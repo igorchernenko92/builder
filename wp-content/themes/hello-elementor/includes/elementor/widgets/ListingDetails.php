@@ -23,7 +23,7 @@ class ListingDetails extends Widget_Base {
 	}
 
 	public function get_title() {
-		return __( 'Custom heading', 'wpcasa-berlin' );
+		return __( 'Hello details', 'wpcasa-berlin' );
 	}
 
     public function get_icon() {

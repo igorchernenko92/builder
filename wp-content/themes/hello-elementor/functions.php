@@ -287,6 +287,20 @@ function register_post_types(){
     ] );
 }
 
+add_action( 'init', 'create_prop_tax' );
+
+function create_prop_tax() {
+    register_taxonomy(
+        'features',
+        'property',
+        array(
+            'label' => __( 'Features' ),
+            'rewrite' => array( 'slug' => 'features' ),
+            'hierarchical' => true,
+        )
+    );
+}
+
 /**
  * Implement widgets creating
  */
