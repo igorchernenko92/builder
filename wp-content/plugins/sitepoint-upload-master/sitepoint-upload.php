@@ -85,6 +85,88 @@ function su_load_scripts() {
 add_action('wp_enqueue_scripts', 'su_load_scripts');
 
 
+add_action( 'wp_ajax_login_or_register', 'login_or_register' );
+add_action( 'wp_ajax_nopriv_login_or_register', 'login_or_register' );
+function login_or_register() {
+
+//    require_once get_template_directory() . '/vendor/autoload.php';
+//
+//    $client = new Google_Client(['client_id' => '390155665774-rblk9ocv18mt5npcj79fpufqt5ni5g95.apps.googleusercontent.com']);  // Specify the CLIENT_ID of the app that accesses the backend
+//    $payload = $client->verifyIdToken($_POST['token']);
+//    if ($payload) {
+//        $userid = $payload['sub'];
+//
+//    } else {
+//
+//    }
+
+    $main_site = 'test.redcarlos.pro';
+
+//    $username = $_POST['name'];
+    $useremail = $_POST['email'];
+    $password = wp_generate_password( 12 );
+
+
+
+    $rand_number = rand( 1, 2000 );
+    $username = 'user-' . $rand_number;
+    $password = 'fake-password';
+    // $password = wp_generate_password( 12, false );
+    $email = "email+$rand_number@example.com";
+    $user_id = wpmu_create_user( $username, $password, $email );
+
+    $bytes = random_bytes(3);
+
+    $siteName = bin2hex($bytes);
+    $newdomain = "{$siteName}.$main_site";
+    $path = '/';
+
+    $blog_id = wpmu_create_blog( $newdomain, $path, $siteName, $user_id , array( 'public' => 1 ) );
+    $blog = get_blog_details( array( 'blog_id' => $blog_id ) );
+
+//    echo $blog->siteurl;
+//    switch_to_blog( $blog_id );
+    $location = $siteName . '.' . $main_site;
+//    echo $email . ' ';
+//    echo $blog_id . ' ';
+    echo 'http://' . $location;
+
+    $creds = array();
+    $creds['user_login'] = 'email+1217@example.com';
+    $creds['user_password'] = 'fake-password';
+
+    wp_signon($creds);
+    switch_to_blog( $blog_id );
+    $import = new WP_Import_Custom();
+
+    $templates = trailingslashit( WP_CONTENT_DIR ) . 'uploads/templates.xml';
+    $pages = trailingslashit( WP_CONTENT_DIR ) . 'uploads/pages.xml';
+    $property = trailingslashit( WP_CONTENT_DIR ) . 'uploads/property.xml';
+    $menu = trailingslashit( WP_CONTENT_DIR ) . 'uploads/menu.xml';
+
+    $import->import($templates);
+    $import->import($pages);
+    $import->import($property);
+    $import->import($menu);
+
+    $homepage = get_page_by_title( 'first main page' );
+    if ( $homepage ) {
+        update_option( 'page_on_front', $homepage->ID );
+        update_option( 'show_on_front', 'page' );
+    }
+
+    $all_conditions = [];
+    $query = new \WP_Query( [
+        'posts_per_page' => -1,
+        'post_type' => 'elementor_library',
+//        'fields' => 'ids',
+        'meta_key' => '_elementor_conditions',
+    ] );
+
+    wp_die();
+
+}
+
 
 
 
@@ -109,8 +191,13 @@ function su_image_submission_cb() {
     $import->import($ae);
     $import->import($property);
 
-    wp_die();
+    $homepage = get_page_by_title( 'first main page' );
+    if ( $homepage ) {
+        update_option( 'page_on_front', $homepage->ID );
+        update_option( 'show_on_front', 'page' );
+    }
 
+    wp_die();
 
 }
 add_action( 'wp_ajax_myajax-submit', 'su_image_submission_cb' );

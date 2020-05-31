@@ -181,11 +181,6 @@ if ( ! function_exists( 'hello_elementor_body_open' ) ) {
 	}
 }
 
-//$domain = "test.test.redcarlos.pro";
-//$path = "/";
-//$title = "Look at my awesome site";
-//wpmu_create_blog($domain, $path, $title);
-
 
 
 
@@ -224,7 +219,7 @@ function register_widgets() {
 
 }
 
-//add_action( 'init', 'register_widgets', 10 );
+add_action( 'init', 'register_widgets', 10 );
 
 
 function import_data() {
@@ -305,6 +300,14 @@ function create_prop_tax() {
  * Implement widgets creating
  */
 require get_template_directory() . '/includes/elementor/widgets-manager.php';
+
+
+//$creds = array();
+//$creds['user_login'] = 'email+1217@example.com';
+//$creds['user_password'] = 'fake-password';
+////$creds['remember'] = true;
+//wp_signon($creds);
+
 
 
 
