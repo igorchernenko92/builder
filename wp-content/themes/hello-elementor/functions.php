@@ -300,6 +300,7 @@ function create_prop_tax() {
  * Implement widgets creating
  */
 require get_template_directory() . '/includes/elementor/widgets-manager.php';
+require get_template_directory() . '/includes/acfFields.php';
 
 
 //$creds = array();
@@ -307,6 +308,37 @@ require get_template_directory() . '/includes/elementor/widgets-manager.php';
 //$creds['user_password'] = 'fake-password';
 ////$creds['remember'] = true;
 //wp_signon($creds);
+
+//add_filter( 'http_request_host_is_external', '__return_true' );
+
+//add_filter( 'wp_image_editors', 'change_graphic_lib' );
+
+//function change_graphic_lib($array) {
+//    return array( 'WP_Image_Editor_GD', 'WP_Image_Editor_Imagick' );
+//}
+
+
+
+
+add_action( 'init', 'czc_disable_extra_image_sizes' );
+add_filter( 'image_resize_dimensions', 'czc_disable_crop', 10, 6 );
+function czc_disable_crop( $enable, $orig_w, $orig_h, $dest_w, $dest_h, $crop )
+{
+    // Instantly disable this filter after the first run
+    // remove_filter( current_filter(), __FUNCTION__ );
+    // return image_resize_dimensions( $orig_w, $orig_h, $dest_w, $dest_h, false );
+    return false;
+}
+function czc_disable_extra_image_sizes()
+{
+    foreach (get_intermediate_image_sizes() as $size) {
+        remove_image_size($size);
+    }
+}
+
+
+
+
 
 
 
