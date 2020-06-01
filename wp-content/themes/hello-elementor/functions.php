@@ -222,17 +222,6 @@ function register_widgets() {
 add_action( 'init', 'register_widgets', 10 );
 
 
-function import_data() {
-    $xml = simplexml_load_file(file_get_contents('http://test.redcarlos.pro/pagess.xml'));
-
-//    var_dump($xml);
-
-
-}
-//echo get_current_blog_id();
-//add_action( 'init', 'import_data', 10 );
-
-
 function my_acf_init() {
     acf_update_setting('google_api_key', 'AIzaSyCyzLPGLgRv_SOdc3anLhP8olpjrBocu6I');
 }
@@ -336,6 +325,9 @@ function czc_disable_extra_image_sizes()
     }
 }
 
+
+//var_dump(get_blogs_of_user(122));
+//var_dump(get_home_url());
 
 
 
