@@ -101,7 +101,6 @@ function login_or_register() {
     $token = $client->verifyIdToken($_POST['token']);
 
 //  TODO: add check if token is got
-    $main_site = 'test.redcarlos.pro';
     $username = $_POST['name'];
     $email = $_POST['email'];
     $password = wp_generate_password( 12 );
@@ -122,27 +121,10 @@ function login_or_register() {
             $email = $user->data->user_email;
             $user_id = $user->data->ID;
 
-//            wp_set_current_user($user_id, $email);
-//            wp_set_auth_cookie($user_id);
-//            do_action('wp_login', $email);
-//
-//
-//            $location = 'http://' . get_blogs_of_user($user_id)[1]->domain;
-
         } else { //if token exist but don't set to user
-
-//
             if ( $user_id = email_exists($email) ) { //check if email exist
-                if (!is_user_logged_in()) {
+                if (!is_user_logged_in())
                     add_user_meta($user_id, '_gToken', $gId, true); //set token to email
-                }
-
-//                    wp_set_current_user($user_id, $email); // log in user
-//                    wp_set_auth_cookie($user_id);
-//                    do_action('wp_login', $email);
-//
-//                    $location = 'http://' . get_blogs_of_user($user_id)[1]->domain;
-
             } else { // if user doesn't exist create user and blog and login user
 
                 $main_site = 'test.redcarlos.pro';
@@ -150,29 +132,16 @@ function login_or_register() {
                 $randName = bin2hex($bytes);     // need for creating unique site name
                 $newdomain = "{$randName}.$main_site"; // create unique domain
 
-                $username = 'user-' . $randName;
-                $password = wp_generate_password( 12 );
-                $email = "email+$randName@example.com";
-
-
                 $user_id = wpmu_create_user( $username, $password, $email ); // create network user
-                $user = new WP_User($user_id); // create for adding user role
-                $user->set_role('editor');  //set user new role
+                $blog_id = wpmu_create_blog( $newdomain, '/', $randName, $user_id);
 
-                $blog_id = wpmu_create_blog( $newdomain, '/', $randName, 1 , array( 'public' => 1 ) ); // create blog by admin(id=1)
-                add_user_to_blog($blog_id, $user_id, 'editor');
+                import_data($blog_id);
 
-//                import_data($blog_id);
-//
-//                $homepage = get_page_by_title( 'first main page' );
-//                if ( $homepage ) {
-//                    update_option( 'page_on_front', $homepage->ID );
-//                    update_option( 'show_on_front', 'page' );
-//                }
-
-
-
-
+                $homepage = get_page_by_title( 'first main page' ); // set main page from just imported data
+                if ( $homepage ) {
+                    update_option( 'page_on_front', $homepage->ID );
+                    update_option( 'show_on_front', 'page' );
+                }
             }
 
         }
@@ -182,22 +151,14 @@ function login_or_register() {
         //if token doesn't pass
         wp_die();
     }
-//
-    ob_start();
-//    var_dump(get_blogs_of_user($user_id));
-    $result = ob_get_clean();
-    echo $result;
-
-
-
 
     wp_set_current_user($user_id, $email); // log in user
     wp_set_auth_cookie($user_id);
     do_action('wp_login', $email);
 
-    $location = 'http://' . get_blogs_of_user($user_id)[1]->domain;  // send link to front
+    $location = get_blogs_of_user($user_id)[ array_key_first(get_blogs_of_user($user_id)) ]->siteurl;  // send link to front
 
-    wp_die();
+    wp_die($location);
 
 }
 
