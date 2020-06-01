@@ -126,13 +126,12 @@ function login_or_register() {
                 if (!is_user_logged_in())
                     add_user_meta($user_id, '_gToken', $gId, true); //set token to email
             } else { // if user doesn't exist create user and blog and login user
-
                 $main_site = 'test.redcarlos.pro';
                 $bytes = random_bytes(3); // need for creating unique site name
                 $randName = bin2hex($bytes);     // need for creating unique site name
                 $newdomain = "{$randName}.$main_site"; // create unique domain
 
-                $user_id = wpmu_create_user( $username, $password, $email ); // create network user
+                $user_id = wpmu_create_user( $email, $password, $email ); // create network user
                 $blog_id = wpmu_create_blog( $newdomain, '/', $randName, $user_id);
 
                 import_data($blog_id);
