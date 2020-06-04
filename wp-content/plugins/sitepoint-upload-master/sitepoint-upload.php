@@ -233,35 +233,38 @@ function import_data($blog_id) {
 
 
 
-//function su_image_submission_cb() {
-//    check_ajax_referer('myajax-nonce', 'nonce_code');
-//
-//    $import = new WP_Import_Custom();
-//
-////    ob_start();
-////    var_dump($_FILES['file']);
-////    $result = ob_get_clean();
-////
-////    echo $result;
-////    $name = trailingslashit( WP_CONTENT_DIR ) . 'uploads/finalpages.xml';
-////    $menu = trailingslashit( WP_CONTENT_DIR ) . 'uploads/menu.xml';
-//    $ae = trailingslashit( WP_CONTENT_DIR ) . 'uploads/ae.xml';
-//    $property = trailingslashit( WP_CONTENT_DIR ) . 'uploads/property.xml';
-////
-////    $import->import($name);
-////    $import->import($menu);
-//
-//    $import->import($ae);
-//    $import->import($property);
-//
-//    $homepage = get_page_by_title( 'first main page' );
-//    if ( $homepage ) {
-//        update_option( 'page_on_front', $homepage->ID );
-//        update_option( 'show_on_front', 'page' );
-//    }
-//
-//    wp_die();
-//
-//}
-//add_action( 'wp_ajax_myajax-submit', 'su_image_submission_cb' );
-//add_action( 'wp_ajax_nopriv_myajax-submit', 'su_image_submission_cb' );
+function su_image_submission_cb() {
+    check_ajax_referer('myajax-nonce', 'nonce_code');
+
+    $import = new WP_Import_Custom();
+    $import->fetch_attachments = true;
+
+    $templates = trailingslashit( WP_CONTENT_DIR ) . 'uploads/templates.xml';
+    $pages = trailingslashit( WP_CONTENT_DIR ) . 'uploads/pages.xml';
+    $property = trailingslashit( WP_CONTENT_DIR ) . 'uploads/property.xml';
+    $menu = trailingslashit( WP_CONTENT_DIR ) . 'uploads/menu.xml';
+    $media = trailingslashit( WP_CONTENT_DIR ) . 'uploads/media.xml';
+    $all = trailingslashit( WP_CONTENT_DIR ) . 'uploads/all.xml';
+
+//    prevent outputting
+//    ob_start();
+    $import->import($templates);
+    $import->import($pages);
+    $import->import($property);
+    $import->import($menu);
+    $import->import($media);
+
+    //    prevent outputting
+//    ob_end_clean();
+
+    $homepage = get_page_by_title( 'first main page' );
+    if ( $homepage ) {
+        update_option( 'page_on_front', $homepage->ID );
+        update_option( 'show_on_front', 'page' );
+    }
+
+    wp_die();
+
+}
+add_action( 'wp_ajax_myajax-submit', 'su_image_submission_cb' );
+add_action( 'wp_ajax_nopriv_myajax-submit', 'su_image_submission_cb' );
