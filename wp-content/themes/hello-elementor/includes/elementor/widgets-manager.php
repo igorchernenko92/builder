@@ -57,7 +57,7 @@ class Widget_Manager {
         // TODO: move widget folder to variable
 //        include_once( 'widgets/Listings.php' );
 //        include_once( 'widgets/ListingsSearch.php' );
-        include_once( 'widgets/ListingsCarousel.php' );
+        include_once( 'widgets/ListingsCarousel/ListingsCarousel.php' );
 //
         include_once( 'widgets/ListingDetails.php' );
 //        include_once( 'widgets/ListingFeatures.php' );

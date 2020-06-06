@@ -16,9 +16,6 @@ if (!defined('ABSPATH')) {
 
 class ListingsCarousel extends Widget_Base
 {
-    use \Essential_Addons_Elementor\Traits\Helper;
-    use \Essential_Addons_Elementor\Pro\Template\Content\Post_Carousel;
-
     public function get_name()
     {
         return 'eael-post-carousel';
@@ -55,10 +52,6 @@ class ListingsCarousel extends Widget_Base
         ];
     }
 
-    public function get_custom_help_url()
-    {
-        return 'https://essential-addons.com/elementor/docs/post-carousel/';
-    }
 
     public function get_style_depends()
     {
@@ -77,13 +70,6 @@ class ListingsCarousel extends Widget_Base
 
     protected function _register_controls()
     {
-        /**
-         * Query And Layout Controls!
-         * @source includes/elementor-helper.php
-         */
-        $this->eael_query_controls();
-        $this->eael_layout_controls();
-
         /**
          * Content Tab: Carousel Settings
          */
@@ -392,10 +378,6 @@ class ListingsCarousel extends Widget_Base
 
         $this->end_controls_section();
 
-        /**
-         * Read More Button Style Controls
-         */
-        $this->eael_read_more_button_style();
 
         $this->start_controls_section(
             'eael_section_typography',
@@ -615,9 +597,6 @@ class ListingsCarousel extends Widget_Base
         $this->end_controls_tabs();
 
         $this->end_controls_section();
-
-
-        $this->terms_style();
 
 
         /**
@@ -1018,7 +997,27 @@ class ListingsCarousel extends Widget_Base
     }
 
     protected function render() {
-        echo 'testttt';
+        $var = [
+           'number' =>  '777'
+        ];
+        echo ' outside ';
+        echo $this->get_partial('includes/elementor/widgets/ListingsCarousel/template-parts/1.php', $var );
+        echo ' outside2 ';
+    }
+
+
+    function get_partial($template_name, $data = []) {
+        $template = locate_template($template_name, false);
+
+        if (!$template) {
+            return;
+        }
+
+        if ($data) {
+            extract($data);
+        }
+
+        include($template);
     }
 
     protected function content_template() {}
