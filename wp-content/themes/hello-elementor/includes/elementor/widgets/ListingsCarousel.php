@@ -2,195 +2,1024 @@
 
 namespace WPSight_Berlin\Elementor\Widgets;
 
-use Elementor\Controls_Manager;
-use Elementor\Widget_Base;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Box_Shadow;
+use \Elementor\Group_Control_Typography;
+use \Elementor\Scheme_Typography;
+use \Elementor\Widget_Base;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+if (!defined('ABSPATH')) {
+    exit;
 }
+// Exit if accessed directly
 
-/**
- * All information about custom widgets can be found here
- * https://developers.elementor.com/creating-a-new-widget/
- */
-class ListingsCarousel extends Widget_Base {
+class ListingsCarousel extends Widget_Base
+{
+    use \Essential_Addons_Elementor\Traits\Helper;
+    use \Essential_Addons_Elementor\Pro\Template\Content\Post_Carousel;
 
-	public function get_name() {
-		return 'wpsight_berlin_listings_carousel';
-	}
+    public function get_name()
+    {
+        return 'eael-post-carousel';
+    }
 
-	public function get_title() {
-		return __( 'Listings Carousel', 'wpcasa-berlin' );
-	}
+    public function get_title()
+    {
+        return __('Property Carousel', 'essential-addons-elementor');
+    }
 
-    public function get_icon() {
-		return 'eicon-carousel';
-	}
+    public function get_icon()
+    {
+        return 'eaicon-post-carousel';
+    }
 
-	public function get_categories() {
-		return [ 'general', 'theme' ];
-	}
+    public function get_categories()
+    {
+        return ['essential-addons-elementor'];
+    }
 
-	protected function _register_controls() {
+    public function get_keywords()
+    {
+        return [
+            'post carousel',
+            'ea post carousel',
+            'ea post slider',
+            'ea post navigation',
+            'blog post',
+            'bloggers',
+            'blog',
+            'carousel',
+            'ea',
+            'essential addons',
+        ];
+    }
 
-		$this->start_controls_section(
-			'section_layout',
-			[
-				'label' => __( 'Layout', 'wpcasa-berlin' ),
-			]
-		);
+    public function get_custom_help_url()
+    {
+        return 'https://essential-addons.com/elementor/docs/post-carousel/';
+    }
 
-//        $this->add_control(
-//            'archive_location',
-//            [
-//                'label' => __( 'Location', 'wpcasa-berlin' ),
-//                'type' => Controls_Manager::SWITCHER,
-//                'label_off' => __( 'False', 'wpcasa-berlin' ),
-//                'label_on' => __( 'True', 'wpcasa-berlin' ),
-//                'default' => 'yes',
-//            ]
-//        );
+    public function get_style_depends()
+    {
+        return [
+            'font-awesome-5-all',
+            'font-awesome-4-shim',
+        ];
+    }
 
-        $this->add_control(
-            'listing_type',
-            [
-                'label' => __( 'Listing type', 'wpcasa-berlin' ),
-                'type' => Controls_Manager::SWITCHER,
-                'label_off' => __( 'False', 'wpcasa-berlin' ),
-                'label_on' => __( 'True', 'wpcasa-berlin' ),
-                'default' => 'yes',
-            ]
-        );
+    public function get_script_depends()
+    {
+        return [
+            'font-awesome-4-shim',
+        ];
+    }
 
-        $this->add_control(
-            'title',
-            [
-                'label' => __( 'Title', 'wpcasa-berlin' ),
-                'type' => Controls_Manager::SWITCHER,
-                'label_off' => __( 'False', 'wpcasa-berlin' ),
-                'label_on' => __( 'True', 'wpcasa-berlin' ),
-                'default' => 'false',
-            ]
-        );
+    protected function _register_controls()
+    {
+        /**
+         * Query And Layout Controls!
+         * @source includes/elementor-helper.php
+         */
+        $this->eael_query_controls();
+        $this->eael_layout_controls();
 
-        $this->add_control(
-            'date',
-            [
-                'label' => __( 'Date', 'wpcasa-berlin' ),
-                'type' => Controls_Manager::SWITCHER,
-                'label_off' => __( 'False', 'wpcasa-berlin' ),
-                'label_on' => __( 'True', 'wpcasa-berlin' ),
-                'default' => 'true',
-            ]
-        );
-
-        $details_array = [];
-        foreach ( array_keys(wpsight_details()) as $detail ) {
-            $details_array[$detail] = wpsight_get_detail( $detail, 'label' );
-        }
-
-        $this->add_control(
-            'show_elements',
-            [
-                'label' => __( 'Listing Details', 'wpcasa-berlin' ),
-                'type' => \Elementor\Controls_Manager::SELECT2,
-                'multiple' => true,
-                'options' => $details_array,
-                'default' => [ 'numberOfRooms', 'details_4' ],
-            ]
-        );
-		$this->end_controls_section();
-
-
+        /**
+         * Content Tab: Carousel Settings
+         */
 
         $this->start_controls_section(
-            'section_query',
+            'section_additional_options',
             [
-                'label' => __( 'Query', 'elementor' ),
+                'label' => __('Carousel Settings', 'essential-addons-elementor'),
             ]
         );
 
         $this->add_control(
-            'nr',
+            'carousel_effect',
             [
-                'label' => __( 'NR', 'wpcasa-berlin' ),
-                'type' => Controls_Manager::TEXT,
-                'default' => '10',
+                'label' => __('Effect', 'essential-addons-elementor'),
+                'description' => __('Sets transition effect', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'slide',
+                'options' => [
+                    'slide' => __('Slide', 'essential-addons-elementor'),
+                    'fade' => __('Fade', 'essential-addons-elementor'),
+                    'cube' => __('Cube', 'essential-addons-elementor'),
+                    'coverflow' => __('Coverflow', 'essential-addons-elementor'),
+                    'flip' => __('Flip', 'essential-addons-elementor'),
+                ],
             ]
         );
 
-        foreach( get_object_taxonomies( wpsight_post_type(), 'objects' ) as $key => $taxonomy ) {
-            $terms = get_terms( array( $key ), array( 'hide_empty' => 0 ) );
+        $this->add_responsive_control(
+            'items',
+            [
+                'label' => __('Visible Items', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SLIDER,
+                'default' => ['size' => 3],
+                'tablet_default' => ['size' => 2],
+                'mobile_default' => ['size' => 1],
+                'range' => [
+                    'px' => [
+                        'min' => 1,
+                        'max' => 10,
+                        'step' => 1,
+                    ],
+                ],
+                'size_units' => '',
+                'condition' => [
+                    'carousel_effect' => ['slide', 'coverflow'],
+                ],
+            ]
+        );
 
-            $terms_filtered = array_column($terms, 'name', 'slug');
-//            add first el
-            $terms_filtered = array_merge(["" => sprintf( __( 'All %s', 'wpcasa-berlin' ), esc_attr( $taxonomy->label ) )], $terms_filtered);
+        $this->add_responsive_control(
+            'margin',
+            [
+                'label' => __('Items Gap', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SLIDER,
+                'default' => ['size' => 10],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                ],
+                'size_units' => '',
+                'condition' => [
+                    'carousel_effect' => ['slide', 'coverflow'],
+                ],
+            ]
+        );
 
-            $this->add_control(
-                $taxonomy->name,
-                [
-                    'label' => $taxonomy->label,
-                    'type' => Controls_Manager::SELECT,
-                    'options' => $terms_filtered,
-                ]
-            );
-        }
+        $this->add_responsive_control(
+            'post_image_height',
+            [
+                'label' => __('Image Height', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SLIDER,
+                'default' => ['size' => 350],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 600,
+                        'step' => 1,
+                    ],
+                ],
+                'size_units' => ['px'],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-entry-thumbnail' => 'height: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'slider_speed',
+            [
+                'label' => __('Slider Speed', 'essential-addons-elementor'),
+                'description' => __('Duration of transition between slides (in ms)', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SLIDER,
+                'default' => ['size' => 400],
+                'range' => [
+                    'px' => [
+                        'min' => 100,
+                        'max' => 3000,
+                        'step' => 1,
+                    ],
+                ],
+                'size_units' => '',
+            ]
+        );
+
+        $this->add_control(
+            'autoplay',
+            [
+                'label' => __('Autoplay', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SWITCHER,
+                'default' => 'yes',
+                'label_on' => __('Yes', 'essential-addons-elementor'),
+                'label_off' => __('No', 'essential-addons-elementor'),
+                'return_value' => 'yes',
+            ]
+        );
+
+        $this->add_control(
+            'autoplay_speed',
+            [
+                'label' => __('Autoplay Speed', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SLIDER,
+                'default' => ['size' => 2000],
+                'range' => [
+                    'px' => [
+                        'min' => 500,
+                        'max' => 5000,
+                        'step' => 1,
+                    ],
+                ],
+                'size_units' => '',
+                'condition' => [
+                    'autoplay' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'pause_on_hover',
+            [
+                'label' => __('Pause On Hover', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SWITCHER,
+                'default' => '',
+                'label_on' => __('Yes', 'essential-addons-elementor'),
+                'label_off' => __('No', 'essential-addons-elementor'),
+                'return_value' => 'yes',
+                'condition' => [
+                    'autoplay' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'infinite_loop',
+            [
+                'label' => __('Infinite Loop', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SWITCHER,
+                'default' => 'yes',
+                'label_on' => __('Yes', 'essential-addons-elementor'),
+                'label_off' => __('No', 'essential-addons-elementor'),
+                'return_value' => 'yes',
+            ]
+        );
+
+        $this->add_control(
+            'grab_cursor',
+            [
+                'label' => __('Grab Cursor', 'essential-addons-elementor'),
+                'description' => __('Shows grab cursor when you hover over the slider', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SWITCHER,
+                'default' => '',
+                'label_on' => __('Show', 'essential-addons-elementor'),
+                'label_off' => __('Hide', 'essential-addons-elementor'),
+                'return_value' => 'yes',
+            ]
+        );
+
+        $this->add_control(
+            'navigation_heading',
+            [
+                'label' => __('Navigation', 'essential-addons-elementor'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'arrows',
+            [
+                'label' => __('Arrows', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SWITCHER,
+                'default' => 'yes',
+                'label_on' => __('Yes', 'essential-addons-elementor'),
+                'label_off' => __('No', 'essential-addons-elementor'),
+                'return_value' => 'yes',
+            ]
+        );
+
+        $this->add_control(
+            'dots',
+            [
+                'label' => __('Dots', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SWITCHER,
+                'default' => 'yes',
+                'label_on' => __('Yes', 'essential-addons-elementor'),
+                'label_off' => __('No', 'essential-addons-elementor'),
+                'return_value' => 'yes',
+            ]
+        );
+
+        $this->end_controls_section();
+
+        $this->start_controls_section(
+            'eael_section_post_grid_style',
+            [
+                'label' => __('Post Style', 'essential-addons-elementor'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'eael_post_grid_bg_hover_icon_new',
+            [
+                'label' => __('Post Hover Icon', 'essential-addons-elementor'),
+                'type' => Controls_Manager::ICONS,
+                'fa4compatibility' => 'eael_post_grid_bg_hover_icon',
+                'default' => [
+                    'value' => 'fas fa-long-arrow-alt-right',
+                    'library' => 'fa-solid',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_post_grid_bg_color',
+            [
+                'label' => __('Post Background Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#fff',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-grid-post-holder' => 'background-color: {{VALUE}}',
+                ],
+
+            ]
+        );
+
+        $this->add_control(
+            'eael_post_block_hover_animation',
+            [
+                'label' => __('Hover Style', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SELECT,
+                'label_block' => true,
+                'default' => 'fade-in',
+                'options' => [
+                    'none' => esc_html__('None', 'essential-addons-elementor'),
+                    'fade-in' => esc_html__('FadeIn', 'essential-addons-elementor'),
+                    'zoom-in' => esc_html__('ZoomIn', 'essential-addons-elementor'),
+                    'slide-up' => esc_html__('SlideUp', 'essential-addons-elementor'),
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_thumbnail_overlay_color',
+            [
+                'label' => __('Thumbnail Overlay Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => 'rgba(0,0,0, .75)',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-entry-overlay' => 'background-color: {{VALUE}}',
+                ],
+
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'eael_post_grid_border',
+                'label' => esc_html__('Border', 'essential-addons-elementor'),
+                'selector' => '{{WRAPPER}} .eael-grid-post-holder',
+            ]
+        );
+
+        $this->add_control(
+            'eael_post_grid_border_radius',
+            [
+                'label' => esc_html__('Border Radius', 'essential-addons-elementor'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'selectors' => [
+                    '{{WRAPPER}} .eael-grid-post-holder' => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'eael_post_grid_box_shadow',
+                'selector' => '{{WRAPPER}} .eael-grid-post-holder',
+            ]
+        );
+
+        $this->end_controls_section();
+
+        /**
+         * Read More Button Style Controls
+         */
+        $this->eael_read_more_button_style();
+
+        $this->start_controls_section(
+            'eael_section_typography',
+            [
+                'label' => __('Color & Typography', 'essential-addons-elementor'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'eael_post_grid_title_style',
+            [
+                'label' => __('Title Style', 'essential-addons-elementor'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'title_tag',
+            [
+                'label' => __('Select Tag', 'essential-addons-for-elementor-lite'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'h2',
+                'options' => [
+                    'h1' => __('H1', 'essential-addons-for-elementor-lite'),
+                    'h2' => __('H2', 'essential-addons-for-elementor-lite'),
+                    'h3' => __('H3', 'essential-addons-for-elementor-lite'),
+                    'h4' => __('H4', 'essential-addons-for-elementor-lite'),
+                    'h5' => __('H5', 'essential-addons-for-elementor-lite'),
+                    'h6' => __('H6', 'essential-addons-for-elementor-lite'),
+                    'span' => __('Span', 'essential-addons-for-elementor-lite'),
+                    'p' => __('P', 'essential-addons-for-elementor-lite'),
+                    'div' => __('Div', 'essential-addons-for-elementor-lite'),
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'eael_post_grid_title_color',
+            [
+                'label' => __('Title Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#303133',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-entry-title, {{WRAPPER}} .eael-entry-title a' => 'color: {{VALUE}};',
+                ],
+
+            ]
+        );
+
+        $this->add_control(
+            'eael_post_grid_title_hover_color',
+            [
+                'label' => __('Title Hover Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '#23527c',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-entry-title:hover, {{WRAPPER}} .eael-entry-title a:hover' => 'color: {{VALUE}};',
+                ],
+
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_post_grid_title_alignment',
+            [
+                'label' => __('Title Alignment', 'essential-addons-elementor'),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'left' => [
+                        'title' => __('Left', 'essential-addons-elementor'),
+                        'icon' => 'fa fa-align-left',
+                    ],
+                    'center' => [
+                        'title' => __('Center', 'essential-addons-elementor'),
+                        'icon' => 'fa fa-align-center',
+                    ],
+                    'right' => [
+                        'title' => __('Right', 'essential-addons-elementor'),
+                        'icon' => 'fa fa-align-right',
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-entry-title' => 'text-align: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'eael_post_grid_title_typography',
+                'label' => __('Typography', 'essential-addons-elementor'),
+                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+                'selector' => '{{WRAPPER}} .eael-entry-title',
+            ]
+        );
+
+        $this->add_control(
+            'eael_post_grid_excerpt_style',
+            [
+                'label' => __('Excerpt Style', 'essential-addons-elementor'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'eael_post_grid_excerpt_color',
+            [
+                'label' => __('Excerpt Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-grid-post-excerpt p' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_post_grid_excerpt_alignment',
+            [
+                'label' => __('Excerpt Alignment', 'essential-addons-elementor'),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'left' => [
+                        'title' => __('Left', 'essential-addons-elementor'),
+                        'icon' => 'fa fa-align-left',
+                    ],
+                    'center' => [
+                        'title' => __('Center', 'essential-addons-elementor'),
+                        'icon' => 'fa fa-align-center',
+                    ],
+                    'right' => [
+                        'title' => __('Right', 'essential-addons-elementor'),
+                        'icon' => 'fa fa-align-right',
+                    ],
+                    'justify' => [
+                        'title' => __('Justified', 'essential-addons-elementor'),
+                        'icon' => 'fa fa-align-justify',
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eael-grid-post-excerpt p' => 'text-align: {{VALUE}};',
+                    '{{WRAPPER}} .eael-grid-post-excerpt .eael-post-elements-readmore-btn' => 'text-align: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'eael_post_grid_excerpt_typography',
+                'label' => __('Excerpt Typography', 'essential-addons-elementor'),
+                'scheme' => Scheme_Typography::TYPOGRAPHY_3,
+                'selector' => '{{WRAPPER}} .eael-grid-post-excerpt p',
+            ]
+        );
+
+        $this->add_control(
+            'eael_post_grid_meta_style',
+            [
+                'label' => __('Meta Style', 'essential-addons-elementor'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'eael_post_grid_meta_color',
+            [
+                'label' => __('Meta Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .eael-entry-meta, .eael-entry-meta a' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'eael_post_grid_meta_alignment',
+            [
+                'label' => __('Meta Alignment', 'essential-addons-elementor'),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'left' => [
+                        'title' => __('Left', 'essential-addons-elementor'),
+                        'icon' => 'fa fa-align-left',
+                    ],
+                    'center' => [
+                        'title' => __('Center', 'essential-addons-elementor'),
+                        'icon' => 'fa fa-align-center',
+                    ],
+                    'right' => [
+                        'title' => __('Right', 'essential-addons-elementor'),
+                        'icon' => 'fa fa-align-right',
+                    ],
+                ],
+                'prefix_class' => 'post_carousel_meta_alignment-%s',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'eael_post_grid_meta_typography',
+                'label' => __('Meta Typography', 'essential-addons-elementor'),
+                'scheme' => Scheme_Typography::TYPOGRAPHY_3,
+                'selector' => '{{WRAPPER}} .eael-entry-meta > div',
+            ]
+        );
+
+        $this->end_controls_section();
+
+        $this->end_controls_tabs();
 
         $this->end_controls_section();
 
 
+        $this->terms_style();
 
-	}
 
-	protected function render() {
-        $settings = $this->get_active_settings();
-        $taxonomy_filters	= array();
-
-        foreach( get_object_taxonomies( wpsight_post_type(), 'objects' ) as $key => $taxonomy ) {
-            $taxonomy_filters[ $key ] = $settings[$key];
-        }
-
-        $listings_args = array(
-            'nr'				=> $settings['nr'],
-            'meta_query'		=> array(
-                array(
-                    'key'		=> '_thumbnail_id',
-                    'compare'	=> 'EXISTS'
-                )
-            ),
-            'show_paging'		=> false
+        /**
+         * Style Tab: Arrows
+         */
+        $this->start_controls_section(
+            'section_arrows_style',
+            [
+                'label' => __('Arrows', 'essential-addons-elementor'),
+                'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'arrows' => 'yes',
+                ],
+            ]
         );
 
-        $listings_args = array_merge( $listings_args, $taxonomy_filters );
+        $this->add_control(
+            'arrow',
+            [
+                'label' => __('Choose Arrow', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SELECT,
+                'label_block' => true,
+                'default' => 'fa fa-angle-right',
+                'options' => [
+                    'fa fa-angle-right' => __('Angle', 'essential-addons-elementor'),
+                    'fa fa-angle-double-right' => __('Double Angle', 'essential-addons-elementor'),
+                    'fa fa-chevron-right' => __('Chevron', 'essential-addons-elementor'),
+                    'fa fa-chevron-circle-right' => __('Chevron Circle', 'essential-addons-elementor'),
+                    'fa fa-arrow-right' => __('Arrow', 'essential-addons-elementor'),
+                    'fa fa-long-arrow-right' => __('Long Arrow', 'essential-addons-elementor'),
+                    'fa fa-caret-right' => __('Caret', 'essential-addons-elementor'),
+                    'fa fa-caret-square-o-right' => __('Caret Square', 'essential-addons-elementor'),
+                    'fa fa-arrow-circle-right' => __('Arrow Circle', 'essential-addons-elementor'),
+                    'fa fa-arrow-circle-o-right' => __('Arrow Circle O', 'essential-addons-elementor'),
+                    'fa fa-toggle-right' => __('Toggle', 'essential-addons-elementor'),
+                    'fa fa-hand-o-right' => __('Hand', 'essential-addons-elementor'),
+                ],
+            ]
+        );
 
-        $listings = wpsight_get_listings( $listings_args );
+        $this->add_responsive_control(
+            'arrows_size',
+            [
+                'label' => __('Arrows Size', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SLIDER,
+                'default' => ['size' => '22'],
+                'range' => [
+                    'px' => [
+                        'min' => 15,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                ],
+                'size_units' => ['px'],
+                'selectors' => [
+                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'font-size: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
 
-//        if ( 'yes' === $settings['archive_location'] ) {
-//            $settings['show_elements'][] = 'archive_location';
-//        }
+        $this->add_responsive_control(
+            'left_arrow_position',
+            [
+                'label' => __('Align Left Arrow', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'min' => -100,
+                        'max' => 40,
+                        'step' => 1,
+                    ],
+                ],
+                'size_units' => ['px'],
+                'selectors' => [
+                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'left: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
 
-        if ( 'yes' === $settings['listing_type'] ) {
-            $settings['show_elements'][] = 'listing_type';
-        }
+        $this->add_responsive_control(
+            'right_arrow_position',
+            [
+                'label' => __('Align Right Arrow', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'min' => -100,
+                        'max' => 40,
+                        'step' => 1,
+                    ],
+                ],
+                'size_units' => ['px'],
+                'selectors' => [
+                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next' => 'right: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
 
-        if ( 'yes' === $settings['title'] ) {
-            $settings['show_elements'][] = 'title';
-        }
+        $this->start_controls_tabs('tabs_arrows_style');
 
-        if ( 'yes' === $settings['date'] ) {
-            $settings['show_elements'][] = 'date';
-        }
-//       add filter to edit listing card details
-        $show_elements = $settings['show_elements'];
-        add_filter( 'card_info_filter', function() use ( $show_elements ) {
-            return $show_elements;
-        });
+        $this->start_controls_tab(
+            'tab_arrows_normal',
+            [
+                'label' => __('Normal', 'essential-addons-elementor'),
+            ]
+        );
 
-        wpsight_berlin_listings_carousel( $listings );
+        $this->add_control(
+            'arrows_bg_color_normal',
+            [
+                'label' => __('Background Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
 
-	}
+        $this->add_control(
+            'arrows_color_normal',
+            [
+                'label' => __('Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
 
-	public function render_plain_content() {}
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'arrows_border_normal',
+                'label' => __('Border', 'essential-addons-elementor'),
+                'placeholder' => '1px',
+                'default' => '1px',
+                'selector' => '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev',
+            ]
+        );
+
+        $this->add_control(
+            'arrows_border_radius_normal',
+            [
+                'label' => __('Border Radius', 'essential-addons-elementor'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->start_controls_tab(
+            'tab_arrows_hover',
+            [
+                'label' => __('Hover', 'essential-addons-elementor'),
+            ]
+        );
+
+        $this->add_control(
+            'arrows_bg_color_hover',
+            [
+                'label' => __('Background Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next:hover, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev:hover' => 'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'arrows_color_hover',
+            [
+                'label' => __('Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next:hover, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev:hover' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'arrows_border_color_hover',
+            [
+                'label' => __('Border Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next:hover, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev:hover' => 'border-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->end_controls_tabs();
+
+        $this->add_responsive_control(
+            'arrows_padding',
+            [
+                'label' => __('Padding', 'essential-addons-elementor'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .swiper-container-wrap .swiper-button-next, {{WRAPPER}} .swiper-container-wrap .swiper-button-prev' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'separator' => 'before',
+            ]
+        );
+
+        $this->end_controls_section();
+
+        /**
+         * Style Tab: Dots
+         */
+        $this->start_controls_section(
+            'section_dots_style',
+            [
+                'label' => __('Dots', 'essential-addons-elementor'),
+                'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'dots' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'dots_position',
+            [
+                'label' => __('Position', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'inside' => __('Inside', 'essential-addons-elementor'),
+                    'outside' => __('Outside', 'essential-addons-elementor'),
+                ],
+                'default' => 'outside',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'dots_size',
+            [
+                'label' => __('Size', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'min' => 2,
+                        'max' => 40,
+                        'step' => 1,
+                    ],
+                ],
+                'size_units' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'dots_spacing',
+            [
+                'label' => __('Spacing', 'essential-addons-elementor'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'min' => 1,
+                        'max' => 30,
+                        'step' => 1,
+                    ],
+                ],
+                'size_units' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet' => 'margin-left: {{SIZE}}{{UNIT}}; margin-right: {{SIZE}}{{UNIT}}',
+                ],
+            ]
+        );
+
+        $this->start_controls_tabs('tabs_dots_style');
+
+        $this->start_controls_tab(
+            'tab_dots_normal',
+            [
+                'label' => __('Normal', 'essential-addons-elementor'),
+            ]
+        );
+
+        $this->add_control(
+            'dots_color_normal',
+            [
+                'label' => __('Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet' => 'background: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'active_dot_color_normal',
+            [
+                'label' => __('Active Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet-active' => 'background: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'dots_border_normal',
+                'label' => __('Border', 'essential-addons-elementor'),
+                'placeholder' => '1px',
+                'default' => '1px',
+                'selector' => '{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet',
+            ]
+        );
+
+        $this->add_control(
+            'dots_border_radius_normal',
+            [
+                'label' => __('Border Radius', 'essential-addons-elementor'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'dots_padding',
+            [
+                'label' => __('Padding', 'essential-addons-elementor'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'allowed_dimensions' => 'vertical',
+                'placeholder' => [
+                    'top' => '',
+                    'right' => 'auto',
+                    'bottom' => '',
+                    'left' => 'auto',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullets' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->start_controls_tab(
+            'tab_dots_hover',
+            [
+                'label' => __('Hover', 'essential-addons-elementor'),
+            ]
+        );
+
+        $this->add_control(
+            'dots_color_hover',
+            [
+                'label' => __('Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet:hover' => 'background: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'dots_border_color_hover',
+            [
+                'label' => __('Border Color', 'essential-addons-elementor'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .swiper-container-wrap .swiper-pagination-bullet:hover' => 'border-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->end_controls_tabs();
+
+        $this->end_controls_section();
+
+    }
+
+    protected function render() {
+        echo 'testttt';
+    }
+
+    protected function content_template() {}
 }
-
-

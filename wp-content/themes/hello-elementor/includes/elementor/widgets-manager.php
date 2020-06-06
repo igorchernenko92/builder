@@ -57,7 +57,7 @@ class Widget_Manager {
         // TODO: move widget folder to variable
 //        include_once( 'widgets/Listings.php' );
 //        include_once( 'widgets/ListingsSearch.php' );
-//        include_once( 'widgets/ListingsCarousel.php' );
+        include_once( 'widgets/ListingsCarousel.php' );
 //
         include_once( 'widgets/ListingDetails.php' );
 //        include_once( 'widgets/ListingFeatures.php' );
@@ -83,8 +83,7 @@ class Widget_Manager {
         // Register Widgets
 //        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\Listings() );
 //        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingsSearch() );
-//        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingsCarousel() );
-//        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingsCarousel() );
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingsCarousel() );
 //
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingDetails() );
 //        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingFeatures() );
