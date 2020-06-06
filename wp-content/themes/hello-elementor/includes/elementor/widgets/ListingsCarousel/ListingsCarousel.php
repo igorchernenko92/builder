@@ -36,6 +36,20 @@ class ListingsCarousel extends Widget_Base
         return ['essential-addons-elementor'];
     }
 
+    public function get_partial($template_name, $data = []) {
+        $template = locate_template($template_name, false);
+
+        if (!$template) {
+            return;
+        }
+
+        if ($data) {
+            extract($data);
+        }
+
+        include($template);
+    }
+
     public function get_keywords()
     {
         return [
@@ -997,28 +1011,32 @@ class ListingsCarousel extends Widget_Base
     }
 
     protected function render() {
-        $var = [
-           'number' =>  '777'
+
+
+        $args = [
+            'post_type' => 'property',
+            'posts_per_page' => -1
         ];
-        echo ' outside ';
-        echo $this->get_partial('includes/elementor/widgets/ListingsCarousel/template-parts/1.php', $var );
-        echo ' outside2 ';
+
+        $query = new \WP_Query($args);
+        $props = $query->get_posts();
+
+        if ( $props ) {
+            foreach ($props as $prop) {
+                $data = [
+                    'gallery' => get_field('property_gallery', $prop->ID )
+                ];
+
+                echo $this->get_partial('includes/elementor/widgets/ListingsCarousel/template-parts/1.php', $data );
+
+            }
+        }
+
+
     }
 
 
-    function get_partial($template_name, $data = []) {
-        $template = locate_template($template_name, false);
 
-        if (!$template) {
-            return;
-        }
-
-        if ($data) {
-            extract($data);
-        }
-
-        include($template);
-    }
 
     protected function content_template() {}
 }
