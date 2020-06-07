@@ -1011,7 +1011,8 @@ class ListingsCarousel extends Widget_Base
     }
 
     protected function render() {
-
+        wp_enqueue_script('hello-carousel-script', get_stylesheet_directory_uri() . '/includes/elementor/widgets/ListingsCarousel/assets/js/script.js', '', '1', true);
+        wp_enqueue_style( 'hello-carousel-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/ListingsCarousel/assets/css/main.css', '', 1 );
 
         $args = [
             'post_type' => 'property',
