@@ -16,38 +16,48 @@
       <a class="hl-listing-card-1__location-item" href="#">Tokyo</a>
     </div>
 
-    <a class="hl-listing-card-1__picture-wrap-img" href="#">
-      <picture class="hl-listing-card-1__picture-img-picture">
-        <source src=" <?php echo $gallery[0]['sizes']['medium'] ?>" type="image/png">
-        <img
-          src="http://builder.local/wp-content/uploads/2020/05/birds-14.png"
-          class="hl-listing-card-1__picture-img hl-img-responsive"
-          alt=""
-        >
-      </picture>
-    </a>
+<!--    <a class="hl-listing-card-1__picture-wrap-img" href="#">-->
+<!--      <picture class="hl-listing-card-1__picture-img-picture">-->
+<!--        <source src=" --><?php //echo $gallery[0]['sizes']['medium'] ?><!--" type="image/png">-->
+<!--        <img-->
+<!--          src="http://builder.local/wp-content/uploads/2020/05/birds-14.png"-->
+<!--          class="hl-listing-card-1__picture-img hl-img-responsive"-->
+<!--          alt=""-->
+<!--        >-->
+<!--      </picture>-->
+<!--    </a>-->
 
-    <div class="hl-listing-card-1__carousel" style="display: none;">
-      <?php foreach ($gallery as $image) { ?>
-        <div class="hl-listing-card-1__carousel-item">
-          <a class="hl-listing-card-1__carousel-item-inner hl-listing-card-1__picture-wrap-img" href="#">
-            <img
-              src="<?php echo  $image['sizes']['medium']; ?>"
-              class="hl-listing-card-1__picture-img hl-img-responsive"
-              title="<?php echo $image['title']; ?>"
-              alt="<?php echo $image['alt']; ?>"
-            >
-          </a>
+    <div class="hl-listing-card__carousel hl-listing-card-1__carousel">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <?php foreach ($gallery as $image) { ?>
+            <div class="swiper-slide hl-listing-card-1__carousel-item">
+              <a class="hl-listing-card-1__carousel-item-inner hl-listing-card-1__picture-wrap-img" href="#">
+                <img
+                  src="<?php echo  $image['sizes']['medium']; ?>"
+                  class="hl-listing-card-1__picture-img hl-img-responsive"
+                  title="<?php echo $image['title']; ?>"
+                  alt="<?php echo $image['alt']; ?>"
+                >
+              </a>
+            </div>
+          <?php } ?>
         </div>
-      <?php } ?>
 
-      <button class="hl-listing-card-1__carousel-nav-left hl-listing-card-1__carousel-nav">
+        <button class="hl-listing-card__carousel-nav_prev hl-listing-card-1__carousel-nav hl-listing-card__carousel-nav">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"></path>
+            <path fill="none" d="M0 0h24v24H0V0z"></path>
+          </svg>
+        </button>
 
-      </button>
-
-      <button class="rhl-listing-card-1__carousel-nav-right hl-listing-card-1__carousel-nav">
-
-      </button>
+        <button class="hl-listing-card__carousel-nav_next hl-listing-card-1__carousel-nav hl-listing-card__carousel-nav">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path>
+            <path fill="none" d="M0 0h24v24H0V0z"></path>
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
 
