@@ -1023,14 +1023,14 @@ class ListingsCarousel extends Widget_Base
         $props = $query->get_posts();
 
         if ( $props ) {
-            foreach ($props as $prop) {
-                $data = [
-                    'gallery' => get_field('property_gallery', $prop->ID )
-                ];
-
-                echo $this->get_partial('includes/elementor/widgets/ListingsCarousel/template-parts/1.php', $data );
-
-            }
+            echo "<div class='hl-listings'>";
+                foreach ($props as $prop) {
+                    $data = [
+                        'gallery' => get_field('property_gallery', $prop->ID )
+                    ];
+                    echo $this->get_partial('includes/elementor/widgets/ListingsCarousel/template-parts/1.php', $data );
+                }
+            echo "</div>";
         }
 
 
