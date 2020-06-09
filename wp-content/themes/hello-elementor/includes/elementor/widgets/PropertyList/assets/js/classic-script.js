@@ -3,9 +3,8 @@
       const defaultOptions = function (params) {
         return {
           spaceBetween: 0,
-          loop: true,
           slidesPerView: 1,
-          speed: 800,
+          speed: 500,
           preloadImages: false,
           lazy: true,
           allowTouchMove: false,
