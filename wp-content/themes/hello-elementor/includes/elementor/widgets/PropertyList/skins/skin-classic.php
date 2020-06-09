@@ -197,19 +197,18 @@ class Hello_Skin_Classic extends Skin_Base {
         }
 
 //        $this->render_loop_header();
+        echo "<div class='hl-listings'>";
+            while ( $query->have_posts() ) {
+                $query->the_post();
 
-        while ( $query->have_posts() ) {
-            $query->the_post();
+                $data = [
+                    'gallery' => get_field('property_gallery', get_the_ID() )
+                ];
 
-            $data = [
-                'gallery' => get_field('property_gallery', get_the_ID() )
-            ];
-
-            $this->current_permalink = get_permalink();
-            echo "<div class='hl-listings'>";
+                $this->current_permalink = get_permalink();
                 echo $this->get_partial('includes/elementor/widgets/PropertyList/skins/skin-classic-template.php', $data );
-            echo "</div>";
-        }
+            }
+        echo "</div>";
 
         wp_reset_postdata();
 
