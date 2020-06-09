@@ -206,7 +206,9 @@ class Hello_Skin_Classic extends Skin_Base {
             ];
 
             $this->current_permalink = get_permalink();
-            echo $this->get_partial('includes/elementor/widgets/PropertyList/skins/skin-classic-template.php', $data );
+            echo "<div class='hl-listings'>";
+                echo $this->get_partial('includes/elementor/widgets/PropertyList/skins/skin-classic-template.php', $data );
+            echo "</div>";
         }
 
         wp_reset_postdata();
