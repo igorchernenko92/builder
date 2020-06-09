@@ -1028,7 +1028,7 @@ class ListingsCarousel extends Widget_Base
                     $data = [
                         'gallery' => get_field('property_gallery', $prop->ID )
                     ];
-                    echo $this->get_partial('includes/elementor/widgets/ListingsCarousel/template-parts/1.php', $data );
+//                    echo $this->get_partial('includes/elementor/widgets/ListingsCarousel/template-parts/1.php', $data );
                 }
             echo "</div>";
         }
