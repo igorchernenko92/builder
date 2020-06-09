@@ -13,6 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 include_once ( 'property-base.php');
 include_once ( 'skins/skin-base.php');
 include_once ( 'skins/skin-classic.php');
+include_once ( 'skins/skin-cards.php');
 
 /**
  * Class Posts
@@ -46,7 +47,7 @@ class Property extends Property_Base {
 
 
 		$this->add_skin( new Skinss\Hello_Skin_Classic( $this ) );
-//		$this->add_skin( new Skins\Skin_Cards( $this ) );
+		$this->add_skin( new Skinss\Skin_Cards( $this ) );
 //		$this->add_skin( new Skins\Skin_Full_Content( $this ) );
 	}
 

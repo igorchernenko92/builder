@@ -1,5 +1,5 @@
 <?php
-namespace ElementorPro\Modules\Posts\Skins;
+namespace WPSight_Berlin\Elementor\Widgets\Property\Skinss;
 
 use Elementor\Controls_Manager;
 use Elementor\Core\Schemes;
@@ -16,7 +16,7 @@ class Skin_Cards extends Skin_Base {
 	protected function _register_controls_actions() {
 		parent::_register_controls_actions();
 
-		add_action( 'elementor/element/posts/cards_section_design_image/before_section_end', [ $this, 'register_additional_design_image_controls' ] );
+		add_action( 'elementor/element/property/cards_section_design_image/before_section_end', [ $this, 'register_additional_design_image_controls' ] );
 	}
 
 	public function get_id() {
