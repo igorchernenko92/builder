@@ -206,7 +206,7 @@ class Hello_Skin_Classic extends Skin_Base {
             ];
 
             $this->current_permalink = get_permalink();
-            $this->render_post($data);
+            echo $this->get_partial('includes/elementor/widgets/PropertyList/skins/skin-classic-template.php', $data );
         }
 
         wp_reset_postdata();
@@ -215,8 +215,8 @@ class Hello_Skin_Classic extends Skin_Base {
 
     }
 
-    protected function render_post($data) {
-        echo $this->get_partial('includes/elementor/widgets/PropertyList/skins/skin-classic-template.php', $data );
+    protected function render_post() {
+
 	}
 
 
