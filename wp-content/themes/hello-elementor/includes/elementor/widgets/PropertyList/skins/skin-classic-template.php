@@ -30,18 +30,23 @@
         <div class="hl-listing-card__carousel hl-listing-card-1__carousel">
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                    <?php foreach ($gallery as $image) { ?>
-                        <div class="swiper-slide hl-listing-card-1__carousel-item">
-                            <a class="hl-listing-card-1__carousel-item-inner hl-listing-card-1__picture-wrap-img" href="#">
-                                <img
-                                        src="<?php echo  $image['sizes']['medium']; ?>"
-                                        class="hl-listing-card-1__picture-img hl-img-responsive"
-                                        title="<?php echo $image['title']; ?>"
-                                        alt="<?php echo $image['alt']; ?>"
-                                >
-                            </a>
-                        </div>
-                    <?php } ?>
+
+                    <?php
+                    if ($gallery) {
+                      foreach ($gallery as $image) { ?>
+                          <div class="swiper-slide hl-listing-card-1__carousel-item">
+                              <a class="hl-listing-card-1__carousel-item-inner hl-listing-card-1__picture-wrap-img" href="#">
+                                  <img
+                                          src="<?php echo  $image['sizes']['medium']; ?>"
+                                          class="hl-listing-card-1__picture-img hl-img-responsive"
+                                          title="<?php echo $image['title']; ?>"
+                                          alt="<?php echo $image['alt']; ?>"
+                                  >
+                              </a>
+                          </div>
+                      <?php }
+                      }
+                      ?>
                 </div>
 
                 <button class="hl-listing-card__carousel-nav_prev hl-listing-card-1__carousel-nav hl-listing-card__carousel-nav">
