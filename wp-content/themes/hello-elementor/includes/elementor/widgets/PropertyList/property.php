@@ -34,7 +34,7 @@ class Property extends Property_Base {
 
 	public function on_import( $element ) {
 		if ( ! get_post_type_object( $element['settings']['posts_post_type'] ) ) {
-//			$element['settings']['posts_post_type'] = 'post';
+			$element['settings']['property_post_type'] = 'property';
 		}
 
 		return $element;
@@ -59,11 +59,12 @@ class Property extends Property_Base {
 	}
 
 	public function query_posts() {
-
 		$query_args = [
 			'posts_per_page' => $this->get_current_skin()->get_instance_value( 'posts_per_page' ),
 			'paged' => $this->get_current_page(),
-		];
+            ];
+
+        $this->set_settings('property_post_type', 'property');
 
 		/** @var Module_Query $elementor_query */
 		$elementor_query = Module_Query::instance();

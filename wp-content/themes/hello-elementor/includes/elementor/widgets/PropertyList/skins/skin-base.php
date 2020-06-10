@@ -40,8 +40,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		$this->register_thumbnail_controls();
 		$this->register_title_controls();
 		$this->register_excerpt_controls();
-		$this->register_meta_data_controls();
-		$this->register_read_more_controls();
 		$this->register_link_controls();
 	}
 
@@ -265,32 +263,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		);
 	}
 
-	protected function register_read_more_controls() {
-		$this->add_control(
-			'show_read_more',
-			[
-				'label' => __( 'Read More', 'elementor-pro' ),
-				'type' => Controls_Manager::SWITCHER,
-				'label_on' => __( 'Show', 'elementor-pro' ),
-				'label_off' => __( 'Hide', 'elementor-pro' ),
-				'default' => 'yes',
-				'separator' => 'before',
-			]
-		);
-
-		$this->add_control(
-			'read_more_text',
-			[
-				'label' => __( 'Read More Text', 'elementor-pro' ),
-				'type' => Controls_Manager::TEXT,
-				'default' => __( 'Read More »', 'elementor-pro' ),
-				'condition' => [
-					$this->get_control_id( 'show_read_more' ) => 'yes',
-				],
-			]
-		);
-	}
-
 	protected function register_link_controls() {
 		$this->add_control(
 			'open_new_tab',
@@ -312,42 +284,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
 		return $optional_attributes_html;
 	}
-
-	protected function register_meta_data_controls() {
-		$this->add_control(
-			'meta_data',
-			[
-				'label' => __( 'Meta Data', 'elementor-pro' ),
-				'label_block' => true,
-				'type' => Controls_Manager::SELECT2,
-				'default' => [ 'date', 'comments' ],
-				'multiple' => true,
-				'options' => [
-					'author' => __( 'Author', 'elementor-pro' ),
-					'date' => __( 'Date', 'elementor-pro' ),
-					'time' => __( 'Time', 'elementor-pro' ),
-					'comments' => __( 'Comments', 'elementor-pro' ),
-				],
-				'separator' => 'before',
-			]
-		);
-
-		$this->add_control(
-			'meta_separator',
-			[
-				'label' => __( 'Separator Between', 'elementor-pro' ),
-				'type' => Controls_Manager::TEXT,
-				'default' => '///',
-				'selectors' => [
-					'{{WRAPPER}} .elementor-post__meta-data span + span:before' => 'content: "{{VALUE}}"',
-				],
-				'condition' => [
-					$this->get_control_id( 'meta_data!' ) => [],
-				],
-			]
-		);
-	}
-
 	/**
 	 * Style Tab
 	 */

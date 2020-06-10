@@ -19,7 +19,7 @@ class acf_field_relationship extends acf_field {
 	*/
 	
 	function initialize() {
-		
+
 		// vars
 		$this->name = 'relationship';
 		$this->label = __("Relationship",'acf');
@@ -29,7 +29,7 @@ class acf_field_relationship extends acf_field {
 			'taxonomy'			=> array(),
 			'min' 				=> 0,
 			'max' 				=> 0,
-			'filters'			=> array('search', 'post_type', 'taxonomy'),
+			'filters'			=> array('search', 'post_type', 'taxonomy', 'meta'),
 			'elements' 			=> array(),
 			'return_format'		=> 'object'
 		);
@@ -154,19 +154,19 @@ class acf_field_relationship extends acf_field {
 		
 		// post_type
 		if( !empty($options['post_type']) ) {
-			
+
 			$args['post_type'] = acf_get_array( $options['post_type'] );
-		
+
 		} elseif( !empty($field['post_type']) ) {
-		
+
 			$args['post_type'] = acf_get_array( $field['post_type'] );
-			
+
 		} else {
-			
+
 			$args['post_type'] = acf_get_post_types();
-			
+
 		}
-		
+
 		
 		// taxonomy
 		if( !empty($options['taxonomy']) ) {

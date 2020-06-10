@@ -53,8 +53,6 @@ class Skin_Cards extends Skin_Base {
 		$this->register_thumbnail_controls();
 		$this->register_title_controls();
 		$this->register_excerpt_controls();
-		$this->register_meta_data_controls();
-		$this->register_read_more_controls();
 		$this->register_link_controls();
 		$this->register_badge_controls();
 		$this->register_avatar_controls();
@@ -79,16 +77,6 @@ class Skin_Cards extends Skin_Base {
 					'none' => __( 'No', 'elementor-pro' ),
 				],
 				'render_type' => 'template',
-			]
-		);
-	}
-
-	protected function register_meta_data_controls() {
-		parent::register_meta_data_controls();
-		$this->update_control(
-			'meta_separator',
-			[
-				'default' => '•',
 			]
 		);
 	}

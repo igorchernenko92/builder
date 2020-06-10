@@ -3,6 +3,8 @@ namespace WPSight_Berlin\Elementor\Widgets\Property\Skinss;
 
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Box_Shadow;
+use Elementor\Group_Control_Typography;
+use Elementor\Repeater;
 
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -14,7 +16,7 @@ class Hello_Skin_Classic extends Skin_Base {
 
 	protected function _register_controls_actions() {
 		parent::_register_controls_actions();
-		add_action( 'elementor/element/property/classic_section_design_layout/after_section_end', [ $this, 'register_additional_design_controls' ] );
+		add_action( 'elementor/element/property/section_layout/before_section_end', [ $this, 'add_meta_data_controls' ] );
 
         wp_enqueue_script('hello-carousel-script', get_stylesheet_directory_uri() . '/includes/elementor/widgets/PropertyList/assets/js/classic-script.js', '', '1', true);
         wp_enqueue_style( 'hello-carousel-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/PropertyList/assets/css/classic-main.css', '', 1 );
@@ -29,152 +31,121 @@ class Hello_Skin_Classic extends Skin_Base {
 		return __( 'Classic', 'elementor-pro' );
 	}
 
-	public function register_additional_design_controls() {
-		$this->start_controls_section(
-			'section_design_box',
-			[
-				'label' => __( 'Box', 'elementor-pro' ),
-				'tab' => Controls_Manager::TAB_STYLE,
-			]
-		);
+	public function add_meta_data_controls() {
+        $repeater = new Repeater();
+
+        $repeater->add_control(
+            'meta_data',
+            [
+                'label' => __( 'Meta Data', 'elementor-pro' ),
+                'label_block' => true,
+                'type' => Controls_Manager::SELECT2,
+//                'default' => [ 'date', 'comments' ],
+                'multiple' => false,
+                'options' => [
+                    'property_bedrooms' => __( 'Beds', 'elementor-pro' ),
+                    'property_bath' => __( 'Bath', 'elementor-pro' ),
+                    'property_garages' => __( 'Garages', 'elementor-pro' ),
+                    'property_rooms' => __( 'Rooms', 'elementor-pro' ),
+                    'property_living_area' => __( 'Living Area', 'elementor-pro' ),
+                    'property_terrace' => __( 'Terrace', 'elementor-pro' ),
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'text',
+            [
+                'label' => __( 'Label', 'elementor' ),
+                'type' => Controls_Manager::TEXT,
+                'label_block' => true,
+                'placeholder' => __( '', 'elementor' ),
+                'default' => __( 'List Item', 'elementor' ),
+                'description' => __( 'Leave it empty if default', 'elementor' ),
+                'dynamic' => [
+                    'active' => true,
+                ],
+            ]
+        );
+
+        $repeater->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'content_typography',
+                'label' => __( 'Text Typography', 'plugin-domain' ),
+                'scheme' => \Elementor\Scheme_Typography::TYPOGRAPHY_1,
+                'selector' => '{{WRAPPER}} .text',
+            ]
+        );
+
+        $repeater->add_control(
+            'hr',
+            [
+                'type' => \Elementor\Controls_Manager::DIVIDER,
+            ]
+        );
 
 
-		$this->add_control(
-			'box_border_radius',
-			[
-				'label' => __( 'Border Radius', 'elementor-pro' ),
-				'type' => Controls_Manager::SLIDER,
-				'size_units' => [ 'px', '%' ],
-				'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 200,
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .elementor-post' => 'border-radius: {{SIZE}}{{UNIT}}',
-				],
-			]
-		);
+        $repeater->add_control(
+            'icon_color',
+            [
+                'label' => __( 'Icon color', 'elementor-pro' ),
+                'type' => Controls_Manager::COLOR,
+                'scheme' => [
+                    'type' => \Elementor\Scheme_Color::get_type(),
+                    'value' => \Elementor\Scheme_Color::COLOR_1,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .elementor-post__title, {{WRAPPER}} .elementor-post__title a' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
 
-		$this->add_control(
-			'box_padding',
-			[
-				'label' => __( 'Padding', 'elementor-pro' ),
-				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px' ],
-				'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 50,
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .elementor-post' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
-				],
-			]
-		);
+        $repeater->add_control(
+            'selected_icon',
+            [
+                'label' => __( 'Icon', 'elementor' ),
+                'type' => Controls_Manager::ICONS,
+                'default' => [
+                    'value' => 'fas fa-check',
+                    'library' => 'fa-solid',
+                ],
+                'fa4compatibility' => 'icon',
+            ]
+        );
 
-		$this->add_control(
-			'content_padding',
-			[
-				'label' => __( 'Content Padding', 'elementor-pro' ),
-				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px' ],
-				'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 50,
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .elementor-post__text' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}',
-				],
-				'separator' => 'after',
-			]
-		);
-
-		$this->start_controls_tabs( 'bg_effects_tabs' );
-
-		$this->start_controls_tab( 'classic_style_normal',
-			[
-				'label' => __( 'Normal', 'elementor-pro' ),
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name' => 'box_shadow',
-				'selector' => '{{WRAPPER}} .elementor-post',
-			]
-		);
-
-		$this->add_control(
-			'box_bg_color',
-			[
-				'label' => __( 'Background Color', 'elementor-pro' ),
-				'type' => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .elementor-post' => 'background-color: {{VALUE}}',
-				],
-			]
-		);
-
-		$this->add_control(
-			'box_border_color',
-			[
-				'label' => __( 'Border Color', 'elementor-pro' ),
-				'type' => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .elementor-post' => 'border-color: {{VALUE}}',
-				],
-			]
-		);
-
-		$this->end_controls_tab();
-
-		$this->start_controls_tab( 'classic_style_hover',
-			[
-				'label' => __( 'Hover', 'elementor-pro' ),
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name' => 'box_shadow_hover',
-				'selector' => '{{WRAPPER}} .elementor-post:hover',
-			]
-		);
-
-		$this->add_control(
-			'box_bg_color_hover',
-			[
-				'label' => __( 'Background Color', 'elementor-pro' ),
-				'type' => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .elementor-post:hover' => 'background-color: {{VALUE}}',
-				],
-			]
-		);
-
-		$this->add_control(
-			'box_border_color_hover',
-			[
-				'label' => __( 'Border Color', 'elementor-pro' ),
-				'type' => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .elementor-post:hover' => 'border-color: {{VALUE}}',
-				],
-			]
-		);
-
-		$this->end_controls_tab();
-
-		$this->end_controls_tabs();
-
-		$this->end_controls_section();
+        $this->add_control(
+            'property_meta_list',
+            [
+                'label' => '',
+                'type' => Controls_Manager::REPEATER,
+                'fields' => $repeater->get_controls(),
+                'default' => [
+                    [
+                        'text' => __( 'List Item #1', 'elementor' ),
+                        'selected_icon' => [
+                            'value' => 'fas fa-check',
+                            'library' => 'fa-solid',
+                        ],
+                    ],
+                    [
+                        'text' => __( 'List Item #2', 'elementor' ),
+                        'selected_icon' => [
+                            'value' => 'fas fa-times',
+                            'library' => 'fa-solid',
+                        ],
+                    ],
+                    [
+                        'text' => __( 'List Item #3', 'elementor' ),
+                        'selected_icon' => [
+                            'value' => 'fas fa-dot-circle',
+                            'library' => 'fa-solid',
+                        ],
+                    ],
+                ],
+                'title_field' => '{{{ elementor.helpers.renderIcon( this, selected_icon, {}, "i", "panel" ) || \'<i class="{{ icon }}" aria-hidden="true"></i>\' }}} {{{ text }}}',
+            ]
+        );
 	}
 
 
