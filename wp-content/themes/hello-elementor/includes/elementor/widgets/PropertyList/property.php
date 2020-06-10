@@ -4,7 +4,7 @@ namespace WPSight_Berlin\Elementor\Widgets\Property;
 use Elementor\Controls_Manager;
 use ElementorPro\Modules\QueryControl\Module as Module_Query;
 use ElementorPro\Modules\QueryControl\Controls\Group_Control_Related;
-//use WPSight_Berlin\Elementor\Widgets\Property\Skinss;
+//use WPSight_Berlin\Elementor\Widgets\Property\Skins;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 include_once ( 'property-base.php');
 include_once ( 'skins/skin-base.php');
-include_once ( 'skins/skin-classic.php');
+include_once ( 'skins/skin-list.php');
 include_once ( 'skins/skin-cards.php');
 
 /**
@@ -46,8 +46,8 @@ class Property extends Property_Base {
 
 
 
-		$this->add_skin( new Skinss\Hello_Skin_Classic( $this ) );
-		$this->add_skin( new Skinss\Skin_Cards( $this ) );
+		$this->add_skin( new Skins\Hello_Skin_Classic( $this ) );
+		$this->add_skin( new Skins\Skin_Cards( $this ) );
 //		$this->add_skin( new Skins\Skin_Full_Content( $this ) );
 	}
 
