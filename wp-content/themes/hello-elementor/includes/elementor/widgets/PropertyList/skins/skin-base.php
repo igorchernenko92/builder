@@ -118,7 +118,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .elementor-posts-container .elementor-post__thumbnail' => 'padding-bottom: calc( {{SIZE}} * 100% );',
-					'{{WRAPPER}}:after' => 'content: "{{SIZE}}";',
+//					'{{WRAPPER}}:after' => 'content: "{{SIZE}}";',
 				],
 				'condition' => [
 					$this->get_control_id( 'thumbnail!' ) => 'none',
