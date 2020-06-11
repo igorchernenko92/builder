@@ -38,4 +38,10 @@ class Skin3 extends Skin_Base {
 
     }
 
+    protected function render_post_header() {
+        ?>
+    <div <?php post_class( [ 'hl-listing-card hl-listing-card_skin-3 hl-listing-card_hover' ] ); ?>>
+        <?php
+    }
+
 }

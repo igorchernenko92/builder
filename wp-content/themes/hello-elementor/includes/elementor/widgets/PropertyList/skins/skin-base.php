@@ -868,7 +868,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
 	protected function render_post_header() {
 		?>
-		<div <?php post_class( [ 'hl-listing-card hl-listing-card hl-listing-card_hover' ] ); ?>>
+		<div <?php post_class( [ 'hl-listing-card hl-listing-card_skin-1 hl-listing-card_hover' ] ); ?>>
 		<?php
 	}
 
@@ -988,6 +988,42 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		<?php
 	}
 
+    protected function start_picture_wrapper() {
+        ?>
+            <div class="hl-listing-card__picture">
+        <?php
+    }
+
+    protected function end_picture_wrapper() {
+        ?>
+            </div>
+        <?php
+    }
+
+    protected function render_tags() {
+      ?>
+        <ul class="hl-listing-card__tags">
+          <li class="hl-listing-card__tag-wrap">
+            <a href="#" class="hl-listing-card__tag hl-listing-card__tag_green">Featured</a>
+          </li>
+
+          <li class="hl-listing-card__tag-wrap">
+            <a href="#" class="hl-listing-card__tag hl-listing-card__tag_red">Rentals</a>
+          </li>
+        </ul>
+      <?php
+    }
+
+    protected function render_location() {
+      ?>
+        <div class="hl-listing-card__location">
+          <i class="fa fa-map-marker hl-listing-card__location-icon"></i>
+          <a class="hl-listing-card__location-text" href="#">Shinjuku,</a>
+          <a class="hl-listing-card__location-text" href="#">Tokyo</a>
+        </div>
+      <?php
+    }
+
     protected function render_thumb_carousel() { ?>
         <div class="hl-listing-card__carousel hl-listing-card__carousel">
             <div class="swiper-container">
@@ -1052,7 +1088,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                 ?>
             <li class="hl-listing-card__info-item">
                 <i class="fa fa-<?php echo $item['selected_icon']['value']; ?> hl-listing-card__icon hl-listing-card__info-icon"></i>
-<!--                <span class="hl-listing-card__meta_info-label">--><?php //echo $label; ?><!--</span>-->
                 <span class="hl-listing-card__info-value"><?php echo $value; ?></span>
             </li>
 
@@ -1068,7 +1103,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		<?php
 	}
 
-    protected function render_agent() {
+    protected function render_bottom() {
         ?>
         <div class="hl-listing-card__bottom mt-auto">
             <div class="hl-listing-card__bottom-inner">
@@ -1153,21 +1188,22 @@ abstract class Skin_Base extends Elementor_Skin_Base {
     }
 
 	protected function render_post() {
-		$this->render_post_header();
-        $this->render_thumb_carousel();
+      $this->render_post_header();
+          $this->start_picture_wrapper();
+              $this->render_tags();
+              $this->render_location();
+              $this->render_thumb_carousel();
+          $this->end_picture_wrapper();
 
-        $this->start_content_wrapper();
-        $this->render_title();
-        $this->render_price();
-        $this->render_excerpt();
-//        $this->render_read_more();
-        $this->render_meta_data();
+          $this->start_content_wrapper();
+              $this->render_title();
+              $this->render_price();
+              $this->render_excerpt();
+              $this->render_meta_data();
+          $this->end_content_wrapper();
 
-        $this->end_content_wrapper();
-
-		$this->render_agent();
-//		$this->render_text_footer();
-		$this->render_post_footer();
+          $this->render_bottom();
+      $this->render_post_footer();
 	}
 
 	public function render_amp() {
