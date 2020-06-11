@@ -25,7 +25,11 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 	protected function _register_controls_actions() {
 		add_action( 'elementor/element/property/section_layout/before_section_end', [ $this, 'register_controls' ] );
         add_action( 'elementor/element/property/section_query/after_section_end', [ $this, 'register_style_sections' ] );
-	}
+
+        wp_enqueue_script('hello-carousel-script', get_stylesheet_directory_uri() . '/includes/elementor/widgets/PropertyList/assets/js/base-script.js', '', '1', true);
+        wp_enqueue_style( 'hello-carousel-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/PropertyList/assets/css/base-main.css', '', 1 );
+
+    }
 
 	public function register_style_sections( Widget_Base $widget ) {
 		$this->parent = $widget;
@@ -42,6 +46,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		$this->register_title_controls();
 		$this->register_excerpt_controls();
 		$this->register_link_controls();
+        $this->register_read_more_controls();
 		$this->add_meta_data_controls();
 	}
 
@@ -49,6 +54,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 //		$this->register_design_layout_controls();
 		$this->register_design_image_controls();
 		$this->register_design_content_controls();
+
 	}
 
 	protected function register_thumbnail_controls() {
@@ -194,7 +200,31 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		);
 	}
 
+    protected function register_read_more_controls() {
+        $this->add_control(
+            'show_read_more',
+            [
+                'label' => __( 'Read More', 'elementor-pro' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __( 'Show', 'elementor-pro' ),
+                'label_off' => __( 'Hide', 'elementor-pro' ),
+                'default' => 'no',
+                'separator' => 'before',
+            ]
+        );
 
+        $this->add_control(
+            'read_more_text',
+            [
+                'label' => __( 'Read More Text', 'elementor-pro' ),
+                'type' => Controls_Manager::TEXT,
+                'default' => __( '...', 'elementor-pro' ),
+                'condition' => [
+                    $this->get_control_id( 'show_read_more' ) => 'yes',
+                ],
+            ]
+        );
+    }
 
     public function add_meta_data_controls() {
         $repeater = new Repeater();
@@ -781,9 +811,9 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		$this->end_controls_section();
 	}
 
-	public function filter_excerpt_length() {
-		return $this->get_instance_value( 'excerpt_length' );
-	}
+//	public function filter_excerpt_length() {
+//		return $this->get_instance_value( 'excerpt_length' );
+//	}
 
 	public function filter_excerpt_more( $more ) {
 		return '';
@@ -792,8 +822,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 	public function get_container_class() {
 		return 'elementor-property--skin-' . $this->get_id();
 	}
-
-
 
 	protected function render_title() {
 		if ( ! $this->get_instance_value( 'show_title' ) ) {
@@ -813,24 +841,15 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 	}
 
 	protected function render_excerpt() {
-		add_filter( 'excerpt_more', [ $this, 'filter_excerpt_more' ], 20 );
-		add_filter( 'excerpt_length', [ $this, 'filter_excerpt_length' ], 20 );
-
-		if ( ! $this->get_instance_value( 'show_excerpt' ) ) {
-			return;
-		}
-
-		add_filter( 'excerpt_more', [ $this, 'filter_excerpt_more' ], 20 );
-		add_filter( 'excerpt_length', [ $this, 'filter_excerpt_length' ], 20 );
-
-		?>
+        $length = $this->get_instance_value( 'excerpt_length' );
+        $read_more_text = $this->get_instance_value( 'read_more_text' );
+	    ?>
 		<p class="hl-listing-card-1__description">
-			<?php the_excerpt(); ?>
+            <?php echo wp_trim_words( get_the_excerpt(), $length, '' );; ?>
 		</p>
 		<?php
 
-		remove_filter( 'excerpt_length', [ $this, 'filter_excerpt_length' ], 20 );
-		remove_filter( 'excerpt_more', [ $this, 'filter_excerpt_more' ], 20 );
+
 	}
 
 	protected function render_read_more() {
@@ -1137,11 +1156,11 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		$this->render_post_header();
         $this->render_thumb_carousel();
 
-
         $this->start_content_wrapper();
         $this->render_title();
         $this->render_price();
         $this->render_excerpt();
+        $this->render_read_more();
         $this->render_meta_data();
 
         $this->end_content_wrapper();

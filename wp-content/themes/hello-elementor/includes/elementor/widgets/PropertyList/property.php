@@ -12,8 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 include_once ( 'property-base.php');
 include_once ( 'skins/skin-base.php');
-include_once ( 'skins/skin-list.php');
-include_once ( 'skins/skin-cards.php');
+include_once ( 'skins/skin1.php');
+include_once ( 'skins/skin2.php');
+include_once ( 'skins/skin3.php');
 
 /**
  * Class Posts
@@ -40,15 +41,10 @@ class Property extends Property_Base {
 		return $element;
 	}
 
-
-
 	protected function _register_skins() {
-
-
-
-		$this->add_skin( new Skins\Hello_Skin_Classic( $this ) );
-		$this->add_skin( new Skins\Skin_Cards( $this ) );
-//		$this->add_skin( new Skins\Skin_Full_Content( $this ) );
+		$this->add_skin( new Skins\Skin1( $this ) );
+		$this->add_skin( new Skins\Skin2( $this ) );
+		$this->add_skin( new Skins\Skin3( $this ) );
 	}
 
 	protected function _register_controls() {

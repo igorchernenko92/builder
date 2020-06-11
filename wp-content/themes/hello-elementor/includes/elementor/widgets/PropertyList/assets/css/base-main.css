@@ -104,7 +104,7 @@ ol {
 @media (min-width: 992px) {
     .hl-listing-card-1.hl-listing-card-1_hover:hover {
         box-shadow: 0 3px 23px 9px rgba(7,152,255,0.15);
-        transform: translate(0%, -10px);
+        transform: translate(0%, -5px);
     }
 }
 

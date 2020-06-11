@@ -12,23 +12,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-class Hello_Skin_Classic extends Skin_Base {
+class Skin2 extends Skin_Base {
 
 	protected function _register_controls_actions() {
 		parent::_register_controls_actions();
-		add_action( 'elementor/element/property/section_layout/before_section_end', [ $this, 'add_meta_data_controls' ] );
 
-        wp_enqueue_script('hello-carousel-script', get_stylesheet_directory_uri() . '/includes/elementor/widgets/PropertyList/assets/js/list-script.js', '', '1', true);
-        wp_enqueue_style( 'hello-carousel-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/PropertyList/assets/css/list-main.css', '', 1 );
+        wp_enqueue_script('hello-carousel-script', get_stylesheet_directory_uri() . '/includes/elementor/widgets/PropertyList/assets/js/skin2.js', '', '1', true);
+        wp_enqueue_style( 'hello-carousel-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/PropertyList/assets/css/skin2.css', '', 1 );
 
     }
 
 	public function get_id() {
-		return 'list';
+		return 'skin2';
 	}
 
 	public function get_title() {
-		return __( 'List', 'elementor-pro' );
+		return __( 'Skin 2', 'elementor-pro' );
 	}
 
     protected function render_loop_header() {
