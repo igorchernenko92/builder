@@ -100,8 +100,8 @@
             <li class="hl-listing-card-1__info-item">
                 <span class="hl-listing-card-1__icon hl-listing-card-1__info-icon"></span>
                 <span class="hl-listing-card-1__info-value">
-          190.00 m<sup>2</sup>
-        </span>
+                  190.00 m<sup>2</sup>
+                </span>
             </li>
         </ul>
     </div>

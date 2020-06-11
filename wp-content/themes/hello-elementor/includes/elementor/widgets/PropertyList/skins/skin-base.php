@@ -6,6 +6,7 @@ use Elementor\Core\Schemes;
 use Elementor\Group_Control_Css_Filter;
 use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Typography;
+use Elementor\Repeater;
 use Elementor\Skin_Base as Elementor_Skin_Base;
 use Elementor\Widget_Base;
 use ElementorPro\Plugin;
@@ -41,6 +42,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		$this->register_title_controls();
 		$this->register_excerpt_controls();
 		$this->register_link_controls();
+		$this->add_meta_data_controls();
 	}
 
 	public function register_design_controls() {
@@ -50,50 +52,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 	}
 
 	protected function register_thumbnail_controls() {
-		$this->add_control(
-			'thumbnail',
-			[
-				'label' => __( 'Image Position', 'elementor-pro' ),
-				'type' => Controls_Manager::SELECT,
-				'default' => 'top',
-				'options' => [
-					'top' => __( 'Top', 'elementor-pro' ),
-					'left' => __( 'Left', 'elementor-pro' ),
-					'right' => __( 'Right', 'elementor-pro' ),
-					'none' => __( 'None', 'elementor-pro' ),
-				],
-				'prefix_class' => 'elementor-posts--thumbnail-',
-			]
-		);
-
-		$this->add_control(
-			'masonry',
-			[
-				'label' => __( 'Masonry', 'elementor-pro' ),
-				'type' => Controls_Manager::SWITCHER,
-				'label_off' => __( 'Off', 'elementor-pro' ),
-				'label_on' => __( 'On', 'elementor-pro' ),
-				'condition' => [
-					$this->get_control_id( 'columns!' ) => '1',
-					$this->get_control_id( 'thumbnail' ) => 'top',
-				],
-				'render_type' => 'ui',
-				'frontend_available' => true,
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Image_Size::get_type(),
-			[
-				'name' => 'thumbnail_size',
-				'default' => 'medium',
-				'exclude' => [ 'custom' ],
-				'condition' => [
-					$this->get_control_id( 'thumbnail!' ) => 'none',
-				],
-				'prefix_class' => 'elementor-posts--thumbnail-size-',
-			]
-		);
 
 		$this->add_responsive_control(
 			'item_ratio',
@@ -119,47 +77,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 				'selectors' => [
 					'{{WRAPPER}} .elementor-posts-container .elementor-post__thumbnail' => 'padding-bottom: calc( {{SIZE}} * 100% );',
 //					'{{WRAPPER}}:after' => 'content: "{{SIZE}}";',
-				],
-				'condition' => [
-					$this->get_control_id( 'thumbnail!' ) => 'none',
-					$this->get_control_id( 'masonry' ) => '',
-				],
-			]
-		);
-
-		$this->add_responsive_control(
-			'image_width',
-			[
-				'label' => __( 'Image Width', 'elementor-pro' ),
-				'type' => Controls_Manager::SLIDER,
-				'range' => [
-					'%' => [
-						'min' => 10,
-						'max' => 100,
-					],
-					'px' => [
-						'min' => 10,
-						'max' => 600,
-					],
-				],
-				'default' => [
-					'size' => 100,
-					'unit' => '%',
-				],
-				'tablet_default' => [
-					'size' => '',
-					'unit' => '%',
-				],
-				'mobile_default' => [
-					'size' => 100,
-					'unit' => '%',
-				],
-				'size_units' => [ '%', 'px' ],
-				'selectors' => [
-					'{{WRAPPER}} .elementor-post__thumbnail__link' => 'width: {{SIZE}}{{UNIT}};',
-				],
-				'condition' => [
-					$this->get_control_id( 'thumbnail!' ) => 'none',
 				],
 			]
 		);
@@ -276,6 +193,125 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 			]
 		);
 	}
+
+
+
+    public function add_meta_data_controls() {
+        $repeater = new Repeater();
+
+        $repeater->add_control(
+            'property_meta_key',
+            [
+                'label' => __( 'Meta Data', 'elementor-pro' ),
+                'label_block' => true,
+                'type' => Controls_Manager::SELECT2,
+//                'default' => [ 'date', 'comments' ],
+                'multiple' => false,
+                'options' => [
+                    'property_bedrooms' => __( 'Beds', 'elementor-pro' ),
+                    'property_bath' => __( 'Bath', 'elementor-pro' ),
+                    'property_garages' => __( 'Garages', 'elementor-pro' ),
+                    'property_rooms' => __( 'Rooms', 'elementor-pro' ),
+                    'property_living_area' => __( 'Living Area', 'elementor-pro' ),
+                    'property_terrace' => __( 'Terrace', 'elementor-pro' ),
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'label',
+            [
+                'label' => __( 'Label', 'elementor' ),
+                'type' => Controls_Manager::TEXT,
+                'label_block' => true,
+                'placeholder' => __( '', 'elementor' ),
+                'default' => __( '', 'elementor' ),
+                'description' => __( 'Leave it empty if default', 'elementor' ),
+                'dynamic' => [
+                    'active' => true,
+                ],
+            ]
+        );
+
+//        $repeater->add_group_control(
+//            \Elementor\Group_Control_Typography::get_type(),
+//            [
+//                'name' => 'content_typography',
+//                'label' => __( 'Text Typography', 'plugin-domain' ),
+//                'scheme' => \Elementor\Scheme_Typography::TYPOGRAPHY_1,
+//                'selector' => '{{WRAPPER}} .hl-listing-card-1__meta_info-label',
+//            ]
+//        );
+
+        $repeater->add_control(
+            'hr',
+            [
+                'type' => \Elementor\Controls_Manager::DIVIDER,
+            ]
+        );
+
+
+        $repeater->add_control(
+            'icon_color',
+            [
+                'label' => __( 'Icon color', 'elementor-pro' ),
+                'type' => Controls_Manager::COLOR,
+                'scheme' => [
+                    'type' => \Elementor\Scheme_Color::get_type(),
+                    'value' => \Elementor\Scheme_Color::COLOR_1,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .elementor-post__title, {{WRAPPER}} .elementor-post__title a' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'selected_icon',
+            [
+                'label' => __( 'Icon', 'elementor' ),
+                'type' => Controls_Manager::ICONS,
+                'default' => [
+                    'value' => 'fas fa-check',
+                    'library' => 'fa-solid',
+                ],
+                'fa4compatibility' => 'icon',
+            ]
+        );
+
+        $this->add_control(
+            'property_meta_data',
+            [
+                'label' => '',
+                'type' => Controls_Manager::REPEATER,
+                'fields' => $repeater->get_controls(),
+                'default' => [
+                    [
+                        'text' => __( 'List Item #1', 'elementor' ),
+                        'selected_icon' => [
+                            'value' => 'fas fa-check',
+                            'library' => 'fa-solid',
+                        ],
+                    ],
+                    [
+                        'text' => __( 'List Item #2', 'elementor' ),
+                        'selected_icon' => [
+                            'value' => 'fas fa-times',
+                            'library' => 'fa-solid',
+                        ],
+                    ],
+                    [
+                        'text' => __( 'List Item #3', 'elementor' ),
+                        'selected_icon' => [
+                            'value' => 'fas fa-dot-circle',
+                            'library' => 'fa-solid',
+                        ],
+                    ],
+                ],
+                'title_field' => '{{{ elementor.helpers.renderIcon( this, selected_icon, {}, "i", "panel" ) || \'<i class="{{ icon }}" aria-hidden="true"></i>\' }}} {{{ text }}}',
+            ]
+        );
+    }
 
 	protected function get_optional_link_attributes_html() {
 		$settings = $this->parent->get_settings();
@@ -729,32 +765,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		return 'elementor-property--skin-' . $this->get_id();
 	}
 
-	protected function render_thumbnail() {
-		$thumbnail = $this->get_instance_value( 'thumbnail' );
 
-		if ( 'none' === $thumbnail && ! Plugin::elementor()->editor->is_edit_mode() ) {
-			return;
-		}
-
-		$settings = $this->parent->get_settings();
-		$setting_key = $this->get_control_id( 'thumbnail_size' );
-		$settings[ $setting_key ] = [
-			'id' => get_post_thumbnail_id(),
-		];
-		$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings, $setting_key );
-
-		if ( empty( $thumbnail_html ) ) {
-			return;
-		}
-
-		$optional_attributes_html = $this->get_optional_link_attributes_html();
-
-		?>
-		<a class="elementor-post__thumbnail__link" href="<?php echo $this->current_permalink; ?>" <?php echo $optional_attributes_html; ?>>
-			<div class="elementor-post__thumbnail"><?php echo $thumbnail_html; ?></div>
-		</a>
-		<?php
-	}
 
 	protected function render_title() {
 		if ( ! $this->get_instance_value( 'show_title' ) ) {
@@ -765,7 +776,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
 		$tag = $this->get_instance_value( 'title_tag' );
 		?>
-		<<?php echo $tag; ?> class="elementor-post__title">
+		<<?php echo $tag; ?> class="hl-listing-card-1__title">
 			<a href="<?php echo $this->current_permalink; ?>" <?php echo $optional_attributes_html; ?>>
 				<?php the_title(); ?>
 			</a>
@@ -785,9 +796,9 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		add_filter( 'excerpt_length', [ $this, 'filter_excerpt_length' ], 20 );
 
 		?>
-		<div class="elementor-post__excerpt">
+		<p class="hl-listing-card-1__description">
 			<?php the_excerpt(); ?>
-		</div>
+		</p>
 		<?php
 
 		remove_filter( 'excerpt_length', [ $this, 'filter_excerpt_length' ], 20 );
@@ -810,19 +821,32 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
 	protected function render_post_header() {
 		?>
-		<article <?php post_class( [ 'elementor-post elementor-grid-item' ] ); ?>>
+		<div <?php post_class( [ 'hl-listing-card hl-listing-card-1 hl-listing-card-1_hover' ] ); ?>>
 		<?php
 	}
 
 	protected function render_post_footer() {
 		?>
-		</article>
+		</div>
 		<?php
 	}
 
 	protected function render_text_header() {
 		?>
 		<div class="elementor-post__text">
+		<?php
+	}
+
+	protected function render_price() {
+		?>
+        <div class="hl-listing-card-1__price">
+          <span class="hl-listing-card-1__price-value">
+            ¥ 770,000
+          </span>
+            <span class="hl-listing-card-1__price-label">
+            / month
+          </span>
+        </div>
 		<?php
 	}
 
@@ -839,7 +863,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 			$this->get_container_class(),
 		];
 
-		/** @var \WP_Query $wp_query */
 		$wp_query = $this->parent->get_query();
 
 		// Use grid only if found posts.
@@ -919,31 +942,38 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 	}
 
 	protected function render_meta_data() {
-		/** @var array $settings e.g. [ 'author', 'date', ... ] */
-		$settings = $this->get_instance_value( 'meta_data' );
+		$settings = $this->get_instance_value( 'property_meta_data' );
 		if ( empty( $settings ) ) {
 			return;
 		}
+
+		$options = [
+            'property_bedrooms' => __( 'Beds', 'elementor-pro' ),
+            'property_bath' => __( 'Bath', 'elementor-pro' ),
+            'property_garages' => __( 'Garages', 'elementor-pro' ),
+            'property_rooms' => __( 'Rooms', 'elementor-pro' ),
+            'property_living_area' => __( 'Living Area', 'elementor-pro' ),
+            'property_terrace' => __( 'Terrace', 'elementor-pro' ),
+        ];
+		echo '<ul class="hl-listing-card-1__info">';
+            foreach (  $settings as $item ) {
+                $label = $item['label'];
+                if (!$label) $label = $options[$item['property_meta_key']];
+
+                $value = get_field($item['property_meta_key'], get_the_ID());
+                ?>
+            <li class="hl-listing-card-1__info-item">
+                <span class="hl-listing-card-1__icon hl-listing-card-1__info-icon"><?php echo $item['selected_icon']['value'];  ?></span>
+                <span class="hl-listing-card-1__meta_info-label"><?php echo $label;  ?></span>
+                <span class="hl-listing-card-1__info-value"><?php echo $value; ?></span>
+            </li>
+
+       <?php }
+        echo '</ul>';
+
 		?>
-		<div class="elementor-post__meta-data">
-			<?php
-			if ( in_array( 'author', $settings ) ) {
-				$this->render_author();
-			}
 
-			if ( in_array( 'date', $settings ) ) {
-				$this->render_date();
-			}
 
-			if ( in_array( 'time', $settings ) ) {
-				$this->render_time();
-			}
-
-			if ( in_array( 'comments', $settings ) ) {
-				$this->render_comments();
-			}
-			?>
-		</div>
 		<?php
 	}
 
@@ -994,17 +1024,17 @@ abstract class Skin_Base extends Elementor_Skin_Base {
         $this->render_loop_header();
 
         // It's the global `wp_query` it self. and the loop was started from the theme.
-        if ( $query->in_the_loop ) {
-            $this->current_permalink = get_permalink();
-            $this->render_post();
-        } else {
+//        if ( $query->in_the_loop ) {
+//            $this->current_permalink = get_permalink();
+//            $this->render_post();
+//        } else {
             while ( $query->have_posts() ) {
                 $query->the_post();
 
                 $this->current_permalink = get_permalink();
                 $this->render_post();
             }
-        }
+//        }
 
         wp_reset_postdata();
 
@@ -1013,15 +1043,15 @@ abstract class Skin_Base extends Elementor_Skin_Base {
     }
 
 	protected function render_post() {
-//		$this->render_post_header();
-//		$this->render_thumbnail();
+		$this->render_post_header();
 //		$this->render_text_header();
-//		$this->render_title();
-//		$this->render_meta_data();
-//		$this->render_excerpt();
+		$this->render_title();
+        $this->render_price();
+		$this->render_excerpt();
+        $this->render_meta_data();
 //		$this->render_read_more();
 //		$this->render_text_footer();
-//		$this->render_post_footer();
+		$this->render_post_footer();
 	}
 
 	public function render_amp() {

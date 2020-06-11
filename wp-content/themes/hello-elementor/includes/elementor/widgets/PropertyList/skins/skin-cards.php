@@ -541,41 +541,8 @@ class Skin_Cards extends Skin_Base {
 		<?php
 	}
 
-	protected function render_thumbnail() {
-		if ( 'none' === $this->get_instance_value( 'thumbnail' ) ) {
-			return;
-		}
-
-		$settings = $this->parent->get_settings();
-		$setting_key = $this->get_control_id( 'thumbnail_size' );
-		$settings[ $setting_key ] = [
-			'id' => get_post_thumbnail_id(),
-		];
-		$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings, $setting_key );
-
-		if ( empty( $thumbnail_html ) ) {
-			return;
-		}
-
-		$optional_attributes_html = $this->get_optional_link_attributes_html();
-
-		?>
-		<a class="elementor-post__thumbnail__link" href="<?php echo get_permalink(); ?>" <?php echo $optional_attributes_html; ?>>
-			<div class="elementor-post__thumbnail"><?php echo $thumbnail_html; ?></div>
-		</a>
-		<?php
-		if ( $this->get_instance_value( 'show_badge' ) ) {
-			$this->render_badge();
-		}
-
-		if ( $this->get_instance_value( 'show_avatar' ) ) {
-			$this->render_avatar();
-		}
-	}
-
 	protected function render_post() {
 		$this->render_post_header();
-		$this->render_thumbnail();
 		$this->render_text_header();
 		$this->render_title();
 		$this->render_excerpt();
