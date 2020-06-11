@@ -208,10 +208,10 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 //                'default' => [ 'date', 'comments' ],
                 'multiple' => false,
                 'options' => [
+                    'property_rooms' => __( 'Rooms', 'elementor-pro' ),
                     'property_bedrooms' => __( 'Beds', 'elementor-pro' ),
                     'property_bath' => __( 'Bath', 'elementor-pro' ),
                     'property_garages' => __( 'Garages', 'elementor-pro' ),
-                    'property_rooms' => __( 'Rooms', 'elementor-pro' ),
                     'property_living_area' => __( 'Living Area', 'elementor-pro' ),
                     'property_terrace' => __( 'Terrace', 'elementor-pro' ),
                 ],
@@ -287,28 +287,56 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                 'fields' => $repeater->get_controls(),
                 'default' => [
                     [
-                        'text' => __( 'List Item #1', 'elementor' ),
+                        'label' => __( '', 'elementor' ),
+                        'property_meta_key' => 'property_rooms',
                         'selected_icon' => [
-                            'value' => 'fas fa-check',
+                            'value' => 'fas fa-door-open',
                             'library' => 'fa-solid',
                         ],
                     ],
                     [
-                        'text' => __( 'List Item #2', 'elementor' ),
+                        'label' => __( '', 'elementor' ),
+                        'property_meta_key' => 'property_bedrooms',
                         'selected_icon' => [
-                            'value' => 'fas fa-times',
+                            'value' => 'fas fa-bed',
                             'library' => 'fa-solid',
                         ],
                     ],
                     [
-                        'text' => __( 'List Item #3', 'elementor' ),
+                        'label' => __( '', 'elementor' ),
+                        'property_meta_key' => 'property_bath',
                         'selected_icon' => [
-                            'value' => 'fas fa-dot-circle',
+                            'value' => 'fas fa-bath',
+                            'library' => 'fa-solid',
+                        ],
+                    ],
+
+                    [
+                        'label' => __( '', 'elementor' ),
+                        'property_meta_key' => 'property_garages',
+                        'selected_icon' => [
+                            'value' => 'fas fa-car-alt',
+                            'library' => 'fa-solid',
+                        ],
+                    ],
+                    [
+                        'label' => __( '', 'elementor' ),
+                        'property_meta_key' => 'property_living_area',
+                        'selected_icon' => [
+                            'value' => 'fas fa-square-root-alt',
+                            'library' => 'fa-solid',
+                        ],
+                    ],
+                    [
+                        'label' => __( '', 'elementor' ),
+                        'property_meta_key' => 'property_terrace',
+                        'selected_icon' => [
+                            'value' => 'fas fa-house-damage',
                             'library' => 'fa-solid',
                         ],
                     ],
                 ],
-                'title_field' => '{{{ elementor.helpers.renderIcon( this, selected_icon, {}, "i", "panel" ) || \'<i class="{{ icon }}" aria-hidden="true"></i>\' }}} {{{ text }}}',
+                'title_field' => '{{{ elementor.helpers.renderIcon( this, selected_icon, {}, "i", "panel" ) || \'<i class="{{ icon }}" aria-hidden="true"></i>\' }}} {{{ property_meta_key }}}',
             ]
         );
     }
@@ -946,7 +974,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		if ( empty( $settings ) ) {
 			return;
 		}
-
 		$options = [
             'property_bedrooms' => __( 'Beds', 'elementor-pro' ),
             'property_bath' => __( 'Bath', 'elementor-pro' ),
@@ -963,18 +990,13 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                 $value = get_field($item['property_meta_key'], get_the_ID());
                 ?>
             <li class="hl-listing-card-1__info-item">
-                <span class="hl-listing-card-1__icon hl-listing-card-1__info-icon"><?php echo $item['selected_icon']['value'];  ?></span>
-                <span class="hl-listing-card-1__meta_info-label"><?php echo $label;  ?></span>
+                <span class="hl-listing-card-1__icon hl-listing-card-1__info-icon"><?php echo $item['selected_icon']['value']; ?></span>
+                <span class="hl-listing-card-1__meta_info-label"><?php echo $label; ?></span>
                 <span class="hl-listing-card-1__info-value"><?php echo $value; ?></span>
             </li>
 
        <?php }
         echo '</ul>';
-
-		?>
-
-
-		<?php
 	}
 
 	protected function render_author() {
