@@ -59,7 +59,6 @@ class Skin_Cards extends Skin_Base {
 	}
 
 	public function register_design_controls() {
-		$this->register_design_layout_controls();
 		$this->register_design_card_controls();
 		$this->register_design_image_controls();
 		$this->register_design_content_controls();

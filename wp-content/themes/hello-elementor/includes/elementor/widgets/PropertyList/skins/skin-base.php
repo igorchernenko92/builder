@@ -46,7 +46,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 	}
 
 	public function register_design_controls() {
-		$this->register_design_layout_controls();
+//		$this->register_design_layout_controls();
 		$this->register_design_image_controls();
 		$this->register_design_content_controls();
 	}
@@ -351,84 +351,84 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 	/**
 	 * Style Tab
 	 */
-	protected function register_design_layout_controls() {
-		$this->start_controls_section(
-			'section_design_layout',
-			[
-				'label' => __( 'Layout', 'elementor-pro' ),
-				'tab' => Controls_Manager::TAB_STYLE,
-			]
-		);
-
-		$this->add_control(
-			'column_gap',
-			[
-				'label' => __( 'Columns Gap', 'elementor-pro' ),
-				'type' => Controls_Manager::SLIDER,
-				'default' => [
-					'size' => 30,
-				],
-				'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 100,
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .elementor-posts-container' => 'grid-column-gap: {{SIZE}}{{UNIT}}',
-					'.elementor-msie {{WRAPPER}} .elementor-post' => 'padding-right: calc( {{SIZE}}{{UNIT}}/2 ); padding-left: calc( {{SIZE}}{{UNIT}}/2 );',
-					'.elementor-msie {{WRAPPER}} .elementor-posts-container' => 'margin-left: calc( -{{SIZE}}{{UNIT}}/2 ); margin-right: calc( -{{SIZE}}{{UNIT}}/2 );',
-				],
-			]
-		);
-
-		$this->add_control(
-			'row_gap',
-			[
-				'label' => __( 'Rows Gap', 'elementor-pro' ),
-				'type' => Controls_Manager::SLIDER,
-				'default' => [
-					'size' => 35,
-				],
-				'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 100,
-					],
-				],
-				'frontend_available' => true,
-				'selectors' => [
-					'{{WRAPPER}} .elementor-posts-container' => 'grid-row-gap: {{SIZE}}{{UNIT}}',
-					'.elementor-msie {{WRAPPER}} .elementor-post' => 'padding-bottom: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'alignment',
-			[
-				'label' => __( 'Alignment', 'elementor-pro' ),
-				'type' => Controls_Manager::CHOOSE,
-				'options' => [
-					'left' => [
-						'title' => __( 'Left', 'elementor-pro' ),
-						'icon' => 'eicon-text-align-left',
-					],
-					'center' => [
-						'title' => __( 'Center', 'elementor-pro' ),
-						'icon' => 'eicon-text-align-center',
-					],
-					'right' => [
-						'title' => __( 'Right', 'elementor-pro' ),
-						'icon' => 'eicon-text-align-right',
-					],
-				],
-				'prefix_class' => 'elementor-posts--align-',
-			]
-		);
-
-		$this->end_controls_section();
-	}
+//	protected function register_design_layout_controls() {
+//		$this->start_controls_section(
+//			'section_design_layout',
+//			[
+//				'label' => __( 'Layout', 'elementor-pro' ),
+//				'tab' => Controls_Manager::TAB_STYLE,
+//			]
+//		);
+//
+//		$this->add_control(
+//			'column_gap',
+//			[
+//				'label' => __( 'Columns Gap', 'elementor-pro' ),
+//				'type' => Controls_Manager::SLIDER,
+//				'default' => [
+//					'size' => 30,
+//				],
+//				'range' => [
+//					'px' => [
+//						'min' => 0,
+//						'max' => 100,
+//					],
+//				],
+//				'selectors' => [
+//					'{{WRAPPER}} .elementor-posts-container' => 'grid-column-gap: {{SIZE}}{{UNIT}}',
+//					'.elementor-msie {{WRAPPER}} .elementor-post' => 'padding-right: calc( {{SIZE}}{{UNIT}}/2 ); padding-left: calc( {{SIZE}}{{UNIT}}/2 );',
+//					'.elementor-msie {{WRAPPER}} .elementor-posts-container' => 'margin-left: calc( -{{SIZE}}{{UNIT}}/2 ); margin-right: calc( -{{SIZE}}{{UNIT}}/2 );',
+//				],
+//			]
+//		);
+//
+//		$this->add_control(
+//			'row_gap',
+//			[
+//				'label' => __( 'Rows Gap', 'elementor-pro' ),
+//				'type' => Controls_Manager::SLIDER,
+//				'default' => [
+//					'size' => 35,
+//				],
+//				'range' => [
+//					'px' => [
+//						'min' => 0,
+//						'max' => 100,
+//					],
+//				],
+//				'frontend_available' => true,
+//				'selectors' => [
+//					'{{WRAPPER}} .elementor-posts-container' => 'grid-row-gap: {{SIZE}}{{UNIT}}',
+//					'.elementor-msie {{WRAPPER}} .elementor-post' => 'padding-bottom: {{SIZE}}{{UNIT}};',
+//				],
+//			]
+//		);
+//
+//		$this->add_control(
+//			'alignment',
+//			[
+//				'label' => __( 'Alignment', 'elementor-pro' ),
+//				'type' => Controls_Manager::CHOOSE,
+//				'options' => [
+//					'left' => [
+//						'title' => __( 'Left', 'elementor-pro' ),
+//						'icon' => 'eicon-text-align-left',
+//					],
+//					'center' => [
+//						'title' => __( 'Center', 'elementor-pro' ),
+//						'icon' => 'eicon-text-align-center',
+//					],
+//					'right' => [
+//						'title' => __( 'Right', 'elementor-pro' ),
+//						'icon' => 'eicon-text-align-right',
+//					],
+//				],
+//				'prefix_class' => 'elementor-posts--align-',
+//			]
+//		);
+//
+//		$this->end_controls_section();
+//	}
 
 	protected function register_design_image_controls() {
 		$this->start_controls_section(
@@ -969,6 +969,48 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		<?php
 	}
 
+    protected function render_thumb_carousel() { ?>
+        <div class="hl-listing-card__carousel hl-listing-card-1__carousel">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+
+                    <?php
+                    $gallery = get_field('property_gallery', get_the_ID() );
+                    if ($gallery) {
+                        foreach ($gallery as $image) { ?>
+                            <div class="swiper-slide hl-listing-card-1__carousel-item">
+                                <a class="hl-listing-card-1__carousel-item-inner hl-listing-card-1__picture-wrap-img" href="#">
+                                    <img
+                                            src="<?php echo  $image['sizes']['medium']; ?>"
+                                            class="hl-listing-card-1__picture-img hl-img-responsive"
+                                            title="<?php echo $image['title']; ?>"
+                                            alt="<?php echo $image['alt']; ?>"
+                                    >
+                                </a>
+                            </div>
+                        <?php }
+                    }
+                    ?>
+                </div>
+
+                <button class="hl-listing-card__carousel-nav_prev hl-listing-card-1__carousel-nav hl-listing-card__carousel-nav">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"></path>
+                        <path fill="none" d="M0 0h24v24H0V0z"></path>
+                    </svg>
+                </button>
+
+                <button class="hl-listing-card__carousel-nav_next hl-listing-card-1__carousel-nav hl-listing-card__carousel-nav">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path>
+                        <path fill="none" d="M0 0h24v24H0V0z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+   <?php }
+
 	protected function render_meta_data() {
 		$settings = $this->get_instance_value( 'property_meta_data' );
 		if ( empty( $settings ) ) {
@@ -1007,6 +1049,23 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		<?php
 	}
 
+    protected function render_agent() {
+        ?>
+        <div class="hl-listing-card-1__bottom mt-auto">
+            <div class="hl-listing-card-1__bottom-inner">
+                <a href="#" class="hl-listing-card-1__agent">
+                    <img
+                            src="https://tokyowpresidence.b-cdn.net/wp-content/uploads/2014/05/agent3-1-19-120x120.jpg"
+                            class="hl-listing-card-1__agent-img hl-img-responsive"
+                            alt=""
+                    >
+                    <span class="hl-listing-card-1__agent-name">Janet Richmond</span>
+                </a>
+            </div>
+        </div>
+        <?php
+    }
+
 	protected function render_date() {
 		?>
 		<span class="elementor-post-date">
@@ -1017,6 +1076,14 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		</span>
 		<?php
 	}
+
+    protected function start_content_wrapper() {
+        echo '<div class="hl-listing-card-1__body">';
+    }
+
+    protected function end_content_wrapper() {
+        echo '</div>';
+    }
 
 	protected function render_time() {
 		?>
@@ -1043,35 +1110,43 @@ abstract class Skin_Base extends Elementor_Skin_Base {
             return;
         }
 
-        $this->render_loop_header();
+//        $this->render_loop_header();
 
         // It's the global `wp_query` it self. and the loop was started from the theme.
 //        if ( $query->in_the_loop ) {
 //            $this->current_permalink = get_permalink();
 //            $this->render_post();
 //        } else {
+        echo "<div class='hl-listings'>";
             while ( $query->have_posts() ) {
                 $query->the_post();
 
                 $this->current_permalink = get_permalink();
                 $this->render_post();
             }
+        echo "</div>";
 //        }
 
         wp_reset_postdata();
 
-        $this->render_loop_footer();
+//        $this->render_loop_footer();
 
     }
 
 	protected function render_post() {
 		$this->render_post_header();
-//		$this->render_text_header();
-		$this->render_title();
+        $this->render_thumb_carousel();
+
+
+        $this->start_content_wrapper();
+        $this->render_title();
         $this->render_price();
-		$this->render_excerpt();
+        $this->render_excerpt();
         $this->render_meta_data();
-//		$this->render_read_more();
+
+        $this->end_content_wrapper();
+
+		$this->render_agent();
 //		$this->render_text_footer();
 		$this->render_post_footer();
 	}
