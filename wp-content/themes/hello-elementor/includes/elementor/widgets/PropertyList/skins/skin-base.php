@@ -269,7 +269,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 //                'name' => 'content_typography',
 //                'label' => __( 'Text Typography', 'plugin-domain' ),
 //                'scheme' => \Elementor\Scheme_Typography::TYPOGRAPHY_1,
-//                'selector' => '{{WRAPPER}} .hl-listing-card-1__meta_info-label',
+//                'selector' => '{{WRAPPER}} .hl-listing-card__meta_info-label',
 //            ]
 //        );
 
@@ -832,7 +832,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
 		$tag = $this->get_instance_value( 'title_tag' );
 		?>
-		<<?php echo $tag; ?> class="hl-listing-card-1__title">
+		<<?php echo $tag; ?> class="hl-listing-card__title">
 			<a href="<?php echo $this->current_permalink; ?>" <?php echo $optional_attributes_html; ?>>
 				<?php the_title(); ?>
 			</a>
@@ -844,7 +844,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
         $length = $this->get_instance_value( 'excerpt_length' );
         $read_more_text = $this->get_instance_value( 'read_more_text' );
 	    ?>
-		<p class="hl-listing-card-1__description">
+		<p class="hl-listing-card__description">
             <?php echo wp_trim_words( get_the_excerpt(), $length, '' );; ?>
 		</p>
 		<?php
@@ -868,7 +868,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
 	protected function render_post_header() {
 		?>
-		<div <?php post_class( [ 'hl-listing-card hl-listing-card-1 hl-listing-card-1_hover' ] ); ?>>
+		<div <?php post_class( [ 'hl-listing-card hl-listing-card hl-listing-card_hover' ] ); ?>>
 		<?php
 	}
 
@@ -886,11 +886,11 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
 	protected function render_price() {
 		?>
-        <div class="hl-listing-card-1__price">
-          <span class="hl-listing-card-1__price-value">
+        <div class="hl-listing-card__price">
+          <span class="hl-listing-card__price-value">
             ¥ 770,000
           </span>
-            <span class="hl-listing-card-1__price-label">
+            <span class="hl-listing-card__price-label">
             / month
           </span>
         </div>
@@ -989,7 +989,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 	}
 
     protected function render_thumb_carousel() { ?>
-        <div class="hl-listing-card__carousel hl-listing-card-1__carousel">
+        <div class="hl-listing-card__carousel hl-listing-card__carousel">
             <div class="swiper-container">
                 <div class="swiper-wrapper">
 
@@ -997,11 +997,11 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                     $gallery = get_field('property_gallery', get_the_ID() );
                     if ($gallery) {
                         foreach ($gallery as $image) { ?>
-                            <div class="swiper-slide hl-listing-card-1__carousel-item">
-                                <a class="hl-listing-card-1__carousel-item-inner hl-listing-card-1__picture-wrap-img" href="#">
+                            <div class="swiper-slide hl-listing-card__carousel-item">
+                                <a class="hl-listing-card__carousel-item-inner hl-listing-card__picture-wrap-img" href="#">
                                     <img
                                             src="<?php echo  $image['sizes']['medium']; ?>"
-                                            class="hl-listing-card-1__picture-img hl-img-responsive"
+                                            class="hl-listing-card__picture-img hl-img-responsive"
                                             title="<?php echo $image['title']; ?>"
                                             alt="<?php echo $image['alt']; ?>"
                                     >
@@ -1012,14 +1012,14 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                     ?>
                 </div>
 
-                <button class="hl-listing-card__carousel-nav_prev hl-listing-card-1__carousel-nav hl-listing-card__carousel-nav">
+                <button class="hl-listing-card__carousel-nav_prev hl-listing-card__carousel-nav hl-listing-card__carousel-nav">
                     <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"></path>
                         <path fill="none" d="M0 0h24v24H0V0z"></path>
                     </svg>
                 </button>
 
-                <button class="hl-listing-card__carousel-nav_next hl-listing-card-1__carousel-nav hl-listing-card__carousel-nav">
+                <button class="hl-listing-card__carousel-nav_next hl-listing-card__carousel-nav hl-listing-card__carousel-nav">
                     <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path>
                         <path fill="none" d="M0 0h24v24H0V0z"></path>
@@ -1043,17 +1043,17 @@ abstract class Skin_Base extends Elementor_Skin_Base {
             'property_living_area' => __( 'Living Area', 'elementor-pro' ),
             'property_terrace' => __( 'Terrace', 'elementor-pro' ),
         ];
-		echo '<ul class="hl-listing-card-1__info">';
+		echo '<ul class="hl-listing-card__info">';
             foreach (  $settings as $item ) {
                 $label = $item['label'];
                 if (!$label) $label = $options[$item['property_meta_key']];
 
                 $value = get_field($item['property_meta_key'], get_the_ID());
                 ?>
-            <li class="hl-listing-card-1__info-item">
-                <span class="hl-listing-card-1__icon hl-listing-card-1__info-icon"><?php echo $item['selected_icon']['value']; ?></span>
-                <span class="hl-listing-card-1__meta_info-label"><?php echo $label; ?></span>
-                <span class="hl-listing-card-1__info-value"><?php echo $value; ?></span>
+            <li class="hl-listing-card__info-item">
+                <i class="fa fa-<?php echo $item['selected_icon']['value']; ?> hl-listing-card__icon hl-listing-card__info-icon"></i>
+<!--                <span class="hl-listing-card__meta_info-label">--><?php //echo $label; ?><!--</span>-->
+                <span class="hl-listing-card__info-value"><?php echo $value; ?></span>
             </li>
 
        <?php }
@@ -1070,15 +1070,15 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
     protected function render_agent() {
         ?>
-        <div class="hl-listing-card-1__bottom mt-auto">
-            <div class="hl-listing-card-1__bottom-inner">
-                <a href="#" class="hl-listing-card-1__agent">
+        <div class="hl-listing-card__bottom mt-auto">
+            <div class="hl-listing-card__bottom-inner">
+                <a href="#" class="hl-listing-card__agent">
                     <img
                             src="https://tokyowpresidence.b-cdn.net/wp-content/uploads/2014/05/agent3-1-19-120x120.jpg"
-                            class="hl-listing-card-1__agent-img hl-img-responsive"
+                            class="hl-listing-card__agent-img hl-img-responsive"
                             alt=""
                     >
-                    <span class="hl-listing-card-1__agent-name">Janet Richmond</span>
+                    <span class="hl-listing-card__agent-name">Janet Richmond</span>
                 </a>
             </div>
         </div>
@@ -1097,7 +1097,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 	}
 
     protected function start_content_wrapper() {
-        echo '<div class="hl-listing-card-1__body">';
+        echo '<div class="hl-listing-card__body">';
     }
 
     protected function end_content_wrapper() {
@@ -1160,7 +1160,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
         $this->render_title();
         $this->render_price();
         $this->render_excerpt();
-        $this->render_read_more();
+//        $this->render_read_more();
         $this->render_meta_data();
 
         $this->end_content_wrapper();
