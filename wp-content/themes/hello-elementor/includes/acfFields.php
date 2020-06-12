@@ -183,8 +183,10 @@ if( function_exists('acf_add_local_field_group') ):
                     'class' => '',
                     'id' => '',
                 ),
-                'display_format' => 'F j, Y',
-                'return_format' => 'F j, Y',
+                'display_format' => 'Ymd',
+                'return_format' => 'Ymd',
+                // 'display_format' => 'F j, Y',
+                // 'return_format' => 'F j, Y',
                 'first_day' => 1,
             ),
             array(

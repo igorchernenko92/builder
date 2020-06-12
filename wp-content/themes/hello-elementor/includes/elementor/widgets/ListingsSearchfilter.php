@@ -14,6 +14,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class ListingsSearchFilter extends Base_Widget {
 
+	public function __construct( $data = [], $args = null ) {
+
+		parent::__construct( $data, $args );
+		wp_enqueue_style( 'ut-datepicker-css', get_template_directory_uri() . '/includes/elementor/widgets/assets/css/datepicker.css', array(), date("Ymd"), false );
+		wp_enqueue_script( 'ut-datepicker-js', get_template_directory_uri() . '/includes/elementor/widgets/assets/js/datepicker.js', array(), date("Ymd"), false );
+	}
+
 	public function get_name() {
 		return 'search_filter';
 	}
@@ -28,6 +35,28 @@ class ListingsSearchFilter extends Base_Widget {
 
 	public function get_categories() {
 		return [ 'general' ];
+	}
+
+	/**
+	 * Get permalink by template name
+	 */
+
+	public function get_permalik_by_template( $template ) {
+
+		$result = '';
+
+		if ( ! empty( $template ) ) {
+			$pages = get_pages( array(
+			    'meta_key'   => '_wp_page_template',
+			    'meta_value' => $template
+			) );
+			$template_id = $pages[0]->ID;
+			$page = get_post( $template_id );
+
+			$result = get_permalink( $page );
+		}
+		
+		return $result;
 	}
 
 	protected function _register_controls() {
@@ -48,9 +77,14 @@ class ListingsSearchFilter extends Base_Widget {
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'search',
 				'options' => [
-					'search' 	=> _x( 'Search', 'Type Field', 'elementor' ),
-					'order' 	=> _x( 'Order', 'Type Field', 'elementor' ),
-					'price' 	=> _x( 'Price', 'Type Field', 'elementor' ),
+					'search' 				=> _x( 'Search', 'Type Field', 'elementor' ),
+					'property_year_built' 	=> _x( 'Year Built', 'Type Field', 'elementor' ),
+					'property_bedrooms' 	=> _x( 'Bedrooms', 'Type Field', 'elementor' ),
+					'property_bath' 		=> _x( 'Bath', 'Type Field', 'elementor' ),
+					'property_garages' 		=> _x( 'Garages', 'Type Field', 'elementor' ),
+					'property_rooms' 		=> _x( 'Rooms', 'Type Field', 'elementor' ),
+					'property_living_area' 	=> _x( 'Living Area', 'Type Field', 'elementor' ),
+					'property_terrace' 		=> _x( 'Terrace', 'Type Field', 'elementor' ),
 				],
 			]
 		);
@@ -139,11 +173,12 @@ class ListingsSearchFilter extends Base_Widget {
 		
 			<div id="home-search" class="site-section home-section">
 				<div class="container">
-					<form method="get" action="#" class="wpsight-listings-search horizontal">
+					<form id="search_filter_form" method="get" action="#" class="wpsight-listings-search horizontal">
 						<div class="listings-search-default">
 							<div class="row gutter-30">
 								
 								<?php foreach ( $settings['items'] as $field ) : ?>
+
 									
 									<?php if ( 'search' == $field['type_field'] ) : ?>
 
@@ -156,29 +191,33 @@ class ListingsSearchFilter extends Base_Widget {
 										<div class="listings-search-field listings-search-field-submit listings-search-field-submit col-xs-2 col-sm-3"> 
 											<input type="submit" value="Search" class="btn btn-primary btn-block">
 										</div>
-									
-									<?php elseif ( 'order' == $field['type_field'] ) : ?>
 
-										<div class="listings-search-field listings-search-field-select listings-search-field-offer col-xs-12 col-sm-2" style="width:<?php echo $field['width_field']; ?>%;">
-											<div class="btn-group bootstrap-select listing-search-offer select form-control">
-												<label>
-													<?php echo $field['label']; ?>
-													<select class="listing-search-offer select selectpicker form-control" name="offer" tabindex="-98">
-														<option value="">Order</option>
-														<option value="asc" data-default="false">ASC</option>
-														<option value="desc" data-default="false">DESC</option> 
-													</select>
-												</label>
-											</div>
-										</div>
+									<?php 
+									elseif ( 
+											'property_bedrooms' 	== $field['type_field'] || 
+											'property_bath' 		== $field['type_field'] ||
+											'property_garages' 		== $field['type_field'] ||
+											'property_rooms' 		== $field['type_field'] ||
+											'property_living_area' 	== $field['type_field'] ||
+											'property_terrace' 		== $field['type_field'] 
+										   ) : 
+									?>
 
-									<?php elseif ( 'price' == $field['type_field'] ) : ?>
-
-										<div class="listings-search-field listings-search-field-text listings-search-field-keyword col-xs-12 col-sm-9" style="width:<?php echo $field['width_field']; ?>%;"> 
+										<div class="col-xs-12 col-sm-9" style="width:<?php echo $field['width_field']; ?>%;"> 
 											<label>
 												<?php echo $field['label']; ?>
-												<input class="listing-search-keyword text form-control" name="price" type="number" value="" placeholder="<?php echo $field['placeholder']; ?>">
+												<input class="text form-control" name="<?php echo $field['type_field']; ?>" type="number" value="" placeholder="<?php echo $field['placeholder']; ?>">
 											</label>
+										</div>
+
+									<?php elseif ( 'property_year_built' == $field['type_field'] ) : ?>
+
+										<div class="col-xs-12 col-sm-9" style="width:<?php echo $field['width_field']; ?>%;"> 
+											<label>
+												<?php echo $field['label']; ?>
+												<input class="text form-control datepicker-here" name="<?php echo $field['type_field']; ?>" type="text" value="" placeholder="<?php echo $field['placeholder']; ?>" data-date-format="yyyy mm dd">
+												<!-- data-date-format="M d, yyyy" -->
+											</label> 
 										</div>
 
 									<?php endif; ?>
@@ -190,6 +229,18 @@ class ListingsSearchFilter extends Base_Widget {
 					</form>
 				</div>
 			</div>
+
+			<script>
+				jQuery(document).ready( function($) {
+					$('#search_filter_form').submit( function(e) {
+	    				e.preventDefault();
+	    				var template_url = '<?php echo $this->get_permalik_by_template( 'template-advanced-search.php' ); ?>';
+	    				var data = $(this).serialize();
+	    				var redirect_url = template_url + '?' + data;
+	    				window.location  = redirect_url;
+					});
+				});
+			</script>
 
 		<?php
 	}
