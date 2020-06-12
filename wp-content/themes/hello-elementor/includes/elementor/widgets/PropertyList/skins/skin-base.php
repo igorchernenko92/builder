@@ -1171,14 +1171,43 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 //            $this->current_permalink = get_permalink();
 //            $this->render_post();
 //        } else {
-        echo "<div class='hl-listings'>";
+
+        $isCarousel = true;
+
+        if ($isCarousel) {
+            echo "<div class='hl-listings-carousel'>
+                    <div class='swiper-container'>
+                      <div class='swiper-wrapper'>
+            ";
+        } else {
+            echo "<div class='hl-listings'>";
+        }
             while ( $query->have_posts() ) {
                 $query->the_post();
 
                 $this->current_permalink = get_permalink();
-                $this->render_post();
+
+                if ($isCarousel) {
+                  echo "<div class='swiper-slide'>";
+                }
+
+                  $this->render_post();
+
+                if ($isCarousel) {
+                    echo "</div>";
+                }
             }
-        echo "</div>";
+
+        if ($isCarousel) {
+            echo "
+                  </div>
+                </div>
+              </div>
+            ";
+        } else {
+            echo "</div>";
+        }
+
 //        }
 
         wp_reset_postdata();
