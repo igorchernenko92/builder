@@ -60,8 +60,8 @@ class Widget_Manager {
 //        include_once( 'widgets/ListingsSearch.php' );
 //        include_once( 'widgets/ListingsCarousel/ListingsCarousel.php' );
         include_once( 'widgets/PropertyList/property.php' );
-       include_once( 'widgets/ListingsSearchFilter.php' );
-       include_once( 'widgets/ListingsGMapResultSearch.php' );
+        include_once( 'widgets/ListingsSearchfilter.php' );
+        include_once( 'widgets/ListingsGMapResultSearch.php' );
 //        include_once( 'widgets/ListingsCarousel.php' );
 //
         include_once( 'widgets/ListingDetails.php' );
