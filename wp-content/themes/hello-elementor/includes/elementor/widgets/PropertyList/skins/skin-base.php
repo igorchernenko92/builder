@@ -1103,7 +1103,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		<?php
 	}
 
-    protected function render_bottom() {
+    protected function render_agent() {
         ?>
         <div class="hl-listing-card__bottom mt-auto">
             <div class="hl-listing-card__bottom-inner">
@@ -1231,7 +1231,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
               $this->render_meta_data();
           $this->end_content_wrapper();
 
-          $this->render_bottom();
+          $this->render_agent();
       $this->render_post_footer();
 	}
 

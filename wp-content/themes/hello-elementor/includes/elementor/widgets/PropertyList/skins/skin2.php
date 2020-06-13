@@ -92,7 +92,7 @@ class Skin2 extends Skin_Base {
         echo '</ul>';
 	}
 
-    protected function render_bottom() {
+    protected function render_agent() {
         ?>
         <div class="hl-listing-card__bottom mt-auto">
             <div class="hl-listing-card__bottom-inner">
@@ -126,7 +126,7 @@ class Skin2 extends Skin_Base {
                 $this->render_price();
             $this->end_content_wrapper();
 
-            $this->render_bottom();
+            $this->render_agent();
         $this->render_post_footer();
     }
 

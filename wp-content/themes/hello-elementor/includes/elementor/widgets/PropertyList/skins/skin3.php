@@ -44,4 +44,57 @@ class Skin3 extends Skin_Base {
         <?php
     }
 
+    protected function render_agent() {
+        ?>
+        <div class="hl-listing-card__bottom mt-auto">
+            <div class="hl-listing-card__bottom-inner">
+                <a href="#" class="hl-listing-card__agent">
+                    <img
+                        src="https://tokyowpresidence.b-cdn.net/wp-content/uploads/2014/05/agent3-1-19-120x120.jpg"
+                        class="hl-listing-card__agent-img hl-img-responsive"
+                        alt=""
+                    >
+                </a>
+            </div>
+        </div>
+        <?php
+    }
+
+    protected function render_post() {
+        $this->render_post_header();
+          $this->start_picture_wrapper();
+            $this->render_tags();
+            $this->render_agent();
+            $this->render_thumb_carousel();
+          $this->end_picture_wrapper();
+
+          $this->start_content_wrapper();
+            $this->render_title();
+            $this->render_price();
+            $this->render_excerpt();
+            $this->render_meta_data();
+          $this->end_content_wrapper();
+        $this->render_post_footer();
+    }
+
+    public function render() {
+        $this->parent->query_posts();
+
+        /** @var \WP_Query $query */
+        $query = $this->parent->get_query();
+        if ( ! $query->found_posts ) {
+            return;
+        }
+
+        echo "<div class='hl-listings hl-listings_large'>";
+          while ( $query->have_posts() ) {
+            $query->the_post();
+            $this->current_permalink = get_permalink();
+            $this->render_post();
+          }
+        echo "</div>";
+
+        wp_reset_postdata();
+    }
+
 }
