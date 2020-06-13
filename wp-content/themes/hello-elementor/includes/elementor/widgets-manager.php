@@ -60,6 +60,9 @@ class Widget_Manager {
 //        include_once( 'widgets/ListingsSearch.php' );
 //        include_once( 'widgets/ListingsCarousel/ListingsCarousel.php' );
         include_once( 'widgets/PropertyList/property.php' );
+       include_once( 'widgets/ListingsSearchFilter.php' );
+       include_once( 'widgets/ListingsGMapResultSearch.php' );
+//        include_once( 'widgets/ListingsCarousel.php' );
 //
         include_once( 'widgets/ListingDetails.php' );
 //        include_once( 'widgets/ListingFeatures.php' );
@@ -84,7 +87,8 @@ class Widget_Manager {
 
         // Register Widgets
 //        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\Listings() );
-//        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingsSearch() );
+       \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingsSearchFilter() );
+       \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingsGMapResultSearch );
 //        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingsCarousel() );
 ////
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingDetails() );
