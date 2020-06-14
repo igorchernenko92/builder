@@ -16,9 +16,9 @@ class ListingsSearchFilter extends Base_Widget {
 
 	public function __construct( $data = [], $args = null ) {
 
-//		parent::__construct( $data, $args );
-//		wp_enqueue_style( 'ut-datepicker-css', get_template_directory_uri() . '/includes/elementor/widgets/assets/css/datepicker.css', array(), date("Ymd"), false );
-//		wp_enqueue_script( 'ut-datepicker-js', get_template_directory_uri() . '/includes/elementor/widgets/assets/js/datepicker.js', array(), date("Ymd"), false );
+		parent::__construct( $data, $args );
+		wp_enqueue_style( 'ut-datepicker-css', get_template_directory_uri() . '/includes/elementor/widgets/assets/css/datepicker.css', array(), date("Ymd"), false );
+		wp_enqueue_script( 'ut-datepicker-js', get_template_directory_uri() . '/includes/elementor/widgets/assets/js/datepicker.js', array(), date("Ymd"), false );
 	}
 
 	public function get_name() {
@@ -175,57 +175,52 @@ class ListingsSearchFilter extends Base_Widget {
 				<div class="container">
 					<form id="search_filter_form" method="get" action="#" class="wpsight-listings-search horizontal">
 						<div class="listings-search-default">
-							<div class="row gutter-30">
-								
-								<?php foreach ( $settings['items'] as $field ) : ?>
+              <?php foreach ( $settings['items'] as $field ) : ?>
 
-									
-									<?php if ( 'search' == $field['type_field'] ) : ?>
+                <?php if ( 'search' == $field['type_field'] ) : ?>
+                  <div class="listings-search-field listings-search-field-text listings-search-field-keyword wrap-field wrap-field_search" style="width:<?php echo $field['width_field']; ?>%;">
+                    <label class="wrap-input">
+                      <?php echo $field['label']; ?>
+                      <input class="listing-search-keyword text form-control" name="keyword" type="text" value="" placeholder="<?php echo $field['placeholder']; ?>">
+                    </label>
 
-										<div class="listings-search-field listings-search-field-text listings-search-field-keyword col-xs-10 col-sm-9" style="width:<?php echo $field['width_field']; ?>%;"> 
-											<label>
-												<?php echo $field['label']; ?>
-												<input class="listing-search-keyword text form-control" name="keyword" type="text" value="" placeholder="<?php echo $field['placeholder']; ?>">
-											</label>
-										</div>
-										<div class="listings-search-field listings-search-field-submit listings-search-field-submit col-xs-2 col-sm-3"> 
-											<input type="submit" value="Search" class="btn btn-primary btn-block">
-										</div>
+                    <div class="listings-search-field listings-search-field-submit listings-search-field-submit">
+                      <input type="submit" value="Search" class="btn btn-primary btn-block">
+                    </div>
+                  </div>
 
-									<?php 
-									elseif (
-											'property_bedrooms' 	== $field['type_field'] || 
-											'property_bath' 		== $field['type_field'] ||
-											'property_garages' 		== $field['type_field'] ||
-											'property_rooms' 		== $field['type_field'] ||
-											'property_living_area' 	== $field['type_field'] ||
-											'property_terrace' 		== $field['type_field'] 
-										   ) : 
-									?>
+                <?php
+                elseif (
+                    'property_bedrooms' 	== $field['type_field'] ||
+                    'property_bath' 		== $field['type_field'] ||
+                    'property_garages' 		== $field['type_field'] ||
+                    'property_rooms' 		== $field['type_field'] ||
+                    'property_living_area' 	== $field['type_field'] ||
+                    'property_terrace' 		== $field['type_field']
+                     ) :
+                ?>
 
-										<div class="col-xs-12 col-sm-9" style="width:<?php echo $field['width_field']; ?>%;"> 
-											<label>
-												<?php echo $field['label']; ?>
-												<input class="text form-control" name="<?php echo $field['type_field']; ?>" type="number" value="" placeholder="<?php echo $field['placeholder']; ?>">
-											</label>
-										</div>
+                  <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
+                    <label class="wrap-input">
+                      <?php echo $field['label']; ?>
+                      <input class="text form-control" name="<?php echo $field['type_field']; ?>" type="number" value="" placeholder="<?php echo $field['placeholder']; ?>">
+                    </label>
+                  </div>
 
-									<?php elseif ( 'property_year_built' == $field['type_field'] ) : ?>
+                <?php elseif ( 'property_year_built' == $field['type_field'] ) : ?>
 
-										<div class="col-xs-12 col-sm-9" style="width:<?php echo $field['width_field']; ?>%;"> 
-											<label>
-												<?php echo $field['label']; ?>
-												<input class="text form-control datepicker-here" name="<?php echo $field['type_field']; ?>" type="text" value="" placeholder="<?php echo $field['placeholder']; ?>" data-date-format="yyyy mm dd">
-												<!-- data-date-format="M d, yyyy" -->
-											</label> 
-										</div>
+                  <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
+                    <label class="wrap-input">
+                      <?php echo $field['label']; ?>
+                      <input class="text form-control datepicker-here" name="<?php echo $field['type_field']; ?>" type="text" value="" placeholder="<?php echo $field['placeholder']; ?>" data-date-format="yyyy mm dd">
+                      <!-- data-date-format="M d, yyyy" -->
+                    </label>
+                  </div>
 
-									<?php endif; ?>
+                <?php endif; ?>
 
-								<?php endforeach; ?>
-
-							</div>
-						</div>  
+              <?php endforeach; ?>
+						</div>
 					</form>
 				</div>
 			</div>
