@@ -1336,10 +1336,9 @@ class HelloGoogleMap extends Widget_Base {
                 $is_repeater = true;
             }
         }
-        //if(isset($field_settings['type'])) var_dump($field_settings['type']);
-        // ...............
 
-        if(!$is_repeater){
+
+
             $imageMarker = DCE_Helper::get_acf_field_value($settings['acf_markerfield'], $id_page);
 
             if (is_string($imageMarker)) {
@@ -1360,7 +1359,7 @@ class HelloGoogleMap extends Widget_Base {
                 $imageSrc = wp_get_attachment_image_src($imageMarker['ID'], 'full');
                 $imageMarker = $imageSrc[0];
             }
-        }
+
         if ($imageMarker == '') {
             $imageMarker = $settings['imageMarker']['url'];
         }
@@ -1373,29 +1372,15 @@ class HelloGoogleMap extends Widget_Base {
         if ($settings['enable_infoWindow']) {
 
             $infoWindow_str = $settings['custom_infoWindow_wysiwig'];
-            /*switch ($settings['custom_infoWindow_style']) {
-                case 'text_wysiwyg':
-                    $infoWindow_str = $settings['custom_infoWindow_wysiwig'];
-                    break;
-                case 'text':
-                    $infoWindow_str = $settings['custom_infoWindow'];
-                    break;
-                default:
-                    $infoWindow_str = '';
-            }*/
+
             $infoWindow_str = DCE_Helper::get_dynamic_value($infoWindow_str);
             $infoWindow_str = htmlspecialchars($infoWindow_str, ENT_QUOTES);
 
-            /* if($settings['acf_mapfield']){
-
-              }else{
-              $infoWindow_str = $settings['address'];
-              } */
         }
 
 
-                     $terms_query = 'all';
-                     $taxquery = array();
+                $terms_query = 'all';
+                $taxquery = array();
                 if ($settings['category'] != '') {
                     $terms_query = explode(',', $settings['category']);
                 }
@@ -1524,10 +1509,7 @@ class HelloGoogleMap extends Widget_Base {
                                             if ($settings['infowindow_query_show_readmore']) {
                                                 $postReadMore = '<div class="dce-iw-readmore-wrapper"><a href="' . $postlink . '" class="dce-iw-readmore-btn">' . __($settings['infowindow_query_readmore_text'], 'dynamic-content-for-elementor' . '_texts') . '</a></div>';
                                             }
-                                            //$map_field = get_post_meta( $id_page, $settings['acf_mapfield'] );
-                                            //$marker_img = get_field($settings['acf_markerfield']);
 
-                                            //$marker_img = get_post_meta( $id_page, $settings['acf_markerfield'] );
 
                                             $postInfowindow = $postImage . '<div class="dce-iw-textzone">' . $postTitle . $postContent . $postReadMore . '</div>';
                                         }
@@ -1555,13 +1537,20 @@ class HelloGoogleMap extends Widget_Base {
                                             $marker_img = $imageMarker;
                                         }
 
+                                        if ($marker_img == '') {
+                                            $marker_data = '';
+                                        } else {
+                                            $marker_data = '"marker":"' . $marker_img . '",';
+                                        }
+
+
                                         if ($counter > 0) {
                                             echo ', ';
                                         }
                                         echo '{"address":"' . $indirizzo . '",';
                                         echo '"lat":"' . $lat . '",';
                                         echo '"lng":"' . $lng . '",';
-                                        echo '"marker":"' . $marker_img . '",';
+                                        echo $marker_data;
                                         echo '"postLink":"' . $postlink . '",';
                                         echo '"infoWindow": "' . strval(addslashes($postInfowindow)) . '"}';
                                         //var_dump($map_field);
