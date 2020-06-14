@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSight_Berlin\Elementor\Widgets;
+namespace WPSight_Berlin\Elementor\Widgets\HelloMap;
 
 use Elementor\Repeater;
 use Elementor\Controls_Manager;
@@ -29,7 +29,7 @@ class HelloGoogleMap extends Widget_Base {
         parent::__construct($data, $args);
         wp_register_script( 'hello-google-script', 'https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCyzLPGLgRv_SOdc3anLhP8olpjrBocu6I&callback=initialize', [ 'elementor-frontend' ], '1.0.0', true );
         wp_register_script( 'hello-markerclusterer-js', 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js', array(), date("Ymd"), false );
-        wp_register_script( 'hello-map-script', get_stylesheet_directory_uri() . '/includes/elementor/widgets/google-maps.js', [ 'elementor-frontend' ], '1.0.0', true );
+        wp_register_script( 'hello-map-script', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloMap/assets/js/google-maps.js', [ 'elementor-frontend' ], '1.0.0', true );
     }
 
     public function get_script_depends() {
