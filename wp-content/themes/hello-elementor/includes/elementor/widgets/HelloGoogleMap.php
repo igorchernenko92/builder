@@ -1440,6 +1440,40 @@ class HelloGoogleMap extends Widget_Base {
                 );
 
 
+                foreach ( (array)$_GET as $meta_key => $meta_value ) {
+
+                    if ( ! empty(  $meta_value ) ) {
+
+                        if ( 'keyword' == $meta_key ) {
+
+                            $args['s'] = $meta_value;
+
+                        } elseif ( 'property_year_built' == $meta_key ) {
+
+                            $args['meta_query'][] = array(
+                                array(
+                                    'key' 		=> $meta_key,
+                                    'value' 	=> preg_replace( '/\s+/', '', $meta_value ), // date('Ymd'),
+                                    'type' 		=> 'DATE',
+                                    'compare' 	=> '=='
+                                )
+                            );
+
+                        } else {
+
+                            $args['meta_query'][] = array(
+                                array(
+                                    'key'   => $meta_key,
+                                    'value' => $meta_value
+                                )
+                            );
+
+                        }
+
+                    }
+                }
+
+
                 // QUERY - RELATIONSHIP - POST
 
                 if(isset($args) && count($args) ) {
