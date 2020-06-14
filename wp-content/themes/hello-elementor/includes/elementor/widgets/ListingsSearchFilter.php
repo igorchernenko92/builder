@@ -16,9 +16,9 @@ class ListingsSearchFilter extends Base_Widget {
 
 	public function __construct( $data = [], $args = null ) {
 
-		parent::__construct( $data, $args );
-		wp_enqueue_style( 'ut-datepicker-css', get_template_directory_uri() . '/includes/elementor/widgets/assets/css/datepicker.css', array(), date("Ymd"), false );
-		wp_enqueue_script( 'ut-datepicker-js', get_template_directory_uri() . '/includes/elementor/widgets/assets/js/datepicker.js', array(), date("Ymd"), false );
+//		parent::__construct( $data, $args );
+//		wp_enqueue_style( 'ut-datepicker-css', get_template_directory_uri() . '/includes/elementor/widgets/assets/css/datepicker.css', array(), date("Ymd"), false );
+//		wp_enqueue_script( 'ut-datepicker-js', get_template_directory_uri() . '/includes/elementor/widgets/assets/js/datepicker.js', array(), date("Ymd"), false );
 	}
 
 	public function get_name() {
@@ -193,7 +193,7 @@ class ListingsSearchFilter extends Base_Widget {
 										</div>
 
 									<?php 
-									elseif ( 
+									elseif (
 											'property_bedrooms' 	== $field['type_field'] || 
 											'property_bath' 		== $field['type_field'] ||
 											'property_garages' 		== $field['type_field'] ||
