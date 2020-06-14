@@ -77,19 +77,19 @@ class HelloGoogleMap extends Widget_Base {
             ]
         );
 
-        $this->add_control(
-            'map_data_type', [
-                'label' => __('Data Type', 'dynamic-content-for-elementor'),
-                'type' => Controls_Manager::SELECT,
-                'default' => 'acfmap',
-                'options' => [
-                    'acfmap' => __('ACF Map Field', 'dynamic-content-for-elementor'),
-                    'address' => __('Address', 'dynamic-content-for-elementor'),
-                    'latlng' => __('Latitude Longitude', 'dynamic-content-for-elementor'),
-                ],
-                'frontend_available' => true,
-            ]
-        );
+//        $this->add_control(
+//            'map_data_type', [
+//                'label' => __('Data Type', 'dynamic-content-for-elementor'),
+//                'type' => Controls_Manager::SELECT,
+//                'default' => 'acfmap',
+//                'options' => [
+//                    'acfmap' => __('ACF Map Field', 'dynamic-content-for-elementor'),
+//                    'address' => __('Address', 'dynamic-content-for-elementor'),
+//                    'latlng' => __('Latitude Longitude', 'dynamic-content-for-elementor'),
+//                ],
+//                'frontend_available' => true,
+//            ]
+//        );
         $this->add_control(
             'acf_mapfield', [
                 'label' => __('ACF Map', 'dynamic-content-for-elementor'),
@@ -97,32 +97,26 @@ class HelloGoogleMap extends Widget_Base {
                 'options' => DCE_Helper::get_acf_fields('google_map'),
                 'frontend_available' => true,
                 'label_block' => true,
-                'condition' => [
-                    'map_data_type' => 'acfmap',
-                ],
             ]
         );
         // --------------------------------- [ Use Query post ]
-        $this->add_control(
-            'use_query_heading',
-            [
-                'label' => __('Multilocations from CPT, Relationship, Repeater, Post', 'dynamic-content-for-elementor'),
-                'type' => Controls_Manager::HEADING,
-                'separator' => 'before',
-                'condition' => [
-                    'map_data_type' => 'acfmap',
-                    'acf_mapfield!' => '0',
-                ]
-            ]
-        );
+//        $this->add_control(
+//            'use_query_heading',
+//            [
+//                'label' => __('Multilocations from CPT, Relationship, Repeater, Post', 'dynamic-content-for-elementor'),
+//                'type' => Controls_Manager::HEADING,
+//                'separator' => 'before',
+//                'condition' => [
+//                    'acf_mapfield!' => '0',
+//                ]
+//            ]
+//        );
         $this->add_control(
             'use_query', [
                 'label' => __('Use Query', 'dynamic-content-for-elementor'),
                 'type' => Controls_Manager::SWITCHER,
                 'frontend_available' => true,
-
                 'condition' => [
-                    'map_data_type' => 'acfmap',
                     'acf_mapfield!' => '0',
                 ]
             ]
@@ -134,7 +128,6 @@ class HelloGoogleMap extends Widget_Base {
                 'default' => 'yes',
                 'frontend_available' => true,
                 'condition' => [
-                    'map_data_type' => 'acfmap',
                     'acf_mapfield!' => '0',
                 ]
             ]
@@ -248,72 +241,10 @@ class HelloGoogleMap extends Widget_Base {
                 'type' => Controls_Manager::SWITCHER,
                 'frontend_available' => true,
                 'condition' => [
-                    'map_data_type' => 'acfmap',
                     'acf_mapfield!' => '0',
-                    'use_query!' => '',
                 ],
             ]
         );
-        /* $this->add_control(
-          'infoWindow_heading_content',
-          [
-          'label' => __( 'InfoWindow Content', 'dynamic-content-for-elementor' ),
-          'type' => Controls_Manager::HEADING,
-          'separator' => 'before',
-          'condition' => [
-          'infoWindow_click_to_post' => '',
-          ],
-          ]
-          );
-          $this->add_control(
-          'infoWindow_title', [
-          'label' => __('Title', 'dynamic-content-for-elementor'),
-          'type' => Controls_Manager::SWITCHER,
-          'label_on' => __('Yes', 'dynamic-content-for-elementor'),
-          'label_off' => __('No', 'dynamic-content-for-elementor'),
-          'frontend_available' => true,
-          'condition' => [
-          'acf_mapfield!' => '0',
-          'use_query' => 'yes',
-          ],
-          ]
-          );
-          $this->add_control(
-          'infoWindow_image', [
-          'label' => __('Image', 'dynamic-content-for-elementor'),
-          'type' => Controls_Manager::SWITCHER,
-          'label_on' => __('Yes', 'dynamic-content-for-elementor'),
-          'label_off' => __('No', 'dynamic-content-for-elementor'),
-          'frontend_available' => true,
-          'condition' => [
-          'acf_mapfield!' => '0',
-          'use_query' => 'yes',
-          ],
-          ]
-          ); */
-
-        /*$this->add_control(
-                'custom_infoWindow_style', [
-            'label' => __('Style', 'dynamic-content-for-elementor'),
-            'type' => Controls_Manager::CHOOSE,
-            'options' => [
-                'text' => [
-                    'title' => __('Simple Text', 'dynamic-content-for-elementor'),
-                    'icon' => 'fa fa-font',
-                ],
-                'text_wysiwyg' => [
-                    'title' => __('HTML Wysiwyg', 'dynamic-content-for-elementor'),
-                    'icon' => 'fa fa-align-left',
-                ],
-            ],
-            'toggle' => false,
-            'default' => 'text',
-            'condition' => [
-                'infoWindow_click_to_post' => '',
-                'use_query' => '',
-            ],
-                ]
-        );*/
 
         $this->add_control(
             'custom_infoWindow_render', [
@@ -333,7 +264,6 @@ class HelloGoogleMap extends Widget_Base {
                 'default' => 'simple',
                 'condition' => [
                     'infoWindow_click_to_post' => '',
-                    'use_query!' => '',
                 ],
             ]
         );
@@ -347,24 +277,11 @@ class HelloGoogleMap extends Widget_Base {
                 'deafult' => '[post:ID|get_the_post_thumbnail(thumbnail)]<h4>[post:title]</h4>[post:excerpt]<br><a href="[post:permalink]">READ MORE</a>',
                 'condition' => [
                     'infoWindow_click_to_post' => '',
-                    'use_query!' => '',
                     'custom_infoWindow_render' => 'html',
                 ],
             ]
         );
-        /*$this->add_control(
-                'custom_infoWindow',
-                [
-                    'label' => __('Custom text', 'dynamic-content-for-elementor'),
-                    'type' => Controls_Manager::CODE,
-                    'frontend_available' => true,
-                    'label_block' => true,
-                    'condition' => [
-                        'custom_infoWindow_style' => 'text',
-                        'use_query' => '',
-                    ],
-                ]
-        );*/
+
         $this->add_control(
             'custom_infoWindow_wysiwig',
             [
@@ -1289,43 +1206,13 @@ class HelloGoogleMap extends Widget_Base {
             'section_cpt', [
                 'label' => __('Multilocations Query', 'dynamic-content-for-elementor'),
                 'condition' => [
-                    'map_data_type' => 'acfmap',
                     'acf_mapfield!' => '0',
                     'use_query!' => '',
                 ]
             ]
         );
 
-        // --------------------------------- [ Query Type ]
-        $this->add_control(
-            'query_type', [
-                'label' => __('Query Type', 'dynamic-content-for-elementor'),
-                'type' => Controls_Manager::CHOOSE,
-                'options' => [
-                    'get_cpt' => [
-                        'title' => 'Custom Post Type',
-                        'icon' => 'fa fa-files-o',
-                    ],
-                    'acf_relations' => [
-                        'title' => 'ACF Relations',
-                        'icon' => 'fa fa-american-sign-language-interpreting',
-                    ],
-                    'acf_repeater' => [
-                        'title' => 'ACF Repeater',
-                        'icon' => 'fa fa-ellipsis-v',
-                    ],
-                    'specific_posts' => [
-                        'title' => 'From Specific Post',
-                        'icon' => 'fa fa-list-ul',
-                    ],
 
-                ],
-                'default' => 'get_cpt',
-                'condition' => [
-                    'use_query' => 'yes',
-                ],
-            ]
-        );
         // --------------------------------- [ Custom Post Type ]
 
         $this->add_control(
@@ -1334,10 +1221,7 @@ class HelloGoogleMap extends Widget_Base {
                 'type' => Controls_Manager::SELECT,
                 //'options' => get_post_taxonomies( $post->ID ),
                 'options' => ['' => __('None', 'dynamic-content-for-elementor')] + get_taxonomies(array('public' => true)),
-                'condition' => [
-                    'use_query' => 'yes',
-                    'query_type' => ['get_cpt'],
-                ],
+
             ]
         );
         $this->add_control(
@@ -1345,10 +1229,7 @@ class HelloGoogleMap extends Widget_Base {
                 'label' => __('Terms ID', 'dynamic-content-for-elementor'),
                 'description' => __('Comma separated list of category ids', 'dynamic-content-for-elementor'),
                 'type' => Controls_Manager::HIDDEN,
-                'condition' => [
-                    'use_query' => 'yes',
-                    'query_type' => ['get_cpt'],
-                ],
+
             ]
         );
         $this->add_control(
@@ -1356,12 +1237,7 @@ class HelloGoogleMap extends Widget_Base {
                 'label' => __('Use Dynamic Current Post Terms (Archive)', 'dynamic-content-for-elementor'),
                 'type' => Controls_Manager::SWITCHER,
                 'description' => __('Filter results by taxonomy terms associated to current post', 'dynamic-content-for-elementor'),
-                'condition' => [
-                    'taxonomy!' => '',
-                    'query_type' => ['get_cpt', 'dynamic_mode'],
-                    'use_query' => 'yes',
-                    //'terms_from_acf' => ''
-                ],
+
             ]
         );
         foreach ($taxonomies as $tkey => $atax) {
@@ -1375,8 +1251,6 @@ class HelloGoogleMap extends Widget_Base {
                         'multiple' => true,
                         'label_block' => true,
                         'condition' => [
-                            'use_query' => 'yes',
-                            'query_type' => ['get_cpt', 'dynamic_mode'],
                             'taxonomy' => $tkey,
                             'terms_current_post' => '',
                         ],
@@ -1386,130 +1260,7 @@ class HelloGoogleMap extends Widget_Base {
                 );
             }
         }
-        // --------------------------------- [ ACF relations ]
-        $this->add_control(
-            'acf_relationship', [
-                'label' => __('Relations (ACF)', 'dynamic-content-for-elementor'),
-                'type' => Controls_Manager::SELECT,
-                //'options' => get_post_taxonomies( $post->ID ),
-                'options' => DCE_Helper::get_acf_fields('relationship'),
-                'label_block' => true,
-                'default' => '0',
-                'condition' => [
-                    'use_query' => 'yes',
-                    'query_type' => 'acf_relations',
-                ],
-            ]
-        );
-        // --------------------------------- [ ACF repeater ]
-        $this->add_control(
-            'acf_repeater', [
-                'label' => __('Repeater (ACF)', 'dynamic-content-for-elementor'),
-                'type' => Controls_Manager::SELECT,
-                //'options' => get_post_taxonomies( $post->ID ),
-                'options' => DCE_Helper::get_acf_fields('repeater'),
-                'label_block' => true,
-                'default' => '0',
-                'condition' => [
-                    'use_query' => 'yes',
-                    'query_type' => 'acf_repeater',
-                ],
-            ]
-        );
-        $this->add_control(
-            'acf_repeater_iwimage', [
-                'label' => __('InfoWindow Image (ACF)', 'dynamic-content-for-elementor'),
-                'type' => Controls_Manager::SELECT,
-                //'options' => get_post_taxonomies( $post->ID ),
-                'options' => DCE_Helper::get_acf_fields('image'),
-                'label_block' => true,
-                'separator' => 'before',
-                'default' => '0',
-                'condition' => [
-                    'use_query' => 'yes',
-                    'query_type' => 'acf_repeater',
-                    'enable_infoWindow!' => '',
-                    'custom_infoWindow_render' => 'simple'
-                ],
-            ]
-        );
-        $this->add_control(
-            'acf_repeater_iwtitle', [
-                'label' => __('InfoWindow Title Repeater (ACF)', 'dynamic-content-for-elementor'),
-                'type' => Controls_Manager::SELECT,
-                //'options' => get_post_taxonomies( $post->ID ),
-                'options' => DCE_Helper::get_acf_fields('text'),
-                'label_block' => true,
-                'default' => '0',
-                'condition' => [
-                    'use_query' => 'yes',
-                    'query_type' => 'acf_repeater',
-                    'enable_infoWindow!' => '',
-                    'custom_infoWindow_render' => 'simple'
-                ],
-            ]
-        );
-        $this->add_control(
-            'acf_repeater_iwcontent', [
-                'label' => __('InfoWindow Content Repeater (ACF)', 'dynamic-content-for-elementor'),
-                'type' => Controls_Manager::SELECT,
-                //'options' => get_post_taxonomies( $post->ID ),
-                'options' => DCE_Helper::get_acf_fields(['textarea','wysiwyg']),
-                'label_block' => true,
-                'default' => '0',
-                'condition' => [
-                    'use_query' => 'yes',
-                    'query_type' => 'acf_repeater',
-                    'enable_infoWindow!' => '',
-                    'custom_infoWindow_render' => 'simple'
-                ],
-            ]
-        );
-        $this->add_control(
-            'acf_repeater_iwlink', [
-                'label' => __('InfoWindow ReadMore Link Repeater (ACF)', 'dynamic-content-for-elementor'),
-                'type' => Controls_Manager::SELECT,
-                //'options' => get_post_taxonomies( $post->ID ),
-                'options' => DCE_Helper::get_acf_fields(['url','link','page_link']),
-                'label_block' => true,
-                'default' => '0',
-                'condition' => [
-                    'use_query' => 'yes',
-                    'query_type' => 'acf_repeater',
-                    'enable_infoWindow!' => '',
-                    'custom_infoWindow_render' => 'simple'
-                ],
-            ]
-        );
-        // --------------------------------- [ Specific Pages ]
-        /* $this->add_control(
-          'specific_pages', [
-          'label' => __('Posts', 'dynamic-content-for-elementor'),
-          'type' => Controls_Manager::SELECT2,
-          'options' => DCE_Helper::get_all_posts(),
-          'multiple' => true,
-          'label_block' => true,
-          'condition' => [
-          'query_type' => 'specific_posts',
-          ],
-          ]
-          ); */
-        $this->add_control(
-            'specific_pages',
-            [
-                'label' => __('Posts', 'dynamic-content-for-elementor'),
-                'type' => 'ooo_query',
-                'placeholder' => __('Post Title', 'dynamic-content-for-elementor'),
-                'label_block' => true,
-                'query_type' => 'posts',
-                'multiple' => true,
-                'label_block' => true,
-                'condition' => [
-                    'use_query' => 'yes',
-                    'query_type' => 'specific_posts',
-                ],
-            ]
-        );
+
         $this->end_controls_section();
 
         $this->start_controls_section(
@@ -1641,37 +1392,8 @@ class HelloGoogleMap extends Widget_Base {
               $infoWindow_str = $settings['address'];
               } */
         }
-        if (!$settings['use_query']) {
 
-            $map_data_type = $settings['map_data_type'];
-            $indirizzo = $settings['address'];
 
-            $lat = $settings['latitudine'];
-            $lng = $settings['longitudine'];
-
-            if ($settings['acf_mapfield']) {
-                //$location = get_field($settings['acf_mapfield'], $id_page);
-                $location = DCE_Helper::get_acf_field_value($settings['acf_mapfield'], $id_page);
-
-                //$location = unserialize(get_post_meta( $id_page, $settings['acf_mapfield'], true ));
-                //var_dump($location);
-                //echo $id_page;
-                if (!empty($location)) {
-                    $indirizzo = $location['address'];
-                    $lat = $location['lat'];
-                    $lng = $location['lng'];
-                }
-            }
-            //$indirizzo = $location['address'];
-            //echo $indirizzo;
-            /*
-              echo $settings['height']['size'];
-              echo $settings['zoom']['size'];
-             */
-            //$location['address'] = $indirizzo;
-            //echo $indirizzo;
-        } else {
-                 if ($settings['query_type'] == 'get_cpt') {
                      $terms_query = 'all';
                      $taxquery = array();
                 if ($settings['category'] != '') {
@@ -1731,15 +1453,11 @@ class HelloGoogleMap extends Widget_Base {
                     'post_status' => 'publish',
                     'tax_query' => $taxquery,
                 );
-            }
 
 
-                // if in query_type e sono in tipo post. (query, relation, post)
-                //
-                //var_dump($args);
                 // QUERY - RELATIONSHIP - POST
 
-                if(isset($args) && count($args) ){
+                if(isset($args) && count($args) ) {
                     $p_query = new \WP_Query($args);
                     //echo $p_query->found_posts;
                     $counter = 0;
@@ -1868,7 +1586,7 @@ class HelloGoogleMap extends Widget_Base {
 
 
             /* ----------------------------------------------------------------- END Query */
-        } // end if use_query
+
         //var_dump($counter);
         ?>
 
@@ -1910,9 +1628,6 @@ class HelloGoogleMap extends Widget_Base {
                 $snazzy_list[$snazzy_url] = $snazzy_name;
             }
         }
-        // ciclo la cartellina maps_style in assets e ricavo la lista dei files ....
-        //$snazzy_list[DCE_URL.'assets/maps_style/extra_light'] = 'Extra Light';
-        //$snazzy_list[DCE_URL.'assets/maps_style/extra_black'] = 'Extra black';
 
         return $snazzy_list;
     }
