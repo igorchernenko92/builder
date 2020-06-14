@@ -56,21 +56,14 @@ class Widget_Manager {
      */
     private function include_widgets_files() {
         // TODO: move widget folder to variable
-//        include_once( 'widgets/Listings.php' );
-//        include_once( 'widgets/ListingsSearch.php' );
 //        include_once( 'widgets/ListingsCarousel/ListingsCarousel.php' );
         include_once( 'widgets/PropertyList/property.php' );
-        include_once( 'widgets/ListingsSearchfilter.php' );
+        include_once( 'widgets/ListingsSearchFilter.php' );
         include_once( 'widgets/ListingsGMapResultSearch.php' );
 //        include_once( 'widgets/ListingsCarousel.php' );
 //
         include_once( 'widgets/ListingDetails.php' );
-//        include_once( 'widgets/ListingFeatures.php' );
-//        include_once( 'widgets/ListingMap.php' );
 //        include_once( 'widgets/ListingAgent.php' );
-//        include_once( 'widgets/ListingImageSlider.php' );
-//        include_once( 'widgets/ListingSidebar.php' );
-//        include_once( 'widgets/ListingImageGallery.php' );
 
     }
 
@@ -86,19 +79,13 @@ class Widget_Manager {
         $this->include_widgets_files();
 
         // Register Widgets
-//        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\Listings() );
        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingsSearchFilter() );
        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingsGMapResultSearch );
 //        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingsCarousel() );
 ////
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingDetails() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\Property\Property() );
-//        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingFeatures() );
 //        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingAgent() );
-//        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingMap() );
-//        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingImageSlider() );
-//        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingSidebar() );
-//        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingImageGallery() );
     }
 
     /**
