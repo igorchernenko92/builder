@@ -5,6 +5,7 @@ use Elementor\Controls_Manager;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
 use Elementor\Repeater;
+use Elementor\Widget_Base;
 
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -14,12 +15,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Skin1 extends Skin_Base {
 
+    public function __construct(Widget_Base $parent) {
+        parent::__construct( $parent );
+    }
+
 	protected function _register_controls_actions() {
 		parent::_register_controls_actions();
-
-        wp_enqueue_script('hello-carousel-script', get_stylesheet_directory_uri() . '/includes/elementor/widgets/PropertyList/assets/js/skin1.js', '', '1', true);
-        wp_enqueue_style( 'hello-carousel-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/PropertyList/assets/css/skin1.css', '', 1 );
-
     }
 
 	public function get_id() {

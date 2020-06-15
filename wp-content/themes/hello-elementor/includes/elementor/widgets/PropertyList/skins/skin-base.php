@@ -22,13 +22,11 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 	 */
 	protected $current_permalink;
 
+
+
 	protected function _register_controls_actions() {
 		add_action( 'elementor/element/property/section_layout/before_section_end', [ $this, 'register_controls' ] );
         add_action( 'elementor/element/property/section_query/after_section_end', [ $this, 'register_style_sections' ] );
-
-        wp_enqueue_script('hello-carousel-script', get_stylesheet_directory_uri() . '/includes/elementor/widgets/PropertyList/assets/js/base-script.js', '', '1', true);
-        wp_enqueue_style( 'hello-carousel-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/PropertyList/assets/css/base-main.css', '', 1 );
-
     }
 
 	public function register_style_sections( Widget_Base $widget ) {
@@ -820,7 +818,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 	}
 
 	public function get_container_class() {
-		return 'elementor-property--skin-' . $this->get_id();
+		return 'elementor-hello-property--skin-' . $this->get_id();
 	}
 
 	protected function render_title() {

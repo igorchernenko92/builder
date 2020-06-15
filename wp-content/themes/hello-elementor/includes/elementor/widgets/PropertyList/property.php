@@ -2,6 +2,7 @@
 namespace WPSight_Berlin\Elementor\Widgets\Property;
 
 use Elementor\Controls_Manager;
+use Elementor\Widget_Base;
 use ElementorPro\Modules\QueryControl\Module as Module_Query;
 use ElementorPro\Modules\QueryControl\Controls\Group_Control_Related;
 //use WPSight_Berlin\Elementor\Widgets\Property\Skins;
@@ -20,6 +21,20 @@ include_once ( 'skins/skin3.php');
  * Class Posts
  */
 class Property extends Property_Base {
+
+    public function __construct($data = [], $args = null) {
+        parent::__construct($data, $args);
+        wp_register_script('hello-carousel-script', get_stylesheet_directory_uri() . '/includes/elementor/widgets/PropertyList/assets/js/base-script.js', '', '1', true);
+        wp_register_style('hello-carousel-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/PropertyList/assets/css/base-main.css', '', 1);
+    }
+
+    public function get_script_depends() {
+        return ['hello-carousel-script', 'swiper'];
+    }
+
+    public function get_style_depends() {
+        return ['hello-carousel-style'];
+    }
 
 	public function get_name() {
 		return 'property';

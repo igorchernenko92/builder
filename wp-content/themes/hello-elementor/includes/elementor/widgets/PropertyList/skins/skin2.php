@@ -16,10 +16,6 @@ class Skin2 extends Skin_Base {
 
 	protected function _register_controls_actions() {
 		parent::_register_controls_actions();
-
-        wp_enqueue_script('hello-carousel-script', get_stylesheet_directory_uri() . '/includes/elementor/widgets/PropertyList/assets/js/skin2.js', '', '1', true);
-        wp_enqueue_style( 'hello-carousel-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/PropertyList/assets/css/skin2.css', '', 1 );
-
     }
 
 	public function get_id() {

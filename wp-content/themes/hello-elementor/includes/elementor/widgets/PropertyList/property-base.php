@@ -3,6 +3,7 @@ namespace WPSight_Berlin\Elementor\Widgets\Property;
 
 use Elementor\Core\Schemes;
 use Elementor\Group_Control_Typography;
+use Elementor\Widget_Base;
 use ElementorPro\Base\Base_Widget;
 use Elementor\Controls_Manager;
 
@@ -11,10 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class Posts
+ * Class Property_Base
  */
-abstract class Property_Base extends Base_Widget {
-
+abstract class Property_Base extends Widget_Base {
 	/**
 	 * @var \WP_Query
 	 */
@@ -24,10 +24,6 @@ abstract class Property_Base extends Base_Widget {
 
 	public function get_icon() {
 		return 'eicon-post-list';
-	}
-
-	public function get_script_depends() {
-		return [ 'imagesloaded' ];
 	}
 
 	public function get_query() {
