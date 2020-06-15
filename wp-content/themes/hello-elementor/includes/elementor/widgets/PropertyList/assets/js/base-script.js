@@ -146,7 +146,6 @@
   }
 
   $(window).on('elementor/frontend/init', function () {
-    console.log(elementorFrontend);
     elementorFrontend.hooks.addAction('frontend/element_ready/property.skin1', WidgetElements_ACFSliderHandler1);
 
   });

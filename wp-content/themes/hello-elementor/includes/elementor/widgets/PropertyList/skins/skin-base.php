@@ -22,8 +22,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 	 */
 	protected $current_permalink;
 
-
-
 	protected function _register_controls_actions() {
 		add_action( 'elementor/element/property/section_layout/before_section_end', [ $this, 'register_controls' ] );
         add_action( 'elementor/element/property/section_query/after_section_end', [ $this, 'register_style_sections' ] );
