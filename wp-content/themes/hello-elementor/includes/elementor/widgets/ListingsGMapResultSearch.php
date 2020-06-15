@@ -12,10 +12,10 @@ class ListingsGMapResultSearch extends Widget_Base {
 
 	public function __construct( $data = [], $args = null ) {
 
-		parent::__construct( $data, $args );
-		wp_enqueue_script( 'ut-markerclusterer-js', 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js', array(), date("Ymd"), false );
-		wp_enqueue_script( 'ut-googleapis-js', 'https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false', array(), date("Ymd"), false );
-		wp_enqueue_script( 'ut-markerclusterer-background-size-js', 'https://gist.githubusercontent.com/verticalgrain/28bf79bcfd7fbe8e3bfeac3b56fcc82a/raw/e6a95d2e2d789051b2513861c8ee564e4691b181/markerclustererBackgroundSize.js', array(), date("Ymd"), false );
+//		parent::__construct( $data, $args );
+//		wp_enqueue_script( 'ut-markerclusterer-js', 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js', array(), date("Ymd"), false );
+//		wp_enqueue_script( 'ut-googleapis-js', 'https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false', array(), date("Ymd"), false );
+//		wp_enqueue_script( 'ut-markerclusterer-background-size-js', 'https://gist.githubusercontent.com/verticalgrain/28bf79bcfd7fbe8e3bfeac3b56fcc82a/raw/e6a95d2e2d789051b2513861c8ee564e4691b181/markerclustererBackgroundSize.js', array(), date("Ymd"), false );
 	}
 
 	public function get_script_depends() {

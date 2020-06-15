@@ -1,0 +1,85 @@
+:root {
+    --default-transition: 0.3s ease;
+    --dark: #333;
+    --green-1: #06b236;
+    --red-1: #FF3B3D;
+    --blue-1: #0073e1;
+    --gray-1: #5c727d;
+    --gray-border-1: #eef3f6;
+}
+
+/* Common BEGIN */
+ul,
+ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.hl-img-responsive {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+}
+
+.ml-auto {
+    margin-left: auto;
+}
+
+.mr-auto {
+    margin-right: auto;
+}
+
+.mt-auto {
+    margin-top: auto;
+}
+
+.mb-auto {
+    margin-bottom: auto;
+}
+/* Common END */
+
+
+/* Listings BEGIN */
+.hl-listings {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    grid-gap: 24px;
+    align-content: stretch;
+    align-items: stretch;
+}
+
+.hl-listing-card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: 100%;
+    background-color: #fff;
+    line-height: 1.4;
+    transition: all var(--default-transition);
+}
+
+.hl-listing-card__carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    z-index: 2;
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+}
+
+.hl-listing-card__carousel-nav:hover,
+.hl-listing-card__carousel-nav:focus {
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+/* Listings END */
