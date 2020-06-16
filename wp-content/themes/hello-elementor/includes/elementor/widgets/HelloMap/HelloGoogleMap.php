@@ -191,7 +191,7 @@ class HelloGoogleMap extends Widget_Base {
             'prevent_scroll', [
                 'label' => __('Scroll', 'dynamic-content-for-elementor'),
                 'type' => Controls_Manager::SWITCHER,
-                'default' => 'yes',
+                'default' => 'false',
                 'separator' => 'before',
                 'label_on' => __('Yes', 'dynamic-content-for-elementor'),
                 'label_off' => __('No', 'dynamic-content-for-elementor'),
