@@ -24,6 +24,16 @@ include_once ( 'DCE_Helper.php');
  */
 class HelloGoogleMap extends Widget_Base {
 
+    private $check_get = [
+        'keyword',
+        'property_year_built',
+        'property_bedrooms',
+        'property_bath',
+        'property_garages',
+        'property_rooms',
+        'property_living_area',
+        'property_terrace',
+    ];
 
     public function __construct($data = [], $args = null) {
         parent::__construct($data, $args);
@@ -116,6 +126,7 @@ class HelloGoogleMap extends Widget_Base {
                 'label' => __('Use Query', 'dynamic-content-for-elementor'),
                 'type' => Controls_Manager::SWITCHER,
                 'frontend_available' => true,
+                'default' => 'yes',
                 'condition' => [
                     'acf_mapfield!' => '0',
                 ]
@@ -180,7 +191,7 @@ class HelloGoogleMap extends Widget_Base {
             'prevent_scroll', [
                 'label' => __('Scroll', 'dynamic-content-for-elementor'),
                 'type' => Controls_Manager::SWITCHER,
-                'default' => 'yes',
+                'default' => 'false',
                 'separator' => 'before',
                 'label_on' => __('Yes', 'dynamic-content-for-elementor'),
                 'label_off' => __('No', 'dynamic-content-for-elementor'),
@@ -1442,7 +1453,7 @@ class HelloGoogleMap extends Widget_Base {
 
                 foreach ( (array)$_GET as $meta_key => $meta_value ) {
 
-                    if ( ! empty(  $meta_value ) ) {
+                    if ( in_array( $meta_key, $this->check_get ) && ! empty( $meta_value ) ) {
 
                         if ( 'keyword' == $meta_key ) {
 

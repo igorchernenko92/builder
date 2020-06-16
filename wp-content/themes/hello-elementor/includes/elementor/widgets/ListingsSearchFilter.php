@@ -41,7 +41,7 @@ class ListingsSearchFilter extends Base_Widget {
 	 * Get permalink by template name
 	 */
 
-	public function get_permalik_by_template( $template ) {
+	public function get_permalink_by_template( $template ) {
 
 		$result = '';
 
@@ -229,7 +229,7 @@ class ListingsSearchFilter extends Base_Widget {
 				jQuery(document).ready( function($) {
 					$('#search_filter_form').submit( function(e) {
 	    				e.preventDefault();
-	    				var template_url = '<?php echo $this->get_permalik_by_template( 'template-advanced-search.php' ); ?>';
+	    				var template_url = '<?php echo $this->get_permalink_by_template( 'template-advanced-search.php' ); ?>';
 	    				var data = $(this).serialize();
 	    				var redirect_url = template_url + '?' + data;
 	    				window.location  = redirect_url;
