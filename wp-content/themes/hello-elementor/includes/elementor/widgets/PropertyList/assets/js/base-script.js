@@ -11,7 +11,7 @@
       };
 
       if (carouselWidth.laptop) {
-        slidesPerView.laptop = 3;
+        slidesPerView.laptop = 2;
         slidesPerView.tablet = 2;
         slidesPerView.mobileXm = 1;
         slidesPerView.mobileSm = 1;
@@ -94,11 +94,12 @@
         if (!$swiper) return;
 
         const perViews = getPreViewsForCarousel($swiper.parent());
+        console.log($swiper.closest(".hl-listings-carousel"))
 
         const customOptions = {
           navigation: {
-            nextEl: $swiper.find(".hl-listings-carousel__nav_next"),
-            prevEl: $swiper.find(".hl-listings-carousel__nav_prev"),
+            nextEl: $swiper.closest(".hl-listings-carousel").find(".hl-listings-carousel__nav_next"),
+            prevEl: $swiper.closest(".hl-listings-carousel").find(".hl-listings-carousel__nav_prev"),
           },
           slidesPerView: perViews.laptop,
           breakpoints: {
