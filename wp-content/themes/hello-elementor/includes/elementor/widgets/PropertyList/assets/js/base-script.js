@@ -11,7 +11,7 @@
       };
 
       if (carouselWidth.laptop) {
-        slidesPerView.laptop = 2;
+        slidesPerView.laptop = 3;
         slidesPerView.tablet = 2;
         slidesPerView.mobileXm = 1;
         slidesPerView.mobileSm = 1;
