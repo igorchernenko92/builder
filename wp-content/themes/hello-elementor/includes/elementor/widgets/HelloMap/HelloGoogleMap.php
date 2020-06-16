@@ -126,6 +126,7 @@ class HelloGoogleMap extends Widget_Base {
                 'label' => __('Use Query', 'dynamic-content-for-elementor'),
                 'type' => Controls_Manager::SWITCHER,
                 'frontend_available' => true,
+                'default' => 'yes',
                 'condition' => [
                     'acf_mapfield!' => '0',
                 ]
@@ -1452,7 +1453,7 @@ class HelloGoogleMap extends Widget_Base {
 
                 foreach ( (array)$_GET as $meta_key => $meta_value ) {
 
-                    if ( in_array( $meta_key, $this->$check_get ) && ! empty(  $meta_value ) ) {
+                    if ( in_array( $meta_key, $this->check_get ) && ! empty( $meta_value ) ) {
 
                         if ( 'keyword' == $meta_key ) {
 
