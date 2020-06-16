@@ -76,10 +76,47 @@ class Property extends Property_Base {
             ];
 
         $this->set_settings('property_post_type', 'property');
+//TODO: add that array to option
+        $check_get = [
+            'keyword',
+            'property_year_built',
+            'property_bedrooms',
+            'property_bath',
+            'property_garages',
+            'property_rooms',
+            'property_living_area',
+            'property_terrace',
+        ];
+
+        foreach ( (array)$_GET as $meta_key => $meta_value ) {
+            if ( in_array( $meta_key, $check_get ) && ! empty( $meta_value ) ) {
+                if ( 'keyword' == $meta_key ) {
+                    $args['s'] = $meta_value;
+                } elseif ( 'property_year_built' == $meta_key ) {
+                    $args['meta_query'][] = array(
+                        array(
+                            'key' 		=> $meta_key,
+                            'value' 	=> preg_replace( '/\s+/', '', $meta_value ), // date('Ymd'),
+                            'type' 		=> 'DATE',
+                            'compare' 	=> '=='
+                        )
+                    );
+                } else {
+                    $args['meta_query'][] = array(
+                        array(
+                            'key'   => $meta_key,
+                            'value' => $meta_value
+                        )
+                    );
+                }
+            }
+        }
+
 
 		/** @var Module_Query $elementor_query */
 		$elementor_query = Module_Query::instance();
-		$this->query = $elementor_query->get_query( $this, $this->get_name(), $query_args, [] );
+		$this->query = $elementor_query->get_query( $this, $this->get_name(), $args, [] );
+
 	}
 
 	protected function register_query_section_controls() {
