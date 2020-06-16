@@ -1,5 +1,5 @@
 <?php
-namespace WPSight_Berlin\Elementor\Widgets\Property\Skins;
+namespace WPSight_Berlin\Elementor\Widgets\Agents\Skins;
 
 use Elementor\Controls_Manager;
 use Elementor\Core\Schemes;
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-abstract class Skin_Base extends Elementor_Skin_Base {
+abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
 
 	/**
 	 * @var string Save current permalink to avoid conflict with plugins the filters the permalink during the post render.
@@ -34,7 +34,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 	}
 
     public function get_id() {
-        return 'skin-base';
+        return 'skin-agents-base';
     }
 
 
@@ -1201,24 +1201,9 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
         if ($isCarousel) {
             echo "
+                  </div>
                 </div>
               </div>
-              
-              <button class='hl-listings-carousel__nav_prev hl-listings-carousel__nav'>
-                <svg viewBox='0 0 24 24' fill='currentColor'>
-                  <path d='M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z'></path>
-                  <path fill='none' d='M0 0h24v24H0V0z'></path>
-                </svg>
-              </button>
-              
-              <button class='hl-listings-carousel__nav_next hl-listings-carousel__nav'>
-                <svg viewBox='0 0 24 24' fill='currentColor'>
-                  <path d='M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z'></path>
-                  <path fill='none' d='M0 0h24v24H0V0z'></path>
-                </svg>
-              </button>
-              
-            </div>
             ";
         } else {
             echo "</div>";
