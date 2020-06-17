@@ -326,9 +326,27 @@ function czc_disable_extra_image_sizes()
 }
 
 
-//var_dump(get_blogs_of_user(122));
-//var_dump(get_home_url());
 
+
+add_action( 'init', 'add_search_array' );
+
+
+
+function add_search_array() {
+    $check_get = [
+        'keyword',
+        'property_year_built',
+        'property_bedrooms',
+        'property_bath',
+        'property_garages',
+        'property_rooms',
+        'property_living_area',
+        'property_terrace',
+    ];
+
+    add_option( 'hello_search_array', $check_get );
+
+}
 
 
 

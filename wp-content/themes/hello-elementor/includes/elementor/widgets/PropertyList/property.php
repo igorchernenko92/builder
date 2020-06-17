@@ -76,18 +76,8 @@ class Property extends Property_Base {
             ];
 
         $this->set_settings('property_post_type', 'property');
-//TODO: add that array to option
-        $check_get = [
-            'keyword',
-            'property_year_built',
-            'property_bedrooms',
-            'property_bath',
-            'property_garages',
-            'property_rooms',
-            'property_living_area',
-            'property_terrace',
-        ];
 
+        $check_get = get_option('hello_search_array');
         foreach ( (array)$_GET as $meta_key => $meta_value ) {
             if ( in_array( $meta_key, $check_get ) && ! empty( $meta_value ) ) {
                 if ( 'keyword' == $meta_key ) {
