@@ -1218,37 +1218,38 @@ abstract class Skin_Base extends Elementor_Skin_Base {
     }
 
     protected function render_carousel($query) {
-        echo "<div class='hl-listings-carousel'>
-                <div class='swiper-container'>
+	    ?>
+        <div class='hl-listings-carousel'>
+            <div class='swiper-container'>
                 <div class='swiper-wrapper'>
-        ";
-        while ( $query->have_posts() ) {
-            $query->the_post();
-            $this->current_permalink = get_permalink();
-                echo "<div class='swiper-slide'>";
-                    $this->render_post();
-                echo "</div>";
-        }
-            echo "
+                  <?php
+                    while ( $query->have_posts() ) {
+                        $query->the_post();
+                        $this->current_permalink = get_permalink();
+                            echo "<div class='swiper-slide'>";
+                                $this->render_post();
+                            echo "</div>";
+                    } ?>
+
                 </div>
-              </div>
-              
-              <button class='hl-listings-carousel__nav_prev hl-listings-carousel__nav'>
-                <svg viewBox='0 0 24 24' fill='currentColor'>
-                  <path d='M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z'></path>
-                  <path fill='none' d='M0 0h24v24H0V0z'></path>
-                </svg>
-              </button>
-              
-              <button class='hl-listings-carousel__nav_next hl-listings-carousel__nav'>
-                <svg viewBox='0 0 24 24' fill='currentColor'>
-                  <path d='M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z'></path>
-                  <path fill='none' d='M0 0h24v24H0V0z'></path>
-                </svg>
-              </button>
-              
             </div>
-            ";
+              
+          <button class='hl-listings-carousel__nav_prev hl-listings-carousel__nav'>
+            <svg viewBox='0 0 24 24' fill='currentColor'>
+              <path d='M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z'></path>
+              <path fill='none' d='M0 0h24v24H0V0z'></path>
+            </svg>
+          </button>
+
+          <button class='hl-listings-carousel__nav_next hl-listings-carousel__nav'>
+            <svg viewBox='0 0 24 24' fill='currentColor'>
+              <path d='M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z'></path>
+              <path fill='none' d='M0 0h24v24H0V0z'></path>
+            </svg>
+          </button>
+
+        </div>
+<?php
     }
 
     protected function render_list($query) {
