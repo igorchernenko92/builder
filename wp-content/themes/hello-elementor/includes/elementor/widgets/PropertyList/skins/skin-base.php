@@ -1052,10 +1052,18 @@ abstract class Skin_Base extends Elementor_Skin_Base {
       <?php
     }
 
+    protected function render_img_placeholder() {
+	    ?>
+        <div class="hl-listing-card__picture-wrap-img">
+          <img src="https://via.placeholder.com/358x232" class="hl-listing-card__picture-img img-responsive" alt="">
+        </div>
+      <?php
+    }
+
     protected function render_thumb_carousel() {
-         if ( !$this->get_instance_value( 'hello_is_thumb_carousel' ) ) return;
-
-
+         if ( !$this->get_instance_value( 'hello_is_thumb_carousel' ) ) {
+           echo $this->render_img_placeholder();
+         } else {
 	    ?>
         <div class="hl-listing-card__carousel hl-listing-card__carousel">
             <div class="swiper-container">
@@ -1097,6 +1105,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
         </div>
 
    <?php }
+	  }
 
 	protected function render_meta_data() {
 		$settings = $this->get_instance_value( 'property_meta_data' );
