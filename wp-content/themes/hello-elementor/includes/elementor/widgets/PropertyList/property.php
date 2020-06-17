@@ -67,6 +67,9 @@ class Property extends Property_Base {
 
 		$this->register_query_section_controls();
 		$this->register_pagination_section_controls();
+
+//		Deregistering specific controls for specific skins
+        $this->remove_responsive_control( 'skin3_hello_is_carousel' );
 	}
 
 	public function query_posts() {

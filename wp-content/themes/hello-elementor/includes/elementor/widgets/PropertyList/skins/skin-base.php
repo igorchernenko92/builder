@@ -49,6 +49,8 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		$this->register_link_controls();
         $this->register_read_more_controls();
 		$this->add_meta_data_controls();
+
+
 	}
 
 	public function register_design_controls() {
@@ -59,8 +61,20 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 	}
 
 	protected function register_thumbnail_controls() {
+        $this->add_responsive_control(
+            'hello_is_carousel',
+            [
+                'label' => __( 'Carousel', 'elementor-pro' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __( 'Show', 'elementor-pro' ),
+                'label_off' => __( 'Hide', 'elementor-pro' ),
+                'separator' => 'before',
+            ]
+        );
 
-		$this->add_responsive_control(
+
+
+	    $this->add_responsive_control(
 			'item_ratio',
 			[
 				'label' => __( 'Image Ratio', 'elementor-pro' ),
@@ -90,6 +104,8 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 	}
 
 	protected function register_columns_controls() {
+
+
 		$this->add_responsive_control(
 			'columns',
 			[
@@ -1158,8 +1174,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
     public function render() {
         $this->parent->query_posts();
-
-        /** @var \WP_Query $query */
         $query = $this->parent->get_query();
         if ( ! $query->found_posts ) {
             return;
@@ -1173,33 +1187,33 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 //            $this->render_post();
 //        } else {
 
-        $isCarousel = true;
+        $isCarousel = $this->get_instance_value( 'hello_is_carousel' );
 
-        if ($isCarousel) {
-            echo "<div class='hl-listings-carousel'>
-                    <div class='swiper-container'>
-                      <div class='swiper-wrapper'>
-            ";
+        if ( $isCarousel ) {
+            $this->render_carousel($query);
         } else {
-            echo "<div class='hl-listings'>";
+            $this->render_list($query);
         }
-            while ( $query->have_posts() ) {
-                $query->the_post();
 
-                $this->current_permalink = get_permalink();
 
-                if ($isCarousel) {
-                  echo "<div class='swiper-slide'>";
-                }
 
-                  $this->render_post();
+        wp_reset_postdata();
 
-                if ($isCarousel) {
-                    echo "</div>";
-                }
-            }
+//        $this->render_loop_footer();
+    }
 
-        if ($isCarousel) {
+    protected function render_carousel($query) {
+        echo "<div class='hl-listings-carousel'>
+                <div class='swiper-container'>
+                <div class='swiper-wrapper'>
+        ";
+        while ( $query->have_posts() ) {
+            $query->the_post();
+            $this->current_permalink = get_permalink();
+                echo "<div class='swiper-slide'>";
+                    $this->render_post();
+                echo "</div>";
+        }
             echo "
                 </div>
               </div>
@@ -1220,16 +1234,16 @@ abstract class Skin_Base extends Elementor_Skin_Base {
               
             </div>
             ";
-        } else {
-            echo "</div>";
-        }
+    }
 
-//        }
-
-        wp_reset_postdata();
-
-//        $this->render_loop_footer();
-
+    protected function render_list($query) {
+        echo "<div class='hl-listings'>";
+            while ( $query->have_posts() ) {
+                $query->the_post();
+                $this->current_permalink = get_permalink();
+                $this->render_post();
+            }
+        echo "</div>";
     }
 
 	protected function render_post() {
