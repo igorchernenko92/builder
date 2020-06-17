@@ -71,6 +71,7 @@
         spaceBetween: 30,
         speed: 500,
         preloadImages: false,
+        width: 280,
         // allowTouchMove: false,
         on: {
           init: function () {

@@ -824,52 +824,9 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
 		return 'elementor-hello-property--skin-' . $this->get_id();
 	}
 
-	protected function render_title() {
-		if ( ! $this->get_instance_value( 'show_title' ) ) {
-			return;
-		}
-
-		$optional_attributes_html = $this->get_optional_link_attributes_html();
-
-		$tag = $this->get_instance_value( 'title_tag' );
-		?>
-		<<?php echo $tag; ?> class="hl-listing-card__title">
-			<a href="<?php echo $this->current_permalink; ?>" <?php echo $optional_attributes_html; ?>>
-				<?php the_title(); ?>
-			</a>
-		</<?php echo $tag; ?>>
-		<?php
-	}
-
-	protected function render_excerpt() {
-        $length = $this->get_instance_value( 'excerpt_length' );
-        $read_more_text = $this->get_instance_value( 'read_more_text' );
-	    ?>
-		<p class="hl-listing-card__description">
-            <?php echo wp_trim_words( get_the_excerpt(), $length, '' );; ?>
-		</p>
-		<?php
-
-
-	}
-
-	protected function render_read_more() {
-		if ( ! $this->get_instance_value( 'show_read_more' ) ) {
-			return;
-		}
-
-		$optional_attributes_html = $this->get_optional_link_attributes_html();
-
-		?>
-			<a class="elementor-post__read-more" href="<?php echo $this->current_permalink; ?>" <?php echo $optional_attributes_html; ?>>
-				<?php echo $this->get_instance_value( 'read_more_text' ); ?>
-			</a>
-		<?php
-	}
-
 	protected function render_post_header() {
 		?>
-		<div <?php post_class( [ 'hl-listing-card hl-listing-card_skin-1 hl-listing-card_hover' ] ); ?>>
+		<div <?php post_class( [ 'hl-agent' ] ); ?>>
 		<?php
 	}
 
@@ -879,30 +836,6 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
 		<?php
 	}
 
-	protected function render_text_header() {
-		?>
-		<div class="elementor-post__text">
-		<?php
-	}
-
-	protected function render_price() {
-		?>
-        <div class="hl-listing-card__price">
-          <span class="hl-listing-card__price-value">
-            ¥ 770,000
-          </span>
-            <span class="hl-listing-card__price-label">
-            / month
-          </span>
-        </div>
-		<?php
-	}
-
-	protected function render_text_footer() {
-		?>
-		</div>
-		<?php
-	}
 
 	protected function render_loop_header() {
 		$classes = [
@@ -989,172 +922,48 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
 		<?php
 	}
 
-    protected function start_picture_wrapper() {
-        ?>
-            <div class="hl-listing-card__picture">
-        <?php
-    }
-
-    protected function end_picture_wrapper() {
-        ?>
-            </div>
-        <?php
-    }
-
-    protected function render_tags() {
+    protected function render_avatar() {
       ?>
-        <ul class="hl-listing-card__tags">
-          <li class="hl-listing-card__tag-wrap">
-            <a href="#" class="hl-listing-card__tag hl-listing-card__tag_green">Featured</a>
-          </li>
-
-          <li class="hl-listing-card__tag-wrap">
-            <a href="#" class="hl-listing-card__tag hl-listing-card__tag_red">Rentals</a>
-          </li>
-        </ul>
+        <a class="hl-agent__wrap-img" href="#">
+          <picture class="hl-agent__picture">
+            <source src="https://via.placeholder.com/180x180" type="image/png">
+            <img
+              src="https://via.placeholder.com/180x180"
+              class="hl-agent__img img-responsive"
+              alt=""
+            >
+          </picture>
+        </a>
       <?php
     }
 
-    protected function render_location() {
-      ?>
-        <div class="hl-listing-card__location">
-          <i class="fa fa-map-marker hl-listing-card__location-icon"></i>
-          <a class="hl-listing-card__location-text" href="#">Shinjuku,</a>
-          <a class="hl-listing-card__location-text" href="#">Tokyo</a>
-        </div>
-      <?php
-    }
-
-    protected function render_thumb_carousel() { ?>
-        <div class="hl-listing-card__carousel hl-listing-card__carousel">
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-
-                    <?php
-                    $gallery = get_field('property_gallery', get_the_ID() );
-                    if ($gallery) {
-                        foreach ($gallery as $image) { ?>
-                            <div class="swiper-slide hl-listing-card__carousel-item">
-                                <a class="hl-listing-card__carousel-item-inner hl-listing-card__picture-wrap-img" href="#">
-                                    <img
-                                            src="<?php echo  $image['sizes']['medium']; ?>"
-                                            class="hl-listing-card__picture-img hl-img-responsive"
-                                            title="<?php echo $image['title']; ?>"
-                                            alt="<?php echo $image['alt']; ?>"
-                                    >
-                                </a>
-                            </div>
-                        <?php }
-                    }
-                    ?>
-                </div>
-
-                <button class="hl-listing-card__carousel-nav_prev hl-listing-card__carousel-nav hl-listing-card__carousel-nav">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"></path>
-                        <path fill="none" d="M0 0h24v24H0V0z"></path>
-                    </svg>
-                </button>
-
-                <button class="hl-listing-card__carousel-nav_next hl-listing-card__carousel-nav hl-listing-card__carousel-nav">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path>
-                        <path fill="none" d="M0 0h24v24H0V0z"></path>
-                    </svg>
-                </button>
-            </div>
-        </div>
-
-   <?php }
-
-	protected function render_meta_data() {
-		$settings = $this->get_instance_value( 'property_meta_data' );
-		if ( empty( $settings ) ) {
-			return;
-		}
-		$options = [
-            'property_bedrooms' => __( 'Beds', 'elementor-pro' ),
-            'property_bath' => __( 'Bath', 'elementor-pro' ),
-            'property_garages' => __( 'Garages', 'elementor-pro' ),
-            'property_rooms' => __( 'Rooms', 'elementor-pro' ),
-            'property_living_area' => __( 'Living Area', 'elementor-pro' ),
-            'property_terrace' => __( 'Terrace', 'elementor-pro' ),
-        ];
-		echo '<ul class="hl-listing-card__info">';
-            foreach (  $settings as $item ) {
-                $label = $item['label'];
-                if (!$label) $label = $options[$item['property_meta_key']];
-
-                $value = get_field($item['property_meta_key'], get_the_ID());
-                ?>
-            <li class="hl-listing-card__info-item">
-                <i class="fa fa-<?php echo $item['selected_icon']['value']; ?> hl-listing-card__icon hl-listing-card__info-icon"></i>
-                <span class="hl-listing-card__info-value"><?php echo $value; ?></span>
-            </li>
-
-       <?php }
-        echo '</ul>';
-	}
-
-	protected function render_author() {
-		?>
-		<span class="elementor-post-author">
-			<?php the_author(); ?>
-		</span>
-		<?php
-	}
-
-    protected function render_agent() {
+    protected function render_title() {
         ?>
-        <div class="hl-listing-card__bottom mt-auto">
-            <div class="hl-listing-card__bottom-inner">
-                <a href="#" class="hl-listing-card__agent">
-                    <img
-                            src="https://tokyowpresidence.b-cdn.net/wp-content/uploads/2014/05/agent3-1-19-120x120.jpg"
-                            class="hl-listing-card__agent-img hl-img-responsive"
-                            alt=""
-                    >
-                    <span class="hl-listing-card__agent-name">Janet Richmond</span>
-                </a>
-            </div>
-        </div>
+          <a href="#" class="hl-agent__title">Agent Name</a>
         <?php
     }
 
-	protected function render_date() {
-		?>
-		<span class="elementor-post-date">
-			<?php
-			/** This filter is documented in wp-includes/general-template.php */
-			echo apply_filters( 'the_date', get_the_date(), get_option( 'date_format' ), '', '' );
-			?>
-		</span>
-		<?php
-	}
-
-    protected function start_content_wrapper() {
-        echo '<div class="hl-listing-card__body">';
+    protected function render_position() {
+        ?>
+          <p class="hl-agent__position">Web developer, SEO analytic, UX designer</p>
+        <?php
     }
 
-    protected function end_content_wrapper() {
-        echo '</div>';
+    protected function render_description() {
+        ?>
+          <p class="hl-agent__description">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error laboriosam recusandae unde voluptate!
+          </p>
+        <?php
     }
 
-	protected function render_time() {
-		?>
-		<span class="elementor-post-time">
-			<?php the_time(); ?>
-		</span>
-		<?php
-	}
-
-	protected function render_comments() {
-		?>
-		<span class="elementor-post-avatar">
-			<?php comments_number(); ?>
-		</span>
-		<?php
-	}
+    protected function render_bottom() {
+        ?>
+          <div class="hl-agent__bottom">
+            <a href="#" class="hl-agent__bottom-link">View profile</a>
+          </div>
+        <?php
+    }
 
     public function render() {
         $this->parent->query_posts();
@@ -1173,42 +982,13 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
 //            $this->render_post();
 //        } else {
 
-        $isCarousel = true;
-
-        if ($isCarousel) {
-            echo "<div class='hl-listings-carousel'>
-                    <div class='swiper-container'>
-                      <div class='swiper-wrapper'>
-            ";
-        } else {
-            echo "<div class='hl-listings'>";
-        }
-            while ( $query->have_posts() ) {
-                $query->the_post();
-
-                $this->current_permalink = get_permalink();
-
-                if ($isCarousel) {
-                  echo "<div class='swiper-slide'>";
+            echo "<div class='hl-agents'>";
+                while ( $query->have_posts() ) {
+                    $query->the_post();
+                    $this->current_permalink = get_permalink();
+                    $this->render_post();
                 }
-
-                  $this->render_post();
-
-                if ($isCarousel) {
-                    echo "</div>";
-                }
-            }
-
-        if ($isCarousel) {
-            echo "
-                  </div>
-                </div>
-              </div>
-            ";
-        } else {
             echo "</div>";
-        }
-
 //        }
 
         wp_reset_postdata();
@@ -1219,20 +999,11 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
 
 	protected function render_post() {
       $this->render_post_header();
-          $this->start_picture_wrapper();
-              $this->render_tags();
-              $this->render_location();
-              $this->render_thumb_carousel();
-          $this->end_picture_wrapper();
-
-          $this->start_content_wrapper();
-              $this->render_title();
-              $this->render_price();
-              $this->render_excerpt();
-              $this->render_meta_data();
-          $this->end_content_wrapper();
-
-          $this->render_agent();
+          $this->render_avatar();
+          $this->render_title();
+          $this->render_position();
+          $this->render_description();
+          $this->render_bottom();
       $this->render_post_footer();
 	}
 

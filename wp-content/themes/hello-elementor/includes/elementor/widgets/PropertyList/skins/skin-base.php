@@ -1235,16 +1235,14 @@ abstract class Skin_Base extends Elementor_Skin_Base {
             </div>
               
           <button class='hl-listings-carousel__nav_prev hl-listings-carousel__nav'>
-            <svg viewBox='0 0 24 24' fill='currentColor'>
-              <path d='M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z'></path>
-              <path fill='none' d='M0 0h24v24H0V0z'></path>
+            <svg xmlns="http://www.w3.org/2000/svg" fill='currentColor' width="24" height="24" viewBox="0 0 24 24">
+              <path fill="#222" fill-rule="nonzero" d="M9 17.523L10.39 19 17 12l-6.61-7L9 6.477 14.215 12z"/>
             </svg>
           </button>
 
           <button class='hl-listings-carousel__nav_next hl-listings-carousel__nav'>
-            <svg viewBox='0 0 24 24' fill='currentColor'>
-              <path d='M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z'></path>
-              <path fill='none' d='M0 0h24v24H0V0z'></path>
+            <svg xmlns="http://www.w3.org/2000/svg" fill='currentColor' width="24" height="24" viewBox="0 0 24 24">
+              <path fill="#222" fill-rule="nonzero" d="M9 17.523L10.39 19 17 12l-6.61-7L9 6.477 14.215 12z"/>
             </svg>
           </button>
 
