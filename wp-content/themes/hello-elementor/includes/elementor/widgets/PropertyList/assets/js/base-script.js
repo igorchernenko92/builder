@@ -1,5 +1,5 @@
 (function($) {
-  var WidgetElements_ACFSliderHandler1 = function ($scope, $) {
+  var HelloPropertySkinScript = function ($scope, $) {
     // $(document).ready(function() {
     function getPreViewsForCarousel($carousel) {
       const slidesPerView = {};
@@ -144,11 +144,12 @@
     }
 
     // });
-  }
+  };
 
   $(window).on('elementor/frontend/init', function () {
-    elementorFrontend.hooks.addAction('frontend/element_ready/property.skin1', WidgetElements_ACFSliderHandler1);
-
+    elementorFrontend.hooks.addAction('frontend/element_ready/property.skin1', HelloPropertySkinScript);
+    elementorFrontend.hooks.addAction('frontend/element_ready/property.skin2', HelloPropertySkinScript);
+    elementorFrontend.hooks.addAction('frontend/element_ready/property.skin3', HelloPropertySkinScript);
   });
 
 

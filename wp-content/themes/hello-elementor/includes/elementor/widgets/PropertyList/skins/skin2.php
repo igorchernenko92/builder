@@ -106,24 +106,24 @@ class Skin2 extends Skin_Base {
         <?php
     }
 
-    protected function render_post() {
-        $this->render_post_header();
-            $this->start_picture_wrapper();
-                $this->render_tags();
-                $this->render_category();
-                $this->render_picture_preview();
-                $this->render_thumb_carousel();
-            $this->end_picture_wrapper();
-
-            $this->start_content_wrapper();
-                $this->render_title();
-                $this->render_location();
-                $this->render_meta_data();
-                $this->render_price();
-            $this->end_content_wrapper();
-
-            $this->render_agent();
-        $this->render_post_footer();
-    }
+//    protected function render_post() {
+//        $this->render_post_header();
+//            $this->start_picture_wrapper();
+//                $this->render_tags();
+//                $this->render_category();
+//                $this->render_picture_preview();
+//                $this->render_thumb_carousel();
+//            $this->end_picture_wrapper();
+//
+//            $this->start_content_wrapper();
+//                $this->render_title();
+//                $this->render_location();
+//                $this->render_meta_data();
+//                $this->render_price();
+//            $this->end_content_wrapper();
+//
+//            $this->render_agent();
+//        $this->render_post_footer();
+//    }
 
 }
