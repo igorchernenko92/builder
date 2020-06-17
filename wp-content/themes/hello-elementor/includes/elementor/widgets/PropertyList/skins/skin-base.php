@@ -66,8 +66,19 @@ abstract class Skin_Base extends Elementor_Skin_Base {
             [
                 'label' => __( 'Carousel', 'elementor-pro' ),
                 'type' => Controls_Manager::SWITCHER,
-                'label_on' => __( 'Show', 'elementor-pro' ),
-                'label_off' => __( 'Hide', 'elementor-pro' ),
+                'label_on' => __( 'On', 'elementor-pro' ),
+                'label_off' => __( 'Off', 'elementor-pro' ),
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'hello_is_thumb_carousel',
+            [
+                'label' => __( 'Thumb Carousel', 'elementor-pro' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __( 'On', 'elementor-pro' ),
+                'label_off' => __( 'Off', 'elementor-pro' ),
                 'separator' => 'before',
             ]
         );
@@ -1041,7 +1052,11 @@ abstract class Skin_Base extends Elementor_Skin_Base {
       <?php
     }
 
-    protected function render_thumb_carousel() { ?>
+    protected function render_thumb_carousel() {
+         if ( !$this->get_instance_value( 'hello_is_thumb_carousel' ) ) return;
+
+
+	    ?>
         <div class="hl-listing-card__carousel hl-listing-card__carousel">
             <div class="swiper-container">
                 <div class="swiper-wrapper">
