@@ -89,6 +89,20 @@ class ListingsSearchFilter extends Base_Widget {
 			]
 		);
 
+		$repeater->add_control( 
+			'type_view',
+			[
+				'label'   => _x( 'Type View', 'Type View', 'elementor' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'input',
+				'options' => [
+					'input' 	=> _x( 'Input', 'Type View', 'elementor' ),
+					'select' 	=> _x( 'Select', 'Type View', 'elementor' ),
+					'radio' 	=> _x( 'Radio', 'Type View', 'elementor' ),
+				],
+			]
+		);
+
 		$repeater->add_control(
             'label',
             [
@@ -175,51 +189,104 @@ class ListingsSearchFilter extends Base_Widget {
 				<div class="container">
 					<form id="search_filter_form" method="get" action="#" class="wpsight-listings-search horizontal">
 						<div class="listings-search-default">
-              <?php foreach ( $settings['items'] as $field ) : ?>
 
-                <?php if ( 'search' == $field['type_field'] ) : ?>
-                  <div class="listings-search-field listings-search-field-text listings-search-field-keyword wrap-field wrap-field_search" style="width:<?php echo $field['width_field']; ?>%;">
-                    <label class="wrap-input">
-                      <?php echo $field['label']; ?>
-                      <input class="listing-search-keyword text form-control" name="keyword" type="text" value="" placeholder="<?php echo $field['placeholder']; ?>">
-                    </label>
+			              	<?php 
+			              	foreach ( $settings['items'] as $field ) : 
 
-                    <div class="listings-search-field listings-search-field-submit listings-search-field-submit">
-                      <input type="submit" value="Search" class="btn btn-primary btn-block">
-                    </div>
-                  </div>
+			                	if ( 'search' == $field['type_field'] ) : 
+		                		?>
 
-                <?php
-                elseif (
-                    'property_bedrooms' 	== $field['type_field'] ||
-                    'property_bath' 		== $field['type_field'] ||
-                    'property_garages' 		== $field['type_field'] ||
-                    'property_rooms' 		== $field['type_field'] ||
-                    'property_living_area' 	== $field['type_field'] ||
-                    'property_terrace' 		== $field['type_field']
-                     ) :
-                ?>
+				                  	<div class="listings-search-field listings-search-field-text listings-search-field-keyword wrap-field wrap-field_search" style="width:<?php echo $field['width_field']; ?>%;">
+					                    <label class="wrap-input">
+					                      <?php echo $field['label']; ?>
+					                      <input class="listing-search-keyword text form-control" name="keyword" type="text" value="" placeholder="<?php echo $field['placeholder']; ?>">
+					                    </label>
 
-                  <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
-                    <label class="wrap-input">
-                      <?php echo $field['label']; ?>
-                      <input class="text form-control" name="<?php echo $field['type_field']; ?>" type="number" value="" placeholder="<?php echo $field['placeholder']; ?>">
-                    </label>
-                  </div>
+					                    <div class="listings-search-field listings-search-field-submit listings-search-field-submit">
+					                      <input type="submit" value="Search" class="btn btn-primary btn-block">
+					                    </div>
+				                  	</div>
 
-                <?php elseif ( 'property_year_built' == $field['type_field'] ) : ?>
+			                	<?php
+			               		elseif (
+				                    'property_bedrooms' 	== $field['type_field'] ||
+				                    'property_bath' 		== $field['type_field'] ||
+				                    'property_garages' 		== $field['type_field'] ||
+				                    'property_rooms' 		== $field['type_field'] ||
+				                    'property_living_area' 	== $field['type_field'] ||
+				                    'property_terrace' 		== $field['type_field']
+			                    ) :
+			                	
+				                	if ( 'input' == $field['type_view'] ) : ?>
 
-                  <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
-                    <label class="wrap-input">
-                      <?php echo $field['label']; ?>
-                      <input class="text form-control datepicker-here" name="<?php echo $field['type_field']; ?>" type="text" value="" placeholder="<?php echo $field['placeholder']; ?>" data-date-format="yyyy mm dd">
-                      <!-- data-date-format="M d, yyyy" -->
-                    </label>
-                  </div>
+					                  	<div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
+						                    <label class="wrap-input">
+						                      	<?php echo $field['label']; ?>
+						                      	<input class="text form-control" name="<?php echo $field['type_field']; ?>" type="number" value="" placeholder="<?php echo $field['placeholder']; ?>">
+						                    </label>
+					                  	</div>
 
-                <?php endif; ?>
+				                  	<?php elseif ( 'select' == $field['type_view'] ) : ?>
 
-              <?php endforeach; ?>
+										<div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
+						                    <label class="wrap-input">
+						                      	<?php echo $field['label']; ?>
+						                      	<select name="<?php echo $field['type_field']; ?>">
+						                      		<option value="1">1</option>
+						                      		<option value="2">2</option>
+						                      		<option value="3">3</option>
+						                      		<option value="4">4</option>
+						                      		<option value="5">5</option>
+						                      	</select>
+						                    </label>
+					                  	</div>
+
+				                  	<?php elseif ( 'radio' == $field['type_view'] ) : ?>
+										
+										<div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
+						                    <label class="wrap-input"><?php echo $field['label']; ?></label>
+					                      	<label>
+					                      		1
+						                      	<input type="radio" name="<?php echo $field['type_field']; ?>" value="1" >
+						                    </label>
+						                    <label>
+					                      		2
+						                      	<input type="radio" name="<?php echo $field['type_field']; ?>" value="2" >
+						                    </label>
+						                    <label>
+					                      		3
+						                      	<input type="radio" name="<?php echo $field['type_field']; ?>" value="3" >
+						                    </label>
+						                    <label>
+					                      		4
+						                      	<input type="radio" name="<?php echo $field['type_field']; ?>" value="4" >
+						                    </label>
+						                    <label>
+					                      		5
+						                      	<input type="radio" name="<?php echo $field['type_field']; ?>" value="5" >
+						                    </label>
+					                  	</div>
+
+			                  		<?php 
+			                  		endif; 
+
+				                elseif ( 'property_year_built' == $field['type_field'] ) : 
+			                	?>
+
+				                  <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
+				                    <label class="wrap-input">
+				                      <?php echo $field['label']; ?>
+				                      <input class="text form-control datepicker-here" name="<?php echo $field['type_field']; ?>" type="text" value="" placeholder="<?php echo $field['placeholder']; ?>" data-date-format="yyyy mm dd">
+				                      <!-- data-date-format="M d, yyyy" -->
+				                    </label>
+				                  </div>
+
+				                <?php 
+				            	endif; 
+
+			            	endforeach;
+			            	?>
+
 						</div>
 					</form>
 				</div>
