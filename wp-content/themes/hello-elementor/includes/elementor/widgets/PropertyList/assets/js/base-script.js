@@ -71,7 +71,6 @@
         spaceBetween: 30,
         speed: 500,
         preloadImages: false,
-        width: 280,
         // allowTouchMove: false,
         on: {
           init: function () {
@@ -95,7 +94,6 @@
         if (!$swiper) return;
 
         const perViews = getPreViewsForCarousel($swiper.parent());
-        console.log($swiper.closest(".hl-listings-carousel"))
 
         const customOptions = {
           navigation: {
