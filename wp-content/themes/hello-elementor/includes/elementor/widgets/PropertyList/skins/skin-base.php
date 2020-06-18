@@ -1061,9 +1061,8 @@ abstract class Skin_Base extends Elementor_Skin_Base {
     }
 
     protected function render_thumb_carousel() {
-         if ( !$this->get_instance_value( 'hello_is_thumb_carousel' ) ) {
-           echo $this->render_img_placeholder();
-         } else {
+         if ( !$this->get_instance_value( 'hello_is_thumb_carousel' ) ) return;
+
 	    ?>
         <div class="hl-listing-card__carousel hl-listing-card__carousel">
             <div class="swiper-container">
@@ -1076,7 +1075,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                             <div class="swiper-slide hl-listing-card__carousel-item">
                                 <a class="hl-listing-card__carousel-item-inner hl-listing-card__picture-wrap-img" href="#">
                                     <img
-                                            src="<?php echo  $image['sizes']['medium']; ?>"
+                                            src="<?php echo  $image['sizes']['medium_large']; ?>"
                                             class="hl-listing-card__picture-img hl-img-responsive"
                                             title="<?php echo $image['title']; ?>"
                                             alt="<?php echo $image['alt']; ?>"
@@ -1104,7 +1103,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
             </div>
         </div>
 
-   <?php }
+   <?php
 	  }
 
 	protected function render_meta_data() {
@@ -1242,7 +1241,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
                 </div>
             </div>
-              
+
           <button class='hl-listings-carousel__nav_prev hl-listings-carousel__nav'>
             <svg xmlns="http://www.w3.org/2000/svg" fill='currentColor' width="24" height="24" viewBox="0 0 24 24">
               <path fill="#222" fill-rule="nonzero" d="M9 17.523L10.39 19 17 12l-6.61-7L9 6.477 14.215 12z"/>
