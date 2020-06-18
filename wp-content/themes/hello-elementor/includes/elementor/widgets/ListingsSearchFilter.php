@@ -175,6 +175,22 @@ class ListingsSearchFilter extends Base_Widget {
 			]
 		);
 
+		$result_pages = [ '' => _x( 'Select Page', 'elementor' ) ];
+		$pages = get_pages(); 
+		foreach( $pages as $page ) {
+			$result_pages[ get_page_link( $page->ID ) ] = $page->post_title;
+		}
+
+		$this->add_control(
+			'result_page',
+			[
+				'label'   => _x( 'Select Result Page', 'Select Result Page', 'elementor' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => '',
+				'options' => $result_pages,
+			]
+		);
+
 		$this->end_controls_section();
 
 	}
@@ -187,7 +203,7 @@ class ListingsSearchFilter extends Base_Widget {
 		
 			<div id="home-search" class="site-section home-section">
 				<div class="container">
-					<form id="search_filter_form" method="get" action="#" class="wpsight-listings-search horizontal">
+					<form id="search_filter_form" method="get" action="<?php echo $settings['result_page']; ?>" class="wpsight-listings-search horizontal">
 						<div class="listings-search-default">
 
 			              	<?php 
@@ -292,7 +308,7 @@ class ListingsSearchFilter extends Base_Widget {
 				</div>
 			</div>
 
-			<script>
+			<!-- <script>
 				jQuery(document).ready( function($) {
 					$('#search_filter_form').submit( function(e) {
 	    				e.preventDefault();
@@ -302,7 +318,7 @@ class ListingsSearchFilter extends Base_Widget {
 	    				window.location  = redirect_url;
 					});
 				});
-			</script>
+			</script> -->
 
 		<?php
 	}
