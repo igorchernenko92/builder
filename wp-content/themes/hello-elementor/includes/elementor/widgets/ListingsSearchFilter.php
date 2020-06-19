@@ -178,7 +178,7 @@ class ListingsSearchFilter extends Base_Widget {
 		$result_pages = [ '' => _x( 'Select Page', 'elementor' ) ];
 		$pages = get_pages(); 
 		foreach( $pages as $page ) {
-			$result_pages[ get_page_link( $page->ID ) ] = $page->post_title;
+			$result_pages[ $page->ID ] = $page->post_title;
 		}
 
 		$this->add_control(
@@ -203,7 +203,7 @@ class ListingsSearchFilter extends Base_Widget {
 		
 			<div id="home-search" class="site-section home-section">
 				<div class="container">
-					<form id="search_filter_form" method="get" action="<?php echo $settings['result_page']; ?>" class="wpsight-listings-search horizontal">
+					<form id="search_filter_form" method="get" action="<?php echo get_page_link( $settings['result_page'] ); ?>" class="wpsight-listings-search horizontal">
 						<div class="listings-search-default">
 
 			              	<?php 
