@@ -1061,9 +1061,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
     }
 
     protected function render_thumb_carousel() {
-         if ( !$this->get_instance_value( 'hello_is_thumb_carousel' ) ) return;
-
-	    ?>
+         if ( !$this->get_instance_value( 'hello_is_thumb_carousel' ) ) return; ?>
         <div class="hl-listing-card__carousel hl-listing-card__carousel">
             <div class="swiper-container">
                 <div class="swiper-wrapper">
