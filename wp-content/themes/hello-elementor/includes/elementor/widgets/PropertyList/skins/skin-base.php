@@ -409,85 +409,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 	/**
 	 * Style Tab
 	 */
-//	protected function register_design_layout_controls() {
-//		$this->start_controls_section(
-//			'section_design_layout',
-//			[
-//				'label' => __( 'Layout', 'elementor-pro' ),
-//				'tab' => Controls_Manager::TAB_STYLE,
-//			]
-//		);
-//
-//		$this->add_control(
-//			'column_gap',
-//			[
-//				'label' => __( 'Columns Gap', 'elementor-pro' ),
-//				'type' => Controls_Manager::SLIDER,
-//				'default' => [
-//					'size' => 30,
-//				],
-//				'range' => [
-//					'px' => [
-//						'min' => 0,
-//						'max' => 100,
-//					],
-//				],
-//				'selectors' => [
-//					'{{WRAPPER}} .elementor-posts-container' => 'grid-column-gap: {{SIZE}}{{UNIT}}',
-//					'.elementor-msie {{WRAPPER}} .elementor-post' => 'padding-right: calc( {{SIZE}}{{UNIT}}/2 ); padding-left: calc( {{SIZE}}{{UNIT}}/2 );',
-//					'.elementor-msie {{WRAPPER}} .elementor-posts-container' => 'margin-left: calc( -{{SIZE}}{{UNIT}}/2 ); margin-right: calc( -{{SIZE}}{{UNIT}}/2 );',
-//				],
-//			]
-//		);
-//
-//		$this->add_control(
-//			'row_gap',
-//			[
-//				'label' => __( 'Rows Gap', 'elementor-pro' ),
-//				'type' => Controls_Manager::SLIDER,
-//				'default' => [
-//					'size' => 35,
-//				],
-//				'range' => [
-//					'px' => [
-//						'min' => 0,
-//						'max' => 100,
-//					],
-//				],
-//				'frontend_available' => true,
-//				'selectors' => [
-//					'{{WRAPPER}} .elementor-posts-container' => 'grid-row-gap: {{SIZE}}{{UNIT}}',
-//					'.elementor-msie {{WRAPPER}} .elementor-post' => 'padding-bottom: {{SIZE}}{{UNIT}};',
-//				],
-//			]
-//		);
-//
-//		$this->add_control(
-//			'alignment',
-//			[
-//				'label' => __( 'Alignment', 'elementor-pro' ),
-//				'type' => Controls_Manager::CHOOSE,
-//				'options' => [
-//					'left' => [
-//						'title' => __( 'Left', 'elementor-pro' ),
-//						'icon' => 'eicon-text-align-left',
-//					],
-//					'center' => [
-//						'title' => __( 'Center', 'elementor-pro' ),
-//						'icon' => 'eicon-text-align-center',
-//					],
-//					'right' => [
-//						'title' => __( 'Right', 'elementor-pro' ),
-//						'icon' => 'eicon-text-align-right',
-//					],
-//				],
-//				'prefix_class' => 'elementor-posts--align-',
-//			]
-//		);
-//
-//		$this->end_controls_section();
-//	}
-
 	protected function register_design_image_controls() {
 		$this->start_controls_section(
 			'section_design_image',
@@ -1052,6 +973,23 @@ abstract class Skin_Base extends Elementor_Skin_Base {
       <?php
     }
 
+    protected function render_post_image() {
+        if ( $this->get_instance_value( 'hello_is_thumb_carousel' ) ) return;
+
+        $attr = array(
+            'class' => "hl-listing-card__picture-img img-responsive",
+        );
+        $thumbnail = get_the_post_thumbnail( get_the_ID(), 'large', $attr );
+
+        ?>
+
+        <a href="<?php echo $this->current_permalink; ?>" <?php echo $this->get_optional_link_attributes_html(); ?>>
+            <div class="hl-listing-card__picture-wrap-img">
+                <?php echo $thumbnail; ?>
+            </div>
+        </a>
+   <?php }
+
     protected function render_img_placeholder() {
 	    ?>
         <div class="hl-listing-card__picture-wrap-img">
@@ -1271,6 +1209,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
           $this->start_picture_wrapper();
               $this->render_tags();
               $this->render_location();
+              $this->render_post_image();
               $this->render_thumb_carousel();
           $this->end_picture_wrapper();
 
