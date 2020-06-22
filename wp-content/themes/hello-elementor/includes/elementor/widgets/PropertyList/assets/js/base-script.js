@@ -1,6 +1,5 @@
 (function($) {
-  var HelloPropertySkinScript = function ($scope, $) {
-    // $(document).ready(function() {
+  const HelloPropertySkinScript = function ($scope, $) {
     function getPreViewsForCarousel($carousel) {
       const slidesPerView = {};
       const carouselWidth = {
@@ -30,7 +29,6 @@
       return slidesPerView;
     }
 
-
     const $carousels = $(".hl-listings-carousel");
     const $listings = $(".hl-listing-card:not('.swiper-slide > .hl-listing-card')");
 
@@ -41,12 +39,6 @@
         speed: 500,
         preloadImages: false,
         lazy: true,
-        allowTouchMove: false,
-        breakpoints: {
-          991: {
-            allowTouchMove: true,
-          },
-        },
         ...params,
       }
     };
@@ -60,10 +52,12 @@
           prevEl: $slider.find(".hl-listing-card__carousel-nav_prev")
         },
       };
-
-      new Swiper($slider.find("> .swiper-container"), defaultOptionsByListingSlider({
-        ...customOptions,
-      }))
+  
+      if (!$slider.find("> .swiper-container").hasClass("swiper-container-initialized")) {
+        new Swiper($slider.find("> .swiper-container"), defaultOptionsByListingSlider({
+          ...customOptions,
+        }))
+      }
     };
 
     const defaultOptionsByCarousel = function (params) {
@@ -71,7 +65,6 @@
         spaceBetween: 30,
         speed: 500,
         preloadImages: false,
-        // allowTouchMove: false,
         on: {
           init: function () {
             const $listings = $(this.$el).find(".hl-listing-card");
@@ -100,26 +93,33 @@
             nextEl: $swiper.closest(".hl-listings-carousel").find(".hl-listings-carousel__nav_next"),
             prevEl: $swiper.closest(".hl-listings-carousel").find(".hl-listings-carousel__nav_prev"),
           },
+          pagination: {
+            el: $swiper.closest(".hl-listings-carousel").find(".hl-listings-carousel__pagination"),
+            clickable: true
+          },
           slidesPerView: perViews.laptop,
+          autoHeight: perViews.laptop === 1,
           breakpoints: {
             480: {
               slidesPerView: perViews.mobileSm,
-              allowTouchMove: true,
+              autoHeight: perViews.mobileSm === 1,
             },
             600: {
               slidesPerView: perViews.tablet,
-              allowTouchMove: true,
+              autoHeight: perViews.tablet === 1,
             },
             991: {
               slidesPerView: perViews.laptop,
-              allowTouchMove: true,
+              autoHeight: perViews.laptop === 1,
             },
           },
         };
-
-        new Swiper($swiper, defaultOptionsByCarousel({
-          ...customOptions,
-        }))
+        
+        if (!$swiper.hasClass("swiper-container-initialized")) {
+          new Swiper($swiper, defaultOptionsByCarousel({
+            ...customOptions,
+          }))
+        }
       }
 
       $carousels.each(function () {
@@ -141,8 +141,6 @@
         initListingSlider($slider);
       })
     }
-
-    // });
   };
 
   $(window).on('elementor/frontend/init', function () {

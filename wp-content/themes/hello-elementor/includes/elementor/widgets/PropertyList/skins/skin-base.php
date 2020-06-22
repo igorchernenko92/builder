@@ -1178,6 +1178,8 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                 </div>
             </div>
 
+          <div class="hl-listings-carousel__pagination slider-pagination"></div>
+
           <button class='hl-listings-carousel__nav_prev hl-listings-carousel__nav'>
             <svg xmlns="http://www.w3.org/2000/svg" fill='currentColor' width="24" height="24" viewBox="0 0 24 24">
               <path fill="#222" fill-rule="nonzero" d="M9 17.523L10.39 19 17 12l-6.61-7L9 6.477 14.215 12z"/>
