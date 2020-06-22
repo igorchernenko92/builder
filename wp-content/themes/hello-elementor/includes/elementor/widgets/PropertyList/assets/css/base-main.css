@@ -595,11 +595,11 @@ ol {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    margin: auto -12px -6px;
+    margin: auto -12px -10px;
 }
 
 .hl-listing-card_skin-1 .hl-listing-card__info > * {
-    margin-bottom: 6px;
+    margin-bottom: 10px;
 }
 
 .hl-listing-card_skin-1 .hl-listing-card__info-item {
@@ -608,6 +608,8 @@ ol {
     color: var(--gray-1);
     padding: 0 11px;
     font-size: 13px;
+    width: 100%;
+    max-width: 25%;
 }
 
 .hl-listing-card_skin-1 .hl-listing-card__info-icon {
@@ -619,7 +621,7 @@ ol {
 }
 
 .hl-listing-card_skin-1 .hl-listing-card__body > * {
-    margin-bottom: 8px;
+    margin-bottom: 12px;
 }
 
 .hl-listing-card_skin-1 .hl-listing-card__info-value {

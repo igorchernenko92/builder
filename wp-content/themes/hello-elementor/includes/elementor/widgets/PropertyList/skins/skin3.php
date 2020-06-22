@@ -61,6 +61,7 @@ class Skin3 extends Skin_Base {
           $this->start_picture_wrapper();
             $this->render_tags();
             $this->render_agent();
+            $this->render_post_image();
             $this->render_thumb_carousel();
           $this->end_picture_wrapper();
 
