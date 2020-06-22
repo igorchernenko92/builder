@@ -296,6 +296,8 @@ ol {
     left: 0;
     width: 100%;
     height: 100% !important;
+    object-fit: cover;
+    object-position: center;
 }
 
 .hl-listing-card__title {
@@ -329,6 +331,15 @@ ol {
 .swiper-container.swiper-container-initialized .hl-listing-card__picture-wrap-img {
     position: relative;
     visibility: visible;
+}
+
+.swiper-slide .hl-listing-card {
+    box-shadow: none !important;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.swiper-slide .hl-listing-card:hover {
+    transform: none !important;
 }
 /* Listings END */
 
