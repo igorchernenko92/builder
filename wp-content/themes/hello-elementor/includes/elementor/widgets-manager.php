@@ -59,12 +59,13 @@ class Widget_Manager {
 //        include_once( 'widgets/ListingsCarousel/ListingsCarousel.php' );
         include_once( 'widgets/PropertyList/property.php' );
         include_once( 'widgets/HelloAgentList/HelloAgents.php' );
-        include_once( 'widgets/ListingsSearchFilter.php' );
+        /*include_once( 'widgets/ListingsSearchFilter.php' );*/
 //        include_once( 'widgets/ListingsGMapResultSearch.php' );
         include_once( 'widgets/HelloMap/HelloGoogleMap.php' );
+        include_once( 'widgets/HelloSearchFilter/HelloSearchFilter.php' );
 //        include_once( 'widgets/ListingsCarousel.php' );
 //
-        include_once( 'widgets/ListingDetails.php' );
+        include_once( 'widgets/ListingDetails.php' ); 
 //        include_once( 'widgets/ListingAgent.php' );
 
     }
@@ -81,9 +82,10 @@ class Widget_Manager {
         $this->include_widgets_files();
 
         // Register Widgets
-       \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingsSearchFilter() );
+       /*\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingsSearchFilter() );*/
 //       \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingsGMapResultSearch );
        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloMap\HelloGoogleMap() );
+       \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloSearchFilter\HelloSearchFilter() );
 //        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingsCarousel() );
 ////
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingDetails() );

@@ -98,7 +98,7 @@ class ListingsSearchFilter extends Base_Widget {
 				'options' => [
 					'input' 	=> _x( 'Input', 'Type View', 'elementor' ),
 					'select' 	=> _x( 'Select', 'Type View', 'elementor' ),
-					'radio' 	=> _x( 'Radio', 'Type View', 'elementor' ),
+					'checkbox' 	=> _x( 'Checkbox', 'Type View', 'elementor' ),
 				],
 			]
 		);
@@ -257,29 +257,29 @@ class ListingsSearchFilter extends Base_Widget {
 						                    </label>
 					                  	</div>
 
-				                  	<?php elseif ( 'radio' == $field['type_view'] ) : ?>
+				                  	<?php elseif ( 'checkbox' == $field['type_view'] ) : ?>
 										
 										<div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
 						                    <label class="wrap-input"><?php echo $field['label']; ?></label>
 					                      	<label>
 					                      		1
-						                      	<input type="radio" name="<?php echo $field['type_field']; ?>" value="1" >
+						                      	<input type="checkbox" name="<?php echo $field['type_field']; ?>" value="1" >
 						                    </label>
 						                    <label>
 					                      		2
-						                      	<input type="radio" name="<?php echo $field['type_field']; ?>" value="2" >
+						                      	<input type="checkbox" name="<?php echo $field['type_field']; ?>" value="2" >
 						                    </label>
 						                    <label>
 					                      		3
-						                      	<input type="radio" name="<?php echo $field['type_field']; ?>" value="3" >
+						                      	<input type="checkbox" name="<?php echo $field['type_field']; ?>" value="3" >
 						                    </label>
 						                    <label>
 					                      		4
-						                      	<input type="radio" name="<?php echo $field['type_field']; ?>" value="4" >
+						                      	<input type="checkbox" name="<?php echo $field['type_field']; ?>" value="4" >
 						                    </label>
 						                    <label>
 					                      		5
-						                      	<input type="radio" name="<?php echo $field['type_field']; ?>" value="5" >
+						                      	<input type="checkbox" name="<?php echo $field['type_field']; ?>" value="5" >
 						                    </label>
 					                  	</div>
 
