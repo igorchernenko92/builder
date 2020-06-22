@@ -112,6 +112,7 @@ class Skin2 extends Skin_Base {
                 $this->render_tags();
                 $this->render_category();
                 $this->render_picture_preview();
+                $this->render_post_image();
                 $this->render_thumb_carousel();
             $this->end_picture_wrapper();
 
