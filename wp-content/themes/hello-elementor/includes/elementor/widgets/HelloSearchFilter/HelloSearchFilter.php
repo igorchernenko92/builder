@@ -1,9 +1,10 @@
 <?php
-namespace WPSight_Berlin\Elementor\Widgets;
+
+namespace WPSight_Berlin\Elementor\Widgets\HelloSearchFilter;
 
 use Elementor\Controls_Manager;
 use Elementor\Core\Schemes;
-use Elementor\Group_Control_Text_Shadow;
+use Elementor\Group_Control_Text_Shadow; 
 use Elementor\Group_Control_Typography;
 use Elementor\Repeater;
 use ElementorPro\Base\Base_Widget;
@@ -12,7 +13,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-class ListingsSearchFilter extends Base_Widget {
+// include_once ( 'property-base.php');
+include_once ( 'skins/skin-base.php');
+include_once ( 'skins/skin1.php');
+include_once ( 'skins/skin2.php');
+
+class HelloSearchFilter extends Base_Widget {
 
 	public function __construct( $data = [], $args = null ) {
 
@@ -35,6 +41,11 @@ class ListingsSearchFilter extends Base_Widget {
 
 	public function get_categories() {
 		return [ 'general' ];
+	}
+
+	protected function _register_skins() {
+		$this->add_skin( new Skins\Skin1( $this ) );
+		$this->add_skin( new Skins\Skin2( $this ) );
 	}
 
 	/**
