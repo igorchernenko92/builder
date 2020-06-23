@@ -13,7 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-// include_once ( 'property-base.php');
 include_once ( 'skins/skin-base.php');
 include_once ( 'skins/skin1.php');
 include_once ( 'skins/skin2.php');
@@ -28,11 +27,11 @@ class HelloSearchFilter extends Base_Widget {
 	}
 
 	public function get_name() {
-		return 'search_filter';
+		return 'hello_search_filter'; 
 	}
 
 	public function get_title() {
-		return __( 'Search Filter', 'elementor' );
+		return __( 'Hello Search Filter', 'elementor' );
 	}
 
 	public function get_icon() {
@@ -46,28 +45,6 @@ class HelloSearchFilter extends Base_Widget {
 	protected function _register_skins() {
 		$this->add_skin( new Skins\Skin1( $this ) );
 		$this->add_skin( new Skins\Skin2( $this ) );
-	}
-
-	/**
-	 * Get permalink by template name
-	 */
-
-	public function get_permalink_by_template( $template ) {
-
-		$result = '';
-
-		if ( ! empty( $template ) ) {
-			$pages = get_pages( array(
-			    'meta_key'   => '_wp_page_template',
-			    'meta_value' => $template
-			) );
-			$template_id = $pages[0]->ID;
-			$page = get_post( $template_id );
-
-			$result = get_permalink( $page );
-		}
-		
-		return $result;
 	}
 
 	protected function _register_controls() {
@@ -318,18 +295,6 @@ class HelloSearchFilter extends Base_Widget {
 					</form>
 				</div>
 			</div>
-
-			<!-- <script>
-				jQuery(document).ready( function($) {
-					$('#search_filter_form').submit( function(e) {
-	    				e.preventDefault();
-	    				var template_url = '<?php echo $this->get_permalink_by_template( 'template-advanced-search.php' ); ?>';
-	    				var data = $(this).serialize();
-	    				var redirect_url = template_url + '?' + data;
-	    				window.location  = redirect_url;
-					});
-				});
-			</script> -->
 
 		<?php
 	}

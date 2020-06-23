@@ -24,30 +24,13 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		wp_enqueue_script( 'ut-datepicker-js', get_template_directory_uri() . '/includes/elementor/widgets/assets/js/datepicker.js', array(), date("Ymd"), false );
 	}
 
-	public function get_permalink_by_template( $template ) {
-
-		$result = '';
-
-		if ( ! empty( $template ) ) {
-			$pages = get_pages( array(
-			    'meta_key'   => '_wp_page_template',
-			    'meta_value' => $template
-			) );
-			$template_id = $pages[0]->ID;
-			$page = get_post( $template_id );
-
-			$result = get_permalink( $page );
-		}
-		
-		return $result;
-	}
-
     public function get_id() {
         return 'skin-base';
     }
 
-	protected function _register_controls() {
+	protected function register_controls( Widget_Base $widget ) {
 
+        $this->parent = $widget;
 		$this->start_controls_section(
 			'section_search_filter',
 			[
@@ -302,18 +285,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                     </form>
                 </div>
             </div>
-
-            <!-- <script>
-                jQuery(document).ready( function($) {
-                    $('#search_filter_form').submit( function(e) {
-                        e.preventDefault();
-                        var template_url = '<?php echo $this->get_permalink_by_template( 'template-advanced-search.php' ); ?>';
-                        var data = $(this).serialize();
-                        var redirect_url = template_url + '?' + data;
-                        window.location  = redirect_url;
-                    });
-                });
-            </script> -->
 
         <?php
     }
