@@ -335,7 +335,7 @@ ol {
 
 .swiper-slide .hl-listing-card {
     box-shadow: none !important;
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    /*border: 1px solid rgba(0, 0, 0, 0.08);*/
 }
 
 .swiper-slide .hl-listing-card:hover {

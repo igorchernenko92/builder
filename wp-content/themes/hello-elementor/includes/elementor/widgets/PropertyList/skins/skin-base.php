@@ -46,10 +46,11 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		$this->register_thumbnail_controls();
 		$this->register_title_controls();
 		$this->register_excerpt_controls();
-		$this->register_link_controls();
+        $this->register_price_controls();
         $this->register_agent_controls();
         $this->register_read_more_controls();
 		$this->register_meta_data_controls();
+        $this->register_link_controls();
 	}
 
 	public function register_design_controls() {
@@ -253,6 +254,20 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 			]
 		);
 	}
+
+    protected function register_price_controls() {
+        $this->add_control(
+            'hello_show_price',
+            [
+                'label' => __( 'Price', 'elementor-pro' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __( 'Show', 'elementor-pro' ),
+                'label_off' => __( 'Hide', 'elementor-pro' ),
+                'default' => 'yes',
+                'render_type' => 'none',
+            ]
+        );
+    }
 
     protected function register_read_more_controls() {
         $this->add_control(
@@ -889,7 +904,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 	}
 
 	protected function render_price() {
-		?>
+        if ( !$this->get_instance_value( 'hello_show_price' ) ) return; ?>
         <div class="hl-listing-card__price">
           <span class="hl-listing-card__price-value">
             ¥ 770,000
@@ -1240,19 +1255,26 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                 </div>
             </div>
 
-          <div class="hl-listings-carousel__pagination slider-pagination"></div>
 
-          <button class='hl-listings-carousel__nav_prev hl-listings-carousel__nav'>
-            <svg xmlns="http://www.w3.org/2000/svg" fill='currentColor' width="24" height="24" viewBox="0 0 24 24">
-              <path fill="#222" fill-rule="nonzero" d="M9 17.523L10.39 19 17 12l-6.61-7L9 6.477 14.215 12z"/>
-            </svg>
-          </button>
+            <?php if ( $this->get_instance_value( 'carousel_show_dots' ) ) {  ?>
+                <div class="hl-listings-carousel__pagination slider-pagination"></div>
+            <?php } ?>
 
-          <button class='hl-listings-carousel__nav_next hl-listings-carousel__nav'>
-            <svg xmlns="http://www.w3.org/2000/svg" fill='currentColor' width="24" height="24" viewBox="0 0 24 24">
-              <path fill="#222" fill-rule="nonzero" d="M9 17.523L10.39 19 17 12l-6.61-7L9 6.477 14.215 12z"/>
-            </svg>
-          </button>
+
+
+        <?php if ( $this->get_instance_value( 'carousel_show_arrows' ) ) {  ?>
+              <button class='hl-listings-carousel__nav_prev hl-listings-carousel__nav'>
+                <svg xmlns="http://www.w3.org/2000/svg" fill='currentColor' width="24" height="24" viewBox="0 0 24 24">
+                  <path fill="#222" fill-rule="nonzero" d="M9 17.523L10.39 19 17 12l-6.61-7L9 6.477 14.215 12z"/>
+                </svg>
+              </button>
+
+              <button class='hl-listings-carousel__nav_next hl-listings-carousel__nav'>
+                <svg xmlns="http://www.w3.org/2000/svg" fill='currentColor' width="24" height="24" viewBox="0 0 24 24">
+                  <path fill="#222" fill-rule="nonzero" d="M9 17.523L10.39 19 17 12l-6.61-7L9 6.477 14.215 12z"/>
+                </svg>
+              </button>
+        <?php } ?>
 
         </div>
 <?php
