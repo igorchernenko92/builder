@@ -47,10 +47,9 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		$this->register_title_controls();
 		$this->register_excerpt_controls();
 		$this->register_link_controls();
+        $this->register_agent_controls();
         $this->register_read_more_controls();
-		$this->add_meta_data_controls();
-
-
+		$this->register_meta_data_controls();
 	}
 
 	public function register_design_controls() {
@@ -72,6 +71,34 @@ abstract class Skin_Base extends Elementor_Skin_Base {
             ]
         );
 
+        $this->add_control(
+            'carousel_show_dots',
+            [
+                'label' => __( 'Carousel Dots', 'elementor-pro' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __( 'Show', 'elementor-pro' ),
+                'label_off' => __( 'Hide', 'elementor-pro' ),
+                'default' => 'no',
+                'condition' => [
+                    $this->get_control_id( 'hello_is_carousel' ) => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'carousel_show_arrows',
+            [
+                'label' => __( 'Arrows', 'elementor-pro' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __( 'Show', 'elementor-pro' ),
+                'label_off' => __( 'Hide', 'elementor-pro' ),
+                'default' => 'no',
+                'condition' => [
+                    $this->get_control_id( 'hello_is_carousel' ) => 'yes',
+                ],
+            ]
+        );
+
         $this->add_responsive_control(
             'hello_is_thumb_carousel',
             [
@@ -82,7 +109,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                 'separator' => 'before',
             ]
         );
-
 
 
 	    $this->add_responsive_control(
@@ -254,7 +280,33 @@ abstract class Skin_Base extends Elementor_Skin_Base {
         );
     }
 
-    public function add_meta_data_controls() {
+    protected function register_agent_controls() {
+        $this->add_control(
+            'show_agent',
+            [
+                'label' => __( 'Show Agent', 'elementor-pro' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __( 'Show', 'elementor-pro' ),
+                'label_off' => __( 'Hide', 'elementor-pro' ),
+                'default' => 'yes',
+                'separator' => 'before',
+            ]
+        );
+    }
+
+    public function register_meta_data_controls() {
+        $this->add_control(
+            'show_meta_data',
+            [
+                'label' => __( 'Meta Data', 'elementor-pro' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __( 'Show', 'elementor-pro' ),
+                'label_off' => __( 'Hide', 'elementor-pro' ),
+                'default' => 'yes',
+                'separator' => 'before',
+            ]
+        );
+
         $repeater = new Repeater();
 
         $repeater->add_control(
@@ -406,9 +458,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
 		return $optional_attributes_html;
 	}
-	/**
-	 * Style Tab
-	 */
+
 	protected function register_design_image_controls() {
 		$this->start_controls_section(
 			'section_design_image',
@@ -760,6 +810,8 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		$this->end_controls_section();
 	}
 
+
+
 //	public function filter_excerpt_length() {
 //		return $this->get_instance_value( 'excerpt_length' );
 //	}
@@ -790,6 +842,9 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 	}
 
 	protected function render_excerpt() {
+        if ( ! $this->get_instance_value( 'show_excerpt' ) ) {
+            return;
+        }
         $length = $this->get_instance_value( 'excerpt_length' );
         $read_more_text = $this->get_instance_value( 'read_more_text' );
 	    ?>
@@ -1043,6 +1098,10 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 	  }
 
 	protected function render_meta_data() {
+        if ( ! $this->get_instance_value( 'show_meta_data' ) ) {
+            return;
+        }
+
 		$settings = $this->get_instance_value( 'property_meta_data' );
 		if ( empty( $settings ) ) {
 			return;
@@ -1080,6 +1139,9 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 	}
 
     protected function render_agent() {
+        if ( ! $this->get_instance_value( 'show_agent' ) ) {
+            return;
+        }
         ?>
         <div class="hl-listing-card__bottom mt-auto">
             <div class="hl-listing-card__bottom-inner">
