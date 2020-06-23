@@ -47,6 +47,24 @@ class HelloSearchFilter extends Base_Widget {
 		$this->add_skin( new Skins\Skin2( $this ) );
 	}
 
+	public function selected_options() {
+
+		$list_fields = get_field( 'property_list', 'option' );
+		$list_fields = array_fill_keys( $list_fields, 0 );
+		$options = [
+			'search' 				=> _x( 'Search', 'Type Field', 'elementor' ),
+			'property_year_built' 	=> _x( 'Year Built', 'Type Field', 'elementor' ),
+			'property_bedrooms' 	=> _x( 'Bedrooms', 'Type Field', 'elementor' ),
+			'property_bath' 		=> _x( 'Bath', 'Type Field', 'elementor' ),
+			'property_garages' 		=> _x( 'Garages', 'Type Field', 'elementor' ),
+			'property_rooms' 		=> _x( 'Rooms', 'Type Field', 'elementor' ),
+			'property_living_area' 	=> _x( 'Living Area', 'Type Field', 'elementor' ),
+			'property_terrace' 		=> _x( 'Terrace', 'Type Field', 'elementor' ),
+		];
+
+		return array_intersect_key( $options, $list_fields );
+	}
+
 	protected function _register_controls() {
 
 		$this->start_controls_section(
@@ -64,16 +82,7 @@ class HelloSearchFilter extends Base_Widget {
 				'label'   => _x( 'Type field', 'Type Field', 'elementor' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'search',
-				'options' => [
-					'search' 				=> _x( 'Search', 'Type Field', 'elementor' ),
-					'property_year_built' 	=> _x( 'Year Built', 'Type Field', 'elementor' ),
-					'property_bedrooms' 	=> _x( 'Bedrooms', 'Type Field', 'elementor' ),
-					'property_bath' 		=> _x( 'Bath', 'Type Field', 'elementor' ),
-					'property_garages' 		=> _x( 'Garages', 'Type Field', 'elementor' ),
-					'property_rooms' 		=> _x( 'Rooms', 'Type Field', 'elementor' ),
-					'property_living_area' 	=> _x( 'Living Area', 'Type Field', 'elementor' ),
-					'property_terrace' 		=> _x( 'Terrace', 'Type Field', 'elementor' ),
-				],
+				'options' => $this->selected_options(),
 			]
 		);
 
