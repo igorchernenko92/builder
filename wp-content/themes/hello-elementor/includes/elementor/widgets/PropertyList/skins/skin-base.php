@@ -17,9 +17,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 abstract class Skin_Base extends Elementor_Skin_Base {
 
-	/**
-	 * @var string Save current permalink to avoid conflict with plugins the filters the permalink during the post render.
-	 */
 	protected $current_permalink;
 
 	protected function _register_controls_actions() {
@@ -36,7 +33,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
     public function get_id() {
         return 'skin-base';
     }
-
 
     public function register_controls( Widget_Base $widget ) {
 		$this->parent = $widget;

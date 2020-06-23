@@ -2,7 +2,7 @@
 namespace WPSight_Berlin\Elementor\Widgets\HelloSearchFilter\Skins;
 
 use Elementor\Controls_Manager;
-use Elementor\Core\Schemes; 
+use Elementor\Core\Schemes;
 use Elementor\Group_Control_Css_Filter;
 use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Typography;
@@ -17,47 +17,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 abstract class Skin_Base extends Elementor_Skin_Base {
 
-	public function __construct( $data = [], $args = null ) {
-
-		parent::__construct( $data, $args );
-		wp_enqueue_style( 'ut-datepicker-css', get_template_directory_uri() . '/includes/elementor/widgets/assets/css/datepicker.css', array(), date("Ymd"), false );
-		wp_enqueue_script( 'ut-datepicker-js', get_template_directory_uri() . '/includes/elementor/widgets/assets/js/datepicker.js', array(), date("Ymd"), false );
-	}
-
-	public function get_permalink_by_template( $template ) {
-
-		$result = '';
-
-		if ( ! empty( $template ) ) {
-			$pages = get_pages( array(
-			    'meta_key'   => '_wp_page_template',
-			    'meta_value' => $template
-			) );
-			$template_id = $pages[0]->ID;
-			$page = get_post( $template_id );
-
-			$result = get_permalink( $page );
-		}
-		
-		return $result;
-	}
+    protected function _register_controls_actions() {
+        add_action( 'elementor/element/search_filter/section_search_filter/before_section_end', [ $this, 'register_controls' ] );
+    }
 
     public function get_id() {
         return 'skin-base';
     }
 
-	protected function _register_controls() {
 
-		$this->start_controls_section(
-			'section_search_filter',
-			[
-				'label' => __( 'Search Filter', 'elementor' ),
-			]
-		);
+    public function register_controls( Widget_Base $widget ) {
+        $this->parent = $widget;
+
+        $this->register_some_controls();
+    }
+
+	protected function register_some_controls(  ) {
 
 		$repeater = new Repeater();
 
-		$repeater->add_control( 
+		$repeater->add_control(
 			'type_field',
 			[
 				'label'   => _x( 'Type field', 'Type Field', 'elementor' ),
@@ -76,7 +55,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 			]
 		);
 
-		$repeater->add_control( 
+		$repeater->add_control(
 			'type_view',
 			[
 				'label'   => _x( 'Type View', 'Type View', 'elementor' ),
@@ -108,7 +87,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
             ]
         );
 
-        $repeater->add_control( 
+        $repeater->add_control(
 			'width_field',
 			[
 				'label'   => _x( 'Column Width', 'elementor' ),
@@ -163,7 +142,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		);
 
 		$result_pages = [ '' => _x( 'Select Page', 'elementor' ) ];
-		$pages = get_pages(); 
+		$pages = get_pages();
 		foreach( $pages as $page ) {
 			$result_pages[ $page->ID ] = $page->post_title;
 		}
@@ -178,8 +157,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 			]
 		);
 
-		$this->end_controls_section();
-
 	}
 
 	protected function render_header() {
@@ -189,10 +166,10 @@ abstract class Skin_Base extends Elementor_Skin_Base {
     }
 
     protected function render_search_form() {
-        
+
         $settings = $this->parent->get_settings();
         ?>
-        
+
             <div id="home-search" class="site-section home-section">
                 <div class="container">
                     <form id="search_filter_form" method="get" action="<?php echo get_page_link( $settings['result_page'] ); ?>" class="wpsight-listings-search horizontal">
@@ -201,10 +178,10 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
                         <div class="listings-search-default">
 
-                            <?php 
-                            foreach ( $settings['items'] as $field ) : 
+                            <?php
+                            foreach ( $settings['items'] as $field ) :
 
-                                if ( 'search' == $field['type_field'] ) : 
+                                if ( 'search' == $field['type_field'] ) :
                                 ?>
 
                                     <div class="listings-search-field listings-search-field-text listings-search-field-keyword wrap-field wrap-field_search" style="width:<?php echo $field['width_field']; ?>%;">
@@ -227,7 +204,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                                     'property_living_area'  == $field['type_field'] ||
                                     'property_terrace'      == $field['type_field']
                                 ) :
-                                
+
                                     if ( 'input' == $field['type_view'] ) : ?>
 
                                         <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
@@ -253,7 +230,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                                         </div>
 
                                     <?php elseif ( 'checkbox' == $field['type_view'] ) : ?>
-                                        
+
                                         <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
                                             <label class="wrap-input"><?php echo $field['label']; ?></label>
                                             <label>
@@ -278,10 +255,10 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                                             </label>
                                         </div>
 
-                                    <?php 
-                                    endif; 
+                                    <?php
+                                    endif;
 
-                                elseif ( 'property_year_built' == $field['type_field'] ) : 
+                                elseif ( 'property_year_built' == $field['type_field'] ) :
                                 ?>
 
                                   <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
@@ -292,8 +269,8 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                                     </label>
                                   </div>
 
-                                <?php 
-                                endif; 
+                                <?php
+                                endif;
 
                             endforeach;
                             ?>
@@ -302,19 +279,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                     </form>
                 </div>
             </div>
-
-            <!-- <script>
-                jQuery(document).ready( function($) {
-                    $('#search_filter_form').submit( function(e) {
-                        e.preventDefault();
-                        var template_url = '<?php echo $this->get_permalink_by_template( 'template-advanced-search.php' ); ?>';
-                        var data = $(this).serialize();
-                        var redirect_url = template_url + '?' + data;
-                        window.location  = redirect_url;
-                    });
-                });
-            </script> -->
-
         <?php
     }
 

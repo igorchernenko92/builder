@@ -17,9 +17,7 @@ include_once ( 'skins/skin1.php');
 include_once ( 'skins/skin2.php');
 include_once ( 'skins/skin3.php');
 
-/**
- * Class Posts
- */
+
 class Property extends Property_Base {
 
     public function __construct($data = [], $args = null) {
