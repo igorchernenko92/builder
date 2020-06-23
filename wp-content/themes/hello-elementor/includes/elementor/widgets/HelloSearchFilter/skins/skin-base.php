@@ -34,6 +34,22 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
 	protected function register_some_controls(  ) {
 
+        $result_pages = [ '' => _x( 'Select Page', 'elementor' ) ];
+        $pages = get_pages();
+        foreach( $pages as $page ) {
+            $result_pages[ $page->ID ] = $page->post_title;
+        }
+
+        $this->add_control(
+            'result_page',
+            [
+                'label'   => _x( 'Select Result Page', 'Select Result Page', 'elementor' ),
+                'type'    => Controls_Manager::SELECT,
+                'default' => '',
+                'options' => $result_pages,
+            ]
+        );
+
 		$repeater = new Repeater();
 
 		$repeater->add_control(
@@ -138,22 +154,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 					],
 				],
 				'title_field' => '{{{ type_field }}}',
-			]
-		);
-
-		$result_pages = [ '' => _x( 'Select Page', 'elementor' ) ];
-		$pages = get_pages();
-		foreach( $pages as $page ) {
-			$result_pages[ $page->ID ] = $page->post_title;
-		}
-
-		$this->add_control(
-			'result_page',
-			[
-				'label'   => _x( 'Select Result Page', 'Select Result Page', 'elementor' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => '',
-				'options' => $result_pages,
 			]
 		);
 
