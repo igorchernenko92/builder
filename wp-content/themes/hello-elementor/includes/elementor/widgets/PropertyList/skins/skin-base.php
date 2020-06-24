@@ -1305,8 +1305,4 @@ abstract class Skin_Base extends Elementor_Skin_Base {
           $this->render_agent();
       $this->render_post_footer();
 	}
-
-	public function render_amp() {
-
-	}
 }

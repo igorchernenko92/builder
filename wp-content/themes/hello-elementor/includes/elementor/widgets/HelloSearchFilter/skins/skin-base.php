@@ -41,7 +41,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
         }
 
         $this->add_control(
-            'result_page',
+            'hello_search_result_page',
             [
                 'label'   => _x( 'Select Result Page', 'Select Result Page', 'elementor' ),
                 'type'    => Controls_Manager::SELECT,
@@ -139,7 +139,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		);
 
 		$this->add_control(
-			'items',
+			'hello_search_items',
 			[
 				'label' 	 	=> __( 'Fields', 'elementor' ),
 				'type' 		 	=> Controls_Manager::REPEATER,
@@ -148,9 +148,11 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 				'default' 		=> [
 					[
 						'type_field' => 'search',
+						'type_view' => 'input',
 					],
 					[
 						'type_field' => 'price',
+						'type_view' => 'select',
 					],
 				],
 				'title_field' => '{{{ type_field }}}',
@@ -159,122 +161,56 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
 	}
 
-	protected function render_header() {
-        ?>
-            <h1>Header</h1>
-        <?php
-    }
 
     protected function render_search_form() {
+            $items =  $this->get_instance_value( 'hello_search_items' );
+            $search_result =  $this->get_instance_value( 'hello_search_result_page' );
 
-        $settings = $this->parent->get_settings();
+            $value_data = [
+                'property_bedrooms' => ['1' => 1, '2' => 2, '3' => 3],
+                'property_rooms' => ['1' => 1, '2' => 2, '3' => 3, '4' => 4],
+                'property_bath' => ['1' => 1, '2' => 2, '3' => 3],
+                'property_garages' => ['1' => 1, '2' => 2, '3' => 3]
+            ];
+
         ?>
 
             <div id="home-search" class="site-section home-section">
                 <div class="container">
-                    <form id="search_filter_form" method="get" action="<?php echo get_page_link( $settings['result_page'] ); ?>" class="wpsight-listings-search horizontal">
-
-                        <h1>SKIN BASE</h1>
+                    <form id="search_filter_form" method="get" action="<?php echo get_page_link( $search_result ); ?>" class="wpsight-listings-search horizontal">
 
                         <div class="listings-search-default">
 
                             <?php
-                            foreach ( $settings['items'] as $field ) :
-
-                                if ( 'search' == $field['type_field'] ) :
-                                ?>
-
-                                    <div class="listings-search-field listings-search-field-text listings-search-field-keyword wrap-field wrap-field_search" style="width:<?php echo $field['width_field']; ?>%;">
-                                        <label class="wrap-input">
-                                          <?php echo $field['label']; ?>
-                                          <input class="listing-search-keyword text form-control" name="keyword" type="text" value="" placeholder="<?php echo $field['placeholder']; ?>">
-                                        </label>
-
-                                        <div class="listings-search-field listings-search-field-submit listings-search-field-submit">
-                                          <input type="submit" value="Search" class="btn btn-primary btn-block">
-                                        </div>
-                                    </div>
-
-                                <?php
-                                elseif (
-                                    'property_bedrooms'     == $field['type_field'] ||
-                                    'property_bath'         == $field['type_field'] ||
-                                    'property_garages'      == $field['type_field'] ||
-                                    'property_rooms'        == $field['type_field'] ||
-                                    'property_living_area'  == $field['type_field'] ||
-                                    'property_terrace'      == $field['type_field']
-                                ) :
-
-                                    if ( 'input' == $field['type_view'] ) : ?>
-
+                                foreach ( $items as $field ) :
+                                    if ( $field['type_view'] == 'select'  ) { ?>
                                         <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
                                             <label class="wrap-input">
-                                                <?php echo $field['label']; ?>
+                                                <?php echo $field['label'];?>
+                                                    <select class="select form-control" multiple name="<?php echo $field['type_field']; ?>[]">
+                                                        <?php foreach ( $value_data[$field['type_field']] as $option ) { ?>
+                                                            <option value="<?php echo $option; ?>"><?php echo $option; ?></option>
+                                                         <?php  }  ?>
+                                                    </select>
+                                            </label>
+                                        </div>
+                                 <?php } ?>
+
+
+                                <?php
+                                    if ( $field['type_view'] == 'input'  ) { ?>
+                                        <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
+                                            <label class="wrap-input">
+                                                <?php echo $field['label'];?>
                                                 <input class="text form-control" name="<?php echo $field['type_field']; ?>" type="number" value="" placeholder="<?php echo $field['placeholder']; ?>">
                                             </label>
                                         </div>
+                                <?php } ?>
 
-                                    <?php elseif ( 'select' == $field['type_view'] ) : ?>
-
-                                        <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
-                                            <label class="wrap-input">
-                                                <?php echo $field['label']; ?>
-                                                <select name="<?php echo $field['type_field']; ?>">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                </select>
-                                            </label>
-                                        </div>
-
-                                    <?php elseif ( 'checkbox' == $field['type_view'] ) : ?>
-
-                                        <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
-                                            <label class="wrap-input"><?php echo $field['label']; ?></label>
-                                            <label>
-                                                1
-                                                <input type="checkbox" name="<?php echo $field['type_field']; ?>" value="1" >
-                                            </label>
-                                            <label>
-                                                2
-                                                <input type="checkbox" name="<?php echo $field['type_field']; ?>" value="2" >
-                                            </label>
-                                            <label>
-                                                3
-                                                <input type="checkbox" name="<?php echo $field['type_field']; ?>" value="3" >
-                                            </label>
-                                            <label>
-                                                4
-                                                <input type="checkbox" name="<?php echo $field['type_field']; ?>" value="4" >
-                                            </label>
-                                            <label>
-                                                5
-                                                <input type="checkbox" name="<?php echo $field['type_field']; ?>" value="5" >
-                                            </label>
-                                        </div>
-
-                                    <?php
-                                    endif;
-
-                                elseif ( 'property_year_built' == $field['type_field'] ) :
-                                ?>
-
-                                  <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
-                                    <label class="wrap-input">
-                                      <?php echo $field['label']; ?>
-                                      <input class="text form-control datepicker-here" name="<?php echo $field['type_field']; ?>" type="text" value="" placeholder="<?php echo $field['placeholder']; ?>" data-date-format="yyyy mm dd">
-                                      <!-- data-date-format="M d, yyyy" -->
-                                    </label>
-                                  </div>
-
-                                <?php
-                                endif;
-
-                            endforeach;
-                            ?>
-
+                               <?php endforeach; ?>
+                            <div class="listings-search-field listings-search-field-submit listings-search-field-submit">
+                                <input type="submit" value="Search" class="btn btn-primary btn-block">
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -282,16 +218,11 @@ abstract class Skin_Base extends Elementor_Skin_Base {
         <?php
     }
 
-    protected function render_footer() {
-        ?>
-            <h1>Footer</h1>
-        <?php
-    }
 
 	public function render() {
 
-        $this->render_header();
+
         $this->render_search_form();
-        $this->render_footer();
+
     }
 }
