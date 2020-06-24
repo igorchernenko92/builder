@@ -1,6 +1,6 @@
 (function($) {
     const HelloGallerySkinScript = function ($scope, $) {
-        alert('sdcsc');
+
     };
 
     $(window).on('elementor/frontend/init', function () {
