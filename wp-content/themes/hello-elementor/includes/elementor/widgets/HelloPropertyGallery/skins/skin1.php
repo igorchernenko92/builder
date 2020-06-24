@@ -31,12 +31,4 @@ class Hello_Gallery_Skin1 extends Hello_Gallery_Skin_Base {
 		return __( 'Skin 1', 'elementor-pro' );
 	}
 
-    protected function render_loop_header() {
-
-    }
-
-    protected function render_loop_footer() {
-
-    }
-
 }

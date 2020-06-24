@@ -4,7 +4,8 @@ namespace WPSight_Berlin\Elementor\Widgets\HelloPropertyGallery\Skins;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
-use Elementor\Repeater;use WPSight_Berlin\Elementor\Widgets\HelloPropertyGallery\Skins\Hello_Gallery_Skin_Base;
+use Elementor\Repeater;
+use WPSight_Berlin\Elementor\Widgets\HelloPropertyGallery\Skins\Hello_Gallery_Skin_Base;
 
 
 class Hello_Gallery_Skin3 extends Hello_Gallery_Skin_Base {

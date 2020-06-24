@@ -24,9 +24,8 @@ abstract class Hello_Gallery_Skin_Base extends Elementor_Skin_Base {
         return 'hello_property_skin_base';
     }
 
-    public function render()
-    {
-
+    public function render() {
+        echo 'sdcsd';
     }
 
 
