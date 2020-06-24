@@ -186,7 +186,9 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                                     if ( 'select' == $field['type_view'] ) { ?>
                                         <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
                                             <label class="wrap-input">
-                                                <?php echo $field['label'];?>
+                                                    <span class="listings-search-field-label">
+                                                        <?php echo $field['label']; ?>
+                                                    </span>
                                                     <select class="select form-control" name="<?php echo $field['type_field']; ?>">
                                                         <?php foreach ( $value_data[$field['type_field']] as $option ) { ?>
                                                             <option value="<?php echo $option; ?>"><?php echo $option; ?></option>
@@ -200,16 +202,20 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                                     <?php  if ( 'input' == $field['type_view'] ) { ?>
                                             <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
                                                 <label class="wrap-input">
-                                                    <?php echo $field['label'];?>
+                                                    <span class="listings-search-field-label">
+                                                        <?php echo $field['label']; ?>
+                                                    </span>
                                                     <input class="text form-control" name="<?php echo $field['type_field']; ?>" type="text" value="" placeholder="<?php echo $field['placeholder']; ?>">
                                                 </label>
                                             </div>
                                     <?php } ?>
 
                                <?php endforeach; ?>
-                            <div class="listings-search-field listings-search-field-submit listings-search-field-submit">
-                                <input type="submit" value="Search" class="btn btn-primary btn-block">
-                            </div>
+                              <div class="wrap-field listings-search-field-submit">
+                                  <div class="wrap-input">
+                                      <input type="submit" value="Search" class="btn btn-primary btn-block">
+                                  </div>
+                              </div>
                         </div>
                     </form>
                 </div>
