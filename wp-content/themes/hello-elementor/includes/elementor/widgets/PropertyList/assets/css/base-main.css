@@ -37,22 +37,27 @@ html {
     }
 }
 
-.listings-search-default .wrap-field {
-    margin-bottom: 30px;
-    padding: 0 15px;
-    display: flex;
-    align-items: center;
-}
-
 .listings-search-default .wrap-input {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.listings-search-field-label {
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .listings-search-default .wrap-field {
     margin-bottom: 30px;
     padding: 0 15px;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
+}
+
+.listings-search-default .form-control {
+    margin-top: auto;
 }
 
 .listings-search-default .wrap-field_search .btn {
