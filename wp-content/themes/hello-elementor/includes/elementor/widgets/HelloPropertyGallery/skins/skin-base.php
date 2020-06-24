@@ -16,7 +16,7 @@ abstract class Hello_Gallery_Skin_Base extends Elementor_Skin_Base {
 	protected $current_permalink;
 
 	protected function _register_controls_actions() {
-		add_action( 'elementor/element/hello_property_gallery/section_layout/before_section_end', [ $this, 'register_controls' ] );
+//		add_action( 'elementor/element/hello_property_gallery/section_layout/before_section_end', [ $this, 'register_controls' ] );
     }
 
 
