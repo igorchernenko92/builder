@@ -95,7 +95,8 @@
           },
           pagination: {
             el: $swiper.closest(".hl-listings-carousel").find(".hl-listings-carousel__pagination"),
-            clickable: true
+            clickable: true,
+            type: "bullets",
           },
           slidesPerView: perViews.laptop,
           autoHeight: perViews.laptop === 1,
@@ -141,65 +142,6 @@
         initListingSlider($slider);
       })
     }
-  
-  
-  
-  
-  
-  
-  
-  
-    const $galleries = $(".hl-gallery-1");
-  
-    const defaultOptionsGallery = function (params) {
-      return {
-        spaceBetween: 15,
-        slidesPerView: "auto",
-        speed: 600,
-        allowTouchMove: false,
-        breakpoints: {
-          991: {
-            allowTouchMove: true,
-          },
-          576: {
-            allowTouchMove: true,
-            slidesPerView: 1,
-          },
-        },
-        ...params,
-      }
-    };
-  
-    const initListingGallery = function ($gallery) {
-      if (!$gallery) return;
-      
-      const customOptions = {
-        navigation: {
-          nextEl: $gallery.find(".hl-gallery__slider-nav_next"),
-          prevEl: $gallery.find(".hl-gallery__slider-nav_prev")
-        },
-      };
-    
-      if (!$gallery.find("> .swiper-container").hasClass("swiper-container-initialized")) {
-        new Swiper($gallery.find("> .swiper-container"), defaultOptionsGallery({
-          ...customOptions,
-        }))
-      }
-    };
-  
-  
-    if ($galleries.length) {
-      $galleries.each(function () {
-        const $gallery = $(this).find(".hl-gallery__slider");
-        if (!$gallery) return;
-        initListingGallery($gallery);
-      })
-    }
-    
-    
-    
-    
-    
   };
   
   $(window).on('elementor/frontend/init', function () {
