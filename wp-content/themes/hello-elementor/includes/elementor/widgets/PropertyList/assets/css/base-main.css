@@ -515,21 +515,25 @@ ol {
 
 }
 
-.hl-listing-card_skin-1 .hl-listing-card__carousel-nav {
+.hl-listing-card_skin-1 .hl-listing-card__carousel-nav,
+.hl-listing-card_skin-2 .hl-listing-card__carousel-nav {
     width: 50px;
 }
 
-.hl-listing-card_skin-1 .hl-listing-card__carousel-nav > svg {
+.hl-listing-card_skin-1 .hl-listing-card__carousel-nav > svg,
+.hl-listing-card_skin-2 .hl-listing-card__carousel-nav > svg {
     width: 45px;
     height: 45px;
     fill: #fff;
 }
 
-.hl-listing-card_skin-1 .hl-listing-card__carousel-nav_prev {
+.hl-listing-card_skin-1 .hl-listing-card__carousel-nav_prev,
+.hl-listing-card_skin-2 .hl-listing-card__carousel-nav_prev {
     left: 0;
 }
 
-.hl-listing-card_skin-1 .hl-listing-card__carousel-nav_next {
+.hl-listing-card_skin-1 .hl-listing-card__carousel-nav_next,
+.hl-listing-card_skin-2 .hl-listing-card__carousel-nav_next {
     right: 0;
 }
 
