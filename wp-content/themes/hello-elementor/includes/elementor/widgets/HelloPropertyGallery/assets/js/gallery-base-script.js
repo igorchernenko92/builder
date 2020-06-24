@@ -1,6 +1,6 @@
 (function($) {
     const HelloGallerySkinScript = function ($scope, $) {
-
+    //        write here
     };
 
     $(window).on('elementor/frontend/init', function () {
