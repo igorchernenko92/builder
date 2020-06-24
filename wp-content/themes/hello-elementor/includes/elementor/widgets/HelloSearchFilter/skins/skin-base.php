@@ -183,7 +183,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
                             <?php
                                 foreach ( $items as $field ) :
-                                    if ( $field['type_view'] == 'select'  ) { ?>
+                                    if ( 'select' == $field['type_view'] ) { ?>
                                         <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
                                             <label class="wrap-input">
                                                 <?php echo $field['label'];?>
@@ -194,18 +194,17 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                                                     </select>
                                             </label>
                                         </div>
-                                 <?php } ?>
+                                    <?php } ?>
 
 
-                                <?php
-                                    if ( $field['type_view'] == 'input'  ) { ?>
-                                        <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
-                                            <label class="wrap-input">
-                                                <?php echo $field['label'];?>
-                                                <input class="text form-control" name="<?php echo $field['type_field']; ?>" type="number" value="" placeholder="<?php echo $field['placeholder']; ?>">
-                                            </label>
-                                        </div>
-                                <?php } ?>
+                                    <?php  if ( 'input' == $field['type_view'] ) { ?>
+                                            <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
+                                                <label class="wrap-input">
+                                                    <?php echo $field['label'];?>
+                                                    <input class="text form-control" name="<?php echo $field['type_field']; ?>" type="text" value="" placeholder="<?php echo $field['placeholder']; ?>">
+                                                </label>
+                                            </div>
+                                    <?php } ?>
 
                                <?php endforeach; ?>
                             <div class="listings-search-field listings-search-field-submit listings-search-field-submit">

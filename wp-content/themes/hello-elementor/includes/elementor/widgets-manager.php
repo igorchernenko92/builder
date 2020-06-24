@@ -58,6 +58,7 @@ class Widget_Manager {
         // TODO: move widget folder to variable
 //        include_once( 'widgets/ListingsCarousel/ListingsCarousel.php' );
         include_once( 'widgets/PropertyList/property.php' );
+        include_once( 'widgets/HelloPropertyGallery/HelloPropertyGallery.php' );
         include_once( 'widgets/HelloAgentList/HelloAgents.php' );
         /*include_once( 'widgets/ListingsSearchFilter.php' );*/
 //        include_once( 'widgets/ListingsGMapResultSearch.php' );
@@ -90,6 +91,7 @@ class Widget_Manager {
 ////
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingDetails() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\Property\Property() );
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloPropertyGallery\HelloPropertyGallery() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\Agents\HelloAgents() );
 //        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingAgent() );
     }
