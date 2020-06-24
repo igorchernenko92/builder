@@ -168,7 +168,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
             $value_data = [
                 'property_bedrooms' => ['1' => 1, '2' => 2, '3' => 3],
-                'property_rooms' => ['1' => 1, '2' => 2, '3' => 3, '4' => 4],
+                'property_rooms' => ['1' => 1, '2' => 2, '3' => 3, '4' => 4, '10' => 10],
                 'property_bath' => ['1' => 1, '2' => 2, '3' => 3],
                 'property_garages' => ['1' => 1, '2' => 2, '3' => 3]
             ];
@@ -187,7 +187,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                                         <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
                                             <label class="wrap-input">
                                                 <?php echo $field['label'];?>
-                                                    <select class="select form-control" multiple name="<?php echo $field['type_field']; ?>[]">
+                                                    <select class="select form-control" multiple name="<?php echo $field['type_field']; ?>">
                                                         <?php foreach ( $value_data[$field['type_field']] as $option ) { ?>
                                                             <option value="<?php echo $option; ?>"><?php echo $option; ?></option>
                                                          <?php  }  ?>
