@@ -8,7 +8,7 @@
         "mobileXm": ($carousel.width() > 480) && ($carousel.width() <= 600),
         "mobileSm": $carousel.width() <= 480
       };
-
+      
       if (carouselWidth.laptop) {
         slidesPerView.laptop = 3;
         slidesPerView.tablet = 2;
@@ -25,13 +25,13 @@
         slidesPerView.mobileXm = 1;
         slidesPerView.mobileSm = 1;
       }
-
+      
       return slidesPerView;
     }
-
+    
     const $carousels = $(".hl-listings-carousel");
     const $listings = $(".hl-listing-card:not('.swiper-slide > .hl-listing-card')");
-
+    
     const defaultOptionsByListingSlider = function (params) {
       return {
         spaceBetween: 0,
@@ -42,24 +42,24 @@
         ...params,
       }
     };
-
+    
     const initListingSlider = function ($slider) {
       if (!$slider) return;
-
+      
       const customOptions = {
         navigation: {
           nextEl: $slider.find(".hl-listing-card__carousel-nav_next"),
           prevEl: $slider.find(".hl-listing-card__carousel-nav_prev")
         },
       };
-  
+      
       if (!$slider.find("> .swiper-container").hasClass("swiper-container-initialized")) {
         new Swiper($slider.find("> .swiper-container"), defaultOptionsByListingSlider({
           ...customOptions,
         }))
       }
     };
-
+    
     const defaultOptionsByCarousel = function (params) {
       return {
         spaceBetween: 30,
@@ -68,7 +68,7 @@
         on: {
           init: function () {
             const $listings = $(this.$el).find(".hl-listing-card");
-
+            
             if ($listings.length) {
               $listings.each(function () {
                 const $slider = $(this).find(".hl-listing-card__carousel");
@@ -81,13 +81,13 @@
         ...params,
       }
     };
-
+    
     const initCarousels = function () {
       function initCarousel($swiper) {
         if (!$swiper) return;
-
+        
         const perViews = getPreViewsForCarousel($swiper.parent());
-
+        
         const customOptions = {
           navigation: {
             nextEl: $swiper.closest(".hl-listings-carousel").find(".hl-listings-carousel__nav_next"),
@@ -121,19 +121,19 @@
           }))
         }
       }
-
+      
       $carousels.each(function () {
         const $carousel = $(this).find("> .swiper-container");
         if (!$carousel) return;
         initCarousel($carousel);
       })
     };
-
-
+    
+    
     if ($carousels.length) {
       initCarousels();
     }
-
+    
     if ($listings.length) {
       $listings.each(function () {
         const $slider = $(this).find(".hl-listing-card__carousel");
@@ -141,15 +141,74 @@
         initListingSlider($slider);
       })
     }
+  
+  
+  
+  
+  
+  
+  
+  
+    const $galleries = $(".hl-gallery-1");
+  
+    const defaultOptionsGallery = function (params) {
+      return {
+        spaceBetween: 15,
+        slidesPerView: "auto",
+        speed: 600,
+        allowTouchMove: false,
+        breakpoints: {
+          991: {
+            allowTouchMove: true,
+          },
+          576: {
+            allowTouchMove: true,
+            slidesPerView: 1,
+          },
+        },
+        ...params,
+      }
+    };
+  
+    const initListingGallery = function ($gallery) {
+      if (!$gallery) return;
+      
+      const customOptions = {
+        navigation: {
+          nextEl: $gallery.find(".hl-gallery__slider-nav_next"),
+          prevEl: $gallery.find(".hl-gallery__slider-nav_prev")
+        },
+      };
+    
+      if (!$gallery.find("> .swiper-container").hasClass("swiper-container-initialized")) {
+        new Swiper($gallery.find("> .swiper-container"), defaultOptionsGallery({
+          ...customOptions,
+        }))
+      }
+    };
+  
+  
+    if ($galleries.length) {
+      $galleries.each(function () {
+        const $gallery = $(this).find(".hl-gallery__slider");
+        if (!$gallery) return;
+        initListingGallery($gallery);
+      })
+    }
+    
+    
+    
+    
+    
   };
-
+  
   $(window).on('elementor/frontend/init', function () {
     elementorFrontend.hooks.addAction('frontend/element_ready/property.skin1', HelloPropertySkinScript);
     elementorFrontend.hooks.addAction('frontend/element_ready/property.skin2', HelloPropertySkinScript);
     elementorFrontend.hooks.addAction('frontend/element_ready/property.skin3', HelloPropertySkinScript);
   });
-
-
+  
+  
 })(jQuery);
 
 
