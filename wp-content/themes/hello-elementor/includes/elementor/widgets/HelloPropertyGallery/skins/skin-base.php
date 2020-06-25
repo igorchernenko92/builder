@@ -53,7 +53,7 @@ abstract class Hello_Gallery_Skin_Base extends Elementor_Skin_Base {
 //                          var_dump( $image['sizes'] );
                           ?>
                           <div class='swiper-slide'>
-                              <a class='hl-gallery__wrap-image' href="<?php echo $image['sizes']['large']; ?>">
+                              <a class='hl-gallery__wrap-image' data-elementor-lightbox-slideshow="gallery_1" href="<?php echo $image['sizes']['large']; ?>">
                                     <img
                                             src="<?php echo $image['sizes']['medium_large']; ?>"
                                             class="hl-listing-card__picture-img hl-img-responsive"

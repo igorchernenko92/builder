@@ -34,7 +34,7 @@ class Hello_Gallery_Skin3 extends Hello_Gallery_Skin_Base {
               <div class="swiper-wrapper">
                   <?php foreach ($gallery as $image) { ?>
                       <div class='swiper-slide'>
-                          <a class="hl-gallery__wrap-image" href="<?php echo $image['sizes']['large']; ?>">
+                          <a class="hl-gallery__wrap-image" data-elementor-lightbox-slideshow="gallery_3" href="<?php echo $image['sizes']['large']; ?>">
                               <img
                                   src="<?php echo $image['sizes']['large']; ?>"
                                   class="hl-gallery__image"
