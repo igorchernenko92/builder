@@ -41,12 +41,14 @@ abstract class Hello_Gallery_Skin_Base extends Elementor_Skin_Base {
                   <div class='swiper-wrapper'>
                       <?php  foreach ($count as $i) { ?>
                           <div class='swiper-slide'>
-                              <picture class='hl-gallery__wrap-image'>
-                                  <img class='hl-gallery__image' src='https://via.placeholder.com/1200x900' alt=''>
-                              </picture>
+                              <a href="http://test.redcarlos.pro/wp-content/uploads/2020/05/new-home-2409165_1920.jpg">
+                                  <picture class='hl-gallery__wrap-image'>
+                                      <img class='hl-gallery__image' src='https://via.placeholder.com/1200x900.jpg' alt=''>
+                                  </picture>
+                              </a>
                           </div>
                       <?php } ?>
-                  </div>
+                  </div>]
 
                 <button class='hl-gallery__slider-nav_prev hl-gallery__slider-nav hl-listing-card__carousel-nav'>
                   <svg xmlns="http://www.w3.org/2000/svg" fill='currentColor' width="24" height="24" viewBox="0 0 24 24">
