@@ -174,7 +174,8 @@ abstract class Skin_Base extends Elementor_Skin_Base {
             ];
 
         ?>
-
+            <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+            <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
             <div id="home-search" class="site-section home-section">
                 <div class="container">
                     <form id="search_filter_form" method="get" action="<?php echo get_page_link( $search_result ); ?>" class="wpsight-listings-search horizontal">

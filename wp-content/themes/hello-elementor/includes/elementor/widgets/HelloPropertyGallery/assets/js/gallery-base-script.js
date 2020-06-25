@@ -24,6 +24,7 @@
         return slidesPerView;
       }
   
+      
       // Gallery 1
       const $galleries_1 = $(".hl-gallery-1");
   
@@ -78,17 +79,9 @@
         })
       }
   
+      
       // Gallery 3
       const $galleries_3 = $(".hl-gallery-3");
-      
-      const defaultOptionsGallery3 = function (params) {
-        return {
-          spaceBetween: 15,
-          speed: 600,
-          allowTouchMove: false,
-          ...params,
-        }
-      };
   
       const initListingGallery3 = function ($gallery_top, $gallery_thumbs) {
         console.log("sdf");
@@ -129,6 +122,34 @@
           initListingGallery3($gallery_top, $gallery_thumbs);
         })
       }
+      
+      
+      // Select 2
+      const initSelect2 = function () {
+        const $selectFields = $("select");
+        const svgIcon = '<svg class="select-icon" width="1em" height="1em" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="currentColor" class="css-tdckgx-style-ExpandMore"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg>';
+    
+        // -- Functions BEGIN
+        const initSelect = function () {
+          $selectFields.each(function() {
+            if ($(this).hasClass("select2-hidden-accessible")) return;
+            
+            $(this).wrap("<div class='wrap-select form-control'></div>");
+            const $wrapperCurSelect = $(this).parent();
+            $wrapperCurSelect.append(svgIcon);
+        
+            $(this).select2({
+              dropdownParent: $wrapperCurSelect,
+              dropdownAutoWidth: true,
+              width: 'auto'
+            });
+          });
+        };
+    
+        if ($selectFields.length) initSelect();
+      };
+      initSelect2()
+  
     };
 
     $(window).on('elementor/frontend/init', function () {

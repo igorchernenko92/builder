@@ -49,6 +49,10 @@ html {
     font-weight: 500;
 }
 
+.listings-search-field-label:empty {
+    display: none;
+}
+
 .listings-search-default .wrap-field {
     margin-bottom: 30px;
     padding: 0 15px;
