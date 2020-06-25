@@ -15,7 +15,7 @@ class Hello_Gallery_Skin3 extends Hello_Gallery_Skin_Base {
     }
 
 	public function get_id() {
-		return 'skin3';
+		return 'hello_gallery_skin3';
 	}
 
 	public function get_title() {
