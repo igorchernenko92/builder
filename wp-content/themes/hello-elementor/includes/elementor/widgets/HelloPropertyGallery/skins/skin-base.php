@@ -33,22 +33,43 @@ abstract class Hello_Gallery_Skin_Base extends Elementor_Skin_Base {
     }
 
     protected function render_gellery_images() {
+//        if ( !$this->get_instance_value( 'hello_is_thumb_carousel' ) ) return;
+
+        $gallery = get_field('property_gallery', get_the_ID() );
+//        var_dump($gallery);
+
+//        if ($gallery) {
+//            foreach ($gallery as $image) {
+//
+//            }
+//        }
+
+
         $count = array_fill(0, 12, 'some');
+
+
 
         ?>
           <div class="hl-gallery__slider">
               <div class='swiper-container'>
                   <div class='swiper-wrapper'>
-                      <?php  foreach ($count as $i) { ?>
+                      <?php foreach ($gallery as $image) {
+//                          var_dump( $image['sizes'] );
+                          ?>
                           <div class='swiper-slide'>
-                              <a href="http://test.redcarlos.pro/wp-content/uploads/2020/05/new-home-2409165_1920.jpg">
+                              <a href="<?php echo $image['sizes']['large']; ?>">
                                   <picture class='hl-gallery__wrap-image'>
-                                      <img class='hl-gallery__image' src='https://via.placeholder.com/1200x900.jpg' alt=''>
+                                      <img
+                                              src="<?php echo $image['sizes']['medium_large']; ?>"
+                                              class="hl-listing-card__picture-img hl-img-responsive"
+                                              title="<?php echo $image['title']; ?>"
+                                              alt="<?php echo $image['alt']; ?>"
+                                      >
                                   </picture>
                               </a>
                           </div>
                       <?php } ?>
-                  </div>]
+                  </div>
 
                 <button class='hl-gallery__slider-nav_prev hl-gallery__slider-nav hl-listing-card__carousel-nav'>
                   <svg xmlns="http://www.w3.org/2000/svg" fill='currentColor' width="24" height="24" viewBox="0 0 24 24">
@@ -63,7 +84,7 @@ abstract class Hello_Gallery_Skin_Base extends Elementor_Skin_Base {
                 </button>
               </div>
 
-              <div class="hl-gallery__slider-pagination slider-pagination"></div>
+<!--              <div class="hl-gallery__slider-pagination slider-pagination"></div>-->
           </div>
         <?php
     }
