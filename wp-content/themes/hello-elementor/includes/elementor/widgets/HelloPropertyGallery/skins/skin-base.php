@@ -29,7 +29,7 @@ abstract class Hello_Gallery_Skin_Base extends Elementor_Skin_Base {
     }
 
     protected function render_gellery_footer() {
-        echo "<div>";
+        echo "</div>";
     }
 
     protected function render_gellery_images() {
@@ -45,10 +45,6 @@ abstract class Hello_Gallery_Skin_Base extends Elementor_Skin_Base {
 //        }
 
 
-        $count = array_fill(0, 12, 'some');
-
-
-
         ?>
           <div class="hl-gallery__slider">
               <div class='swiper-container'>
@@ -57,15 +53,13 @@ abstract class Hello_Gallery_Skin_Base extends Elementor_Skin_Base {
 //                          var_dump( $image['sizes'] );
                           ?>
                           <div class='swiper-slide'>
-                              <a href="<?php echo $image['sizes']['large']; ?>">
-                                  <picture class='hl-gallery__wrap-image'>
-                                      <img
-                                              src="<?php echo $image['sizes']['medium_large']; ?>"
-                                              class="hl-listing-card__picture-img hl-img-responsive"
-                                              title="<?php echo $image['title']; ?>"
-                                              alt="<?php echo $image['alt']; ?>"
-                                      >
-                                  </picture>
+                              <a class='hl-gallery__wrap-image' href="<?php echo $image['sizes']['large']; ?>">
+                                    <img
+                                            src="<?php echo $image['sizes']['medium_large']; ?>"
+                                            class="hl-listing-card__picture-img hl-img-responsive"
+                                            title="<?php echo $image['title']; ?>"
+                                            alt="<?php echo $image['alt']; ?>"
+                                    >
                               </a>
                           </div>
                       <?php } ?>

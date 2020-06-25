@@ -1,6 +1,6 @@
 (function($) {
     const HelloGallerySkinScript = function ($scope, $) {
-      function getPreViewsForCarousel($carousel) {
+      function getPreViews($carousel) {
         const slidesPerView = {};
         const carouselWidth = {
           "laptop": $carousel.width() > 991,
@@ -23,10 +23,11 @@
     
         return slidesPerView;
       }
-      
-      const $galleries = $(".hl-gallery-1");
   
-      const defaultOptionsGallery = function (params) {
+      // Gallery 1
+      const $galleries_1 = $(".hl-gallery-1");
+  
+      const defaultOptionsGallery1 = function (params) {
         return {
           spaceBetween: 15,
           speed: 600,
@@ -35,10 +36,10 @@
         }
       };
   
-      const initListingGallery = function ($gallery) {
+      const initListingGallery1 = function ($gallery) {
         if (!$gallery) return;
   
-        const perViews = getPreViewsForCarousel($gallery.parent());
+        const perViews = getPreViews($gallery.parent());
     
         const customOptions = {
           navigation: {
@@ -63,18 +64,69 @@
         };
     
         if (!$gallery.find("> .swiper-container").hasClass("swiper-container-initialized")) {
-          new Swiper($gallery.find("> .swiper-container"), defaultOptionsGallery({
+          new Swiper($gallery.find("> .swiper-container"), defaultOptionsGallery1({
             ...customOptions,
           }))
         }
       };
-  
-  
-      if ($galleries.length) {
-        $galleries.each(function () {
+      
+      if ($galleries_1.length) {
+        $galleries_1.each(function () {
           const $gallery = $(this).find(".hl-gallery__slider");
           if (!$gallery) return;
-          initListingGallery($gallery);
+          initListingGallery1($gallery);
+        })
+      }
+  
+      // Gallery 3
+      const $galleries_3 = $(".hl-gallery-3");
+      
+      const defaultOptionsGallery3 = function (params) {
+        return {
+          spaceBetween: 15,
+          speed: 600,
+          allowTouchMove: false,
+          ...params,
+        }
+      };
+  
+      const initListingGallery3 = function ($gallery_top, $gallery_thumbs) {
+        console.log("sdf");
+        let sliderThumbsState = null;
+        let sliderTopState = null;
+  
+        if (!$gallery_thumbs.hasClass("swiper-container-initialized")) {
+          sliderThumbsState = new Swiper($gallery_thumbs, {
+            spaceBetween: 10,
+            slidesPerView: 4,
+            freeMode: true,
+            watchSlidesVisibility: true,
+            watchSlidesProgress: true,
+            speed: 600,
+          });
+        }
+        
+        if (!$gallery_top.hasClass("swiper-container-initialized")) {
+          sliderTopState = new Swiper($gallery_top, {
+            spaceBetween: 10,
+            navigation: {
+              nextEl: $gallery_top.find(".hl-gallery__slider-nav_next"),
+              prevEl: $gallery_top.find(".hl-gallery__slider-nav_prev")
+            },
+            speed: 600,
+            thumbs: {
+              swiper: sliderThumbsState
+            }
+          });
+        }
+      };
+  
+      if ($galleries_3.length) {
+        $galleries_3.each(function () {
+          const $gallery_top = $(this).find(".hl-gallery__slider-top");
+          const $gallery_thumbs = $(this).find(".hl-gallery__slider-thumbs");
+          if (!$gallery_top && !$gallery_thumbs) return;
+          initListingGallery3($gallery_top, $gallery_thumbs);
         })
       }
     };
@@ -82,7 +134,6 @@
     $(window).on('elementor/frontend/init', function () {
         elementorFrontend.hooks.addAction('frontend/element_ready/hello_property_gallery.hello_gallery_skin1', HelloGallerySkinScript);
     });
-
 
 })(jQuery);
 
