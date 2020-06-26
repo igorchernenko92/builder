@@ -16,12 +16,33 @@ abstract class Hello_Gallery_Skin_Base extends Elementor_Skin_Base {
 	protected $current_permalink;
 
 	protected function _register_controls_actions() {
-//		add_action( 'elementor/element/hello_property_gallery/section_layout/before_section_end', [ $this, 'register_controls' ] );
+		add_action( 'elementor/element/hello_property_gallery/section_layout/before_section_end', [ $this, 'register_controls' ] );
+//        'elementor/element/' . $this->get_name() . '/' . $section_id . '/after_section_start'
     }
-
 
     public function get_id() {
         return 'hello_property_skin_base';
+    }
+
+    public function register_controls(Widget_Base $widget) {
+        $this->parent = $widget;
+
+        $this->register_gallery_controls();
+    }
+
+    protected function register_gallery_controls( ) {
+        $this->add_control(
+            'open_lightbox',
+            [
+                'label' => __( 'Lightbox', 'elementor' ),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'yes',
+                'options' => [
+                    'yes' => __( 'Yes', 'elementor' ),
+                    'no' => __( 'No', 'elementor' ),
+                ]
+            ]
+        );
     }
 
     protected function render_gellery_header() {
@@ -33,32 +54,38 @@ abstract class Hello_Gallery_Skin_Base extends Elementor_Skin_Base {
     }
 
     protected function render_gellery_images() {
-//        if ( !$this->get_instance_value( 'hello_is_thumb_carousel' ) ) return;
-
+        $open_lightbox = $this->get_instance_value( 'open_lightbox' );
         $gallery = get_field('property_gallery', get_the_ID() );
-//        var_dump($gallery);
-
-//        if ($gallery) {
-//            foreach ($gallery as $image) {
-//
-//            }
-//        }
-
 
         ?>
           <div class="hl-gallery__slider">
               <div class='swiper-container'>
                   <div class='swiper-wrapper'>
-                      <?php foreach ($gallery as $image) {
-//                          var_dump( $image['sizes'] );
-                          ?>
+                      <?php foreach ($gallery as $index => $attachment) {
+                          $link_key = 'link_' . $index;
+//                          $image_url = Group_Control_Image_Size::get_attachment_image_src( $attachment['id'], 'thumbnail', $settings );
+
+                          $link = $this->get_link_url( $attachment );
+
+
+                          $this->parent->add_lightbox_data_attributes( $link_key, $attachment['id'], $open_lightbox, $this->get_id() );
+                          $this->parent->add_render_attribute( $link_key, [
+                              'class' => 'hl-gallery__wrap-image',
+                          ] );
+
+                          if ( $open_lightbox == 'yes' ) {
+                              $this->parent->add_link_attributes( $link_key, $link );
+                           }
+
+                          $link_tag = '<a ' . $this->parent->get_render_attribute_string( $link_key ) . '>';
+                      ?>
                           <div class='swiper-slide'>
-                              <a class='hl-gallery__wrap-image' data-elementor-lightbox-slideshow="gallery_1" href="<?php echo $image['sizes']['large']; ?>">
+                              <?php echo $link_tag; ?>
                                     <img
-                                            src="<?php echo $image['sizes']['medium_large']; ?>"
-                                            class="hl-listing-card__picture-img hl-img-responsive"
-                                            title="<?php echo $image['title']; ?>"
-                                            alt="<?php echo $image['alt']; ?>"
+                                        src="<?php echo $attachment['sizes']['medium_large']; ?>"
+                                        class="hl-listing-card__picture-img hl-img-responsive"
+                                        title="<?php echo $attachment['title']; ?>"
+                                        alt="<?php echo $attachment['alt']; ?>"
                                     >
                               </a>
                           </div>
@@ -83,11 +110,17 @@ abstract class Hello_Gallery_Skin_Base extends Elementor_Skin_Base {
         <?php
     }
 
-    public function render()
-    {
+    public function render() {
         $this->render_gellery_header();
             $this->render_gellery_images();
         $this->render_gellery_footer();
+    }
+
+
+    protected function get_link_url( $attachment ) {
+        return [
+            'url' => wp_get_attachment_url( $attachment['id'] ),
+        ];
     }
 
 

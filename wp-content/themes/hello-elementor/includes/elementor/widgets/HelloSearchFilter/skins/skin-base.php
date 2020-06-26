@@ -29,10 +29,10 @@ abstract class Skin_Base extends Elementor_Skin_Base {
     public function register_controls( Widget_Base $widget ) {
         $this->parent = $widget;
 
-        $this->register_some_controls();
+        $this->register_filter_controls();
     }
 
-	protected function register_some_controls(  ) {
+	protected function register_filter_controls(  ) {
 
         $result_pages = [ '' => _x( 'Select Page', 'elementor' ) ];
         $pages = get_pages();
