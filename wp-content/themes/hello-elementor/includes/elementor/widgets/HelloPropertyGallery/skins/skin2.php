@@ -32,12 +32,9 @@ class Hello_Gallery_Skin2 extends Hello_Gallery_Skin_Base {
 
   protected function render_gellery_images() {
       $gallery = get_field('property_gallery', get_the_ID() );
-      $galleryLength = count($gallery);
-      $i = 0;
       ?>
           <div class="hl-gallery__list">
-              <?php foreach ($gallery as $image) {
-                  if ($i > 5) return; ?>
+              <?php foreach ($gallery as $image) { ?>
                   <a class='hl-gallery__list-item' data-elementor-lightbox-slideshow="gallery_2" href="<?php echo $image['sizes']['large']; ?>">
                     <div class="hl-gallery__list-item-inner">
                       <span class="hl-gallery__list-item-text">See all</span>
@@ -50,7 +47,7 @@ class Hello_Gallery_Skin2 extends Hello_Gallery_Skin_Base {
                       >
                     </div>
                   </a>
-              <?php $i++; } ?>
+              <?php } ?>
           </div>
       <?php
   }
