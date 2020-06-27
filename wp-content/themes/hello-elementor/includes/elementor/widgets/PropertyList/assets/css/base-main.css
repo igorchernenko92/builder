@@ -24,72 +24,6 @@ html {
     height: 100%;
 }
 
-.listings-search-default {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 30px 0;
-    margin: 0 0 -30px;
-}
-
-@media (max-width: 600px) {
-    .listings-search-default {
-        margin: 0 0 -30px;
-    }
-}
-
-.listings-search-default .wrap-input {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.listings-search-field-label {
-    margin-bottom: 6px;
-    font-size: 14px;
-    font-weight: 500;
-}
-
-.listings-search-field-label:empty {
-    display: none;
-}
-
-.listings-search-default .wrap-field {
-    margin-bottom: 30px;
-    padding: 0 15px;
-    display: flex;
-    align-items: flex-end;
-}
-
-.listings-search-default .form-control {
-    margin-top: auto;
-}
-
-.listings-search-default .wrap-field_search .btn {
-    width: 100%;
-}
-
-.listings-search-default .wrap-field_search .wrap-input {
-    flex-grow: 1;
-}
-
-.listings-search-default .wrap-field_search .listings-search-field-submit {
-    flex-shrink: 0;
-    min-width: 100px;
-    margin-left: 15px;
-}
-
-@media (max-width: 992px) {
-    .listings-search-default .wrap-field {
-        width: 50% !important;
-    }
-}
-
-@media (max-width: 600px) {
-    .listings-search-default .wrap-field {
-        width: 100% !important;
-    }
-}
-
 ul,
 ol {
     list-style: none;
@@ -249,7 +183,7 @@ ol {
 
 .hl-listing-card .swiper-container,
 .hl-listing-card__carousel {
-    height: 100%;.slider-pagination
+    height: 100%;
 }
 
 .hl-listing-card__carousel-nav {

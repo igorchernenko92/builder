@@ -40,9 +40,7 @@ class Hello_Gallery_Skin2 extends Hello_Gallery_Skin_Base {
                   if ($i > 5) return; ?>
                   <a class='hl-gallery__list-item' data-elementor-lightbox-slideshow="gallery_2" href="<?php echo $image['sizes']['large']; ?>">
                     <div class="hl-gallery__list-item-inner">
-                      <?php if ($i == 5) { ?>
-                        <span class="hl-gallery__list-item-text">See all</span>
-                      <?php } ?>
+                      <span class="hl-gallery__list-item-text">See all</span>
 
                       <img
                         src="<?php echo $image['sizes']['medium_large']; ?>"
