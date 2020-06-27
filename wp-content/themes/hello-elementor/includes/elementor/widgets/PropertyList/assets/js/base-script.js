@@ -1,6 +1,6 @@
 (function($) {
   const HelloPropertySkinScript = function ($scope, $) {
-    function getPreViewsForCarousel($carousel) {
+    function getPreViews($carousel) {
       const slidesPerView = {};
       const carouselWidth = {
         "laptop": $carousel.width() > 991,
@@ -86,7 +86,7 @@
       function initCarousel($swiper) {
         if (!$swiper) return;
         
-        const perViews = getPreViewsForCarousel($swiper.parent());
+        const perViews = getPreViews($swiper.parent());
         
         const customOptions = {
           navigation: {

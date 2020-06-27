@@ -79,12 +79,22 @@
         })
       }
   
+  
+      // Gallery 2
+      const $galleries_2 = $(".hl-gallery-2");
+      if ($galleries_2.length) {
+        $galleries_2.each(function () {
+          if ($(this).width() > 991) {
+            $(this).addClass("hl-gallery-2_large")
+          }
+        })
+      }
+      
       
       // Gallery 3
       const $galleries_3 = $(".hl-gallery-3");
   
       const initListingGallery3 = function ($gallery_top, $gallery_thumbs) {
-        console.log("sdf");
         let sliderThumbsState = null;
         let sliderTopState = null;
   
