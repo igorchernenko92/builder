@@ -247,7 +247,7 @@ var isAdminBar = false,
 
                                     if (elementSettingsMap.infoWindow_click_to_post) {
                                         if (isEditMode) {
-                                            alert('You have clicked: ' + address_list[k]['postLink']);
+                                            // alert('You have clicked: ' + address_list[k]['postLink']);
                                             return false;
                                         } else {
                                             window.location = address_list[k]['postLink'];

@@ -1208,6 +1208,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
         $this->parent->query_posts();
         $query = $this->parent->get_query();
         if ( ! $query->found_posts ) {
+            echo 'Sorry, but no listing matches your search criteria.';
             return;
         }
 

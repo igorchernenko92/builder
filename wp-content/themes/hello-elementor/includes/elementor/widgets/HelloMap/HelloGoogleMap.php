@@ -1336,7 +1336,6 @@ class HelloGoogleMap extends Widget_Base {
         //$imageMarker = get_field($settings['acf_markerfield'], $id_page);
         $imageMarker = '';
 
-        // individuo se il campo acf selezionato non è un type repeater ....
         $is_repeater = false;
         $imageMarkerType = DCE_Helper::get_acf_field_post($settings['acf_markerfield']);
 
@@ -1492,7 +1491,7 @@ class HelloGoogleMap extends Widget_Base {
                     //echo $p_query->found_posts;
                     $counter = 0;
                     //var_dump($args);
-                    if ($p_query->have_posts()) :
+                    if ($p_query->have_posts()) {
                         global $wp_query;
                         $original_queried_object = get_queried_object();
                         $original_queried_object_id = get_queried_object_id();
@@ -1609,9 +1608,11 @@ class HelloGoogleMap extends Widget_Base {
                         $wp_query->queried_object = $original_queried_object;
                         $wp_query->queried_object_id = $original_queried_object_id;
                         wp_reset_postdata();
-                    endif;
-                }else{
-                    ?>
+                    } else { //have_posts()
+//                        echo 'Sorry, but no listing matches your search criteria.';
+                        return;
+                    }
+                }else { ?>
                     <script>
                         var address_list_<?php echo $this->get_id(); ?> = [];
                     </script>
