@@ -167,10 +167,10 @@ abstract class Skin_Base extends Elementor_Skin_Base {
             $search_result =  $this->get_instance_value( 'hello_search_result_page' );
 
             $value_data = [
-                'property_bedrooms' => ['1' => 1, '2' => 2, '3' => 3],
-                'property_rooms' => ['1' => 1, '2' => 2, '3' => 3, '4' => 4, '10' => 10],
-                'property_bath' => ['1' => 1, '2' => 2, '3' => 3],
-                'property_garages' => ['1' => 1, '2' => 2, '3' => 3]
+                'property_bedrooms' => ['' => 'Bedrooms', '1' => 1, '2' => 2, '3' => 3],
+                'property_rooms' => ['' => 'Rooms','1' => 1, '2' => 2, '3' => 3, '4' => 4, '10' => 10],
+                'property_bath' => ['' => 'Bath','1' => 1, '2' => 2, '3' => 3],
+                'property_garages' => ['' => 'Garages','1' => 1, '2' => 2, '3' => 3]
             ];
 
         ?>
@@ -191,8 +191,10 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                                                         <?php echo $field['label']; ?>
                                                     </span>
                                                     <select class="select form-control" name="<?php echo $field['type_field']; ?>">
-                                                        <?php foreach ( $value_data[$field['type_field']] as $option ) { ?>
-                                                            <option value="<?php echo $option; ?>"><?php echo $option; ?></option>
+                                                        <?php foreach ( $value_data[$field['type_field']] as $index => $option ) {
+//                                                            var_dump($index);
+//                                                            var_dump($option); ?>
+                                                            <option value="<?php echo $index; ?>"><?php echo $option; ?></option>
                                                          <?php  }  ?>
                                                     </select>
                                             </label>
