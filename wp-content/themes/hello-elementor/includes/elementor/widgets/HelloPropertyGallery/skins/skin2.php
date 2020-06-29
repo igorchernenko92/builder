@@ -31,19 +31,34 @@ class Hello_Gallery_Skin2 extends Hello_Gallery_Skin_Base {
   }
 
   protected function render_gellery_images() {
+      $open_lightbox = $this->get_instance_value( 'open_lightbox' );
       $gallery = get_field('property_gallery', get_the_ID() );
+      $unique_id_gallery = "unique_id";
       ?>
           <div class="hl-gallery__list">
-              <?php foreach ($gallery as $image) { ?>
-                  <a class='hl-gallery__list-item' data-elementor-lightbox-slideshow="gallery_2" href="<?php echo $image['sizes']['large']; ?>">
+              <?php foreach ($gallery as $index => $attachment) {
+                  $link_key = 'link_' . $index;
+                  $link = $this->get_link_url( $attachment );
+                  $this->parent->add_lightbox_data_attributes( $link_key, $attachment['id'], $open_lightbox, $this->get_id() . $unique_id_gallery );
+                  $this->parent->add_render_attribute( $link_key, [
+                      'class' => 'hl-gallery__list-item',
+                  ] );
+
+                  if ( $open_lightbox == 'yes' ) {
+                      $this->parent->add_link_attributes( $link_key, $link );
+                  }
+
+                  $link_tag = '<a ' . $this->parent->get_render_attribute_string( $link_key ) . '>';
+                  ?>
+                  <?php echo $link_tag; ?>
                     <div class="hl-gallery__list-item-inner">
                       <span class="hl-gallery__list-item-text">See all</span>
 
                       <img
-                        src="<?php echo $image['sizes']['medium_large']; ?>"
                         class="hl-gallery__image"
-                        title="<?php echo $image['title']; ?>"
-                        alt="<?php echo $image['alt']; ?>"
+                        src="<?php echo $attachment['sizes']['medium_large']; ?>"
+                        title="<?php echo $attachment['title']; ?>"
+                        alt="<?php echo $attachment['alt']; ?>"
                       >
                     </div>
                   </a>
