@@ -80,10 +80,10 @@ class Builder_General {
     public static function builder_get_offer_period( $period_name ) {
         $periods = [
             'none' => '',
-            'per_year' => 'per Year',
-            'per_month' => 'per Month',
-            'per_week' => 'per Week',
-            'per_day' => 'per Day',
+            'per_year' => ' / Year',
+            'per_month' => ' / Month',
+            'per_week' => ' / Week',
+            'per_day' => ' / Day',
         ];
         return isset( $periods[ $period_name ] ) ? $periods[ $period_name ] : '';
     }
