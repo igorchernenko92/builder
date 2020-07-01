@@ -121,8 +121,6 @@ class Builder_General {
 
 
 
-
-
     /**
      * get_property_price()
      *

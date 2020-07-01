@@ -8,7 +8,7 @@ class Builder_Admin {
     public function __construct( ) {
         add_action( 'init', array( $this, 'admin_pages' ) );
 
-        add_action('init', array( $this, 'register_acf_fields') );
+//        add_action('init', array( $this, 'register_acf_fields') );
     }
 
 
