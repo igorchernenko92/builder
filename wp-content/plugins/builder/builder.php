@@ -21,15 +21,10 @@
 include_once(ABSPATH . 'wp-admin/includes/plugin.php');
 	
 if ( ! class_exists( 'Property_Builder' ) ) {
-	
-	/**
-	 * Localisation
-	 */
-	// load_plugin_textdomain( 'wp_builder', false, dirname( plugin_basename( __FILE__ ) ) . '/' );
 
 	class Property_Builder {
 
-	    public function __construct()   {
+	    public function __construct() {
             // Define constants
             if ( ! defined( 'BUILDER_NAME' ) )
                 define( 'BUILDER_NAME', 'Builder' );
@@ -37,13 +32,9 @@ if ( ! class_exists( 'Property_Builder' ) ) {
             if ( ! defined( 'BUILDER_DOMAIN' ) )
                 define( 'BUILDER_DOMAIN', 'builder' );
 
-            define( 'BUILDER_VERSION', '1.0' );
+            define( 'BUILDER_VERSION', '1.0.0' );
             define( 'BUILDER_PLUGIN_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
             define( 'BUILDER_PLUGIN_URL', untrailingslashit( plugins_url( basename( plugin_dir_path( __FILE__ ) ), basename( __FILE__ ) ) ) );
-
-
-
-
 
 	        add_action('init', array( $this, 'register_logo_options_page') );
 	        add_action('init', array( $this, 'register_acf_fields') );

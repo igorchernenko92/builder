@@ -900,7 +900,8 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 	}
 
 	protected function render_price() {
-        if ( !$this->get_instance_value( 'hello_show_price' ) ) return; ?>
+        if ( !$this->get_instance_value( 'hello_show_price' ) ) return;
+        ?>
         <div class="hl-listing-card__price">
           <span class="hl-listing-card__price-value">
             ¥ 770,000
