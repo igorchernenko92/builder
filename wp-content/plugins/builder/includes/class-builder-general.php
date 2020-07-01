@@ -43,16 +43,61 @@ class Builder_General {
             $post_id = get_the_ID();
 
         // Get listing offer
-        $offer = get_post_meta( $post_id, 'property_offer', true );
+        $offer = get_field('property_offer', $post_id );
 
 
         // Return offer key or label
         return apply_filters( 'builder_get_property_offer', $offer, $post_id );
     }
 
+    /**
+     *	builder_property_offer_period_raw()
+     *
+     *	Return property offer period without formatting
+     *
+     *	@since 1.0.0
+     */
+    public static function builder_property_offer_period_raw( $post_id = '' ) {
+        if ( ! $post_id )
+            $post_id = get_the_ID();
 
+        // Get listing offer
+        $offer_period = get_field( 'property_offer_period', $post_id );
+
+
+        // Return offer key or label
+        return apply_filters( 'builder_get_property_offer_period', $offer_period, $post_id );
+    }
+
+
+    /**
+     *	builder_get_offer_period()
+     *
+     *	Return property rent period
+     *
+     *	@since 1.0.0
+     */
+    public static function builder_get_offer_period( $period_name ) {
+        $periods = [
+            'none' => '',
+            'per_year' => 'per Year',
+            'per_month' => 'per Month',
+            'per_week' => 'per Week',
+            'per_day' => 'per Day',
+        ];
+        return isset( $periods[ $period_name ] ) ? $periods[ $period_name ] : '';
+    }
+
+
+    /**
+     *	builder_get_currency_symbol()
+     *
+     *	Return property currency symbol
+     *
+     *	@since 1.0.0
+     */
     public static function builder_get_currency_symbol( $symbol_name ) {
-        $symbols = array(
+        $symbols = [
             'dollar'       => '&#36;',
             'franc'        => '&#8355;',
             'euro'         => '&#128;',
@@ -70,9 +115,12 @@ class Builder_General {
             'rupee'        => '&#8360;',
             'real'         => 'R$',
             'krona'        => 'kr',
-        );
+        ];
         return isset( $symbols[ $symbol_name ] ) ? $symbols[ $symbol_name ] : '';
     }
+
+
+
 
 
     /**
@@ -97,6 +145,7 @@ class Builder_General {
 
         $property_price  = self::builder_property_price_raw( $post_id );
         $property_offer  = self::builder_property_offer_raw( $post_id );
+        $property_offer_period  = self::builder_property_offer_period_raw( $post_id );
 
         if ( !empty( $property_price ) ) {
             $property_price = preg_replace( '/\s+/', '', $property_price );
@@ -120,8 +169,13 @@ class Builder_General {
             $currency =  get_field('property_currency', 'option');
             if ( !$currency ) $currency = 'dollar';
             $currency_symbol =  self::builder_get_currency_symbol($currency);
+            $offer_period  =  self::builder_get_offer_period($property_offer_period);
 
             $property_price = $currency_symbol . ' ' .  $property_price;
+
+            if ( $offer_period ) {
+                $property_price .= ' ' . $offer_period;
+            }
 
         }
 
