@@ -181,6 +181,13 @@ ol {
     transform: translate(0);
 }
 
+@media (max-width: 992px) {
+    .hl-gallery-1 .hl-gallery__slider-nav,
+    .hl-gallery-3 .hl-gallery__slider-nav {
+        opacity: 1;
+    }
+}
+
 .hl-gallery-1 .hl-gallery__slider-nav svg,
 .hl-gallery-3 .hl-gallery__slider-nav svg {
     color: #fff;
