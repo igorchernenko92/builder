@@ -171,10 +171,10 @@ class Builder_General {
             $currency_symbol =  self::builder_get_currency_symbol($currency);
             $offer_period  =  self::builder_get_offer_period($property_offer_period);
 
-            $property_price = $currency_symbol . ' ' .  $property_price;
+            $property_price = '<span class="hl-listing-card__price-value">' . $currency_symbol . ' ' .  $property_price . '  </span>';
 
             if ( $offer_period ) {
-                $property_price .= ' ' . $offer_period;
+                $property_price .= '<span class="hl-listing-card__price-label">' . $offer_period . ' </span>';
             }
 
         }
