@@ -20,14 +20,14 @@
 // Include ABS path
 include_once(ABSPATH . 'wp-admin/includes/plugin.php');
 	
-if ( ! class_exists( 'PropertyBuilder' ) ) {
+if ( ! class_exists( 'Property_Builder' ) ) {
 	
 	/**
 	 * Localisation
 	 */
 	// load_plugin_textdomain( 'wp_builder', false, dirname( plugin_basename( __FILE__ ) ) . '/' );
 
-	class PropertyBuilder {
+	class Property_Builder {
 
 	    public function __construct()   {
             // Define constants
@@ -43,11 +43,21 @@ if ( ! class_exists( 'PropertyBuilder' ) ) {
 
 
 
-            // called after all plugins have loaded
-			add_action( 'plugins_loaded', array( &$this, 'plugins_loaded' ) );
+
 
 	        add_action('init', array( $this, 'register_logo_options_page') );
 	        add_action('init', array( $this, 'register_acf_fields') );
+
+
+            // Include classes
+            include( BUILDER_PLUGIN_DIR . '/includes/class-builder-general.php' );
+
+            // Include functions
+            include( BUILDER_PLUGIN_DIR . '/functions/builder-properties.php' );
+
+
+            // called after all plugins have loaded
+            add_action( 'plugins_loaded', array( &$this, 'plugins_loaded' ) );
 	    }
 
 	    public function register_logo_options_page() {
@@ -157,5 +167,5 @@ if ( ! class_exists( 'PropertyBuilder' ) ) {
 		}
 	}
 
-	$builder = new PropertyBuilder();
+	$builder = new Property_Builder();
 }
