@@ -50,6 +50,31 @@ class Builder_General {
         return apply_filters( 'builder_get_property_offer', $offer, $post_id );
     }
 
+
+    public static function builder_get_currency_symbol( $symbol_name ) {
+        $symbols = array(
+            'dollar'       => '&#36;',
+            'franc'        => '&#8355;',
+            'euro'         => '&#128;',
+            'ruble'        => '&#8381;',
+            'pound'        => '&#163;',
+            'indian_rupee' => '&#8377;',
+            'baht'         => '&#3647;',
+            'shekel'       => '&#8362;',
+            'yen'          => '&#165;',
+            'guilder'      => '&fnof;',
+            'won'          => '&#8361;',
+            'peso'         => '&#8369;',
+            'lira'         => '&#8356;',
+            'peseta'       => '&#8359',
+            'rupee'        => '&#8360;',
+            'real'         => 'R$',
+            'krona'        => 'kr',
+        );
+        return isset( $symbols[ $symbol_name ] ) ? $symbols[ $symbol_name ] : '';
+    }
+
+
     /**
      * get_property_price()
      *
@@ -69,67 +94,34 @@ class Builder_General {
         if ( ! $post_id )
             return false;
 
-        // Set listing price labels
-        $listing_price_labels = array(
-            'sold'    => __( 'Sold', 'wpcasa'  ),
-            'rented'  => __( 'Rented', 'wpcasa'  ),
-            'request' => __( 'Price on request', 'wpcasa' )
-        );
 
-        $listing_price_labels = apply_filters( 'wpsight_get_listing_price_labels', $listing_price_labels );
-
-        // Set listing price args
-        $defauts = array(
-            'number_format' => true,
-            'show_currency' => true,
-            'show_period'  => true,
-            'show_request'  => true
-        );
-
-        $args = wp_parse_args( $args, $defauts );
-
-
-        // Get price info
         $property_price  = self::builder_property_price_raw( $post_id );
         $property_offer  = self::builder_property_offer_raw( $post_id );
-//        $listing_period = self::get_listing_period( $post_id, false );
 
         if ( !empty( $property_price ) ) {
             $property_price = preg_replace( '/\s+/', '', $property_price );
 
-            if ( strpos( $property_price, ',' ) )
-                $property_price_arr = explode( ',', $property_price );
-
-            if ( strpos( $property_price, '.' ) )
-                $property_price_arr = explode( '.', $property_price );
-
-
-
             // remove dots and commas
-//            $property_price = str_replace( '.', '', $property_price );
-//            $property_price = str_replace( ',', '', $property_price );
-
-
+            $property_price = str_replace( '.', '', $property_price );
+            $property_price = str_replace( ',', '', $property_price );
 
             if ( is_numeric( $property_price ) ) {
 
                 // Get thousands separator
-//                $listing_price_format = wpsight_get_option( 'currency_separator', true );
-                $listing_price_format = 'dot';
-
-                // Add thousands separators
+                $listing_price_format = get_field('property_price_separator', 'option');
 
                 if ( $listing_price_format == 'dot' ) {
                     $property_price = number_format( $property_price, 0, ',', '.' );
-                    if ( is_array( $property_price_arr ) )
-                        $property_price .= ',' . $property_price_arr[1];
                 } else {
-                    $property_price = number_format( $property_price, 0, '.', ',' );
-                    if ( is_array( $property_price_arr ) )
-                        $property_price .= '.' . $property_price_arr[1];
+                    $property_price = number_format($property_price, 0, '.', ',');
                 }
-
             }
+
+            $currency =  get_field('property_currency', 'option');
+            if ( !$currency ) $currency = 'dollar';
+            $currency_symbol =  self::builder_get_currency_symbol($currency);
+
+            $property_price = $currency_symbol . ' ' .  $property_price;
 
         }
 
@@ -151,102 +143,102 @@ class Builder_General {
     public static function currencies() {
 
         $currencies = array(
-            'aed' => __( 'AED => United Arab Emirates Dirham', 'wpcasa' ),
-            'ang' => __( 'ANG => Netherlands Antillean Guilder', 'wpcasa' ),
-            'ars' => __( 'ARS => Argentine Peso', 'wpcasa' ),
-            'aud' => __( 'AUD => Australian Dollar', 'wpcasa' ),
-            'bdt' => __( 'BDT => Bangladeshi Taka', 'wpcasa' ),
-            'bgn' => __( 'BGN => Bulgarian Lev', 'wpcasa' ),
-            'bhd' => __( 'BHD => Bahraini Dinar', 'wpcasa' ),
-            'bnd' => __( 'BND => Brunei Dollar', 'wpcasa' ),
-            'bob' => __( 'BOB => Bolivian Boliviano', 'wpcasa' ),
-            'brl' => __( 'BRL => Brazilian Real', 'wpcasa' ),
-            'bwp' => __( 'BWP => Botswanan Pula', 'wpcasa' ),
-            'cad' => __( 'CAD => Canadian Dollar', 'wpcasa' ),
-            'chf' => __( 'CHF => Swiss Franc', 'wpcasa' ),
-            'clp' => __( 'CLP => Chilean Peso', 'wpcasa' ),
-            'cny' => __( 'CNY => Chinese Yuan', 'wpcasa' ),
-            'cop' => __( 'COP => Colombian Peso', 'wpcasa' ),
-            'crc' => __( 'CRC => Costa Rican Colon', 'wpcasa' ),
-            'czk' => __( 'CZK => Czech Republic Koruna', 'wpcasa' ),
-            'dkk' => __( 'DKK => Danish Krone', 'wpcasa' ),
-            'dop' => __( 'DOP => Dominican Peso', 'wpcasa' ),
-            'dzd' => __( 'DZD => Algerian Dinar', 'wpcasa' ),
-            'eek' => __( 'EEK => Estonian Kroon', 'wpcasa' ),
-            'egp' => __( 'EGP => Egyptian Pound', 'wpcasa' ),
-            'eur' => __( 'EUR => Euro', 'wpcasa' ),
-            'fjd' => __( 'FJD => Fijian Dollar', 'wpcasa' ),
-            'gbp' => __( 'GBP => British Pound', 'wpcasa' ),
-            'hkd' => __( 'HKD => Hong Kong Dollar', 'wpcasa' ),
-            'hnl' => __( 'HNL => Honduran Lempira', 'wpcasa' ),
-            'hrk' => __( 'HRK => Croatian Kuna', 'wpcasa' ),
-            'huf' => __( 'HUF => Hungarian Forint', 'wpcasa' ),
-            'idr' => __( 'IDR => Indonesian Rupiah', 'wpcasa' ),
-            'ils' => __( 'ILS => Israeli New Sheqel', 'wpcasa' ),
-            'inr' => __( 'INR => Indian Rupee', 'wpcasa' ),
-            'jmd' => __( 'JMD => Jamaican Dollar', 'wpcasa' ),
-            'jod' => __( 'JOD => Jordanian Dinar', 'wpcasa' ),
-            'jpy' => __( 'JPY => Japanese Yen', 'wpcasa' ),
-            'kes' => __( 'KES => Kenyan Shilling', 'wpcasa' ),
-            'krw' => __( 'KRW => South Korean Won', 'wpcasa' ),
-            'kwd' => __( 'KWD => Kuwaiti Dinar', 'wpcasa' ),
-            'kyd' => __( 'KYD => Cayman Islands Dollar', 'wpcasa' ),
-            'kzt' => __( 'KZT => Kazakhstani Tenge', 'wpcasa' ),
-            'lbp' => __( 'LBP => Lebanese Pound', 'wpcasa' ),
-            'lkr' => __( 'LKR => Sri Lankan Rupee', 'wpcasa' ),
-            'ltl' => __( 'LTL => Lithuanian Litas', 'wpcasa' ),
-            'lvl' => __( 'LVL => Latvian Lats', 'wpcasa' ),
-            'mad' => __( 'MAD => Moroccan Dirham', 'wpcasa' ),
-            'mdl' => __( 'MDL => Moldovan Leu', 'wpcasa' ),
-            'mkd' => __( 'MKD => Macedonian Denar', 'wpcasa' ),
-            'mur' => __( 'MUR => Mauritian Rupee', 'wpcasa' ),
-            'mvr' => __( 'MVR => Maldivian Rufiyaa', 'wpcasa' ),
-            'mxn' => __( 'MXN => Mexican Peso', 'wpcasa' ),
-            'myr' => __( 'MYR => Malaysian Ringgit', 'wpcasa' ),
-            'nad' => __( 'NAD => Namibian Dollar', 'wpcasa' ),
-            'ngn' => __( 'NGN => Nigerian Naira', 'wpcasa' ),
-            'nio' => __( 'NIO => Nicaraguan Cordoba', 'wpcasa' ),
-            'nok' => __( 'NOK => Norwegian Krone', 'wpcasa' ),
-            'npr' => __( 'NPR => Nepalese Rupee', 'wpcasa' ),
-            'nzd' => __( 'NZD => New Zealand Dollar', 'wpcasa' ),
-            'omr' => __( 'OMR => Omani Rial', 'wpcasa' ),
-            'pen' => __( 'PEN => Peruvian Nuevo Sol', 'wpcasa' ),
-            'pgk' => __( 'PGK => Papua New Guinean Kina', 'wpcasa' ),
-            'php' => __( 'PHP => Philippine Peso', 'wpcasa' ),
-            'pkr' => __( 'PKR => Pakistani Rupee', 'wpcasa' ),
-            'pln' => __( 'PLN => Polish Zloty', 'wpcasa' ),
-            'pyg' => __( 'PYG => Paraguayan Guarani', 'wpcasa' ),
-            'qar' => __( 'QAR => Qatari Rial', 'wpcasa' ),
-            'ron' => __( 'RON => Romanian Leu', 'wpcasa' ),
-            'rsd' => __( 'RSD => Serbian Dinar', 'wpcasa' ),
-            'rub' => __( 'RUB => Russian Ruble', 'wpcasa' ),
-            'sar' => __( 'SAR => Saudi Riyal', 'wpcasa' ),
-            'scr' => __( 'SCR => Seychellois Rupee', 'wpcasa' ),
-            'sek' => __( 'SEK => Swedish Krona', 'wpcasa' ),
-            'sgd' => __( 'SGD => Singapore Dollar', 'wpcasa' ),
-            'skk' => __( 'SKK => Slovak Koruna', 'wpcasa' ),
-            'sll' => __( 'SLL => Sierra Leonean Leone', 'wpcasa' ),
-            'svc' => __( 'SVC => Salvadoran Colon', 'wpcasa' ),
-            'thb' => __( 'THB => Thai Baht', 'wpcasa' ),
-            'tnd' => __( 'TND => Tunisian Dinar', 'wpcasa' ),
-            'try' => __( 'TRY => Turkish Lira', 'wpcasa' ),
-            'ttd' => __( 'TTD => Trinidad and Tobago Dollar', 'wpcasa' ),
-            'twd' => __( 'TWD => New Taiwan Dollar', 'wpcasa' ),
-            'tzs' => __( 'TZS => Tanzanian Shilling', 'wpcasa' ),
-            'uah' => __( 'UAH => Ukrainian Hryvnia', 'wpcasa' ),
-            'ugx' => __( 'UGX => Ugandan Shilling', 'wpcasa' ),
-            'usd' => __( 'USD => US Dollar', 'wpcasa' ),
-            'uyu' => __( 'UYU => Uruguayan Peso', 'wpcasa' ),
-            'uzs' => __( 'UZS => Uzbekistan Som', 'wpcasa' ),
-            'vef' => __( 'VEF => Venezuelan Bolivar', 'wpcasa' ),
-            'vnd' => __( 'VND => Vietnamese Dong', 'wpcasa' ),
-            'xof' => __( 'XOF => CFA Franc BCEAO', 'wpcasa' ),
-            'yer' => __( 'YER => Yemeni Rial', 'wpcasa' ),
-            'zar' => __( 'ZAR => South African Rand', 'wpcasa' ),
-            'zmk' => __( 'ZMK => Zambian Kwacha', 'wpcasa' )
+            'aed' => __( 'AED => United Arab Emirates Dirham', 'builder' ),
+            'ang' => __( 'ANG => Netherlands Antillean Guilder', 'builder' ),
+            'ars' => __( 'ARS => Argentine Peso', 'builder' ),
+            'aud' => __( 'AUD => Australian Dollar', 'builder' ),
+            'bdt' => __( 'BDT => Bangladeshi Taka', 'builder' ),
+            'bgn' => __( 'BGN => Bulgarian Lev', 'builder' ),
+            'bhd' => __( 'BHD => Bahraini Dinar', 'builder' ),
+            'bnd' => __( 'BND => Brunei Dollar', 'builder' ),
+            'bob' => __( 'BOB => Bolivian Boliviano', 'builder' ),
+            'brl' => __( 'BRL => Brazilian Real', 'builder' ),
+            'bwp' => __( 'BWP => Botswanan Pula', 'builder' ),
+            'cad' => __( 'CAD => Canadian Dollar', 'builder' ),
+            'chf' => __( 'CHF => Swiss Franc', 'builder' ),
+            'clp' => __( 'CLP => Chilean Peso', 'builder' ),
+            'cny' => __( 'CNY => Chinese Yuan', 'builder' ),
+            'cop' => __( 'COP => Colombian Peso', 'builder' ),
+            'crc' => __( 'CRC => Costa Rican Colon', 'builder' ),
+            'czk' => __( 'CZK => Czech Republic Koruna', 'builder' ),
+            'dkk' => __( 'DKK => Danish Krone', 'builder' ),
+            'dop' => __( 'DOP => Dominican Peso', 'builder' ),
+            'dzd' => __( 'DZD => Algerian Dinar', 'builder' ),
+            'eek' => __( 'EEK => Estonian Kroon', 'builder' ),
+            'egp' => __( 'EGP => Egyptian Pound', 'builder' ),
+            'eur' => __( 'EUR => Euro', 'builder' ),
+            'fjd' => __( 'FJD => Fijian Dollar', 'builder' ),
+            'gbp' => __( 'GBP => British Pound', 'builder' ),
+            'hkd' => __( 'HKD => Hong Kong Dollar', 'builder' ),
+            'hnl' => __( 'HNL => Honduran Lempira', 'builder' ),
+            'hrk' => __( 'HRK => Croatian Kuna', 'builder' ),
+            'huf' => __( 'HUF => Hungarian Forint', 'builder' ),
+            'idr' => __( 'IDR => Indonesian Rupiah', 'builder' ),
+            'ils' => __( 'ILS => Israeli New Sheqel', 'builder' ),
+            'inr' => __( 'INR => Indian Rupee', 'builder' ),
+            'jmd' => __( 'JMD => Jamaican Dollar', 'builder' ),
+            'jod' => __( 'JOD => Jordanian Dinar', 'builder' ),
+            'jpy' => __( 'JPY => Japanese Yen', 'builder' ),
+            'kes' => __( 'KES => Kenyan Shilling', 'builder' ),
+            'krw' => __( 'KRW => South Korean Won', 'builder' ),
+            'kwd' => __( 'KWD => Kuwaiti Dinar', 'builder' ),
+            'kyd' => __( 'KYD => Cayman Islands Dollar', 'builder' ),
+            'kzt' => __( 'KZT => Kazakhstani Tenge', 'builder' ),
+            'lbp' => __( 'LBP => Lebanese Pound', 'builder' ),
+            'lkr' => __( 'LKR => Sri Lankan Rupee', 'builder' ),
+            'ltl' => __( 'LTL => Lithuanian Litas', 'builder' ),
+            'lvl' => __( 'LVL => Latvian Lats', 'builder' ),
+            'mad' => __( 'MAD => Moroccan Dirham', 'builder' ),
+            'mdl' => __( 'MDL => Moldovan Leu', 'builder' ),
+            'mkd' => __( 'MKD => Macedonian Denar', 'builder' ),
+            'mur' => __( 'MUR => Mauritian Rupee', 'builder' ),
+            'mvr' => __( 'MVR => Maldivian Rufiyaa', 'builder' ),
+            'mxn' => __( 'MXN => Mexican Peso', 'builder' ),
+            'myr' => __( 'MYR => Malaysian Ringgit', 'builder' ),
+            'nad' => __( 'NAD => Namibian Dollar', 'builder' ),
+            'ngn' => __( 'NGN => Nigerian Naira', 'builder' ),
+            'nio' => __( 'NIO => Nicaraguan Cordoba', 'builder' ),
+            'nok' => __( 'NOK => Norwegian Krone', 'builder' ),
+            'npr' => __( 'NPR => Nepalese Rupee', 'builder' ),
+            'nzd' => __( 'NZD => New Zealand Dollar', 'builder' ),
+            'omr' => __( 'OMR => Omani Rial', 'builder' ),
+            'pen' => __( 'PEN => Peruvian Nuevo Sol', 'builder' ),
+            'pgk' => __( 'PGK => Papua New Guinean Kina', 'builder' ),
+            'php' => __( 'PHP => Philippine Peso', 'builder' ),
+            'pkr' => __( 'PKR => Pakistani Rupee', 'builder' ),
+            'pln' => __( 'PLN => Polish Zloty', 'builder' ),
+            'pyg' => __( 'PYG => Paraguayan Guarani', 'builder' ),
+            'qar' => __( 'QAR => Qatari Rial', 'builder' ),
+            'ron' => __( 'RON => Romanian Leu', 'builder' ),
+            'rsd' => __( 'RSD => Serbian Dinar', 'builder' ),
+            'rub' => __( 'RUB => Russian Ruble', 'builder' ),
+            'sar' => __( 'SAR => Saudi Riyal', 'builder' ),
+            'scr' => __( 'SCR => Seychellois Rupee', 'builder' ),
+            'sek' => __( 'SEK => Swedish Krona', 'builder' ),
+            'sgd' => __( 'SGD => Singapore Dollar', 'builder' ),
+            'skk' => __( 'SKK => Slovak Koruna', 'builder' ),
+            'sll' => __( 'SLL => Sierra Leonean Leone', 'builder' ),
+            'svc' => __( 'SVC => Salvadoran Colon', 'builder' ),
+            'thb' => __( 'THB => Thai Baht', 'builder' ),
+            'tnd' => __( 'TND => Tunisian Dinar', 'builder' ),
+            'try' => __( 'TRY => Turkish Lira', 'builder' ),
+            'ttd' => __( 'TTD => Trinidad and Tobago Dollar', 'builder' ),
+            'twd' => __( 'TWD => New Taiwan Dollar', 'builder' ),
+            'tzs' => __( 'TZS => Tanzanian Shilling', 'builder' ),
+            'uah' => __( 'UAH => Ukrainian Hryvnia', 'builder' ),
+            'ugx' => __( 'UGX => Ugandan Shilling', 'builder' ),
+            'usd' => __( 'USD => US Dollar', 'builder' ),
+            'uyu' => __( 'UYU => Uruguayan Peso', 'builder' ),
+            'uzs' => __( 'UZS => Uzbekistan Som', 'builder' ),
+            'vef' => __( 'VEF => Venezuelan Bolivar', 'builder' ),
+            'vnd' => __( 'VND => Vietnamese Dong', 'builder' ),
+            'xof' => __( 'XOF => CFA Franc BCEAO', 'builder' ),
+            'yer' => __( 'YER => Yemeni Rial', 'builder' ),
+            'zar' => __( 'ZAR => South African Rand', 'builder' ),
+            'zmk' => __( 'ZMK => Zambian Kwacha', 'builder' )
         );
 
-        return apply_filters( 'wpsight_currencies', $currencies );
+        return apply_filters( 'property_currencies', $currencies );
 
     }
 }
