@@ -24,7 +24,7 @@ class Hello_Gallery_Skin1 extends Hello_Gallery_Skin_Base {
     }
 
 	public function get_id() {
-		return 'hello_gallery_skin1';
+		return $this->parent->get_id();
 	}
 
 	public function get_title() {

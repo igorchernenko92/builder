@@ -56,7 +56,7 @@ abstract class Hello_Gallery_Skin_Base extends Elementor_Skin_Base {
     protected function render_gellery_images() {
         $open_lightbox = $this->get_instance_value( 'open_lightbox' );
         $gallery = get_field('property_gallery', get_the_ID() );
-        $unique_id_gallery = "unique_id";
+        $unique_id_gallery = uniqid();
         ?>
           <div class="hl-gallery__slider">
               <div class='swiper-container'>
