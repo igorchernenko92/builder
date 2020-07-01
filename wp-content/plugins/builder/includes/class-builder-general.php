@@ -31,7 +31,13 @@ class Builder_General {
     }
 
 
-
+    /**
+     *	builder_property_offer_raw()
+     *
+     *	Return property offer without formatting
+     *
+     *	@since 1.0.0
+     */
     public static function builder_property_offer_raw( $post_id = '' ) {
         if ( ! $post_id )
             $post_id = get_the_ID();
@@ -44,17 +50,13 @@ class Builder_General {
         return apply_filters( 'builder_get_property_offer', $offer, $post_id );
     }
 
-
-
-
-
     /**
      * get_property_price()
      *
      * Returns formatted property price with
      * with currency and rental period.
      *
-     * @return string|bool Formatted listing price or false
+     * @return string|bool Formatted property price or false
      *
      * @since 1.0.0
      */
@@ -129,9 +131,7 @@ class Builder_General {
 
             }
 
-
         }
-
 
         return apply_filters( 'builder_get_property_price', $property_price, $post_id );
 

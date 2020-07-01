@@ -36,9 +36,9 @@ if ( ! class_exists( 'Property_Builder' ) ) {
             define( 'BUILDER_PLUGIN_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
             define( 'BUILDER_PLUGIN_URL', untrailingslashit( plugins_url( basename( plugin_dir_path( __FILE__ ) ), basename( __FILE__ ) ) ) );
 
-	        add_action('init', array( $this, 'register_logo_options_page') );
-	        add_action('init', array( $this, 'register_acf_fields') );
 
+            //admin
+            include( BUILDER_PLUGIN_DIR . '/includes/admin/class-builder-admin.php' );
 
             // Include classes
             include( BUILDER_PLUGIN_DIR . '/includes/class-builder-general.php' );
@@ -47,86 +47,16 @@ if ( ! class_exists( 'Property_Builder' ) ) {
             include( BUILDER_PLUGIN_DIR . '/functions/builder-properties.php' );
 
 
+            if ( is_admin() )
+                $this->admin = new Builder_Admin();
+
+
             // called after all plugins have loaded
             add_action( 'plugins_loaded', array( &$this, 'plugins_loaded' ) );
 	    }
 
-	    public function register_logo_options_page() {
 
-	        if ( function_exists('acf_add_options_page') ) {
 
-	            $option_page = acf_add_options_page( array(
-	                'page_title'    => 'Hello builder',
-	                'menu_title'    => 'Hello builder',
-	                'menu_slug'     => 'hello_builder',
-	                'capability'    => 'edit_posts',
-	                'redirect'  	=> false
-                ) );
-
-	        }
-
-	    }
-
-	    public function register_acf_fields ()  {
-
-	        if ( function_exists('acf_add_local_field_group') ) {
-
-	        	acf_add_local_field_group( array(
-					'key' 	 => 'filter_fields_g',
-					'title'  => 'Fields',
-					'fields' => array(
-						
-						array(
-			                'key' 				=> 'build_list_prop_fields',
-			                'label' 			=> 'Property list fields',
-			                'name' 				=> 'property_list',
-			                'type' 				=> 'checkbox',
-			                'instructions' 		=> '',
-			                'required' 			=> 0,
-			                'conditional_logic' => 0,
-			                'wrapper' 			=> array(
-			                    'width' 	=> '',
-			                    'class' 	=> '',
-			                    'id' 		=> '',
-			                ),
-			                'choices' 			=> array(
-			                    'property_year_built' 		=> 'Year Built',
-			                    'property_bedrooms' 		=> 'Bedrooms',
-			                    'property_bath' 			=> 'Bath',
-			                    'property_garages' 			=> 'Garages',
-			                    'property_rooms' 			=> 'Rooms',
-			                    'property_living_area' 		=> 'Living Area',
-			                    'property_terrace' 			=> 'Terrace',
-			                ),
-			                'allow_null' 		=> 0,
-			                'other_choice' 		=> 0,
-			                'default_value' 	=> '',
-			                'layout' 			=> 'vertical',
-			                'return_format' 	=> 'value',
-			                'save_other_choice' => 0,
-			            ),
-
-					),
-					'location' => array (
-	                    array (
-	                        array (
-	                            'param' 	=> 'options_page',
-	                            'operator' 	=> '==',
-	                            'value' 	=> 'hello_builder',
-	                        ),
-	                    ),
-	                ),
-					'menu_order' 			=> 0,
-					// 'position' 				=> 'side',
-					'style' 				=> 'default',
-					'label_placement' 		=> 'top',
-					'instruction_placement' => 'label',
-					'hide_on_screen' 		=> '',
-				) );
-
-	        }
-
-	    }
 
 	    /**
 		 * Take care of anything that needs all plugins to be loaded

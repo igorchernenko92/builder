@@ -1,0 +1,5 @@
+<?php
+/**
+ *	Builder admin functions
+ *
+ */
