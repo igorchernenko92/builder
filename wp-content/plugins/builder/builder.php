@@ -20,18 +20,30 @@
 // Include ABS path
 include_once(ABSPATH . 'wp-admin/includes/plugin.php');
 	
-if ( ! class_exists( 'WP_BUILDER' ) ) {
+if ( ! class_exists( 'PropertyBuilder' ) ) {
 	
 	/**
 	 * Localisation
 	 */
 	// load_plugin_textdomain( 'wp_builder', false, dirname( plugin_basename( __FILE__ ) ) . '/' );
 
-	class WP_BUILDER {
+	class PropertyBuilder {
 
 	    public function __construct()   {
+            // Define constants
+            if ( ! defined( 'BUILDER_NAME' ) )
+                define( 'BUILDER_NAME', 'Builder' );
 
-	    	// called after all plugins have loaded
+            if ( ! defined( 'BUILDER_DOMAIN' ) )
+                define( 'BUILDER_DOMAIN', 'builder' );
+
+            define( 'BUILDER_VERSION', '1.0' );
+            define( 'BUILDER_PLUGIN_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
+            define( 'BUILDER_PLUGIN_URL', untrailingslashit( plugins_url( basename( plugin_dir_path( __FILE__ ) ), basename( __FILE__ ) ) ) );
+
+
+
+            // called after all plugins have loaded
 			add_action( 'plugins_loaded', array( &$this, 'plugins_loaded' ) );
 
 	        add_action('init', array( $this, 'register_logo_options_page') );
@@ -145,5 +157,5 @@ if ( ! class_exists( 'WP_BUILDER' ) ) {
 		}
 	}
 
-	$builder = new WP_BUILDER();
+	$builder = new PropertyBuilder();
 }
