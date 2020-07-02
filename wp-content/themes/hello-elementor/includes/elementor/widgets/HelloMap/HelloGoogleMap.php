@@ -257,41 +257,6 @@ class HelloGoogleMap extends Widget_Base {
             ]
         );
 
-        $this->add_control(
-            'custom_infoWindow_render', [
-                'label' => __('Render', 'dynamic-content-for-elementor'),
-                'type' => Controls_Manager::CHOOSE,
-                'options' => [
-                    'simple' => [
-                        'title' => __('Simple mode', 'dynamic-content-for-elementor'),
-                        'icon' => 'fa fa-align-left',
-                    ],
-                    'html' => [
-                        'title' => __('HTML with Tokens', 'dynamic-content-for-elementor'),
-                        'icon' => 'fa fa-code',
-                    ],
-                ],
-                'toggle' => false,
-                'default' => 'simple',
-                'condition' => [
-                    'infoWindow_click_to_post' => '',
-                ],
-            ]
-        );
-        // --------- HTML
-        $this->add_control(
-            'infoWindow_query_html',
-            [
-                'label' => __('HTML', 'dynamic-content-for-elementor'),
-                'type' => Controls_Manager::CODE,
-                'separator' => 'before',
-                'deafult' => '[post:ID|get_the_post_thumbnail(thumbnail)]<h4>[post:title]</h4>[post:excerpt]<br><a href="[post:permalink]">READ MORE</a>',
-                'condition' => [
-                    'infoWindow_click_to_post' => '',
-                    'custom_infoWindow_render' => 'html',
-                ],
-            ]
-        );
 
         $this->add_control(
             'custom_infoWindow_wysiwig',
@@ -384,7 +349,6 @@ class HelloGoogleMap extends Widget_Base {
                 'condition' => [
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ],
             ]
         );
@@ -397,7 +361,6 @@ class HelloGoogleMap extends Widget_Base {
                 'condition' => [
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ],
             ]
         );
@@ -410,7 +373,6 @@ class HelloGoogleMap extends Widget_Base {
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
                     'infowindow_query_show_image!' => '',
-                    'custom_infoWindow_render' => 'simple',
                     //'infowindow_query_extendimage!' => ''
                 ],
                 'selectors' => [
@@ -442,7 +404,6 @@ class HelloGoogleMap extends Widget_Base {
                     'use_query!' => '',
                     'infoWindow_query_image_float!' => '',
                     'infowindow_query_show_image!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ],
                 //'frontend_available' => true,
             ]
@@ -457,7 +418,6 @@ class HelloGoogleMap extends Widget_Base {
                 'condition' => [
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ],
             ]
         );
@@ -470,7 +430,6 @@ class HelloGoogleMap extends Widget_Base {
                 'condition' => [
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ],
             ]
         );
@@ -484,7 +443,6 @@ class HelloGoogleMap extends Widget_Base {
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
                     'infowindow_query_show_title!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ],
             ]
         );
@@ -499,7 +457,6 @@ class HelloGoogleMap extends Widget_Base {
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
                     'infowindow_query_show_title!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ],
             ]
         );
@@ -514,7 +471,6 @@ class HelloGoogleMap extends Widget_Base {
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
                     'infowindow_query_show_title!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ],
             ]
         );
@@ -530,7 +486,6 @@ class HelloGoogleMap extends Widget_Base {
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
                     'infowindow_query_show_title!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ],
             ]
         );
@@ -544,7 +499,6 @@ class HelloGoogleMap extends Widget_Base {
                 'condition' => [
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ],
             ]
         );
@@ -557,7 +511,6 @@ class HelloGoogleMap extends Widget_Base {
                 'condition' => [
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ],
             ]
         );
@@ -571,7 +524,6 @@ class HelloGoogleMap extends Widget_Base {
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
                     'infowindow_query_show_content!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ],
             ]
         );
@@ -586,7 +538,6 @@ class HelloGoogleMap extends Widget_Base {
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
                     'infowindow_query_show_content!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ],
             ]
         );
@@ -603,7 +554,6 @@ class HelloGoogleMap extends Widget_Base {
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
                     'infowindow_query_show_content!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ],
             ]
         );
@@ -617,7 +567,6 @@ class HelloGoogleMap extends Widget_Base {
                 'condition' => [
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ],
             ]
         );
@@ -630,7 +579,6 @@ class HelloGoogleMap extends Widget_Base {
                 'condition' => [
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ],
             ]
         );
@@ -644,7 +592,6 @@ class HelloGoogleMap extends Widget_Base {
                     'infowindow_query_show_readmore!' => '',
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ]
             ]
         );
@@ -658,7 +605,6 @@ class HelloGoogleMap extends Widget_Base {
                     'infowindow_query_show_readmore!' => '',
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ]
             ]
         );
@@ -673,7 +619,6 @@ class HelloGoogleMap extends Widget_Base {
                     'infowindow_query_show_readmore!' => '',
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ]
             ]
         );
@@ -689,7 +634,6 @@ class HelloGoogleMap extends Widget_Base {
                     'infowindow_query_show_readmore!' => '',
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ]
             ]
         );
@@ -702,7 +646,6 @@ class HelloGoogleMap extends Widget_Base {
                     'infowindow_query_show_readmore!' => '',
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ]
             ]
         );
@@ -716,7 +659,6 @@ class HelloGoogleMap extends Widget_Base {
                     'infowindow_query_show_readmore!' => '',
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ]
             ]
         );
@@ -732,7 +674,6 @@ class HelloGoogleMap extends Widget_Base {
                     'infowindow_query_show_readmore!' => '',
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ]
             ]
         );
@@ -748,7 +689,6 @@ class HelloGoogleMap extends Widget_Base {
                     'infowindow_query_show_readmore!' => '',
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ]
             ]
         );
@@ -761,7 +701,6 @@ class HelloGoogleMap extends Widget_Base {
                     'infowindow_query_readmore_border_border!' => '',
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .gm-style .gm-style-iw-c .dce-iw-readmore-btn:hover' => 'border-color: {{VALUE}};',
@@ -783,7 +722,6 @@ class HelloGoogleMap extends Widget_Base {
                     'infowindow_query_show_readmore!' => '',
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ]
             ]
         );
@@ -814,7 +752,6 @@ class HelloGoogleMap extends Widget_Base {
                     'infowindow_query_show_readmore!' => '',
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ]
             ]
         );
@@ -830,7 +767,6 @@ class HelloGoogleMap extends Widget_Base {
                     'infowindow_query_show_readmore!' => '',
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ]
             ]
         );
@@ -846,7 +782,6 @@ class HelloGoogleMap extends Widget_Base {
                     'infowindow_query_show_readmore!' => '',
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ]
             ]
         );
@@ -863,7 +798,6 @@ class HelloGoogleMap extends Widget_Base {
                     'infowindow_query_show_readmore!' => '',
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ]
             ]
         );
@@ -877,7 +811,6 @@ class HelloGoogleMap extends Widget_Base {
                     'infowindow_query_show_readmore!' => '',
                     'infoWindow_click_to_post' => '',
                     'use_query!' => '',
-                    'custom_infoWindow_render' => 'simple',
                 ]
             ]
         );
