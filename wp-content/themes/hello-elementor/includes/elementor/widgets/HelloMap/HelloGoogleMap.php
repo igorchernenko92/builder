@@ -183,7 +183,6 @@ class HelloGoogleMap extends Widget_Base {
                 'selectors' => [
                     '{{WRAPPER}} #el-wgt-map-{{ID}}' => 'height: {{SIZE}}{{UNIT}};',
                 ],
-                //'frontend_available' => true,
             ]
         );
 
@@ -230,22 +229,7 @@ class HelloGoogleMap extends Widget_Base {
                 ]
             ]
         );
-        /* $this->add_control(
-          'custom_infoWindow_template',
-          [
-          'label' => __('Template', 'dynamic-content-for-elementor'),
-          'type' => 'ooo_query',
-          'placeholder' => __('Select Template', 'dynamic-content-for-elementor'),
-          'label_block' => true,
-          'query_type' => 'posts',
-          'object_type' => 'elementor_library',
-          'description' => 'Use a Elementor Template as content of InfoWindow.',
-          'condition' => [
-          'use_query' => 'yes',
-          'infoWindow_click_to_post' => '',
-          ],
-          ]
-          ); */
+
         $this->add_control(
             'infoWindow_click_to_post', [
                 'label' => __('Link to post', 'dynamic-content-for-elementor'),
@@ -365,46 +349,28 @@ class HelloGoogleMap extends Widget_Base {
             ]
         );
 
-        $this->add_control(
-            'infoWindow_query_image_float', [
-                'label' => __('Float', 'dynamic-content-for-elementor'),
-                'type' => Controls_Manager::SWITCHER,
-                'condition' => [
-                    'infoWindow_click_to_post' => '',
-                    'use_query!' => '',
-                    'infowindow_query_show_image!' => '',
-                    //'infowindow_query_extendimage!' => ''
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .gm-style .gm-style-iw-c .dce-iw-image, {{WRAPPER}} .gm-style .gm-style-iw-c .dce-iw-textzone' => 'float: left;',
-                ],
-            ]
-        );
 
         $this->add_responsive_control(
             'infowindow_query_image_size', [
-                'label' => __('Distribution Size (%)', 'dynamic-content-for-elementor'),
+                'label' => __('Info window image size', 'dynamic-content-for-elementor'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
-                    'size' => 50,
+                    'size' => 300,
                 ],
-                'size_units' => ['%'],
                 'range' => [
-                    '%' => [
-                        'min' => 10,
-                        'max' => 100,
+                    'px' => [
+                        'min' => 40,
+                        'max' => 1440,
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .gm-style .gm-style-iw-c .dce-iw-image' => 'width: {{SIZE}}%;',
-                    '{{WRAPPER}} .gm-style .gm-style-iw-c .dce-iw-textzone' => 'width: calc( 100% - {{SIZE}}% );',
+                    '{{WRAPPER}} .gm-style .gm-style-iw-c .dce-iw-image' => 'width: {{SIZE}}px;',
                 ],
+
                 'condition' => [
-                    'infoWindow_click_to_post' => '',
-                    'use_query!' => '',
-                    'infoWindow_query_image_float!' => '',
-                    'infowindow_query_show_image!' => '',
+                    'infowindow_query_show_image' => 'yes',
                 ],
+
                 //'frontend_available' => true,
             ]
         );
@@ -462,7 +428,7 @@ class HelloGoogleMap extends Widget_Base {
         );
         $this->add_control(
             'infowindow_query_bgcolor_title', [
-                'label' => __('Title BackgroundColor', 'dynamic-content-for-elementor'),
+                'label' => __('Title Background Color', 'dynamic-content-for-elementor'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .gm-style .gm-style-iw-c .dce-iw-title' => 'background-color: {{VALUE}};',
@@ -848,18 +814,6 @@ class HelloGoogleMap extends Widget_Base {
                 'frontend_available' => true,
             ]
         );
-        $this->add_control(
-            'infoWindow_bgColor', [
-                'label' => __('Background Color', 'dynamic-content-for-elementor'),
-                'type' => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .gm-style .gm-style-iw-c, {{WRAPPER}} .gm-style .gm-style-iw-t::after' => 'background: {{VALUE}} !important;',
-                ],
-                'condition' => [
-                    'infoWindow_click_to_post' => '',
-                ],
-            ]
-        );
 
         $this->add_group_control(
             Group_Control_Border::get_type(), [
@@ -887,22 +841,7 @@ class HelloGoogleMap extends Widget_Base {
                 ],
             ]
         );
-        $this->add_control(
-            'infoWindow_padding_wrap', [
-                'label' => __('Padding wrapper', 'dynamic-content-for-elementor'),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', 'em'],
-                'default' => [
-                    'unit' => 'px',
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .gm-style .gm-style-iw-d' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
-                ],
-                'condition' => [
-                    'infoWindow_click_to_post' => '',
-                ],
-            ]
-        );
+
         $this->add_control(
             'infoWindow_border_radius', [
                 'label' => __('Border Radius', 'dynamic-content-for-elementor'),
