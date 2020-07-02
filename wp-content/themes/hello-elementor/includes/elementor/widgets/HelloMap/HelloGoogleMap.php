@@ -105,6 +105,7 @@ class HelloGoogleMap extends Widget_Base {
                 'label' => __('ACF Map', 'builder'),
                 'type' => Controls_Manager::SELECT,
                 'options' => DCE_Helper::get_acf_fields('google_map'),
+                'default' => 'property_location',
                 'frontend_available' => true,
                 'label_block' => true,
             ]
@@ -121,17 +122,17 @@ class HelloGoogleMap extends Widget_Base {
 //                ]
 //            ]
 //        );
-        $this->add_control(
-            'use_query', [
-                'label' => __('Use Query', 'builder'),
-                'type' => Controls_Manager::SWITCHER,
-                'frontend_available' => true,
-                'default' => 'yes',
-                'condition' => [
-                    'acf_mapfield!' => '0',
-                ]
-            ]
-        );
+//        $this->add_control(
+//            'use_query', [
+//                'label' => __('Use Query', 'builder'),
+//                'type' => Controls_Manager::SWITCHER,
+//                'frontend_available' => true,
+//                'default' => 'yes',
+//                'condition' => [
+//                    'acf_mapfield!' => '0',
+//                ]
+//            ]
+//        );
         $this->add_control(
             'auto_zoom', [
                 'label' => __('Force automatic Zoom', 'builder'),
@@ -242,28 +243,27 @@ class HelloGoogleMap extends Widget_Base {
 //        );
 
 
-        $this->add_control(
-            'custom_infoWindow_wysiwig',
-            [
-                'label' => __('Custom text', 'builder'),
-                'type' => Controls_Manager::WYSIWYG,
-                'frontend_available' => true,
-                'label_block' => true,
-                'condition' => [
-                    //'custom_infoWindow_style' => 'text_wysiwyg',
-                    'use_query' => '',
-                ],
-            ]
-        );
+//        $this->add_control(
+//            'custom_infoWindow_wysiwig',
+//            [
+//                'label' => __('Custom text', 'builder'),
+//                'type' => Controls_Manager::WYSIWYG,
+//                'frontend_available' => true,
+//                'label_block' => true,
+//                'condition' => [
+//                    'use_query' => '',
+//                ],
+//            ]
+//        );
 
-        $this->add_control(
-            'infoWindow_heading_style',
-            [
-                'label' => __('InfoWindow Style', 'builder'),
-                'type' => Controls_Manager::HEADING,
-                'separator' => 'before',
-            ]
-        );
+//        $this->add_control(
+//            'infoWindow_heading_style',
+//            [
+//                'label' => __('InfoWindow Style', 'builder'),
+//                'type' => Controls_Manager::HEADING,
+//                'separator' => 'before',
+//            ]
+//        );
 //        $this->add_responsive_control(
 //            'infoWindow_align', [
 //                'label' => __('Alignment', 'builder'),
@@ -294,28 +294,28 @@ class HelloGoogleMap extends Widget_Base {
 //
 //            ]
 //        );
-        $this->add_group_control(
-            Group_Control_Typography::get_type(), [
-                'name' => 'infowindow_typography',
-                'label' => __('Typography', 'builder'),
-                'selector' => '{{WRAPPER}} .gm-style .gm-style-iw-c',
-                'condition' => [
-                    'use_query' => '',
-                ],
-            ]
-        );
-        $this->add_control(
-            'infoWindow_textColor', [
-                'label' => __('Text Color', 'builder'),
-                'type' => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .gm-style .gm-style-iw-c, {{WRAPPER}} .gm-style .gm-style-iw-t::after' => 'color: {{VALUE}};',
-                ],
-                'condition' => [
-                    'use_query' => '',
-                ],
-            ]
-        );
+//        $this->add_group_control(
+//            Group_Control_Typography::get_type(), [
+//                'name' => 'infowindow_typography',
+//                'label' => __('Typography', 'builder'),
+//                'selector' => '{{WRAPPER}} .gm-style .gm-style-iw-c',
+//                'condition' => [
+//                    'use_query' => '',
+//                ],
+//            ]
+//        );
+//        $this->add_control(
+//            'infoWindow_textColor', [
+//                'label' => __('Text Color', 'builder'),
+//                'type' => Controls_Manager::COLOR,
+//                'selectors' => [
+//                    '{{WRAPPER}} .gm-style .gm-style-iw-c, {{WRAPPER}} .gm-style .gm-style-iw-t::after' => 'color: {{VALUE}};',
+//                ],
+//                'condition' => [
+//                    'use_query' => '',
+//                ],
+//            ]
+//        );
 
         // --------- IMAGE
         $this->add_control(
@@ -324,9 +324,6 @@ class HelloGoogleMap extends Widget_Base {
                 'label' => __('Image', 'builder'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
-                'condition' => [
-                    'use_query!' => '',
-                ],
             ]
         );
         $this->add_control(
@@ -335,9 +332,6 @@ class HelloGoogleMap extends Widget_Base {
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'frontend_available' => true,
-                'condition' => [
-                    'use_query!' => '',
-                ],
             ]
         );
 
@@ -373,9 +367,6 @@ class HelloGoogleMap extends Widget_Base {
                 'label' => __('Title', 'builder'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
-                'condition' => [
-                    'use_query!' => '',
-                ],
             ]
         );
         $this->add_control(
@@ -384,9 +375,6 @@ class HelloGoogleMap extends Widget_Base {
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'frontend_available' => true,
-                'condition' => [
-                    'use_query!' => '',
-                ],
             ]
         );
         $this->add_group_control(
@@ -401,7 +389,6 @@ class HelloGoogleMap extends Widget_Base {
 //                    'font_weight' => ['default' => 600],
                 ],
                 'condition' => [
-                    'use_query!' => '',
                     'infowindow_query_show_title!' => '',
                 ],
             ]
@@ -414,7 +401,6 @@ class HelloGoogleMap extends Widget_Base {
                     '{{WRAPPER}} .gm-style .gm-style-iw-c .dce-iw-title' => 'color: {{VALUE}};',
                 ],
                 'condition' => [
-                    'use_query!' => '',
                     'infowindow_query_show_title!' => '',
                 ],
             ]
@@ -427,7 +413,6 @@ class HelloGoogleMap extends Widget_Base {
 //                    '{{WRAPPER}} .gm-style .gm-style-iw-c .dce-iw-title' => 'background-color: {{VALUE}};',
 //                ],
 //                'condition' => [
-//                    'use_query!' => '',
 //                    'infowindow_query_show_title!' => '',
 //                ],
 //            ]
@@ -441,7 +426,6 @@ class HelloGoogleMap extends Widget_Base {
 //                    '{{WRAPPER}} .gm-style .gm-style-iw-c .dce-iw-title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
 //                ],
 //                'condition' => [
-//                    'use_query!' => '',
 //                    'infowindow_query_show_title!' => '',
 //                ],
 //            ]
@@ -706,7 +690,6 @@ class HelloGoogleMap extends Widget_Base {
                 'label' => __('Multilocations Query', 'builder'),
                 'condition' => [
                     'acf_mapfield!' => '0',
-                    'use_query!' => '',
                 ]
             ]
         );
@@ -753,7 +736,6 @@ class HelloGoogleMap extends Widget_Base {
                             'taxonomy' => $tkey,
                         ],
                         'render_type' => 'template',
-                        'use_query' => 'yes',
                     ]
                 );
             }
@@ -960,6 +942,13 @@ class HelloGoogleMap extends Widget_Base {
                         global $wp_query;
                         $original_queried_object = get_queried_object();
                         $original_queried_object_id = get_queried_object_id();
+//                        while ($p_query->have_posts()) {
+//                            $p_query->the_post();
+//                            $map_field = DCE_Helper::get_acf_field_value($settings['acf_mapfield'], get_the_ID());
+//
+//                            var_dump($settings['acf_mapfield']);
+//                            wp_reset_postdata();
+//                        }
                         ?>
                         <script>
                             var address_list_<?php echo $this->get_id(); ?> = [<?php

@@ -183,7 +183,7 @@ var isAdminBar = false,
                 mapDataType = 'latlng';
 
             // ---- se è una query su posts che usano acf -----------
-            if (elementSettingsMap.use_query) {
+            // if (elementSettingsMap.use_query) {
                 //alert(address_list.length);
                 bounds = new google.maps.LatLngBounds();
                 eval('var address_list = address_list_' + id_scope);
@@ -290,44 +290,44 @@ var isAdminBar = false,
                             {imagePath: '/wp-content/plugins/dynamic-content-for-elementor/assets/lib/gmap/markerclusterer/img/m'});
                 }
 
-            } else {
-                // ---- se non è una query... pesco dal singolo -----------
-
-                if (mapDataType == 'address') {
-
-                    addressToLocation(indirizzo, imageMarker, infoWindow, null, changeMapLocation);
-                } else if (mapDataType == 'latlng') {
-
-                    //alert('mapLatLong: '+lati+' '+long);
-
-                    var latLng = new google.maps.LatLng(lati, long); //Makes a latlng
-                    map.panTo(latLng); //Make map global
-
-
-                    var infoWindowMap = new google.maps.InfoWindow({
-                        content: infoWindow
-                    });
-
-
-                    var marker = new google.maps.Marker({
-                        position: latLng, //centroMappa,
-                        map: map,
-                        icon: imageMarker,
-                        animation: google.maps.Animation.DROP,
-                        //title:"Hello World!",
-                        //label: 'LABEL'
-                        //infowindow: 'HI!'
-                    });
-
-                    if (elementSettingsMap.enable_infoWindow) {
-                        marker.addListener('click', function () {
-                            infoWindowMap.open(map, this);
-                        });
-                    }
-
-                }
-                //alert(elementSettingsMap.map_data_type);
-            }
+            // } else {
+            //     // ---- se non è una query... pesco dal singolo -----------
+            //
+            //     if (mapDataType == 'address') {
+            //
+            //         addressToLocation(indirizzo, imageMarker, infoWindow, null, changeMapLocation);
+            //     } else if (mapDataType == 'latlng') {
+            //
+            //         //alert('mapLatLong: '+lati+' '+long);
+            //
+            //         var latLng = new google.maps.LatLng(lati, long); //Makes a latlng
+            //         map.panTo(latLng); //Make map global
+            //
+            //
+            //         var infoWindowMap = new google.maps.InfoWindow({
+            //             content: infoWindow
+            //         });
+            //
+            //
+            //         var marker = new google.maps.Marker({
+            //             position: latLng, //centroMappa,
+            //             map: map,
+            //             icon: imageMarker,
+            //             animation: google.maps.Animation.DROP,
+            //             //title:"Hello World!",
+            //             //label: 'LABEL'
+            //             //infowindow: 'HI!'
+            //         });
+            //
+            //         if (elementSettingsMap.enable_infoWindow) {
+            //             marker.addListener('click', function () {
+            //                 infoWindowMap.open(map, this);
+            //             });
+            //         }
+            //
+            //     }
+            //     //alert(elementSettingsMap.map_data_type);
+            // }
         }
 
         function changeMapLocation(locations) {
@@ -394,12 +394,12 @@ var isAdminBar = false,
                         }
                     });
                 }
-                if (elementSettingsMap.use_query) {
+                // if (elementSettingsMap.use_query) {
                     if (elementSettingsMap.auto_zoom) {
                         bounds.extend(marker.position);
                         map.fitBounds(bounds);
                     }
-                }
+                // }
                 //
             } else {
                 log("Num of results: 0");
