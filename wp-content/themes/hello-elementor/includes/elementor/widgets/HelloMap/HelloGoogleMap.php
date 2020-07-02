@@ -87,19 +87,7 @@ class HelloGoogleMap extends Widget_Base {
             ]
         );
 
-//        $this->add_control(
-//            'map_data_type', [
-//                'label' => __('Data Type', 'builder'),
-//                'type' => Controls_Manager::SELECT,
-//                'default' => 'acfmap',
-//                'options' => [
-//                    'acfmap' => __('ACF Map Field', 'builder'),
-//                    'address' => __('Address', 'builder'),
-//                    'latlng' => __('Latitude Longitude', 'builder'),
-//                ],
-//                'frontend_available' => true,
-//            ]
-//        );
+
         $this->add_control(
             'acf_mapfield', [
                 'label' => __('ACF Map', 'builder'),
@@ -110,29 +98,7 @@ class HelloGoogleMap extends Widget_Base {
                 'label_block' => true,
             ]
         );
-        // --------------------------------- [ Use Query post ]
-//        $this->add_control(
-//            'use_query_heading',
-//            [
-//                'label' => __('Multilocations from CPT, Relationship, Repeater, Post', 'builder'),
-//                'type' => Controls_Manager::HEADING,
-//                'separator' => 'before',
-//                'condition' => [
-//                    'acf_mapfield!' => '0',
-//                ]
-//            ]
-//        );
-//        $this->add_control(
-//            'use_query', [
-//                'label' => __('Use Query', 'builder'),
-//                'type' => Controls_Manager::SWITCHER,
-//                'frontend_available' => true,
-//                'default' => 'yes',
-//                'condition' => [
-//                    'acf_mapfield!' => '0',
-//                ]
-//            ]
-//        );
+
         $this->add_control(
             'auto_zoom', [
                 'label' => __('Force automatic Zoom', 'builder'),
@@ -230,92 +196,6 @@ class HelloGoogleMap extends Widget_Base {
                 ]
             ]
         );
-
-//        $this->add_control(
-//            'infoWindow_click_to_post', [
-//                'label' => __('Link to post', 'builder'),
-//                'type' => Controls_Manager::SWITCHER,
-//                'frontend_available' => true,
-//                'condition' => [
-//                    'acf_mapfield!' => '0',
-//                ],
-//            ]
-//        );
-
-
-//        $this->add_control(
-//            'custom_infoWindow_wysiwig',
-//            [
-//                'label' => __('Custom text', 'builder'),
-//                'type' => Controls_Manager::WYSIWYG,
-//                'frontend_available' => true,
-//                'label_block' => true,
-//                'condition' => [
-//                    'use_query' => '',
-//                ],
-//            ]
-//        );
-
-//        $this->add_control(
-//            'infoWindow_heading_style',
-//            [
-//                'label' => __('InfoWindow Style', 'builder'),
-//                'type' => Controls_Manager::HEADING,
-//                'separator' => 'before',
-//            ]
-//        );
-//        $this->add_responsive_control(
-//            'infoWindow_align', [
-//                'label' => __('Alignment', 'builder'),
-//                'type' => Controls_Manager::CHOOSE,
-//                'options' => [
-//                    'left' => [
-//                        'title' => __('Left', 'builder'),
-//                        'icon' => 'fa fa-align-left',
-//                    ],
-//                    'center' => [
-//                        'title' => __('Center', 'builder'),
-//                        'icon' => 'fa fa-align-center',
-//                    ],
-//                    'right' => [
-//                        'title' => __('Right', 'builder'),
-//                        'icon' => 'fa fa-align-right',
-//                    ],
-//                    'justify' => [
-//                        'title' => __('Justified', 'builder'),
-//                        'icon' => 'fa fa-align-justify',
-//                    ],
-//                ],
-//                'default' => 'center',
-//                'prefix_class' => 'align-dce-',
-//                'selectors' => [
-//                    '{{WRAPPER}} .gm-style .gm-style-iw-c' => 'text-align: {{VALUE}};',
-//                ],
-//
-//            ]
-//        );
-//        $this->add_group_control(
-//            Group_Control_Typography::get_type(), [
-//                'name' => 'infowindow_typography',
-//                'label' => __('Typography', 'builder'),
-//                'selector' => '{{WRAPPER}} .gm-style .gm-style-iw-c',
-//                'condition' => [
-//                    'use_query' => '',
-//                ],
-//            ]
-//        );
-//        $this->add_control(
-//            'infoWindow_textColor', [
-//                'label' => __('Text Color', 'builder'),
-//                'type' => Controls_Manager::COLOR,
-//                'selectors' => [
-//                    '{{WRAPPER}} .gm-style .gm-style-iw-c, {{WRAPPER}} .gm-style .gm-style-iw-t::after' => 'color: {{VALUE}};',
-//                ],
-//                'condition' => [
-//                    'use_query' => '',
-//                ],
-//            ]
-//        );
 
         // --------- IMAGE
         $this->add_control(
@@ -447,26 +327,6 @@ class HelloGoogleMap extends Widget_Base {
                 ],
             ]
         );
-//        $this->add_responsive_control(
-//            'infoWindow_panel_maxwidth', [
-//                'label' => __('Max Width', 'builder'),
-//                'type' => Controls_Manager::SLIDER,
-//                'default' => [
-//                    'unit' => 'px',
-//                    'size' => '',
-//                ],
-//                'labe_block' => false,
-//                'range' => [
-//                    'px' => [
-//                        'min' => 40,
-//                        'max' => 1440,
-//                    ],
-//                ],
-
-//                'frontend_available' => true,
-//            ]
-//        );
-
         $this->add_group_control(
             Group_Control_Border::get_type(), [
                 'name' => 'infoWindow_border',
@@ -626,31 +486,7 @@ class HelloGoogleMap extends Widget_Base {
                 'frontend_available' => true,
             ]
         );
-//        $this->add_control(
-//            'pancontrol', [
-//                'label' => __('Pan Control', 'builder'),
-//                'type' => Controls_Manager::SWITCHER,
-//                'default' => 'yes',
-//                'frontend_available' => true,
-//            ]
-//        );
-//
-//        $this->add_control(
-//            'rotatecontrol', [
-//                'label' => __('Rotate Control', 'builder'),
-//                'type' => Controls_Manager::SWITCHER,
-//                'default' => 'yes',
-//                'frontend_available' => true,
-//            ]
-//        );
-//        $this->add_control(
-//            'scalecontrol', [
-//                'label' => __('Scale Control', 'builder'),
-//                'type' => Controls_Manager::SWITCHER,
-//                'default' => 'yes',
-//                'frontend_available' => true,
-//            ]
-//        );
+
         $this->add_control(
             'streetviewcontrol', [
                 'label' => __('Street View Control', 'builder'),
@@ -714,14 +550,7 @@ class HelloGoogleMap extends Widget_Base {
 
             ]
         );
-//        $this->add_control(
-//            'terms_current_post', [
-//                'label' => __('Use Dynamic Current Post Terms (Archive)', 'builder'),
-//                'type' => Controls_Manager::SWITCHER,
-//                'description' => __('Filter results by taxonomy terms associated to current post', 'builder'),
-//
-//            ]
-//        );
+
         foreach ($taxonomies as $tkey => $atax) {
             if ($tkey) {
                 $this->add_control(
@@ -761,16 +590,7 @@ class HelloGoogleMap extends Widget_Base {
                 'return_value' => 'yes',
             ]
         );
-        /* $this->add_control(
-          'other_post_source', [
-          'label' => __('Select from other source post', 'builder'),
-          'type' => Controls_Manager::SELECT,
-          'options' => DCE_Helper::get_all_posts(),
-          'condition' => [
-          'data_source' => '',
-          ],
-          ]
-          ); */
+
         $this->add_control(
             'other_post_source',
             [
