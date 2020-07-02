@@ -401,48 +401,7 @@ class HelloGoogleMap extends Widget_Base {
                 ],
             ]
         );
-        $this->add_control(
-            'infowindow_query_extendimage', [
-                'label' => __('Extend Image (BG mode)', 'dynamic-content-for-elementor'),
-                'type' => Controls_Manager::SWITCHER,
-                'frontend_available' => true,
-                'condition' => [
-                    'infoWindow_click_to_post' => '',
-                    'use_query!' => '',
-                    'custom_infoWindow_render' => 'simple',
-                ],
-            ]
-        );
-        $this->add_responsive_control(
-            'infowindow_query_bgimage_height', [
-                'label' => __('Height', 'dynamic-content-for-elementor'),
-                'type' => Controls_Manager::SLIDER,
-                'default' => [
-                    'unit' => 'px',
-                    'size' => 100,
-                ],
-                'sizes_unit' => ['px', '%'],
-                'range' => [
-                    'px' => [
-                        'min' => 10,
-                        'max' => 360,
-                    ],
-                    '%' => [
-                        'min' => 1,
-                        'max' => 100,
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .gm-style .gm-style-iw-c .dce-iw-image-bg' => 'height: {{SIZE}}{{UNIT}};',
-                ],
-                'condition' => [
-                    'infoWindow_click_to_post' => '',
-                    'use_query!' => '',
-                    'infowindow_query_extendimage!' => '',
-                    'custom_infoWindow_render' => 'simple',
-                ],
-            ]
-        );
+
         $this->add_control(
             'infoWindow_query_image_float', [
                 'label' => __('Float', 'dynamic-content-for-elementor'),
@@ -1516,10 +1475,6 @@ class HelloGoogleMap extends Widget_Base {
                                         $postlink = get_the_permalink($id_page);
 
                                         // infowindow ---------
-                                        if ($settings['custom_infoWindow_render'] == 'html') {
-                                            $postInfowindow = '<div class="dce-iw-textzone">' . DCE_Helper::get_dynamic_value($settings['infoWindow_query_html']) . '</div>';
-                                            $postInfowindow = preg_replace("/\r|\n/", "", $postInfowindow);
-                                        } else {
                                             $postTitle = get_the_title($id_page);
 
                                             $postImage = '';
@@ -1530,16 +1485,9 @@ class HelloGoogleMap extends Widget_Base {
                                                 $postTitle = '<div class="dce-iw-title">' . get_the_title($id_page) . '</div>';
                                             }
 
-                                            // to do ... elaborare il size dell'immagine.........
-
-
                                             if ($settings['infowindow_query_show_image']) {
                                                 if (!empty(get_the_post_thumbnail($id_page))) {
-                                                    if ($settings['infowindow_query_extendimage']) {
-                                                        $postImage = '<div class="dce-iw-image dce-iw-image-bg" style="background: url(' . get_the_post_thumbnail_url($id_page) . ') no-repeat center center; background-size: cover;"></div>';
-                                                    } else {
-                                                        $postImage = '<div class="dce-iw-image">' . get_the_post_thumbnail($id_page) . '</div>';
-                                                    }
+                                                    $postImage = '<div class="dce-iw-image">' . get_the_post_thumbnail($id_page) . '</div>';
                                                 }
                                             }
                                             if ($settings['infowindow_query_show_content']) {
@@ -1556,7 +1504,7 @@ class HelloGoogleMap extends Widget_Base {
 
 
                                             $postInfowindow = $postImage . '<div class="dce-iw-textzone">' . $postTitle . $postContent . $postReadMore . '</div>';
-                                        }
+
                                         // marker ---------
                                         $marker_img = DCE_Helper::get_acf_field_value($settings['acf_markerfield'], $id_page);
                                         if (is_string($marker_img)) {
