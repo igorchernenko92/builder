@@ -68,6 +68,7 @@ var isAdminBar = false,
         var bounds;
 
         var elementSettingsMap = get_Dyncontel_ElementSettings($scope);
+
         // console.log(elementSettingsMap);
         // elementor bug
         /*if (typeof elementSettingsMap == 'string') {
@@ -133,11 +134,8 @@ var isAdminBar = false,
         //$($scope.context).find('#map').height($($scope.context).find('#map').attr('data-height'));
         var debugHolder = $scope.find('#debug')[0]; //document.getElementById("debug");
         var centroMappa = {lat: lati, lng: long};
-        //console.log(centroMappa);
-        //setTimeout(function(){ alert('Testtt: ' + $scope.find('#el-wgt-map-'+id_scope).length) }, 500 );;
-        //
 
-        //
+        console.log(elementSettingsMap.prevent_scroll);
         var mapParams = {
             zoom: zoom,
             scrollwheel: Boolean(elementSettingsMap.prevent_scroll),
@@ -256,9 +254,9 @@ var isAdminBar = false,
                                         var iwOptions = {
                                             content: address_list[k]['infoWindow'],
                                         }
-                                        if (elementSettingsMap.infoWindow_panel_maxwidth.size) {
-                                            iwOptions['maxWidth'] = elementSettingsMap.infoWindow_panel_maxwidth.size;
-                                        }
+                                        // if (elementSettingsMap.infoWindow_panel_maxwidth.size) {
+                                        //     iwOptions['maxWidth'] = elementSettingsMap.infoWindow_panel_maxwidth.size;
+                                        // }
                                         var infoWindowMap = new google.maps.InfoWindow(iwOptions);
                                         /*var infoWindowMap = new google.maps.InfoWindow({
                                          content: address_list[k]['infoWindow'],
@@ -468,6 +466,7 @@ var isAdminBar = false,
     }
     // Make sure you run this code under Elementor..
     $(window).on('elementor/frontend/init', function () {
+
         if (elementorFrontend.isEditMode()) {
             isEditMode = true;
         }
