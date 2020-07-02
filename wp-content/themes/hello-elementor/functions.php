@@ -294,15 +294,25 @@ function register_post_types(){
     ] );
 }
 
-add_action( 'init', 'create_prop_tax' );
+add_action( 'init', 'create_taxonomies' );
 
-function create_prop_tax() {
+function create_taxonomies() {
     register_taxonomy(
         'features',
         'property',
         array(
             'label' => __( 'Features' ),
             'rewrite' => array( 'slug' => 'features' ),
+            'hierarchical' => true,
+        )
+    );
+
+    register_taxonomy(
+        'location',
+        'agent',
+        array(
+            'label' => __( 'Location' ),
+            'rewrite' => array( 'slug' => 'location' ),
             'hierarchical' => true,
         )
     );
