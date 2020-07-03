@@ -1,5 +1,5 @@
 <?php
-namespace WPSight_Berlin\Elementor\Widgets\HelloMap;
+namespace PropertyBuilder\Elementor\Widgets\HelloMap;
 /**
  * Description of DCE_Trait_Plugin
  *

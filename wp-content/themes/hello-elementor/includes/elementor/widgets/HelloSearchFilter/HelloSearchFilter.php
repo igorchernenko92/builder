@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSight_Berlin\Elementor\Widgets\HelloSearchFilter;
+namespace PropertyBuilder\Elementor\Widgets\HelloSearchFilter;
 
 use Elementor\Controls_Manager;
 use Elementor\Core\Schemes;

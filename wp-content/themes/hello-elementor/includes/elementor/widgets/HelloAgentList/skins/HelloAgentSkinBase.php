@@ -1,5 +1,5 @@
 <?php
-namespace WPSight_Berlin\Elementor\Widgets\Agents\Skins;
+namespace PropertyBuilder\Elementor\Widgets\Agents\Skins;
 
 use Elementor\Controls_Manager;
 use Elementor\Core\Schemes;

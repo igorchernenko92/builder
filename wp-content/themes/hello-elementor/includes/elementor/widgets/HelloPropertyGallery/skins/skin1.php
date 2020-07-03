@@ -1,5 +1,5 @@
 <?php
-namespace WPSight_Berlin\Elementor\Widgets\HelloPropertyGallery\Skins;
+namespace PropertyBuilder\Elementor\Widgets\HelloPropertyGallery\Skins;
 
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Box_Shadow;

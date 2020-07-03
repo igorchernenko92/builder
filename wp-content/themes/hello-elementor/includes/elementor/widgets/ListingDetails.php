@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSight_Berlin\Elementor\Widgets;
+namespace PropertyBuilder\Elementor\Widgets;
 
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Text_Shadow;
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class ListingDetails extends Widget_Base {
 
 	public function get_name() {
-		return 'wpsight_berlin_listing_details';
+		return 'PropertyBuilder_listing_details';
 	}
 
 	public function get_title() {

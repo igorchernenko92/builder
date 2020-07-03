@@ -1,5 +1,5 @@
 <?php
-namespace WPSight_Berlin\Elementor\Widgets\HelloSearchFilter\Skins;
+namespace PropertyBuilder\Elementor\Widgets\HelloSearchFilter\Skins;
 
 use Elementor\Controls_Manager;
 use Elementor\Core\Schemes;

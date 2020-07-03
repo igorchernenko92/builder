@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSight_Berlin\Elementor\Widgets\HelloMap;
+namespace PropertyBuilder\Elementor\Widgets\HelloMap;
 
 use Elementor\Repeater;
 use Elementor\Controls_Manager;

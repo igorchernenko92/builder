@@ -1,11 +1,11 @@
 <?php
-namespace WPSight_Berlin\Elementor\Widgets\Agents;
+namespace PropertyBuilder\Elementor\Widgets\Agents;
 
 use Elementor\Controls_Manager;
 use Elementor\Widget_Base;
 use ElementorPro\Modules\QueryControl\Module as Module_Query;
 use ElementorPro\Modules\QueryControl\Controls\Group_Control_Related;
-//use WPSight_Berlin\Elementor\Widgets\Property\Skins;
+//use PropertyBuilder\Elementor\Widgets\Property\Skins;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly

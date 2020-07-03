@@ -1,5 +1,5 @@
 <?php
-namespace WPSight_Berlin\Elementor\Widgets\Property;
+namespace PropertyBuilder\Elementor\Widgets\Property;
 
 use Elementor\Core\Schemes;
 use Elementor\Group_Control_Typography;

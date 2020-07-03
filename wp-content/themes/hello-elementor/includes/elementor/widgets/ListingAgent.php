@@ -1,6 +1,6 @@
 <?php
 
-namespace WPSight_Berlin\Elementor\Widgets;
+namespace PropertyBuilder\Elementor\Widgets;
 
 use Elementor\Controls_Manager;
 use Elementor\Widget_Base;
@@ -27,7 +27,7 @@ class ListingAgent extends Widget_Base {
     }
 
 	public function get_name() {
-		return 'wpsight_berlin_listing_agent';
+		return 'PropertyBuilder_listing_agent';
 	}
 
 	public function get_title() {

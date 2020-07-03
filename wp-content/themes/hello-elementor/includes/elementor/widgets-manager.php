@@ -1,8 +1,8 @@
 <?php
-namespace WPSight_Berlin\Elementor;
+namespace PropertyBuilder\Elementor;
 
 use ElementorPro\Base\Module_Base;
-use WPSight_Berlin\Elementor\Widgets\Property;
+use PropertyBuilder\Elementor\Widgets\Property;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
