@@ -11,7 +11,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-include_once ( 'HelloAgentsBase.php');
 include_once ( 'skins/HelloAgentSkinBase.php');
 include_once ( 'skins/HelloAgentSkin1.php');
 //include_once ( 'skins/skin2.php');
@@ -20,7 +19,7 @@ include_once ( 'skins/HelloAgentSkin1.php');
 /**
  * Class Posts
  */
-class HelloAgents extends HelloAgentsBase {
+class HelloAgents extends Widget_Base {
 
     public function __construct($data = [], $args = null) {
         parent::__construct($data, $args);
@@ -66,7 +65,6 @@ class HelloAgents extends HelloAgentsBase {
 		parent::_register_controls();
 
 		$this->register_query_section_controls();
-		$this->register_pagination_section_controls();
 	}
 
 	public function query_posts() {
@@ -75,9 +73,8 @@ class HelloAgents extends HelloAgentsBase {
 			'paged' => $this->get_current_page(),
             ];
 
-        $this->set_settings('property_post_type', 'property');
+        $this->set_settings('property_post_type', 'agent');
 
-		/** @var Module_Query $elementor_query */
 		$elementor_query = Module_Query::instance();
 		$this->query = $elementor_query->get_query( $this, $this->get_name(), $query_args, [] );
 	}

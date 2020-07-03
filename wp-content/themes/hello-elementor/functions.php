@@ -307,15 +307,15 @@ function create_taxonomies() {
         )
     );
 
-    register_taxonomy(
-        'location',
-        'agent',
-        array(
-            'label' => __( 'Location' ),
-            'rewrite' => array( 'slug' => 'location' ),
-            'hierarchical' => true,
-        )
-    );
+//    register_taxonomy(
+//        'location',
+//        'agent',
+//        array(
+//            'label' => __( 'Location' ),
+//            'rewrite' => array( 'slug' => 'location' ),
+//            'hierarchical' => true,
+//        )
+//    );
 }
 
 /**
