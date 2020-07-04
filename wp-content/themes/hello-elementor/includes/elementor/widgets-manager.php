@@ -57,18 +57,15 @@ class Widget_Manager {
      */
     private function include_widgets_files() {
         // TODO: move widget folder to variable
-//        include_once( 'widgets/ListingsCarousel/ListingsCarousel.php' );
         include_once( 'widgets/PropertyList/property.php' );
         include_once( 'widgets/HelloPropertyGallery/HelloPropertyGallery.php' );
         include_once( 'widgets/HelloAgentList/HelloAgents.php' );
-        /*include_once( 'widgets/ListingsSearchFilter.php' );*/
-//        include_once( 'widgets/ListingsGMapResultSearch.php' );
         include_once( 'widgets/HelloMap/HelloGoogleMap.php' );
         include_once( 'widgets/HelloSearchFilter/HelloSearchFilter.php' );
-//        include_once( 'widgets/ListingsCarousel.php' );
+//        include_once( 'widgets/HelloPropertyFeatures/HelloPropertyFeatures.php' );
+        include_once( 'widgets/icon-box.php' );
 //
         include_once( 'widgets/ListingDetails.php' ); 
-//        include_once( 'widgets/ListingAgent.php' );
 
     }
 
@@ -84,17 +81,16 @@ class Widget_Manager {
         $this->include_widgets_files();
 
         // Register Widgets
-       /*\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingsSearchFilter() );*/
-//       \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingsGMapResultSearch );
+
        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloMap\HelloGoogleMap() );
        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloSearchFilter\HelloSearchFilter() );
-//        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingsCarousel() );
-////
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingDetails() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\Property\Property() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloPropertyGallery\HelloPropertyGallery() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\Agents\HelloAgents() );
-//        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingAgent() );
+
+//        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloPropertyFeatures\HelloPropertyFeatures() );
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloPropertyFeatures() );
     }
 
     /**
@@ -133,7 +129,6 @@ class Widget_Manager {
             function( $manager ) {
 
                 $manager->register_document_type( 'property-archive', PropertyArchive::get_class_full_name() );
-//                $manager->register_document_type( 'property', Listing::get_class_full_name() );
 
             }
         );
@@ -148,6 +143,8 @@ class Widget_Manager {
 
             }
         );
+//
+
 
         // Register widgets
         add_action( 'elementor/widgets/widgets_registered', [ $this, 'register_widgets' ] );
