@@ -168,18 +168,18 @@ class HelloPropertyFeatures extends Widget_Base {
 //			]
 //		);
 
-		$this->add_control(
-			'link',
-			[
-				'label' => __( 'Link', 'elementor' ),
-				'type' => Controls_Manager::URL,
-				'dynamic' => [
-					'active' => true,
-				],
-				'placeholder' => __( 'https://your-link.com', 'elementor' ),
-				'separator' => 'before',
-			]
-		);
+//		$this->add_control(
+//			'link',
+//			[
+//				'label' => __( 'Link', 'elementor' ),
+//				'type' => Controls_Manager::URL,
+//				'dynamic' => [
+//					'active' => true,
+//				],
+//				'placeholder' => __( 'https://your-link.com', 'elementor' ),
+//				'separator' => 'before',
+//			]
+//		);
 
 		$this->add_control(
 			'position',
@@ -282,18 +282,18 @@ class HelloPropertyFeatures extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'secondary_color',
-			[
-				'label' => __( 'Secondary Color', 'elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '',
-				'selectors' => [
-					'{{WRAPPER}}.elementor-view-framed .elementor-icon' => 'background-color: {{VALUE}};',
-					'{{WRAPPER}}.elementor-view-stacked .elementor-icon' => 'fill: {{VALUE}}; color: {{VALUE}};',
-				],
-			]
-		);
+//		$this->add_control(
+//			'secondary_color',
+//			[
+//				'label' => __( 'Secondary Color', 'elementor' ),
+//				'type' => Controls_Manager::COLOR,
+//				'default' => '',
+//				'selectors' => [
+//					'{{WRAPPER}}.elementor-view-framed .elementor-icon' => 'background-color: {{VALUE}};',
+//					'{{WRAPPER}}.elementor-view-stacked .elementor-icon' => 'fill: {{VALUE}}; color: {{VALUE}};',
+//				],
+//			]
+//		);
 
 		$this->end_controls_tab();
 
@@ -317,18 +317,18 @@ class HelloPropertyFeatures extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'hover_secondary_color',
-			[
-				'label' => __( 'Secondary Color', 'elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '',
-				'selectors' => [
-					'{{WRAPPER}}.elementor-view-framed .elementor-icon:hover' => 'background-color: {{VALUE}};',
-					'{{WRAPPER}}.elementor-view-stacked .elementor-icon:hover' => 'fill: {{VALUE}}; color: {{VALUE}};',
-				],
-			]
-		);
+//		$this->add_control(
+//			'hover_secondary_color',
+//			[
+//				'label' => __( 'Secondary Color', 'elementor' ),
+//				'type' => Controls_Manager::COLOR,
+//				'default' => '',
+//				'selectors' => [
+//					'{{WRAPPER}}.elementor-view-framed .elementor-icon:hover' => 'background-color: {{VALUE}};',
+//					'{{WRAPPER}}.elementor-view-stacked .elementor-icon:hover' => 'fill: {{VALUE}}; color: {{VALUE}};',
+//				],
+//			]
+//		);
 
 		$this->add_control(
 			'hover_animation',
@@ -589,64 +589,67 @@ class HelloPropertyFeatures extends Widget_Base {
 	 */
 	protected function render() {
 		$settings = $this->get_settings_for_display();
+        $terms = get_the_terms( get_the_ID(), 'features' );
 
-		$this->add_render_attribute( 'icon', 'class', [ 'elementor-icon', 'elementor-animation-' . $settings['hover_animation'] ] );
+        foreach ( $terms as $term ) {
 
-		$icon_tag = 'span';
 
-		if ( ! isset( $settings['icon'] ) && ! Icons_Manager::is_migration_allowed() ) {
-			// add old default
-			$settings['icon'] = 'fa fa-star';
-		}
+            $this->add_render_attribute('icon', 'class', ['elementor-icon', 'elementor-animation-' . $settings['hover_animation']]);
 
-		$has_icon = ! empty( $settings['icon'] );
+            $icon_tag = 'span';
 
-		if ( ! empty( $settings['link']['url'] ) ) {
-			$icon_tag = 'a';
+            if (!isset($settings['icon']) && !Icons_Manager::is_migration_allowed()) {
+                // add old default
+                $settings['icon'] = 'fa fa-star';
+            }
 
-			$this->add_link_attributes( 'link', $settings['link'] );
-		}
+            $has_icon = !empty($settings['icon']);
 
-		if ( $has_icon ) {
-			$this->add_render_attribute( 'i', 'class', $settings['icon'] );
-			$this->add_render_attribute( 'i', 'aria-hidden', 'true' );
-		}
+            if ($has_icon) {
+                $this->add_render_attribute('i', 'class', $settings['icon']);
+                $this->add_render_attribute('i', 'aria-hidden', 'true');
+            }
 
-		$icon_attributes = $this->get_render_attribute_string( 'icon' );
-		$link_attributes = $this->get_render_attribute_string( 'link' );
+            $icon_attributes = $this->get_render_attribute_string('icon');
 
-//		$this->add_render_attribute( 'description_text', 'class', 'elementor-icon-box-description' );
 
-		$this->add_inline_editing_attributes( 'title_text', 'none' );
-//		$this->add_inline_editing_attributes( 'description_text' );
-		if ( ! $has_icon && ! empty( $settings['selected_icon']['value'] ) ) {
-			$has_icon = true;
-		}
-		$migrated = isset( $settings['__fa4_migrated']['selected_icon'] );
-		$is_new = ! isset( $settings['icon'] ) && Icons_Manager::is_migration_allowed();
-		?>
-		<div class="elementor-icon-box-wrapper">
-			<?php if ( $has_icon ) : ?>
-			<div class="elementor-icon-box-icon">
-				<<?php echo implode( ' ', [ $icon_tag, $icon_attributes, $link_attributes ] ); ?>>
-				<?php
-				if ( $is_new || $migrated ) {
-					Icons_Manager::render_icon( $settings['selected_icon'], [ 'aria-hidden' => 'true' ] );
-				} elseif ( ! empty( $settings['icon'] ) ) {
-					?><i <?php echo $this->get_render_attribute_string( 'i' ); ?>></i><?php
-				}
-				?>
-				</<?php echo $icon_tag; ?>>
-			</div>
-			<?php endif; ?>
-			<div class="elementor-icon-box-content">
-				<<?php echo $settings['title_size']; ?> class="elementor-icon-box-title">
-					<<?php echo implode( ' ', [ $icon_tag, $link_attributes ] ); ?><?php echo $this->get_render_attribute_string( 'title_text' ); ?>><?php echo $settings['title_text']; ?></<?php echo $icon_tag; ?>>
-				</<?php echo $settings['title_size']; ?>>
+            $this->add_inline_editing_attributes('title_text', 'none');
 
-			</div>
-		</div>
-		<?php
+            if (!$has_icon && !empty($settings['selected_icon']['value'])) {
+                $has_icon = true;
+            }
+            $migrated = isset($settings['__fa4_migrated']['selected_icon']);
+            $is_new = !isset($settings['icon']) && Icons_Manager::is_migration_allowed();
+            ?>
+            <div class="elementor-icon-box-wrapper">
+            <?php if ($has_icon) : ?>
+                <div class="elementor-icon-box-icon">
+                <<?php echo implode(' ', [$icon_tag, $icon_attributes]); ?>>
+                <?php
+                if ($is_new || $migrated) {
+                    Icons_Manager::render_icon($settings['selected_icon'], ['aria-hidden' => 'true']);
+                } elseif (!empty($settings['icon'])) {
+                    ?><i <?php echo $this->get_render_attribute_string('i'); ?>></i><?php
+                }
+                ?>
+                </<?php echo $icon_tag; ?>>
+                </div>
+            <?php endif; ?>
+            <div class="elementor-icon-box-content">
+            <<?php echo $settings['title_size']; ?> class="elementor-icon-box-title">
+            <<?php echo implode(' ', [$icon_tag]); ?> >
+
+
+            <?php  echo '<a href="' . get_term_link( $term ) . '">' . $term->name . '</a>'; ?>
+
+
+          </<?php echo $icon_tag; ?>>
+            </<?php echo $settings['title_size']; ?>>
+
+            </div>
+            </div>
+            <?php
+        }
 	}
 
 
