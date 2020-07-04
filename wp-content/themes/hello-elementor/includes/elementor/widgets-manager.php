@@ -2,7 +2,8 @@
 namespace PropertyBuilder\Elementor;
 
 use ElementorPro\Base\Module_Base;
-use PropertyBuilder\Elementor\Widgets\Property;
+use PropertyBuilder\Elementor\Documents\PropertyArchive;
+use PropertyBuilder\Elementor\Conditions\Property;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -125,6 +126,28 @@ class Widget_Manager {
      * @access public
      */
     public function __construct() {
+        include_once( 'documents/PropertyArchive.php' );
+        include_once( 'conditions/Property.php' );
+        add_action(
+            'elementor/documents/register',
+            function( $manager ) {
+
+                $manager->register_document_type( 'property-archive', PropertyArchive::get_class_full_name() );
+//                $manager->register_document_type( 'property', Listing::get_class_full_name() );
+
+            }
+        );
+
+        add_action(
+            'elementor/theme/register_conditions',
+            function( $manager ) {
+
+                $listings = new Property();
+
+                $manager->get_condition( 'general' )->register_sub_condition( $listings );
+
+            }
+        );
 
         // Register widgets
         add_action( 'elementor/widgets/widgets_registered', [ $this, 'register_widgets' ] );
