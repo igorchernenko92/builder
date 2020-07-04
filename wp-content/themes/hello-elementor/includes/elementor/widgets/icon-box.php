@@ -106,20 +106,20 @@ class HelloPropertyFeatures extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'view',
-			[
-				'label' => __( 'View', 'elementor' ),
-				'type' => Controls_Manager::SELECT,
-				'options' => [
-					'default' => __( 'Default', 'elementor' ),
-					'stacked' => __( 'Stacked', 'elementor' ),
-					'framed' => __( 'Framed', 'elementor' ),
-				],
-				'default' => 'default',
-				'prefix_class' => 'elementor-view-',
-			]
-		);
+//		$this->add_control(
+//			'view',
+//			[
+//				'label' => __( 'View', 'elementor' ),
+//				'type' => Controls_Manager::SELECT,
+//				'options' => [
+//					'default' => __( 'Default', 'elementor' ),
+//					'stacked' => __( 'Stacked', 'elementor' ),
+//					'framed' => __( 'Framed', 'elementor' ),
+//				],
+//				'default' => 'default',
+//				'prefix_class' => 'elementor-view-',
+//			]
+//		);
 
 		$this->add_control(
 			'shape',
@@ -132,7 +132,6 @@ class HelloPropertyFeatures extends Widget_Base {
 				],
 				'default' => 'circle',
 				'condition' => [
-					'view!' => 'default',
 					'selected_icon[value]!' => '',
 				],
 				'prefix_class' => 'elementor-shape-',
@@ -153,21 +152,21 @@ class HelloPropertyFeatures extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'description_text',
-			[
-				'label' => '',
-				'type' => Controls_Manager::TEXTAREA,
-				'dynamic' => [
-					'active' => true,
-				],
-				'default' => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.', 'elementor' ),
-				'placeholder' => __( 'Enter your description', 'elementor' ),
-				'rows' => 10,
-				'separator' => 'none',
-				'show_label' => false,
-			]
-		);
+//		$this->add_control(
+//			'description_text',
+//			[
+//				'label' => '',
+//				'type' => Controls_Manager::TEXTAREA,
+//				'dynamic' => [
+//					'active' => true,
+//				],
+//				'default' => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.', 'elementor' ),
+//				'placeholder' => __( 'Enter your description', 'elementor' ),
+//				'rows' => 10,
+//				'separator' => 'none',
+//				'show_label' => false,
+//			]
+//		);
 
 		$this->add_control(
 			'link',
@@ -289,9 +288,6 @@ class HelloPropertyFeatures extends Widget_Base {
 				'label' => __( 'Secondary Color', 'elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
-				'condition' => [
-					'view!' => 'default',
-				],
 				'selectors' => [
 					'{{WRAPPER}}.elementor-view-framed .elementor-icon' => 'background-color: {{VALUE}};',
 					'{{WRAPPER}}.elementor-view-stacked .elementor-icon' => 'fill: {{VALUE}}; color: {{VALUE}};',
@@ -327,9 +323,6 @@ class HelloPropertyFeatures extends Widget_Base {
 				'label' => __( 'Secondary Color', 'elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
-				'condition' => [
-					'view!' => 'default',
-				],
 				'selectors' => [
 					'{{WRAPPER}}.elementor-view-framed .elementor-icon:hover' => 'background-color: {{VALUE}};',
 					'{{WRAPPER}}.elementor-view-stacked .elementor-icon:hover' => 'fill: {{VALUE}}; color: {{VALUE}};',
@@ -403,9 +396,6 @@ class HelloPropertyFeatures extends Widget_Base {
 						'max' => 5,
 					],
 				],
-				'condition' => [
-					'view!' => 'default',
-				],
 			]
 		);
 
@@ -432,9 +422,6 @@ class HelloPropertyFeatures extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .elementor-icon' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
-				'condition' => [
-					'view' => 'framed',
-				],
 			]
 		);
 
@@ -446,9 +433,6 @@ class HelloPropertyFeatures extends Widget_Base {
 				'size_units' => [ 'px', '%' ],
 				'selectors' => [
 					'{{WRAPPER}} .elementor-icon' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-				'condition' => [
-					'view!' => 'default',
 				],
 			]
 		);
@@ -516,22 +500,22 @@ class HelloPropertyFeatures extends Widget_Base {
 			]
 		);
 
-		$this->add_responsive_control(
-			'title_bottom_space',
-			[
-				'label' => __( 'Spacing', 'elementor' ),
-				'type' => Controls_Manager::SLIDER,
-				'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 100,
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .elementor-icon-box-title' => 'margin-bottom: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
+//		$this->add_responsive_control(
+//			'title_bottom_space',
+//			[
+//				'label' => __( 'Spacing', 'elementor' ),
+//				'type' => Controls_Manager::SLIDER,
+//				'range' => [
+//					'px' => [
+//						'min' => 0,
+//						'max' => 100,
+//					],
+//				],
+//				'selectors' => [
+//					'{{WRAPPER}} .elementor-icon-box-title' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+//				],
+//			]
+//		);
 
 		$this->add_control(
 			'title_color',
@@ -558,39 +542,39 @@ class HelloPropertyFeatures extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'heading_description',
-			[
-				'label' => __( 'Description', 'elementor' ),
-				'type' => Controls_Manager::HEADING,
-				'separator' => 'before',
-			]
-		);
+//		$this->add_control(
+//			'heading_description',
+//			[
+//				'label' => __( 'Description', 'elementor' ),
+//				'type' => Controls_Manager::HEADING,
+//				'separator' => 'before',
+//			]
+//		);
 
-		$this->add_control(
-			'description_color',
-			[
-				'label' => __( 'Color', 'elementor' ),
-				'type' => Controls_Manager::COLOR,
-				'default' => '',
-				'selectors' => [
-					'{{WRAPPER}} .elementor-icon-box-content .elementor-icon-box-description' => 'color: {{VALUE}};',
-				],
-				'scheme' => [
-					'type' => Schemes\Color::get_type(),
-					'value' => Schemes\Color::COLOR_3,
-				],
-			]
-		);
+//		$this->add_control(
+//			'description_color',
+//			[
+//				'label' => __( 'Color', 'elementor' ),
+//				'type' => Controls_Manager::COLOR,
+//				'default' => '',
+//				'selectors' => [
+//					'{{WRAPPER}} .elementor-icon-box-content .elementor-icon-box-description' => 'color: {{VALUE}};',
+//				],
+//				'scheme' => [
+//					'type' => Schemes\Color::get_type(),
+//					'value' => Schemes\Color::COLOR_3,
+//				],
+//			]
+//		);
 
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			[
-				'name' => 'description_typography',
-				'selector' => '{{WRAPPER}} .elementor-icon-box-content .elementor-icon-box-description',
-				'scheme' => Schemes\Typography::TYPOGRAPHY_3,
-			]
-		);
+//		$this->add_group_control(
+//			Group_Control_Typography::get_type(),
+//			[
+//				'name' => 'description_typography',
+//				'selector' => '{{WRAPPER}} .elementor-icon-box-content .elementor-icon-box-description',
+//				'scheme' => Schemes\Typography::TYPOGRAPHY_3,
+//			]
+//		);
 
 		$this->end_controls_section();
 	}
@@ -631,10 +615,10 @@ class HelloPropertyFeatures extends Widget_Base {
 		$icon_attributes = $this->get_render_attribute_string( 'icon' );
 		$link_attributes = $this->get_render_attribute_string( 'link' );
 
-		$this->add_render_attribute( 'description_text', 'class', 'elementor-icon-box-description' );
+//		$this->add_render_attribute( 'description_text', 'class', 'elementor-icon-box-description' );
 
 		$this->add_inline_editing_attributes( 'title_text', 'none' );
-		$this->add_inline_editing_attributes( 'description_text' );
+//		$this->add_inline_editing_attributes( 'description_text' );
 		if ( ! $has_icon && ! empty( $settings['selected_icon']['value'] ) ) {
 			$has_icon = true;
 		}
@@ -659,58 +643,13 @@ class HelloPropertyFeatures extends Widget_Base {
 				<<?php echo $settings['title_size']; ?> class="elementor-icon-box-title">
 					<<?php echo implode( ' ', [ $icon_tag, $link_attributes ] ); ?><?php echo $this->get_render_attribute_string( 'title_text' ); ?>><?php echo $settings['title_text']; ?></<?php echo $icon_tag; ?>>
 				</<?php echo $settings['title_size']; ?>>
-				<?php if ( ! Utils::is_empty( $settings['description_text'] ) ) : ?>
-				<p <?php echo $this->get_render_attribute_string( 'description_text' ); ?>><?php echo $settings['description_text']; ?></p>
-				<?php endif; ?>
+
 			</div>
 		</div>
 		<?php
 	}
 
-	/**
-	 * Render icon box widget output in the editor.
-	 *
-	 * Written as a Backbone JavaScript template and used to generate the live preview.
-	 *
-	 * @since 2.9.0
-	 * @access protected
-	 */
-	protected function content_template() {
-		?>
-		<#
-		var link = settings.link.url ? 'href="' + settings.link.url + '"' : '',
-			iconTag = link ? 'a' : 'span',
-			iconHTML = elementor.helpers.renderIcon( view, settings.selected_icon, { 'aria-hidden': true }, 'i' , 'object' ),
-			migrated = elementor.helpers.isIconMigrated( settings, 'selected_icon' );
 
-		view.addRenderAttribute( 'description_text', 'class', 'elementor-icon-box-description' );
-
-		view.addInlineEditingAttributes( 'title_text', 'none' );
-		view.addInlineEditingAttributes( 'description_text' );
-		#>
-		<div class="elementor-icon-box-wrapper">
-			<# if ( settings.icon || settings.selected_icon ) { #>
-			<div class="elementor-icon-box-icon">
-				<{{{ iconTag + ' ' + link }}} class="elementor-icon elementor-animation-{{ settings.hover_animation }}">
-					<# if ( iconHTML && iconHTML.rendered && ( ! settings.icon || migrated ) ) { #>
-						{{{ iconHTML.value }}}
-						<# } else { #>
-							<i class="{{ settings.icon }}" aria-hidden="true"></i>
-						<# } #>
-				</{{{ iconTag }}}>
-			</div>
-			<# } #>
-			<div class="elementor-icon-box-content">
-				<{{{ settings.title_size }}} class="elementor-icon-box-title">
-					<{{{ iconTag + ' ' + link }}} {{{ view.getRenderAttributeString( 'title_text' ) }}}>{{{ settings.title_text }}}</{{{ iconTag }}}>
-				</{{{ settings.title_size }}}>
-				<# if ( settings.description_text ) { #>
-				<p {{{ view.getRenderAttributeString( 'description_text' ) }}}>{{{ settings.description_text }}}</p>
-				<# } #>
-			</div>
-		</div>
-		<?php
-	}
 
 	public function on_import( $element ) {
 		return Icons_Manager::on_import_migration( $element, 'icon', 'selected_icon', true );
