@@ -103,6 +103,16 @@ class Property extends Property_Base {
             }
         }
 
+        if ( is_tax() ) {
+            $args['tax_query'][] = [
+                [
+                    'taxonomy' => get_query_var( 'taxonomy' ),
+                    'field'    => 'slug',
+                    'terms'    => get_query_var( 'term' )
+                ]
+            ];
+        }
+
 
 		/** @var Module_Query $elementor_query */
 		$elementor_query = Module_Query::instance();
