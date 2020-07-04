@@ -183,7 +183,7 @@ if ( ! function_exists( 'hello_elementor_body_open' ) ) {
 
 
 
-
+//TODO: make function fire once
 function register_widgets() {
 
 //    $condition_general = ['include/general'];
@@ -201,7 +201,10 @@ function register_widgets() {
         $post_id = $post->ID;
 
         $document = \Elementor\Plugin::instance()->documents->get($post_id);
-
+//         check for error if class is non not_supported
+        if ($document instanceof Elementor\Modules\Library\Documents\Not_Supported) {
+            continue;
+        }
             if ( $document ) {
             $conditions = $document->get_meta( '_elementor_conditions' );
 
