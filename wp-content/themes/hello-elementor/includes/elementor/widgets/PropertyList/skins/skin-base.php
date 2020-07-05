@@ -1210,14 +1210,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
             return;
         }
 
-//        $this->render_loop_header();
-
-        // It's the global `wp_query` it self. and the loop was started from the theme.
-//        if ( $query->in_the_loop ) {
-//            $this->current_permalink = get_permalink();
-//            $this->render_post();
-//        } else {
-
         $isCarousel = $this->get_instance_value( 'hello_is_carousel' );
 
         if ( $isCarousel ) {

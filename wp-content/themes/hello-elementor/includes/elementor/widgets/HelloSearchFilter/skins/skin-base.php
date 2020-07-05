@@ -17,12 +17,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 abstract class Skin_Base extends Elementor_Skin_Base {
 
-    protected function _register_controls_actions() {
-        add_action( 'elementor/element/search_filter/section_search_filter/before_section_end', [ $this, 'register_controls' ] );
-    }
-
     public function get_id() {
         return 'skin-base';
+    }
+
+    protected function _register_controls_actions() {
+        add_action( 'elementor/element/search_filter/section_search_filter/before_section_end', [ $this, 'register_controls' ] );
     }
 
 

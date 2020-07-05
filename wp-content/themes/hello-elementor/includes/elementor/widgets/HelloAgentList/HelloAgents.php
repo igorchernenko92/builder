@@ -86,6 +86,18 @@ class HelloAgents extends Widget_Base {
 	}
 
 	protected function register_query_section_controls() {
+
+        $this->start_controls_section(
+            'section_layout',
+            [
+                'label' => __( 'Layout', 'elementor-pro' ),
+                'tab' => Controls_Manager::TAB_CONTENT,
+            ]
+        );
+        $this->end_controls_section();
+
+
+
 		$this->start_controls_section(
 			'section_query',
 			[
@@ -94,19 +106,20 @@ class HelloAgents extends Widget_Base {
 			]
 		);
 
-
 		$this->add_group_control(
 			Group_Control_Related::get_type(),
 			[
 				'name' => $this->get_name(),
 				'presets' => [ 'full' ],
 				'exclude' => [
-					'posts_per_page', //use the one from Layout sectionr
+					'posts_per_page',
+                    'query_id',
 				],
 			]
 		);
 
 		$this->end_controls_section();
+
 	}
 
 }
