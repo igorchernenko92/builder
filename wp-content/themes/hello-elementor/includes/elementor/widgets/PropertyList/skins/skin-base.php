@@ -1148,19 +1148,19 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 	}
 
     protected function render_agent() {
-        if ( ! $this->get_instance_value( 'show_agent' ) ) {
-            return;
-        }
+        if ( ! $this->get_instance_value( 'show_agent' ) ) return;
+        if ( ! $agent = get_field('property_agent') ) return;
+
+        $name = $agent[0]->post_title;
+        $link = get_the_permalink($agent[0]->ID);
+        $thumbnail = get_the_post_thumbnail( $agent[0]->ID, 'large', ['class' => "hl-listing-card__agent-img hl-img-responsive"] );
+
         ?>
         <div class="hl-listing-card__bottom mt-auto">
             <div class="hl-listing-card__bottom-inner">
-                <a href="#" class="hl-listing-card__agent">
-                    <img
-                            src="https://tokyowpresidence.b-cdn.net/wp-content/uploads/2014/05/agent3-1-19-120x120.jpg"
-                            class="hl-listing-card__agent-img hl-img-responsive"
-                            alt=""
-                    >
-                    <span class="hl-listing-card__agent-name">Janet Richmond</span>
+                <a href="<?php echo $link ?>" class="hl-listing-card__agent">
+                   <?php echo $thumbnail; ?>
+                    <span class="hl-listing-card__agent-name"><?php echo $name ?></span>
                 </a>
             </div>
         </div>
