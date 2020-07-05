@@ -285,31 +285,6 @@ class HelloGoogleMap extends Widget_Base {
                 ],
             ]
         );
-//        $this->add_control(
-//            'infowindow_query_bgcolor_title', [
-//                'label' => __('Title Background Color', 'builder'),
-//                'type' => Controls_Manager::COLOR,
-//                'selectors' => [
-//                    '{{WRAPPER}} .gm-style .gm-style-iw-c .dce-iw-title' => 'background-color: {{VALUE}};',
-//                ],
-//                'condition' => [
-//                    'infowindow_query_show_title!' => '',
-//                ],
-//            ]
-//        );
-//        $this->add_control(
-//            'infowindow_query_padding_title', [
-//                'label' => __('Title Padding', 'builder'),
-//                'type' => Controls_Manager::DIMENSIONS,
-//                'size_units' => ['px', 'em'],
-//                'selectors' => [
-//                    '{{WRAPPER}} .gm-style .gm-style-iw-c .dce-iw-title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
-//                ],
-//                'condition' => [
-//                    'infowindow_query_show_title!' => '',
-//                ],
-//            ]
-//        );
 
         $this->end_controls_tab();
 
@@ -521,90 +496,89 @@ class HelloGoogleMap extends Widget_Base {
         );
         $this->end_controls_section();
 
-        $this->start_controls_section(
-            'section_cpt', [
-                'label' => __('Multilocations Query', 'builder'),
-                'condition' => [
-                    'acf_mapfield!' => '0',
-                ]
-            ]
-        );
+//        $this->start_controls_section(
+//            'section_cpt', [
+//                'label' => __('Multilocations Query', 'builder'),
+//                'condition' => [
+//                    'acf_mapfield!' => '0',
+//                ]
+//            ]
+//        );
 
 
         // --------------------------------- [ Custom Post Type ]
 
-        $this->add_control(
-            'taxonomy', [
-                'label' => __('Taxonomy', 'builder'),
-                'type' => Controls_Manager::SELECT,
-                //'options' => get_post_taxonomies( $post->ID ),
-                'options' => ['' => __('None', 'builder')] + get_taxonomies(array('public' => true)),
-
-            ]
-        );
-        $this->add_control(
-            'category', [
-                'label' => __('Terms ID', 'builder'),
-                'description' => __('Comma separated list of category ids', 'builder'),
-                'type' => Controls_Manager::HIDDEN,
-
-            ]
-        );
-
-        foreach ($taxonomies as $tkey => $atax) {
-            if ($tkey) {
-                $this->add_control(
-                    'terms_' . $tkey, [
-                        'label' => __('Terms', 'builder'), //.' '.$atax,
-                        'type' => Controls_Manager::SELECT2,
-                        'options' => ['' => __('All', 'builder')] + DCE_Helper::get_taxonomy_terms($tkey), // + ['dce_current_post_terms' => __('Dynamic Current Post Terms', 'builder')],
-                        'description' => __('Filter results by selected taxonomy term', 'builder'),
-                        'multiple' => true,
-                        'label_block' => true,
-                        'condition' => [
-                            'taxonomy' => $tkey,
-                        ],
-                        'render_type' => 'template',
-                    ]
-                );
-            }
-        }
+//        $this->add_control(
+//            'taxonomy', [
+//                'label' => __('Taxonomy', 'builder'),
+//                'type' => Controls_Manager::SELECT,
+//                'options' => ['' => __('None', 'builder')] + get_taxonomies(array('public' => true)),
+//
+//            ]
+//        );
+//        $this->add_control(
+//            'category', [
+//                'label' => __('Terms ID', 'builder'),
+//                'description' => __('Comma separated list of category ids', 'builder'),
+//                'type' => Controls_Manager::HIDDEN,
+//
+//            ]
+//        );
+//
+//        foreach ($taxonomies as $tkey => $atax) {
+//            if ($tkey) {
+//                $this->add_control(
+//                    'terms_' . $tkey, [
+//                        'label' => __('Terms', 'builder'),
+//                        'type' => Controls_Manager::SELECT2,
+//                        'options' => ['' => __('All', 'builder')] + DCE_Helper::get_taxonomy_terms($tkey),
+//                        'description' => __('Filter results by selected taxonomy term', 'builder'),
+//                        'multiple' => true,
+//                        'label_block' => true,
+//                        'condition' => [
+//                            'taxonomy' => $tkey,
+//                        ],
+//                        'render_type' => 'template',
+//                    ]
+//                );
+//            }
+//        }
 
         $this->end_controls_section();
 
-        $this->start_controls_section(
-            'section_dce_settings', [
-                'label' => __('Dynamic content', 'builder'),
-                'tab' => Controls_Manager::TAB_SETTINGS,
-            ]
-        );
-        $this->add_control(
-            'data_source',
-            [
-                'label' => __('Source', 'builder'),
-                'description' => __('Select the data source', 'builder'),
-                'type' => Controls_Manager::SWITCHER,
-                'default' => 'yes',
-                'label_on' => __('Same', 'builder'),
-                'label_off' => __('Other', 'builder'),
-                'return_value' => 'yes',
-            ]
-        );
-
-        $this->add_control(
-            'other_post_source',
-            [
-                'label' => __('Select from other source post', 'builder'),
-                'type' => 'ooo_query',
-                'placeholder' => __('Post Title', 'builder'),
-                'label_block' => true,
-                'query_type' => 'posts',
-                'condition' => [
-                    'data_source' => '',
-                ],
-            ]
-        );
-        $this->end_controls_section();
+//        $this->start_controls_section(
+//            'section_dce_settings', [
+//                'label' => __('Dynamic content', 'builder'),
+//                'tab' => Controls_Manager::TAB_SETTINGS,
+//            ]
+//        );
+//        $this->add_control(
+//            'data_source',
+//            [
+//                'label' => __('Source', 'builder'),
+//                'description' => __('Select the data source', 'builder'),
+//                'type' => Controls_Manager::SWITCHER,
+//                'default' => 'yes',
+//                'label_on' => __('Same', 'builder'),
+//                'label_off' => __('Other', 'builder'),
+//                'return_value' => 'yes',
+//            ]
+//        );
+//
+//        $this->add_control(
+//            'other_post_source',
+//            [
+//                'label' => __('Select from other source post', 'builder'),
+//                'type' => 'ooo_query',
+//                'placeholder' => __('Post Title', 'builder'),
+//                'label_block' => true,
+//                'query_type' => 'posts',
+//                'condition' => [
+//                    'data_source' => '',
+//                ],
+//            ]
+//        );
+//        $this->end_controls_section();
     }
 
     protected function render() {
@@ -613,9 +587,8 @@ class HelloGoogleMap extends Widget_Base {
             return;
 
         // ------------------------------------------
-        $id_page = DCE_Helper::get_the_id($settings['other_post_source']);
-        // ------------------------------------------
-        //
+        $id_page = DCE_Helper::get_the_id();
+
         $zoom = $settings['zoom']['size'];
         if (!$zoom) {
             $zoom = 10;
@@ -662,59 +635,56 @@ class HelloGoogleMap extends Widget_Base {
             $imageMarker = $settings['imageMarker']['url'];
         }
 
-        //$imageMarker = $settings['imageMarker'];
-        //var_dump( $imageMarker );
-        $infoWindow_str = '';
-        // se la infoWindow è abilitata..
-        // Le possibilità: statico, da ACF singolo, da ACF Query
-        if ($settings['enable_infoWindow']) {
 
-            $infoWindow_str = $settings['custom_infoWindow_wysiwig'];
+//                $terms_query = 'all';
+//                $taxquery = array();
+//                if ($settings['category'] != '') {
+//                    $terms_query = explode(',', $settings['category']);
+//                }
+//
+//                if (isset($settings['terms_' . $settings['taxonomy']]) && !empty($settings['terms_' . $settings['taxonomy']])) {
+//                    $terms_query = $settings['terms_' . $settings['taxonomy']];
+//                    $dce_key = array_search('dce_current_post_terms', $terms_query);
+//                    if ($dce_key !== false) {
+//                        unset($terms_query[$dce_key]);
+//                        $terms_list = wp_get_post_terms($id_page, $settings['taxonomy'], array('orderby' => 'name', 'order' => 'ASC', 'fields' => 'all', 'hide_empty' => true));
+//                        if (!empty($terms_list)) {
+//                            $terms_query = array();
+//                            foreach ($terms_list as $akey => $aterm) {
+//                                if (!in_array($aterm->term_id, $terms_query)) {
+//                                    $terms_query[] = $aterm->term_id;
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//                if ($settings['taxonomy'] != "")
+//                    $taxquery = array(
+//                        array(
+//                            'taxonomy' => $settings['taxonomy'],
+//                            'field' => 'id',
+//                            'terms' => $terms_query
+//                        )
+//                    );
 
-            $infoWindow_str = DCE_Helper::get_dynamic_value($infoWindow_str);
-            $infoWindow_str = htmlspecialchars($infoWindow_str, ENT_QUOTES);
-
-        }
 
 
-                $terms_query = 'all';
-                $taxquery = array();
-                if ($settings['category'] != '') {
-                    $terms_query = explode(',', $settings['category']);
-                }
-
-                if (isset($settings['terms_' . $settings['taxonomy']]) && !empty($settings['terms_' . $settings['taxonomy']])) {
-                    $terms_query = $settings['terms_' . $settings['taxonomy']];
-                    // add current post terms id
-                    $dce_key = array_search('dce_current_post_terms', $terms_query);
-                    if ($dce_key !== false) {
-                        //var_dump($dce_key);
-                        unset($terms_query[$dce_key]);
-                        $terms_list = wp_get_post_terms($id_page, $settings['taxonomy'], array('orderby' => 'name', 'order' => 'ASC', 'fields' => 'all', 'hide_empty' => true));
-                        if (!empty($terms_list)) {
-                            $terms_query = array();
-                            foreach ($terms_list as $akey => $aterm) {
-                                if (!in_array($aterm->term_id, $terms_query)) {
-                                    $terms_query[] = $aterm->term_id;
-                                }
-                            }
-                        }
-                    }
-                }
-                if ($settings['taxonomy'] != "")
-                    $taxquery = array(
-                        array(
-                            'taxonomy' => $settings['taxonomy'],
-                            'field' => 'id',
-                            'terms' => $terms_query
-                        )
-                    );
                 $args = array(
                     'post_type' => 'property',
                     'posts_per_page' => -1,
                     'post_status' => 'publish',
-                    'tax_query' => $taxquery,
+//                    'tax_query' => $taxquery,
                 );
+
+                if ( is_tax() ) {
+                    $args['tax_query'][] = [
+                        [
+                            'taxonomy' => get_query_var( 'taxonomy' ),
+                            'field'    => 'slug',
+                            'terms'    => get_query_var( 'term' )
+                        ]
+                    ];
+                }
 
 
                 foreach ( (array)$_GET as $meta_key => $meta_value ) {
@@ -762,13 +732,6 @@ class HelloGoogleMap extends Widget_Base {
                         global $wp_query;
                         $original_queried_object = get_queried_object();
                         $original_queried_object_id = get_queried_object_id();
-//                        while ($p_query->have_posts()) {
-//                            $p_query->the_post();
-//                            $map_field = DCE_Helper::get_acf_field_value($settings['acf_mapfield'], get_the_ID());
-//
-//                            var_dump($settings['acf_mapfield']);
-//                            wp_reset_postdata();
-//                        }
                         ?>
                         <script>
                             var address_list_<?php echo $this->get_id(); ?> = [<?php
@@ -894,7 +857,7 @@ class HelloGoogleMap extends Widget_Base {
              data-lng='<?php echo $lng; ?>'
              data-zoom='<?php echo $zoom; ?>'
              data-imgmarker='<?php echo $imageMarker; ?>'
-             data-infowindow='<?php echo $infoWindow_str ?>'
+<!--             data-infowindow='--><?php //echo $infoWindow_str ?><!--'-->
         >
         </div>
         <?php
