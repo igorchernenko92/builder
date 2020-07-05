@@ -114,7 +114,6 @@ class Property extends Property_Base {
         }
 
 
-		/** @var Module_Query $elementor_query */
 		$elementor_query = Module_Query::instance();
 		$this->query = $elementor_query->get_query( $this, $this->get_name(), $args, [] );
 

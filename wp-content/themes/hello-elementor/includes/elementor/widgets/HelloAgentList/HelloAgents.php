@@ -21,10 +21,16 @@ include_once ( 'skins/HelloAgentSkin1.php');
  */
 class HelloAgents extends Widget_Base {
 
+    protected $query = null;
+
     public function __construct($data = [], $args = null) {
         parent::__construct($data, $args);
         wp_register_script('hello-carousel-agents-script', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloAgentList/assets/js/base-script.js', '', '1', true);
         wp_register_style('hello-carousel-agents-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloAgentList/assets/css/base-main.css', '', 1);
+    }
+
+    public function get_query() {
+        return $this->query;
     }
 
     public function get_script_depends() {
@@ -70,7 +76,7 @@ class HelloAgents extends Widget_Base {
 	public function query_posts() {
 		$query_args = [
 			'posts_per_page' => $this->get_current_skin()->get_instance_value( 'posts_per_page' ),
-			'paged' => $this->get_current_page(),
+//			'paged' => $this->get_current_page(),
             ];
 
         $this->set_settings('property_post_type', 'agent');

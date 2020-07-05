@@ -938,21 +938,24 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
     }
 
     protected function render_title() {
+        $name = get_the_title();
         ?>
-          <a href="#" class="hl-agent__title">Agent Name</a>
+          <a href="<?php echo  $this->current_permalink ?>" target="_blank" class="hl-agent__title"><?php echo $name ?></a>
         <?php
     }
 
     protected function render_position() {
+        $spec = get_field('agent_specialties', get_the_ID());
         ?>
-          <p class="hl-agent__position">Web developer, SEO analytic, UX designer</p>
+          <p class="hl-agent__position"><?php echo $spec ?></p>
         <?php
     }
 
     protected function render_description() {
+	    $content = get_the_content();
         ?>
           <p class="hl-agent__description">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error laboriosam recusandae unde voluptate!
+                <?php echo $content ?>
           </p>
         <?php
     }
@@ -960,7 +963,7 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
     protected function render_bottom() {
         ?>
           <div class="hl-agent__bottom">
-            <a href="#" class="hl-agent__bottom-link">View profile</a>
+            <a href="<?php echo  $this->current_permalink ?>" target="_blank" class="hl-agent__bottom-link"><?php echo __('View profile', 'builder') ?></a>
           </div>
         <?php
     }
@@ -968,32 +971,21 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
     public function render() {
         $this->parent->query_posts();
 
-        /** @var \WP_Query $query */
         $query = $this->parent->get_query();
         if ( ! $query->found_posts ) {
             return;
         }
 
-//        $this->render_loop_header();
+        echo "<div class='hl-agents'>";
+            while ( $query->have_posts() ) {
+                $query->the_post();
 
-        // It's the global `wp_query` it self. and the loop was started from the theme.
-//        if ( $query->in_the_loop ) {
-//            $this->current_permalink = get_permalink();
-//            $this->render_post();
-//        } else {
-
-            echo "<div class='hl-agents'>";
-                while ( $query->have_posts() ) {
-                    $query->the_post();
-                    $this->current_permalink = get_permalink();
-                    $this->render_post();
-                }
-            echo "</div>";
-//        }
+                $this->current_permalink = get_permalink();
+                $this->render_post();
+            }
+        echo "</div>";
 
         wp_reset_postdata();
-
-//        $this->render_loop_footer();
 
     }
 
