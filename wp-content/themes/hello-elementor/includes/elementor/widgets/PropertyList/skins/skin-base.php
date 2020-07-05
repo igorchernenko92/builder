@@ -1039,7 +1039,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
     protected function render_post_image() {
         if ( $this->get_instance_value( 'hello_is_thumb_carousel' ) ) return;
-
+//        TODO: figure out with get_optional_link_attributes_html()
         $attr = array(
             'class' => "hl-listing-card__picture-img img-responsive",
         );

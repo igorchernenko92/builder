@@ -923,16 +923,14 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
 	}
 
     protected function render_avatar() {
-      ?>
-        <a class="hl-agent__wrap-img" href="#">
-          <picture class="hl-agent__picture">
-            <source src="https://via.placeholder.com/180x180" type="image/png">
-            <img
-              src="https://via.placeholder.com/180x180"
-              class="hl-agent__img img-responsive"
-              alt=""
-            >
-          </picture>
+        $attr = array(
+            'class' => "hl-agent__picture",
+        );
+        $thumbnail = get_the_post_thumbnail( get_the_ID(), 'large', $attr );
+
+        ?>
+        <a class="hl-agent__wrap-img" href="<?php echo $this->current_permalink; ?>">
+            <?php echo $thumbnail; ?>
         </a>
       <?php
     }
@@ -990,6 +988,18 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
     }
 
 	protected function render_post() {
+        $spec = get_field('agent_specialties', get_the_ID());
+        $areas = get_field('agent_service_areas', get_the_ID());
+        $email = get_field('agent_email', get_the_ID());
+        $position = get_field('agent_position', get_the_ID());
+        $com_name = get_field('agent_company_name', get_the_ID());
+        $license = get_field('agent_license', get_the_ID());
+        $tax = get_field('agent_tax_number', get_the_ID());
+        $tel = get_field('agent_mobile', get_the_ID());
+        $office_number = get_field('agent_office_number', get_the_ID());
+        $language = get_field('agent_language', get_the_ID());
+        $website = get_field('agent_website', get_the_ID());
+
       $this->render_post_header();
           $this->render_avatar();
           $this->render_title();

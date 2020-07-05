@@ -31,7 +31,4 @@ class HelloAgentSkin2 extends HelloAgentSkinBase {
 		return __( 'Skin 2', 'elementor-pro' );
 	}
 
-
-
-
 }

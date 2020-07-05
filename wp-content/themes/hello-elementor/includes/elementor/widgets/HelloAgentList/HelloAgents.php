@@ -101,7 +101,7 @@ class HelloAgents extends Widget_Base {
 				'name' => $this->get_name(),
 				'presets' => [ 'full' ],
 				'exclude' => [
-					'posts_per_page', //use the one from Layout section
+					'posts_per_page', //use the one from Layout sectionr
 				],
 			]
 		);
