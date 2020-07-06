@@ -172,14 +172,13 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                 'property_bath' => ['' => 'Bath','1' => 1, '2' => 2, '3' => 3],
                 'property_garages' => ['' => 'Garages','1' => 1, '2' => 2, '3' => 3]
             ];
-
         ?>
             <div id="home-search" class="site-section home-section">
                 <div class="container">
                     <form id="search_filter_form" method="get" action="<?php echo get_page_link( $search_result ); ?>" class="wpsight-listings-search horizontal">
 
                         <div class="listings-search-default">
-
+                            <input type="hidden" id="page_id" name="page_id" value="<?php echo $search_result ?>">
                             <?php
                                 foreach ( $items as $field ) :
                                     if ( 'select' == $field['type_view'] ) { ?>
