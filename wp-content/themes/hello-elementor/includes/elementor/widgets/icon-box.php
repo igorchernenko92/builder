@@ -276,24 +276,10 @@ class HelloPropertyFeatures extends Widget_Base {
 				],
 				'default' => '',
 				'selectors' => [
-					'{{WRAPPER}}.elementor-view-stacked .elementor-icon' => 'background-color: {{VALUE}};',
-					'{{WRAPPER}}.elementor-view-framed .elementor-icon, {{WRAPPER}}.elementor-view-default .elementor-icon' => 'fill: {{VALUE}}; color: {{VALUE}}; border-color: {{VALUE}};',
+					'{{WRAPPER}} .elementor-icon' => 'fill: {{VALUE}}; color: {{VALUE}}; border-color: {{VALUE}};',
 				],
 			]
 		);
-
-//		$this->add_control(
-//			'secondary_color',
-//			[
-//				'label' => __( 'Secondary Color', 'elementor' ),
-//				'type' => Controls_Manager::COLOR,
-//				'default' => '',
-//				'selectors' => [
-//					'{{WRAPPER}}.elementor-view-framed .elementor-icon' => 'background-color: {{VALUE}};',
-//					'{{WRAPPER}}.elementor-view-stacked .elementor-icon' => 'fill: {{VALUE}}; color: {{VALUE}};',
-//				],
-//			]
-//		);
 
 		$this->end_controls_tab();
 
@@ -311,8 +297,7 @@ class HelloPropertyFeatures extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
-					'{{WRAPPER}}.elementor-view-stacked .elementor-icon:hover' => 'background-color: {{VALUE}};',
-					'{{WRAPPER}}.elementor-view-framed .elementor-icon:hover, {{WRAPPER}}.elementor-view-default .elementor-icon:hover' => 'fill: {{VALUE}}; color: {{VALUE}}; border-color: {{VALUE}};',
+					'{{WRAPPER}} .elementor-icon:hover' => 'fill: {{VALUE}}; color: {{VALUE}}; border-color: {{VALUE}};',
 				],
 			]
 		);
@@ -414,28 +399,28 @@ class HelloPropertyFeatures extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'border_width',
-			[
-				'label' => __( 'Border Width', 'elementor' ),
-				'type' => Controls_Manager::DIMENSIONS,
-				'selectors' => [
-					'{{WRAPPER}} .elementor-icon' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->add_control(
-			'border_radius',
-			[
-				'label' => __( 'Border Radius', 'elementor' ),
-				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%' ],
-				'selectors' => [
-					'{{WRAPPER}} .elementor-icon' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
+//		$this->add_control(
+//			'border_width',
+//			[
+//				'label' => __( 'Border Width', 'elementor' ),
+//				'type' => Controls_Manager::DIMENSIONS,
+//				'selectors' => [
+//					'{{WRAPPER}} .elementor-icon' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+//				],
+//			]
+//		);
+//
+//		$this->add_control(
+//			'border_radius',
+//			[
+//				'label' => __( 'Border Radius', 'elementor' ),
+//				'type' => Controls_Manager::DIMENSIONS,
+//				'size_units' => [ 'px', '%' ],
+//				'selectors' => [
+//					'{{WRAPPER}} .elementor-icon' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+//				],
+//			]
+//		);
 
 		$this->end_controls_section();
 
@@ -524,7 +509,7 @@ class HelloPropertyFeatures extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
-					'{{WRAPPER}} .elementor-icon-box-content .elementor-icon-box-title' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .elementor-icon-box-content .elementor-icon-box-title a' => 'color: {{VALUE}};',
 				],
 				'scheme' => [
 					'type' => Schemes\Color::get_type(),
@@ -590,6 +575,8 @@ class HelloPropertyFeatures extends Widget_Base {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
         $terms = get_the_terms( get_the_ID(), 'features' );
+
+//        var_dump($settings['primary_color']);
 
         foreach ( $terms as $term ) {
 

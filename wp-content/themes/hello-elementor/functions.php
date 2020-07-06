@@ -222,7 +222,7 @@ function register_widgets() {
 
 }
 
-add_action( 'init', 'register_widgets', 10 );
+//add_action( 'init', 'register_widgets', 10 );
 
 
 function my_acf_init() {
@@ -252,9 +252,9 @@ function register_post_types(){
         ],
         'description'         => '',
         'public'              => true,
-        'show_in_menu'        => null, // показывать ли в меню адмнки
-        'show_in_rest'        => null, // добавить в REST API. C WP 4.7
-        'rest_base'           => null, // $post_type. C WP 4.7
+        'show_in_menu'        => null,
+        'show_in_rest'        => null,
+        'rest_base'           => null,
         'menu_position'       => null,
         'menu_icon'           => null,
         'hierarchical'        => false,
@@ -283,9 +283,9 @@ function register_post_types(){
         ],
         'description'         => '',
         'public'              => true,
-        'show_in_menu'        => null, // показывать ли в меню адмнки
-        'show_in_rest'        => null, // добавить в REST API. C WP 4.7
-        'rest_base'           => null, // $post_type. C WP 4.7
+        'show_in_menu'        => null,
+        'show_in_rest'        => null,
+        'rest_base'           => null,
         'menu_position'       => null,
         'menu_icon'           => null,
         'hierarchical'        => false,
@@ -361,9 +361,6 @@ function czc_disable_extra_image_sizes()
     }
 }
 
-
-
-
 add_action( 'init', 'add_search_array' );
 
 
@@ -381,7 +378,6 @@ function add_search_array() {
     ];
 
     add_option( 'hello_search_array', $check_get );
-
 }
 
 
