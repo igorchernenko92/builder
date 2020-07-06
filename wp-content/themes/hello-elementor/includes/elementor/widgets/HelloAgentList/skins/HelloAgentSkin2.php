@@ -93,6 +93,12 @@ class HelloAgentSkin2 extends HelloAgentSkinBase {
         <?php
     }
 
+    public function render_agents_top() {
+        ?>
+          <div class='hl-agents-2'>
+        <?php
+    }
+
     protected function render_post() {
         $spec = get_field('agent_specialties', get_the_ID());
         $areas = get_field('agent_service_areas', get_the_ID());

@@ -149,6 +149,18 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
         <?php
     }
 
+    public function render_agents_top() {
+        ?>
+            <div class='hl-agents'>
+        <?php
+    }
+
+    public function render_agents_bottom() {
+      ?>
+        </div>
+      <?php
+    }
+
     public function render() {
         $settings = $this->parent->get_active_settings();
 
@@ -165,14 +177,14 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
             return;
         }
 
-        echo "<div class='hl-agents'>";
+        $this->render_agents_top();
             while ( $query->have_posts() ) {
                 $query->the_post();
 
                 $this->current_permalink = get_permalink();
                 $this->render_post();
             }
-        echo "</div>";
+        $this->render_agents_bottom();
 
         wp_reset_postdata();
 
