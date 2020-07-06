@@ -216,30 +216,30 @@ class HelloGoogleMap extends Widget_Base {
         );
 
 
-        $this->add_responsive_control(
-            'infowindow_query_image_size', [
-                'label' => __('Info window image size', 'builder'),
-                'type' => Controls_Manager::SLIDER,
-                'default' => [
-                    'size' => 300,
-                ],
-                'range' => [
-                    'px' => [
-                        'min' => 40,
-                        'max' => 1440,
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .gm-style .gm-style-iw-c .dce-iw-image' => 'width: {{SIZE}}px;',
-                ],
-
-                'condition' => [
-                    'infowindow_query_show_image' => 'yes',
-                ],
-
-                //'frontend_available' => true,
-            ]
-        );
+//        $this->add_responsive_control(
+//            'infowindow_query_image_size', [
+//                'label' => __('Info window image size', 'builder'),
+//                'type' => Controls_Manager::SLIDER,
+//                'default' => [
+//                    'size' => 300,
+//                ],
+//                'range' => [
+//                    'px' => [
+//                        'min' => 40,
+//                        'max' => 1440,
+//                    ],
+//                ],
+//                'selectors' => [
+//                    '{{WRAPPER}} .gm-style .gm-style-iw-c .dce-iw-image' => 'width: {{SIZE}}px;',
+//                ],
+//
+//                'condition' => [
+//                    'infowindow_query_show_image' => 'yes',
+//                ],
+//
+//                //'frontend_available' => true,
+//            ]
+//        );
         // --------- TITLE
         $this->add_control(
             'infoWindow_heading_style_title',
