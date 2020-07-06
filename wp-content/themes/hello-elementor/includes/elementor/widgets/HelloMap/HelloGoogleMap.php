@@ -757,7 +757,10 @@ class HelloGoogleMap extends Widget_Base {
                                             $postImage = '';
 
                                             $map_card_content = '<div class="map-card__content">';
-                                              $map_card_content .= '<a href="#" class="map-card__title">' . get_the_title($id_page) . '</a>';
+
+                                              if ($settings['infowindow_query_show_title']) {
+                                                $map_card_content .= '<a href="' . $postlink . '" class="map-card__title">' . get_the_title($id_page) . '</a>';
+                                              }
 
                                               $map_card_content .= '<div class="map-card__row">';
                                                 $map_card_content .= '<div class="map-card__price">';
@@ -782,13 +785,9 @@ class HelloGoogleMap extends Widget_Base {
                                             $map_card_content .= '</div>';
 
 
-                                            if ($settings['infowindow_query_show_title']) {
-                                                $postTitle = '<a href="' . $postlink . '"><div class="dce-iw-title">' . get_the_title($id_page) . '</div></a>';
-                                            }
-
                                             if ($settings['infowindow_query_show_image']) {
                                                 if (!empty(get_the_post_thumbnail($id_page))) {
-                                                    $postImage = '<a href="' . $postlink . '"><div class="dce-iw-image">' . get_the_post_thumbnail($id_page) . '</div></a>';
+                                                    $postImage = '<a href="' . $postlink . '"><div class="map-card__wrap-img">' . get_the_post_thumbnail($id_page) . '</div></a>';
                                                 }
                                             }
 //                                            if ($settings['infowindow_query_show_readmore']) {
@@ -872,9 +871,15 @@ class HelloGoogleMap extends Widget_Base {
                 background-color: #ccc;
             }
 
-            .gm-style .gm-style-iw-d {
-              overflow: auto !important;
+            .gm-style .gm-style-iw-d,
+            .gm-style .gm-style-iw.gm-style-iw-c {
+              overflow: initial !important;
               max-height: none !important;
+            }
+
+            .gm-style .gm-style-iw.gm-style-iw-c {
+              max-width: 320px !important;
+              width: 320px;
             }
 
             .map-card__content {
@@ -889,7 +894,30 @@ class HelloGoogleMap extends Widget_Base {
             .map-card__content > *:last-child {
               margin-bottom: 0;
             }
-          
+
+            .map-card__wrap-img {
+              font-size: 0;
+              overflow: hidden;
+              position: relative;
+            }
+
+            .map-card__wrap-img:before {
+              content: "";
+              padding-top: 65%;
+              display: block;
+              pointer-events: none;
+            }
+
+            .map-card__wrap-img img {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100% !important;
+              object-fit: cover;
+              object-position: center;
+            }
+
             .map-card__title {
               display: block;
               font-weight: 600;
