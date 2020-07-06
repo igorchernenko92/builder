@@ -589,7 +589,7 @@ class HelloPropertyFeatures extends Widget_Base {
             
             .feature__item {
               width: 100%;
-              max-width: 50%;
+              max-width: calc(100% / 3);
               padding: 0 12px;
               display: flex;
               align-items: center;
@@ -605,6 +605,12 @@ class HelloPropertyFeatures extends Widget_Base {
             
             .feature__item-content .elementor-icon-box-title {
               margin: 0;
+            }
+            
+            @media (max-width: 768px) {
+              .feature__item {
+                max-width: 50%;
+              }
             }
             
             @media (max-width: 576px) {

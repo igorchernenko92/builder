@@ -10,14 +10,15 @@
         $selectFields.each(function() {
           if ($(this).hasClass("select2-hidden-accessible")) return;
         
-          $(this).wrap("<div class='wrap-select form-control'></div>");
+          $(this).wrap("<div class='wrap-select'></div>");
           const $wrapperCurSelect = $(this).parent();
           $wrapperCurSelect.append(svgIcon);
         
           $(this).select2({
             dropdownParent: $wrapperCurSelect,
             dropdownAutoWidth: true,
-            width: 'auto'
+            width: 'auto',
+            minimumResultsForSearch: -1,
           });
         });
       };
