@@ -578,6 +578,45 @@ class HelloPropertyFeatures extends Widget_Base {
 
 //        var_dump($settings['primary_color']);
 
+        echo "
+          <style>
+            .feature {
+              display: flex;
+              flex-wrap: wrap;
+              margin-left: -12px;
+              margin-right: -12px;
+            }
+            
+            .feature__item {
+              width: 100%;
+              max-width: 50%;
+              padding: 0 12px;
+              display: flex;
+              align-items: center;
+            }
+            
+            .feature__item-icon {
+              margin-right: 10px;
+            }
+            
+            .feature__item-content {
+            
+            }
+            
+            .feature__item-content .elementor-icon-box-title {
+              margin: 0;
+            }
+            
+            @media (max-width: 576px) {
+              .feature__item {
+                max-width: 100%;
+              }
+            }
+          </style>
+                
+          <div class='feature'>
+        ";
+
         foreach ( $terms as $term ) {
 
 
@@ -608,6 +647,7 @@ class HelloPropertyFeatures extends Widget_Base {
             $migrated = isset($settings['__fa4_migrated']['selected_icon']);
             $is_new = !isset($settings['icon']) && Icons_Manager::is_migration_allowed();
             ?>
+
             <div class="feature__item elementor-icon-box-wrapper">
             <?php if ($has_icon) : ?>
                 <div class="feature__item-icon elementor-icon-box-icon">
@@ -637,6 +677,8 @@ class HelloPropertyFeatures extends Widget_Base {
             </div>
             <?php
         }
+
+        echo "</div>";
 	}
 
 
