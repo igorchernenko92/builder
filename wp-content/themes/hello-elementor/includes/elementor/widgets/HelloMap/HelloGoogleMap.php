@@ -422,31 +422,31 @@ class HelloGoogleMap extends Widget_Base {
                 ],
             ]
         );
-        $this->add_control(
-            'snazzy_select', [
-                'label' => __('Snazzy Style', 'builder'),
-                'type' => Controls_Manager::SELECT2,
-                'options' => $this->snazzymaps(),
-                'frontend_available' => true,
-                'condition' => [
-                    'map_type' => 'roadmap',
-                    'style_select' => 'prestyle',
-                ],
-            ]
-        );
-        $this->add_control(
-            'style_map', [
-                'label' => __('Copy Snazzy Json Style Map', 'builder'),
-                'type' => Controls_Manager::TEXTAREA,
-                'default' => __('', 'builder'),
-                'description' => 'To better manage the graphic styles of the map go to: <a href="https://snazzymaps.com/" target="_blank">snazzymaps.com</a>',
-                'frontend_available' => true,
-                'condition' => [
-                    'map_type' => 'roadmap',
-                    'style_select' => 'custom',
-                ],
-            ]
-        );
+//        $this->add_control(
+//            'snazzy_select', [
+//                'label' => __('Snazzy Style', 'builder'),
+//                'type' => Controls_Manager::SELECT2,
+//                'options' => $this->snazzymaps(),
+//                'frontend_available' => true,
+//                'condition' => [
+//                    'map_type' => 'roadmap',
+//                    'style_select' => 'prestyle',
+//                ],
+//            ]
+//        );
+//        $this->add_control(
+//            'style_map', [
+//                'label' => __('Copy Snazzy Json Style Map', 'builder'),
+//                'type' => Controls_Manager::TEXTAREA,
+//                'default' => __('', 'builder'),
+//                'description' => 'To better manage the graphic styles of the map go to: <a href="https://snazzymaps.com/" target="_blank">snazzymaps.com</a>',
+//                'frontend_available' => true,
+//                'condition' => [
+//                    'map_type' => 'roadmap',
+//                    'style_select' => 'custom',
+//                ],
+//            ]
+//        );
         $this->end_controls_section();
         $this->start_controls_section(
             'section_mapControls', [
@@ -867,22 +867,22 @@ class HelloGoogleMap extends Widget_Base {
 
     }
 
-    protected function snazzymaps() {
-        $snazzy_list = [];
-        $snazzy_styles = glob(DCE_PATH . 'assets/maps_style/*.json');
-        if (!empty($snazzy_styles)) {
-            foreach ($snazzy_styles as $key => $value) {
-                $snazzy_name = basename($value);
-                $snazzy_name = str_replace('.json', '', $snazzy_name);
-                $snazzy_name = str_replace('_', ' ', $snazzy_name);
-                $snazzy_name = ucfirst($snazzy_name);
-                $snazzy_url = str_replace('.json', '', $value);
-                $snazzy_url = str_replace(DCE_PATH, DCE_URL, $snazzy_url);
-                $snazzy_list[$snazzy_url] = $snazzy_name;
-            }
-        }
-
-        return $snazzy_list;
-    }
+//    protected function snazzymaps() {
+//        $snazzy_list = [];
+//        $snazzy_styles = glob(DCE_PATH . 'assets/maps_style/*.json');
+//        if (!empty($snazzy_styles)) {
+//            foreach ($snazzy_styles as $key => $value) {
+//                $snazzy_name = basename($value);
+//                $snazzy_name = str_replace('.json', '', $snazzy_name);
+//                $snazzy_name = str_replace('_', ' ', $snazzy_name);
+//                $snazzy_name = ucfirst($snazzy_name);
+//                $snazzy_url = str_replace('.json', '', $value);
+//                $snazzy_url = str_replace(DCE_PATH, DCE_URL, $snazzy_url);
+//                $snazzy_list[$snazzy_url] = $snazzy_name;
+//            }
+//        }
+//
+//        return $snazzy_list;
+//    }
 
 }
