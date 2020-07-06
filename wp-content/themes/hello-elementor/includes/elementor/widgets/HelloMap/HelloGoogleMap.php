@@ -720,7 +720,6 @@ class HelloGoogleMap extends Widget_Base {
                     }
                 }
 
-
                 // QUERY - RELATIONSHIP - POST
 
                 if(isset($args) && count($args) ) {
@@ -759,6 +758,15 @@ class HelloGoogleMap extends Widget_Base {
                                             $postContent = '';
                                             $postReadMore = '';
 
+                                            $detail_row = '<ul class="map-card__details">';
+                                            for ( $i = 0; $i < 5; $i++ ) {
+                                                $detail_row .=  ' <li class="map-card__details-item">';
+                                                $detail_row .=  '<i class="fa fa-fas fa-door-open hl-listing-card__icon map-card__details-item-icon"></i>';
+                                                $detail_row .=  '  <span class="map-card__details-item-value">4</span>';
+                                                $detail_row .=  '   </li>';
+                                            }
+                                            $detail_row .= '</ul>';
+
                                             if ($settings['infowindow_query_show_title']) {
                                                 $postTitle = '<a href="' . $postlink . '"><div class="dce-iw-title">' . get_the_title($id_page) . '</div></a>';
                                             }
@@ -773,7 +781,7 @@ class HelloGoogleMap extends Widget_Base {
 //                                            }
 
 
-                                            $postInfowindow = $postImage . '<div class="dce-iw-textzone">' . $postTitle . $postContent . $postReadMore . '</div>';
+                                            $postInfowindow = $postImage . '<div class="dce-iw-textzone">' . $postTitle . $postContent . $postReadMore . $detail_row . '</div>';
 
                                         // marker ---------
                                         $marker_img = DCE_Helper::get_acf_field_value($settings['acf_markerfield'], $id_page);
