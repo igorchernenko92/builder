@@ -62,7 +62,6 @@ var isAdminBar = false,
 (function ($) {
 
     var DyncontEl_GoogleMapsHandler = function ($scope, $) {
-
         //console.log( $scope );
         var map;
         var bounds;
@@ -88,19 +87,6 @@ var isAdminBar = false,
 
         var imageMarkerUrl = jQuery(map).data('imgmarker') || '';
 
-        /*function getMeta(url){
-         var img = new Image();
-         var objimg = {};
-         img.addEventListener("load", function(){
-         objimg = {w:this.naturalWidth, h:this.naturalHeight};
-
-         return objimg
-         });
-         img.src = url;
-
-
-         }
-         var dataImgMarker = getMeta(imageMarkerUrl);*/
         var w = elementSettingsMap.marker_width;
         var h = elementSettingsMap.marker_height;
         var scaledMarker = null;
@@ -135,7 +121,7 @@ var isAdminBar = false,
         var debugHolder = $scope.find('#debug')[0]; //document.getElementById("debug");
         var centroMappa = {lat: lati, lng: long};
 
-        console.log(elementSettingsMap.prevent_scroll);
+        // console.log(elementSettingsMap.prevent_scroll);
         var mapParams = {
             zoom: zoom,
             scrollwheel: Boolean(elementSettingsMap.prevent_scroll),
@@ -152,6 +138,7 @@ var isAdminBar = false,
         if (elementSettingsMap.map_type && elementSettingsMap.map_type !== "acfmap") {
             mapParams['mapTypeId'] = elementSettingsMap.map_type;
         }
+
 
         if (elementSettingsMap.style_select === 'custom') {
             mapParams['styles'] = eval(elementSettingsMap.style_map);
@@ -208,12 +195,6 @@ var isAdminBar = false,
 
                         var imageMarkerItem = {
                             url: address_list[i]['marker'],
-                            // This marker is 20 pixels wide by 32 pixels high.
-                            //size: new google.maps.Size(80, 80),
-                            // The origin for this image is (0, 0).
-                            //origin: new google.maps.Point(0, 0),
-                            // The anchor for this image is the base of the flagpole at (0, 32).
-                            //anchor: new google.maps.Point(0, 32)
                             scaledSize: scaledMarker
 
                         };
@@ -474,7 +455,6 @@ var isAdminBar = false,
         if ($('body').is('.admin-bar')) {
             isAdminBar = true;
         }
-
         elementorFrontend.hooks.addAction('frontend/element_ready/hello-google-map.default', DyncontEl_GoogleMapsHandler);
     });
 

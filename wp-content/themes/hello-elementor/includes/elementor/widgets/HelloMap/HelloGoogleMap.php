@@ -302,38 +302,38 @@ class HelloGoogleMap extends Widget_Base {
                 ],
             ]
         );
-        $this->add_group_control(
-            Group_Control_Border::get_type(), [
-                'name' => 'infoWindow_border',
-                'label' => __('Border', 'builder'),
-                'selector' => '{{WRAPPER}} .gm-style .gm-style-iw-c, {{WRAPPER}} .gm-style .gm-style-iw-t::after',
-            ]
-        );
-        $this->add_control(
-            'infoWindow_padding', [
-                'label' => __('Padding panel', 'builder'),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', 'em'],
-                'default' => [
-                    'unit' => 'px',
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .gm-style .gm-style-iw-c' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
-                ],
-            ]
-        );
+//        $this->add_group_control(
+//            Group_Control_Border::get_type(), [
+//                'name' => 'infoWindow_border',
+//                'label' => __('Border', 'builder'),
+//                'selector' => '{{WRAPPER}} .gm-style .gm-style-iw-c, {{WRAPPER}} .gm-style .gm-style-iw-t::after',
+//            ]
+//        );
+//        $this->add_control(
+//            'infoWindow_padding', [
+//                'label' => __('Padding panel', 'builder'),
+//                'type' => Controls_Manager::DIMENSIONS,
+//                'size_units' => ['px', 'em'],
+//                'default' => [
+//                    'unit' => 'px',
+//                ],
+//                'selectors' => [
+//                    '{{WRAPPER}} .gm-style .gm-style-iw-c' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+//                ],
+//            ]
+//        );
 
-        $this->add_control(
-            'infoWindow_border_radius', [
-                'label' => __('Border Radius', 'builder'),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', '%'],
-                'selectors' => [
-                    '{{WRAPPER}} .gm-style .gm-style-iw-c' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-
-            ]
-        );
+//        $this->add_control(
+//            'infoWindow_border_radius', [
+//                'label' => __('Border Radius', 'builder'),
+//                'type' => Controls_Manager::DIMENSIONS,
+//                'size_units' => ['px', '%'],
+//                'selectors' => [
+//                    '{{WRAPPER}} .gm-style .gm-style-iw-c' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+//                ],
+//
+//            ]
+//        );
         $this->add_group_control(
             Group_Control_Box_Shadow::get_type(), [
                 'name' => 'infoWindow_box_shadow',
