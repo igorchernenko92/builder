@@ -752,20 +752,35 @@ class HelloGoogleMap extends Widget_Base {
                                         $postlink = get_the_permalink($id_page);
 
                                         // infowindow ---------
-                                            $postTitle = get_the_title($id_page);
+                                            $postTitle = '';
 
                                             $postImage = '';
-                                            $postContent = '';
-                                            $postReadMore = '';
 
-                                            $detail_row = '<ul class="map-card__details">';
-                                            for ( $i = 0; $i < 5; $i++ ) {
-                                                $detail_row .=  ' <li class="map-card__details-item">';
-                                                $detail_row .=  '<i class="fa fa-fas fa-door-open hl-listing-card__icon map-card__details-item-icon"></i>';
-                                                $detail_row .=  '  <span class="map-card__details-item-value">4</span>';
-                                                $detail_row .=  '   </li>';
-                                            }
-                                            $detail_row .= '</ul>';
+                                            $map_card_content = '<div class="map-card__content">';
+                                              $map_card_content .= '<a href="#" class="map-card__title">' . get_the_title($id_page) . '</a>';
+
+                                              $map_card_content .= '<div class="map-card__row">';
+                                                $map_card_content .= '<div class="map-card__price">';
+                                                $map_card_content .= '<span class="map-card__price-value">$ 1,600</span>';
+                                                $map_card_content .= '<span class="map-card__price-label">$ / Month</span>';
+                                                $map_card_content .= '</div>';
+
+                                                $map_card_content .= '<span class="map-card__label">Featured</span>';
+                                              $map_card_content .= '</div>';
+
+
+                                              $map_card_content .= '<div class="map-card__bottom">';
+                                                $map_card_content .= '<ul class="map-card__details">';
+                                                  for ( $i = 0; $i < 5; $i++ ) {
+                                                      $map_card_content .=  '<li class="map-card__details-item">';
+                                                        $map_card_content .=  '<i class="fa fa-fas fa-door-open hl-listing-card__icon map-card__details-item-icon"></i>';
+                                                        $map_card_content .=  '<span class="map-card__details-item-value">4</span>';
+                                                      $map_card_content .=  '</li>';
+                                                  }
+                                                $map_card_content .= '</ul>';
+                                              $map_card_content .= '</div>';
+                                            $map_card_content .= '</div>';
+
 
                                             if ($settings['infowindow_query_show_title']) {
                                                 $postTitle = '<a href="' . $postlink . '"><div class="dce-iw-title">' . get_the_title($id_page) . '</div></a>';
@@ -781,7 +796,7 @@ class HelloGoogleMap extends Widget_Base {
 //                                            }
 
 
-                                            $postInfowindow = $postImage . '<div class="dce-iw-textzone">' . $postTitle . $postContent . $postReadMore . $detail_row . '</div>';
+                                            $postInfowindow = $postImage . '<div class="dce-iw-textzone">' . $map_card_content . '</div>';
 
                                         // marker ---------
                                         $marker_img = DCE_Helper::get_acf_field_value($settings['acf_markerfield'], $id_page);
@@ -859,6 +874,84 @@ class HelloGoogleMap extends Widget_Base {
 
             .gm-style .gm-style-iw-d {
               overflow: auto !important;
+              max-height: none !important;
+            }
+
+            .map-card__content {
+              padding-top: 16px;
+            }
+
+            .map-card__content > * {
+              padding: 0 20px;
+              margin-bottom: 10px;
+            }
+
+            .map-card__content > *:last-child {
+              margin-bottom: 0;
+            }
+          
+            .map-card__title {
+              display: block;
+              font-weight: 600;
+              font-size: 20px;
+              color: #333;
+              text-decoration: none;
+            }
+
+            .map-card__row {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              margin-bottom: 18px;
+            }
+
+            .map-card__details {
+              display: flex;
+              align-items: center;
+              flex-wrap: wrap;
+            }
+
+            .map-card__details > * {
+              margin-bottom: 6px;
+            }
+
+            .map-card__details-item {
+              display: flex;
+              align-items: center;
+              padding: 0 8px;
+              font-size: 12px;
+              width: 100%;
+              max-width: calc(100% / 6);
+            }
+
+            .map-card__details-item-icon {
+              margin-right: 5px;
+              font-size: 14px;
+              width: 20px;
+              height: 20px;
+              display: flex;
+              align-items: center;
+            }
+
+            .map-card__price {
+              color: #5c727d;
+              font-size: 18px;
+              font-weight: 600;
+            }
+
+            .map-card__label {
+              font-size: 14px;
+              background-color: #274abb;
+              color: #fff;
+              text-align: center;
+              line-height: 14px;
+              font-weight: 600;
+              padding: 6px 12px;
+              border-radius: 4px;
+            }
+
+            .map-card__bottom {
+              padding: 0 12px 12px;
             }
         </style>
         <span id="debug" style="display: none;"></span>

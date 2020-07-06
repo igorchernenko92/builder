@@ -560,12 +560,6 @@ ol {
     max-width: calc(100% / 6);
 }
 
-@media (max-width: 768px) {
-    .hl-listing-card_skin-1 .hl-listing-card__info-item {
-        max-width: 25%;
-    }
-}
-
 .hl-listing-card_skin-1 .hl-listing-card__info-icon {
     margin-right: 5px;
     font-size: 14px;
