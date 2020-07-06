@@ -776,7 +776,7 @@ class HelloGoogleMap extends Widget_Base {
                                                 $map_card_content .= '<ul class="map-card__details">';
                                                   for ( $i = 0; $i < 5; $i++ ) {
                                                       $map_card_content .=  '<li class="map-card__details-item">';
-                                                        $map_card_content .=  '<i class="fa fa-fas fa-door-open hl-listing-card__icon map-card__details-item-icon"></i>';
+                                                        $map_card_content .=  '<i class="fa fa-fas fa-door-open map-card__details-item-icon"></i>';
                                                         $map_card_content .=  '<span class="map-card__details-item-value">4</span>';
                                                       $map_card_content .=  '</li>';
                                                   }
@@ -880,6 +880,8 @@ class HelloGoogleMap extends Widget_Base {
             .gm-style .gm-style-iw.gm-style-iw-c {
               max-width: 320px !important;
               width: 320px;
+              padding: 0 !important;
+              overflow: hidden !important;
             }
 
             .map-card__content {
@@ -920,10 +922,10 @@ class HelloGoogleMap extends Widget_Base {
 
             .map-card__title {
               display: block;
-              font-weight: 600;
-              font-size: 20px;
+              font-size: 18px;
               color: #333;
               text-decoration: none;
+              font-weight: 500;
             }
 
             .map-card__row {
@@ -959,12 +961,13 @@ class HelloGoogleMap extends Widget_Base {
               height: 20px;
               display: flex;
               align-items: center;
+              color: #5c727d;
             }
 
             .map-card__price {
               color: #5c727d;
-              font-size: 18px;
-              font-weight: 600;
+              font-size: 16px;
+              font-weight: 500;
             }
 
             .map-card__label {
@@ -973,7 +976,6 @@ class HelloGoogleMap extends Widget_Base {
               color: #fff;
               text-align: center;
               line-height: 14px;
-              font-weight: 600;
               padding: 6px 12px;
               border-radius: 4px;
             }
