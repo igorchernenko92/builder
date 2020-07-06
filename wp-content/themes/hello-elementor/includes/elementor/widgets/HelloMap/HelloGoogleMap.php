@@ -848,6 +848,10 @@ class HelloGoogleMap extends Widget_Base {
                 width: 100%;
                 background-color: #ccc;
             }
+
+            .gm-style .gm-style-iw-d {
+              overflow: auto !important;
+            }
         </style>
         <span id="debug" style="display: none;"></span>
         <?php //echo $settings['acf_mapfield']; ?>

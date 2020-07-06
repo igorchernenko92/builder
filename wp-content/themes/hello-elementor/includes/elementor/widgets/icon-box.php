@@ -608,9 +608,9 @@ class HelloPropertyFeatures extends Widget_Base {
             $migrated = isset($settings['__fa4_migrated']['selected_icon']);
             $is_new = !isset($settings['icon']) && Icons_Manager::is_migration_allowed();
             ?>
-            <div class="elementor-icon-box-wrapper">
+            <div class="feature__item elementor-icon-box-wrapper">
             <?php if ($has_icon) : ?>
-                <div class="elementor-icon-box-icon">
+                <div class="feature__item-icon elementor-icon-box-icon">
                 <<?php echo implode(' ', [$icon_tag, $icon_attributes]); ?>>
                 <?php
                 if ($is_new || $migrated) {
@@ -622,7 +622,7 @@ class HelloPropertyFeatures extends Widget_Base {
                 </<?php echo $icon_tag; ?>>
                 </div>
             <?php endif; ?>
-            <div class="elementor-icon-box-content">
+            <div class="feature__item-content elementor-icon-box-content">
             <<?php echo $settings['title_size']; ?> class="elementor-icon-box-title">
             <<?php echo implode(' ', [$icon_tag]); ?> >
 
