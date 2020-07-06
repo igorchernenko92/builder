@@ -95,17 +95,27 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
 		<?php
 	}
 
+    protected function render_img_placeholder() {
+      ?>
+        <img src="https://via.placeholder.com/358x232" class="img-responsive" alt="">
+      <?php
+    }
+
     protected function render_avatar() {
         $attr = array(
             'class' => "hl-agent__picture",
         );
         $thumbnail = get_the_post_thumbnail( get_the_ID(), 'large', $attr );
 
-        ?>
-        <a class="hl-agent__wrap-img" href="<?php echo $this->current_permalink; ?>">
-            <?php echo $thumbnail; ?>
-        </a>
-      <?php
+        if ($thumbnail) { ?>
+          <a class="hl-agent__wrap-img" href="<?php echo $this->current_permalink; ?>">
+              <?php echo $thumbnail; ?>
+          </a>
+        <?php } else { ?>
+            <div class="hl-agent__wrap-img">
+                <?php echo $this->render_img_placeholder(); ?>
+            </div>
+        <?php }
     }
 
     protected function render_title() {
