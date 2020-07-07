@@ -163,21 +163,31 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
 
     protected function render_search_form() {
-            $items =  $this->get_instance_value( 'hello_search_items' );
-            $search_result =  $this->get_instance_value( 'hello_search_result_page' );
+        $settings = $this->parent->get_settings_for_display();
 
-            $value_data = [
-                'property_bedrooms' => ['' => 'Bedrooms', '1' => 1, '2' => 2, '3' => 3],
-                'property_rooms' => ['' => 'Rooms','1' => 1, '2' => 2, '3' => 3, '4' => 4, '10' => 10],
-                'property_bath' => ['' => 'Bath','1' => 1, '2' => 2, '3' => 3],
-                'property_garages' => ['' => 'Garages','1' => 1, '2' => 2, '3' => 3]
-            ];
+        $unit = $settings['_padding']['unit'];
+        $padding_top = $settings['_padding']['top'] . $unit;
+        $padding_right = $settings['_padding']['right'] . $unit;
+        $padding_bottom = $settings['_padding']['bottom'] . $unit;
+        $padding_left = $settings['_padding']['left'] . $unit;
+
+        $paddings_string = 'padding-top:' . $padding_top .  ';' . ' padding-right:' . $padding_right .  ';' . ' padding-bottom:' . $padding_bottom .  ';' . ' padding-left:' . $padding_left .  ';';
+
+        $items =  $this->get_instance_value( 'hello_search_items' );
+        $search_result =  $this->get_instance_value( 'hello_search_result_page' );
+
+        $value_data = [
+            'property_bedrooms' => ['' => 'Bedrooms', '1' => 1, '2' => 2, '3' => 3],
+            'property_rooms' => ['' => 'Rooms','1' => 1, '2' => 2, '3' => 3, '4' => 4, '10' => 10],
+            'property_bath' => ['' => 'Bath','1' => 1, '2' => 2, '3' => 3],
+            'property_garages' => ['' => 'Garages','1' => 1, '2' => 2, '3' => 3]
+        ];
         ?>
             <div id="home-search" class="site-section home-section">
                 <div class="container">
                     <form id="search_filter_form" method="get" action="<?php echo get_page_link( $search_result ); ?>" class="wpsight-listings-search horizontal">
 
-                        <div class="listings-search-default">
+                        <div class="listings-search-default" style="<?php echo $paddings_string ?>">
                             <input type="hidden" id="page_id" name="page_id" value="<?php echo $search_result ?>">
                             <?php
                                 foreach ( $items as $field ) :
