@@ -194,9 +194,11 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                                     if ( 'select' == $field['type_view'] ) { ?>
                                         <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
                                             <label class="wrap-input">
-                                                    <span class="listings-search-field-label">
-                                                        <?php echo $field['label']; ?>
-                                                    </span>
+                                                    <?php if ($field['label']) { ?>
+                                                      <span class="listings-search-field-label">
+                                                          <?php echo $field['label']; ?>
+                                                      </span>
+                                                    <?php } ?>
                                                     <select class="select form-control" name="<?php echo $field['type_field']; ?>">
                                                         <?php foreach ( $value_data[$field['type_field']] as $index => $option ) {
 //                                                            var_dump($index);
@@ -212,9 +214,11 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                                     <?php  if ( 'input' == $field['type_view'] ) { ?>
                                             <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
                                                 <label class="wrap-input">
-                                                    <span class="listings-search-field-label">
-                                                        <?php echo $field['label']; ?>
-                                                    </span>
+                                                    <?php if ($field['label']) { ?>
+                                                      <span class="listings-search-field-label">
+                                                          <?php echo $field['label']; ?>
+                                                      </span>
+                                                    <?php } ?>
                                                     <input class="text form-control" name="<?php echo $field['type_field']; ?>" type="text" value="" placeholder="<?php echo $field['placeholder']; ?>">
                                                 </label>
                                             </div>
