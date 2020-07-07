@@ -992,8 +992,6 @@ class HelloGoogleMap extends Widget_Base {
              data-lng='<?php echo $lng; ?>'
              data-zoom='<?php echo $zoom; ?>'
              data-imgmarker='<?php echo $imageMarker; ?>'
-<!--             data-infowindow='--><?php //echo $infoWindow_str ?><!--'-->
-        >
         </div>
         <?php
     }
