@@ -108,33 +108,32 @@ abstract class Skin_Base extends Elementor_Skin_Base {
         );
 
 
-	    $this->add_responsive_control(
-			'item_ratio',
-			[
-				'label' => __( 'Image Ratio', 'elementor-pro' ),
-				'type' => Controls_Manager::SLIDER,
-				'default' => [
-					'size' => 0.66,
-				],
-				'tablet_default' => [
-					'size' => '',
-				],
-				'mobile_default' => [
-					'size' => 0.5,
-				],
-				'range' => [
-					'px' => [
-						'min' => 0.1,
-						'max' => 2,
-						'step' => 0.01,
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .elementor-posts-container .elementor-post__thumbnail' => 'padding-bottom: calc( {{SIZE}} * 100% );',
-//					'{{WRAPPER}}:after' => 'content: "{{SIZE}}";',
-				],
-			]
-		);
+//	    $this->add_responsive_control(
+//			'item_ratio',
+//			[
+//				'label' => __( 'Image Ratio', 'elementor-pro' ),
+//				'type' => Controls_Manager::SLIDER,
+//				'default' => [
+//					'size' => 0.66,
+//				],
+//				'tablet_default' => [
+//					'size' => '',
+//				],
+//				'mobile_default' => [
+//					'size' => 0.5,
+//				],
+//				'range' => [
+//					'px' => [
+//						'min' => 0.1,
+//						'max' => 2,
+//						'step' => 0.01,
+//					],
+//				],
+//				'selectors' => [
+//					'{{WRAPPER}} .elementor-posts-container .elementor-post__thumbnail' => 'padding-bottom: calc( {{SIZE}} * 100% );',
+//				],
+//			]
+//		);
 	}
 
 	protected function register_columns_controls() {
