@@ -61,6 +61,81 @@ abstract class Skin_Base extends Elementor_Skin_Base {
             ]
         );
 
+
+        $repeater->add_control(
+            'button_text_color',
+            [
+                'label' => __( 'Text Color', 'elementor' ),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .hello_search_button' => 'fill: {{VALUE}}; color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'search_button' => 'yes',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'background_color',
+            [
+                'label' => __( 'Background Color', 'elementor' ),
+                'type' => Controls_Manager::COLOR,
+                'scheme' => [
+                    'type' => Schemes\Color::get_type(),
+                    'value' => Schemes\Color::COLOR_4,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .hello_search_button' => 'background-color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'search_button' => 'yes',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'hover_color',
+            [
+                'label' => __( 'Hover Text Color', 'elementor' ),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .hello_search_button:hover, {{WRAPPER}} .hello_search_button:focus' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'search_button' => 'yes',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'button_background_hover_color',
+            [
+                'label' => __( 'Hover Background Color', 'elementor' ),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .hello_search_button:hover, {{WRAPPER}} .hello_search_button:focus' => 'background-color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'search_button' => 'yes',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'hover_animation',
+            [
+                'label' => __( 'Hover Animation', 'elementor' ),
+                'type' => Controls_Manager::HOVER_ANIMATION,
+                'condition' => [
+                    'search_button' => 'yes',
+                ],
+            ]
+        );
+
+
+
 		$repeater->add_control(
 			'type_field',
 			[
@@ -115,6 +190,9 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                 'label' 		=> __( 'Placeholder', 'elementor' ),
                 'type' 			=> Controls_Manager::TEXT,
                 'placeholder' 	=> __( 'Enter your placeholder', 'elementor' ),
+                'condition' => [
+                    'search_button' => '',
+                ],
             ]
         );
 
@@ -212,11 +290,15 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                                     $search_button =  $field['search_button'];
 
                                  if ( $search_button ) {
+                                     $label = 'Search';
                                      $field['type_view'] = ''; // need to prevent other fields to show when button
+                                     if ($field['label']) {
+                                         $label = $field['label'];
+                                     }
                                  ?>
-                                    <div class="wrap-field listings-search-field-submit">
+                                    <div class="wrap-field listings-search-field-submit" style="width:<?php echo $field['width_field']; ?>%;">
                                         <div class="wrap-input">
-                                            <input type="submit" value="Search" class="btn btn-primary btn-block">
+                                            <input type="submit" value="<?php echo $label; ?>" class="btn btn-primary btn-block hello_search_button elementor-animation-<?php echo $field['hover_animation'] ?>">
                                         </div>
                                     </div>
                                 <?php }

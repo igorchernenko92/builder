@@ -210,4 +210,12 @@ textarea {
     color: #fff;
 }
 
+.hello_search_button {
+    border: none;
+}
+
+.hello_search_button:focus {
+    outline: none;
+}
+
 /* Select 2 END */
