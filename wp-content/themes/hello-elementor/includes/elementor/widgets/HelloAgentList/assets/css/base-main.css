@@ -95,6 +95,12 @@
     margin-bottom: 30px;
 }
 
+.hl-agent__description > * {
+    color: inherit;
+    line-height: inherit;
+    font-size: inherit;
+}
+
 .hl-agent__bottom {
     margin-top: auto;
     display: flex;
@@ -142,6 +148,13 @@
     width: 100%;
     border-radius: 0;
     margin-bottom: 20px;
+    display: block;
+}
+
+.hl-agent-2 .hl-agent__wrap-img:before {
+    content: '';
+    display: block;
+    padding-top: 100%;
 }
 
 .hl-agents-2 {

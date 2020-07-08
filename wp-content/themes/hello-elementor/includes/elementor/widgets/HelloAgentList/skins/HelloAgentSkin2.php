@@ -38,57 +38,59 @@ class HelloAgentSkin2 extends HelloAgentSkinBase {
     }
 
     protected function render_table() {
-        ?>
+        $license = get_field('agent_license', get_the_ID());
+        $tax = get_field('agent_tax_number', get_the_ID());
+        $areas = get_field('agent_service_areas', get_the_ID());
+        $spec = get_field('agent_specialties', get_the_ID());
+      ?>
             <ul class="hl-agent__table">
-                <li class="hl-agent__table-row">
-                    <span class="hl-agent__table-label">
-                        Office
-                    </span>
+                <?php if ($license) { ?>
+                  <li class="hl-agent__table-row">
+                      <span class="hl-agent__table-label">
+                          Agent license
+                      </span>
 
-                    <span class="hl-agent__table-value">
-                        +375 29 000 00 00
-                    </span>
-                </li>
+                      <span class="hl-agent__table-value">
+                          <?php echo $license; ?>
+                      </span>
+                  </li>
+                <?php } ?>
 
-                <li class="hl-agent__table-row">
-                    <span class="hl-agent__table-label">
-                        Office
-                    </span>
+                <?php if ($tax) { ?>
+                  <li class="hl-agent__table-row">
+                      <span class="hl-agent__table-label">
+                          Tax Number
+                      </span>
 
-                    <span class="hl-agent__table-value">
-                        +375 29 000 00 00
-                    </span>
-                </li>
+                      <span class="hl-agent__table-value">
+                          <?php echo $tax; ?>
+                      </span>
+                  </li>
+                <?php } ?>
 
-                <li class="hl-agent__table-row">
-                    <span class="hl-agent__table-label">
-                        Office
-                    </span>
+                <?php if ($areas) { ?>
+                  <li class="hl-agent__table-row">
+                      <span class="hl-agent__table-label">
+                          Service Areas
+                      </span>
 
-                    <span class="hl-agent__table-value">
-                        +375 29 000 00 00
-                    </span>
-                </li>
+                      <span class="hl-agent__table-value">
+                          <?php echo $areas; ?>
+                      </span>
+                  </li>
+                <?php } ?>
 
-                <li class="hl-agent__table-row">
-                    <span class="hl-agent__table-label">
-                        Office
-                    </span>
+                <?php if ($spec) { ?>
+                  <li class="hl-agent__table-row">
+                      <span class="hl-agent__table-label">
+                          Specialties
+                      </span>
 
-                    <span class="hl-agent__table-value">
-                        <a href="mailto:some@mail.ru">some@mail.ru</a>
-                    </span>
-                </li>
-
-                <li class="hl-agent__table-row">
-                    <span class="hl-agent__table-label">
-                        Office
-                    </span>
-
-                    <span class="hl-agent__table-value">
-                        <a href="mailto:some@mail.ru">some@mail.ru</a>
-                    </span>
-                </li>
+                      <span class="hl-agent__table-value">
+                        <?php echo $spec; ?>
+                      </span>
+                  </li>
+                <?php } ?>
             </ul>
         <?php
     }
@@ -96,22 +98,11 @@ class HelloAgentSkin2 extends HelloAgentSkinBase {
     public function render_agents_top() {
         ?>
           <div class='hl-agents-2'>
+
         <?php
     }
 
     protected function render_post() {
-        $spec = get_field('agent_specialties', get_the_ID());
-        $areas = get_field('agent_service_areas', get_the_ID());
-        $email = get_field('agent_email', get_the_ID());
-        $position = get_field('agent_position', get_the_ID());
-        $com_name = get_field('agent_company_name', get_the_ID());
-        $license = get_field('agent_license', get_the_ID());
-        $tax = get_field('agent_tax_number', get_the_ID());
-        $tel = get_field('agent_mobile', get_the_ID());
-        $office_number = get_field('agent_office_number', get_the_ID());
-        $language = get_field('agent_language', get_the_ID());
-        $website = get_field('agent_website', get_the_ID());
-
         $this->render_post_header();
         $this->render_avatar();
         $this->render_table();

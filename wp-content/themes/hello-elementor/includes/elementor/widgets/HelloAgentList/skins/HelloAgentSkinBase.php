@@ -120,25 +120,25 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
 
     protected function render_title() {
         $name = get_the_title();
-        ?>
+        if ($name) { ?>
           <a href="<?php echo  $this->current_permalink ?>" target="_blank" class="hl-agent__title"><?php echo $name ?></a>
-        <?php
+        <?php }
     }
 
     protected function render_position() {
         $spec = get_field('agent_specialties', get_the_ID());
-        ?>
+        if ($spec) { ?>
           <p class="hl-agent__position"><?php echo $spec ?></p>
-        <?php
+        <?php }
     }
 
     protected function render_description() {
 	    $content = get_field('agent_description', get_the_ID());
-        ?>
-          <p class="hl-agent__description">
-                <?php echo $content ?>
-          </p>
-        <?php
+	    if (trim($content)) { ?>
+          <div class="hl-agent__description">
+                <?php echo trim($content); ?>
+          </div>
+        <?php }
     }
 
     protected function render_bottom() {
@@ -181,6 +181,8 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
             while ( $query->have_posts() ) {
                 $query->the_post();
 
+                $website = get_field('agent_website', get_the_ID());
+
                 $this->current_permalink = get_permalink();
                 $this->render_post();
             }
@@ -191,17 +193,17 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
     }
 
 	protected function render_post() {
-        $spec = get_field('agent_specialties', get_the_ID());
-        $areas = get_field('agent_service_areas', get_the_ID());
-        $email = get_field('agent_email', get_the_ID());
-        $position = get_field('agent_position', get_the_ID());
-        $com_name = get_field('agent_company_name', get_the_ID());
-        $license = get_field('agent_license', get_the_ID());
-        $tax = get_field('agent_tax_number', get_the_ID());
-        $tel = get_field('agent_mobile', get_the_ID());
-        $office_number = get_field('agent_office_number', get_the_ID());
-        $language = get_field('agent_language', get_the_ID());
-        $website = get_field('agent_website', get_the_ID());
+      $spec = get_field('agent_specialties', get_the_ID());
+      $areas = get_field('agent_service_areas', get_the_ID());
+      $email = get_field('agent_email', get_the_ID());
+      $position = get_field('agent_position', get_the_ID());
+      $com_name = get_field('agent_company_name', get_the_ID());
+      $license = get_field('agent_license', get_the_ID());
+      $tax = get_field('agent_tax_number', get_the_ID());
+      $tel = get_field('agent_mobile', get_the_ID());
+      $office_number = get_field('agent_office_number', get_the_ID());
+      $language = get_field('agent_language', get_the_ID());
+      $website = get_field('agent_website', get_the_ID());
 
       $this->render_post_header();
           $this->render_avatar();
