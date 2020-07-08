@@ -903,7 +903,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 //        var_dump(builder_get_property_price());
 
         ?>
-        <div class="hl-listing-card__price">
+        <div class="hl-listing-price">
           <?php  echo builder_get_property_price(); ?>
         </div>
 		<?php

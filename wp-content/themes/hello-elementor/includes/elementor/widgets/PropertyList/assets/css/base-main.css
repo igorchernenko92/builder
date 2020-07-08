@@ -248,7 +248,7 @@ ol {
     margin: 0;
 }
 
-.hl-listing-card__price-value {
+.hl-listing-price__value {
     margin-right: 6px;
 }
 
@@ -518,7 +518,7 @@ ol {
     color: var(--red-1);
 }
 
-.hl-listing-card_skin-1 .hl-listing-card__price {
+.hl-listing-card_skin-1 .hl-listing-price {
     color: var(--red-1);
     font-size: 17px;
     font-weight: 600;
@@ -801,7 +801,7 @@ ol {
     color: var(--blue-1);
 }
 
-.hl-listing-card_skin-2 .hl-listing-card__price {
+.hl-listing-card_skin-2 .hl-listing-price {
     color: var(--gray-1);
     font-size: 18px;
     font-weight: 600;
@@ -1109,7 +1109,7 @@ ol {
     color: var(--blue-1);
 }
 
-.hl-listing-card_skin-3 .hl-listing-card__price {
+.hl-listing-card_skin-3 .hl-listing-price {
     color: var(--light-1);
     font-size: 17px;
     font-weight: 700;
