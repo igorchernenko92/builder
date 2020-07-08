@@ -52,6 +52,15 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
 		$repeater = new Repeater();
 
+        $repeater->add_control(
+            'search_button',
+            [
+                'label' => __('Search button', 'builder'),
+                'type' => Controls_Manager::SWITCHER,
+                'default' => '',
+            ]
+        );
+
 		$repeater->add_control(
 			'type_field',
 			[
@@ -68,6 +77,9 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 					'property_living_area' 	=> _x( 'Living Area', 'Type Field', 'elementor' ),
 					'property_terrace' 		=> _x( 'Terrace', 'Type Field', 'elementor' ),
 				],
+                'condition' => [
+                    'search_button' => '',
+                ],
 			]
 		);
 
@@ -82,6 +94,9 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 					'select' 	=> _x( 'Select', 'Type View', 'elementor' ),
 					'checkbox' 	=> _x( 'Checkbox', 'Type View', 'elementor' ),
 				],
+                'condition' => [
+                    'search_button' => '',
+                ],
 			]
 		);
 
@@ -154,6 +169,9 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 						'type_field' => 'price',
 						'type_view' => 'select',
 					],
+                    [
+                        'search_button' => 'yes',
+                    ],
 				],
 				'title_field' => '{{{ type_field }}}',
 			]
@@ -174,7 +192,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
         $paddings_string = 'padding-top:' . $padding_top .  ';' . ' padding-right:' . $padding_right .  ';' . ' padding-bottom:' . $padding_bottom .  ';' . ' padding-left:' . $padding_left .  ';';
 
         $items =  $this->get_instance_value( 'hello_search_items' );
-        $search_result =  $this->get_instance_value( 'hello_search_result_page' );
+        $search_result_page =  $this->get_instance_value( 'hello_search_result_page' );
 
         $value_data = [
             'property_bedrooms' => ['' => 'Bedrooms', '1' => 1, '2' => 2, '3' => 3],
@@ -185,12 +203,23 @@ abstract class Skin_Base extends Elementor_Skin_Base {
         ?>
             <div id="home-search" class="site-section home-section">
                 <div class="container">
-                    <form id="search_filter_form" method="get" action="<?php echo get_page_link( $search_result ); ?>" class="wpsight-listings-search horizontal">
+                    <form id="search_filter_form" method="get" action="<?php echo get_page_link( $search_result_page ); ?>" class="wpsight-listings-search horizontal">
 
                         <div class="listings-search-default" style="<?php echo $paddings_string ?>">
-                            <input type="hidden" id="page_id" name="page_id" value="<?php echo $search_result ?>">
+                            <input type="hidden" id="page_id" name="page_id" value="<?php echo $search_result_page ?>">
                             <?php
                                 foreach ( $items as $field ) :
+                                    $search_button =  $field['search_button'];
+
+                                 if ( $search_button ) {
+                                     $field['type_view'] = ''; // need to prevent other fields to show when button
+                                 ?>
+                                    <div class="wrap-field listings-search-field-submit">
+                                        <div class="wrap-input">
+                                            <input type="submit" value="Search" class="btn btn-primary btn-block">
+                                        </div>
+                                    </div>
+                                <?php }
                                     if ( 'select' == $field['type_view'] ) { ?>
                                         <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
                                             <label class="wrap-input">
@@ -200,9 +229,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                                                       </span>
                                                     <?php } ?>
                                                     <select class="select form-control" name="<?php echo $field['type_field']; ?>">
-                                                        <?php foreach ( $value_data[$field['type_field']] as $index => $option ) {
-//                                                            var_dump($index);
-//                                                            var_dump($option); ?>
+                                                        <?php foreach ( $value_data[$field['type_field']] as $index => $option ) { ?>
                                                             <option value="<?php echo $index; ?>"><?php echo $option; ?></option>
                                                          <?php  }  ?>
                                                     </select>
@@ -225,11 +252,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                                     <?php } ?>
 
                                <?php endforeach; ?>
-                              <div class="wrap-field listings-search-field-submit">
-                                  <div class="wrap-input">
-                                      <input type="submit" value="Search" class="btn btn-primary btn-block">
-                                  </div>
-                              </div>
+
                         </div>
                     </form>
                 </div>
