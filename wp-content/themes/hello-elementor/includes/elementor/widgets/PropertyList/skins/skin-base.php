@@ -1033,11 +1033,21 @@ abstract class Skin_Base extends Elementor_Skin_Base {
     }
 
     protected function render_location() {
-      ?>
+        $terms = get_the_terms( get_the_ID(), 'location' );
+        if ( !$terms ) return;
+
+        $delimiter = ',';
+        ?>
+
         <div class="hl-listing-card__location">
-          <i class="fa fa-map-marker hl-listing-card__location-icon"></i>
-          <a class="hl-listing-card__location-text" href="#">Shinjuku,</a>
-          <a class="hl-listing-card__location-text" href="#">Tokyo</a>
+            <i class="fa fa-map-marker hl-listing-card__location-icon"></i>
+            <?php foreach ( $terms as $key => $term ) {
+                if (end(array_keys($terms)) == $key) {
+                    $delimiter = '';
+                }
+                ?>
+                <a class="hl-listing-card__location-text" href="<?php echo get_term_link( $term ) ?>"><?php echo $term->name . $delimiter ?></a>
+           <?php } ?>
         </div>
       <?php
     }
