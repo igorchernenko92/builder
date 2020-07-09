@@ -898,14 +898,22 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		<?php
 	}
 
-	protected function render_price() {
-        if ( !$this->get_instance_value( 'hello_show_price' ) ) return;
-//        var_dump(builder_get_property_price());
+	  protected function render_price() {
+        $terms = get_the_terms( get_the_ID(), 'status' );
+	  ?>
+      <div class="hl-listing-wrap-price"> <?php
+        if ( $this->get_instance_value( 'hello_show_price' ) ) { ?>
+          <div class="hl-listing-price">
+            <?php  echo builder_get_property_price(); ?>
+          </div>
+        <?php }
 
-        ?>
-        <div class="hl-listing-price">
-          <?php  echo builder_get_property_price(); ?>
-        </div>
+        if ( $terms ) { ?>
+          <div class="hl-listing-card__category hl-listing-card__tag-wrap">
+            <a href="<?php echo get_term_link( $terms[0] ) ?>" class="hl-listing-card__tag hl-listing-card__tag_green"><?php echo $terms[0]->name ?></a>
+          </div>
+        <?php } ?>
+      </div>
 		<?php
 	}
 
@@ -1013,7 +1021,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
     }
 
     protected function render_tags() {
-        $terms = get_the_terms( get_the_ID(), 'status' );
         $featured = get_the_terms( get_the_ID(), 'featured' );
         ?>
         <ul class="hl-listing-card__tags">
@@ -1021,12 +1028,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                 <li class="hl-listing-card__tag-wrap">
                     <a href="<?php echo get_term_link( $featured[0] ) ?>" class="hl-listing-card__tag hl-listing-card__tag_red"><?php echo $featured[0]->name ?></a>
                 </li>
-            <?php } ?>
-
-            <?php if ( $terms ) { ?>
-              <li class="hl-listing-card__tag-wrap ml-auto">
-                <a href="<?php echo get_term_link( $terms[0] ) ?>" class="hl-listing-card__tag hl-listing-card__tag_green"><?php echo $terms[0]->name ?></a>
-              </li>
             <?php } ?>
         </ul>
       <?php

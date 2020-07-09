@@ -411,7 +411,6 @@ ol {
 
 .hl-listing-card_skin-1 .hl-listing-card__tag-wrap {
     position: relative;
-    margin-bottom: 6px;
     margin-right: 6px;
     display: flex;
     align-items: stretch;
@@ -709,7 +708,6 @@ ol {
 
 .hl-listing-card_skin-2 .hl-listing-card__tag-wrap {
     position: relative;
-    margin-bottom: 6px;
     margin-right: 6px;
     display: flex;
     align-items: stretch;
@@ -718,6 +716,11 @@ ol {
 
 .hl-listing-card_skin-2 .hl-listing-card__tag-wrap:last-child {
     margin-right: 0;
+}
+
+.hl-listing-card__tags.hl-listing-card__tags_bottom {
+    top: auto;
+    bottom: 10px;
 }
 
 .hl-listing-card_skin-2 .hl-listing-card__tag {
@@ -782,7 +785,7 @@ ol {
 }
 
 .hl-listing-card_skin-2 .hl-listing-card__title {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .hl-listing-card_skin-2 .hl-listing-card__title a {

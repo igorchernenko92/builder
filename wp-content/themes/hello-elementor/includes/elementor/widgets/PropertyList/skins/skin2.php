@@ -40,22 +40,6 @@ class Skin2 extends Skin_Base {
         <?php
     }
 
-    	protected function render_price() { ?>
-    	  <div class="hl-listing-wrap-price"> <?php
-          if ( $this->get_instance_value( 'hello_show_price' ) ) { ?>
-            <div class="hl-listing-price">
-              <?php  echo builder_get_property_price(); ?>
-            </div>
-          <?php } ?>
-
-          <div class="hl-listing-card__category hl-listing-card__tag-wrap">
-            <a href="#" class="hl-listing-card__tag hl-listing-card__tag_purple">Family Home</a>
-          </div>
-        </div>
-		<?php
-	}
-
-
     protected function render_picture_preview() {
       ?>
         <div class="hl-listing-card__picture-preview">
