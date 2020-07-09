@@ -800,7 +800,7 @@ ol {
     color: var(--blue-1);
 }
 
-.hl-listing-card_skin-2 .hl-listing-wrap-price {
+.hl-listing-wrap-price {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -1119,6 +1119,10 @@ ol {
     color: var(--blue-1);
 }
 
+.hl-listing-card_skin-3 .hl-listing-wrap-price {
+    margin-bottom: 12px;
+}
+
 .hl-listing-card_skin-3 .hl-listing-price {
     color: var(--light-1);
     font-size: 17px;
@@ -1126,7 +1130,6 @@ ol {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    margin-bottom: 12px;
 }
 
 .hl-listing-card_skin-3 .hl-listing-card__description {
