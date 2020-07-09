@@ -1,5 +1,6 @@
 (function($) {
   const HelloPropertySkinScript = function ($scope, $) {
+    $("#search_filter_form").attr("autocomplete", "off");
     // Select 2
     const initSelect2 = function () {
       const $selectFields = $("select");
