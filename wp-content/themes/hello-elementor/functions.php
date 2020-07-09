@@ -310,6 +310,26 @@ function create_taxonomies() {
         )
     );
 
+    register_taxonomy(
+        'status',
+        'property',
+        array(
+            'label' => __( 'Status' ),
+            'rewrite' => array( 'slug' => 'status' ),
+            'hierarchical' => true,
+        )
+    );
+
+    register_taxonomy(
+        'featured',
+        'property',
+        array(
+            'label' => __( 'Featured' ),
+            'rewrite' => array( 'slug' => 'featured' ),
+            'hierarchical' => true,
+        )
+    );
+
 //    register_taxonomy(
 //        'location',
 //        'agent',

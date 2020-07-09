@@ -1013,15 +1013,21 @@ abstract class Skin_Base extends Elementor_Skin_Base {
     }
 
     protected function render_tags() {
-      ?>
+        $terms = get_the_terms( get_the_ID(), 'status' );
+        $featured = get_the_terms( get_the_ID(), 'featured' );
+        ?>
         <ul class="hl-listing-card__tags">
-          <li class="hl-listing-card__tag-wrap">
-            <a href="#" class="hl-listing-card__tag hl-listing-card__tag_green">Featured</a>
-          </li>
+            <?php if ( $featured ) { ?>
+                <li class="hl-listing-card__tag-wrap">
+                    <a href="<?php echo get_term_link( $featured[0] ) ?>" class="hl-listing-card__tag hl-listing-card__tag_red"><?php echo $featured[0]->name ?></a>
+                </li>
+            <?php } ?>
 
-          <li class="hl-listing-card__tag-wrap">
-            <a href="#" class="hl-listing-card__tag hl-listing-card__tag_red">Rentals</a>
-          </li>
+            <?php if ( $terms ) { ?>
+              <li class="hl-listing-card__tag-wrap">
+                <a href="<?php echo get_term_link( $terms[0] ) ?>" class="hl-listing-card__tag hl-listing-card__tag_green"><?php echo $terms[0]->name ?></a>
+              </li>
+            <?php } ?>
         </ul>
       <?php
     }
