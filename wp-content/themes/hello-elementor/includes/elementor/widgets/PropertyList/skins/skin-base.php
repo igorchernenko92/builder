@@ -1024,7 +1024,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
             <?php } ?>
 
             <?php if ( $terms ) { ?>
-              <li class="hl-listing-card__tag-wrap">
+              <li class="hl-listing-card__tag-wrap ml-auto">
                 <a href="<?php echo get_term_link( $terms[0] ) ?>" class="hl-listing-card__tag hl-listing-card__tag_green"><?php echo $terms[0]->name ?></a>
               </li>
             <?php } ?>

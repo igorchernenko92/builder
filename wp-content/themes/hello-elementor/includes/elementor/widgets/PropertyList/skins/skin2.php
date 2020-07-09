@@ -40,15 +40,21 @@ class Skin2 extends Skin_Base {
         <?php
     }
 
-    protected function render_category() {
-      ?>
-        <ul class="hl-listing-card__tags hl-listing-card__tags_bottom">
-          <li class="hl-listing-card__tag-wrap">
+    	protected function render_price() { ?>
+    	  <div class="hl-listing-wrap-price"> <?php
+          if ( $this->get_instance_value( 'hello_show_price' ) ) { ?>
+            <div class="hl-listing-price">
+              <?php  echo builder_get_property_price(); ?>
+            </div>
+          <?php } ?>
+
+          <div class="hl-listing-card__category hl-listing-card__tag-wrap">
             <a href="#" class="hl-listing-card__tag hl-listing-card__tag_purple">Family Home</a>
-          </li>
-        </ul>
-      <?php
-    }
+          </div>
+        </div>
+		<?php
+	}
+
 
     protected function render_picture_preview() {
       ?>
@@ -106,11 +112,12 @@ class Skin2 extends Skin_Base {
         <?php
     }
 
+
+
     protected function render_post() {
         $this->render_post_header();
             $this->start_picture_wrapper();
                 $this->render_tags();
-                $this->render_category();
                 $this->render_picture_preview();
                 $this->render_post_image();
                 $this->render_thumb_carousel();

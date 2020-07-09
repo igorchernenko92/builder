@@ -600,6 +600,7 @@ ol {
 .hl-listing-card_skin-1 .hl-listing-card__agent {
     display: flex;
     align-items: center;
+    min-height: 30px;
 }
 
 .hl-listing-card_skin-1 .hl-listing-card__agent-img {
@@ -706,11 +707,6 @@ ol {
     justify-content: space-between;
 }
 
-.hl-listing-card_skin-2 .hl-listing-card__tags.hl-listing-card__tags_bottom {
-    top: auto;
-    bottom: 10px;
-}
-
 .hl-listing-card_skin-2 .hl-listing-card__tag-wrap {
     position: relative;
     margin-bottom: 6px;
@@ -801,6 +797,14 @@ ol {
     color: var(--blue-1);
 }
 
+.hl-listing-card_skin-2 .hl-listing-wrap-price {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: auto;
+}
+
 .hl-listing-card_skin-2 .hl-listing-price {
     color: var(--gray-1);
     font-size: 18px;
@@ -808,7 +812,10 @@ ol {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    margin-top: auto;
+}
+
+.hl-listing-card_skin-2 .hl-listing-card__category {
+    margin-bottom: 0;
 }
 
 .hl-listing-card_skin-2 .hl-listing-card__info {
