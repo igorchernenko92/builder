@@ -1089,7 +1089,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                     if ($gallery) {
                         foreach ($gallery as $image) { ?>
                             <div class="swiper-slide hl-listing-card__carousel-item">
-                                <a class="hl-listing-card__carousel-item-inner hl-listing-card__picture-wrap-img" href="#">
+                                <a class="hl-listing-card__carousel-item-inner hl-listing-card__picture-wrap-img" href="<?php echo $this->current_permalink; ?>">
                                     <img
                                             src="<?php echo  $image['sizes']['medium_large']; ?>"
                                             class="hl-listing-card__picture-img hl-img-responsive"

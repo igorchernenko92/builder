@@ -79,12 +79,18 @@ class Skin2 extends Skin_Base {
 	}
 
     protected function render_agent() {
+	     if ( ! $this->get_instance_value( 'show_agent' ) ) return;
+        if ( ! $agent = get_field('property_agent') ) return;
+
+        $name = $agent[0]->post_title;
+        $link = get_the_permalink($agent[0]->ID);
+        $thumbnail = get_the_post_thumbnail( $agent[0]->ID, 'large', ['class' => "hl-listing-card__agent-img hl-img-responsive"] )
         ?>
         <div class="hl-listing-card__bottom mt-auto">
             <div class="hl-listing-card__bottom-inner">
-                <a href="#" class="hl-listing-card__bottom-item">
-                    <i class="fa fa-user hl-listing-card__icon hl-listing-card__bottom-item-icon"></i>
-                    <span class="hl-listing-card__bottom-item-text">Janet Richmond</span>
+                <a href="<?php echo $link ?>" class="hl-listing-card__bottom-item">
+                    <?php echo $thumbnail; ?>
+                    <span class="hl-listing-card__bottom-item-text"><?php echo $name ?></span>
                 </a>
 
                 <div class="hl-listing-card__bottom-item">
