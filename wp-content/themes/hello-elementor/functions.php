@@ -405,9 +405,10 @@ function add_search_array() {
         'property_rooms',
         'property_living_area',
         'property_terrace',
+        'property_price',
     ];
 
-    add_option( 'hello_search_array', $check_get );
+    update_option( 'hello_search_array', $check_get );
 }
 
 

@@ -76,30 +76,53 @@ class Property extends Property_Base {
 			'paged' => $this->get_current_page(),
             ];
 
-        $this->set_settings('property_post_type', 'property');
+        $this->set_settings('property_post_type', 'property'); // query only property post type
 
         $check_get = get_option('hello_search_array');
-        foreach ( (array)$_GET as $meta_key => $meta_value ) {
-            if ( in_array( $meta_key, $check_get ) && ! empty( $meta_value ) ) {
-                if ( 'keyword' == $meta_key ) {
-                    $args['s'] = $meta_value;
-                } elseif ( 'property_year_built' == $meta_key ) {
-                    $args['meta_query'][] = array(
-                        array(
-                            'key' 		=> $meta_key,
-                            'value' 	=> preg_replace( '/\s+/', '', $meta_value ), // date('Ymd'),
-                            'type' 		=> 'DATE',
-                            'compare' 	=> '=='
-                        )
-                    );
-                } else {
+        $getParam = (array)$_GET;
+
+        foreach ( $getParam as $meta_key => $meta_value ) {
+            if ( in_array( $meta_key, $check_get ) && !empty( $meta_value ) ) {
+                $type = '';
+                $compare = '';
+
+                if ( 'property_year_built' == $meta_key ) {
+                    $type = 'DATE';
+                    $compare = '==';
+                    $meta_value = preg_replace( '/\s+/', '', $meta_value ); // date('Ymd'),
+                }
+
+                if ( 'property_price' == $meta_key ) {
+                    $type = 'numeric';
+                    $compare = 'BETWEEN';
+
+                    if ( empty( $meta_value['min'] )  ) {
+                        $meta_value['min'] = 0;
+                    }
+
+                    if ( empty( $meta_value['max'] ) ) {
+                        $meta_value['max'] = 999999999;
+                    }
+
+                    $meta_value = array( $meta_value['min'], $meta_value['max'] );
+                }
+
+
+
+//                if ( 'keyword' == $meta_key ) {
+//                    $args['s'] = $meta_value;
+//                } else {
                     $args['meta_query'][] = array(
                         array(
                             'key'   => $meta_key,
-                            'value' => $meta_value
+                            'value' => $meta_value,
+                            'type'    => $type,
+                            'compare' => $compare
                         )
                     );
-                }
+
+//
+//                }
             }
         }
 

@@ -286,7 +286,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
 	}
 
-
     protected function render_search_form() {
         $settings = $this->parent->get_settings_for_display();
 
@@ -377,13 +376,13 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                                                     <?php echo $field['label']; ?>
                                                 </span>
                                             <?php } ?>
-                                            <input class="text form-control" name="min" type="text" value="" placeholder="<?php echo $field['placeholder']; ?>">
+                                            <input class="text form-control" name="property_price[min]" type="text" value="" placeholder="<?php echo $field['placeholder']; ?>">
                                             <?php if ($field['price_label']) { ?>
                                                 <span class="listings-search-field-label">
                                                     <?php echo $field['price_label']; ?>
                                                 </span>
                                             <?php } ?>
-                                            <input class="text form-control" name="max" type="text" value="" placeholder="<?php echo $field['price_placeholder']; ?>">
+                                            <input class="text form-control" name="property_price[max]" type="text" value="" placeholder="<?php echo $field['price_placeholder']; ?>">
                                         </label>
                                     </div>
                                 <?php } ?>
