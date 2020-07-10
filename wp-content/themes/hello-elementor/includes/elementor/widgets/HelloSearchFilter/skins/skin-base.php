@@ -151,6 +151,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 					'property_rooms' 		=> _x( 'Rooms', 'Type Field', 'elementor' ),
 					'property_living_area' 	=> _x( 'Living Area', 'Type Field', 'elementor' ),
 					'property_terrace' 		=> _x( 'Terrace', 'Type Field', 'elementor' ),
+					'property_price' 		=> _x( 'Price', 'Type Field', 'elementor' ),
 				],
                 'condition' => [
                     'search_button' => '',
@@ -171,9 +172,13 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 				],
                 'condition' => [
                     'search_button' => '',
+                    'type_field!' => 'property_price'
                 ],
 			]
 		);
+
+
+
 
 		$repeater->add_control(
             'label',
@@ -192,6 +197,30 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                 'placeholder' 	=> __( 'Enter your placeholder', 'elementor' ),
                 'condition' => [
                     'search_button' => '',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'price_label',
+            [
+                'label' 		=> __( 'Label 2', 'elementor' ),
+                'type' 			=> Controls_Manager::TEXT,
+                'placeholder' 	=> __( 'Enter your label', 'elementor' ),
+                'condition' => [
+                    'type_field' => 'property_price'
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'price_placeholder',
+            [
+                'label' 		=> __( 'Placeholder 2', 'elementor' ),
+                'type' 			=> Controls_Manager::TEXT,
+                'placeholder' 	=> __( 'Enter your placeholder', 'elementor' ),
+                'condition' => [
+                    'type_field' => 'property_price'
                 ],
             ]
         );
@@ -287,21 +316,28 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                             <input type="hidden" id="page_id" name="page_id" value="<?php echo $search_result_page ?>">
                             <?php
                                 foreach ( $items as $field ) :
-                                    $search_button =  $field['search_button'];
 
-                                 if ( $search_button ) {
-                                     $label = 'Search';
-                                     $field['type_view'] = ''; // need to prevent other fields to show when button
-                                     if ($field['label']) {
-                                         $label = $field['label'];
-                                     }
-                                 ?>
-                                    <div class="wrap-field listings-search-field-submit" style="width:<?php echo $field['width_field']; ?>%;">
-                                        <div class="wrap-input">
-                                            <input type="submit" value="<?php echo $label; ?>" class="btn btn-primary btn-block hello_search_button elementor-animation-<?php echo $field['hover_animation'] ?>">
+                                    if ( $field['type_field'] == 'property_price' ) {
+                                        $field['type_view'] = 'price';
+                                    }
+
+                                    // search button
+                                    $search_button =  $field['search_button'];
+                                     if ( $search_button ) {
+                                         $field['type_view'] = ''; // need to prevent other fields to show when button
+                                         $label = __( 'Search', 'builder' );
+
+                                         if ($field['label']) {
+                                             $label = $field['label'];
+                                         }
+                                     ?>
+                                        <div class="wrap-field listings-search-field-submit" style="width:<?php echo $field['width_field']; ?>%;">
+                                            <div class="wrap-input">
+                                                <input type="submit" value="<?php echo $label; ?>" class="btn btn-primary btn-block hello_search_button elementor-animation-<?php echo $field['hover_animation'] ?>">
+                                            </div>
                                         </div>
-                                    </div>
-                                <?php }
+                                    <?php } // end search button
+
                                     if ( 'select' == $field['type_view'] ) { ?>
                                         <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
                                             <label class="wrap-input">
@@ -332,6 +368,25 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                                                 </label>
                                             </div>
                                     <?php } ?>
+
+                                    <?php  if ( 'price' == $field['type_view'] ) { ?>
+                                    <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
+                                        <label class="wrap-input">
+                                            <?php if ($field['label']) { ?>
+                                                <span class="listings-search-field-label">
+                                                    <?php echo $field['label']; ?>
+                                                </span>
+                                            <?php } ?>
+                                            <input class="text form-control" name="min" type="text" value="" placeholder="<?php echo $field['placeholder']; ?>">
+                                            <?php if ($field['price_label']) { ?>
+                                                <span class="listings-search-field-label">
+                                                    <?php echo $field['price_label']; ?>
+                                                </span>
+                                            <?php } ?>
+                                            <input class="text form-control" name="max" type="text" value="" placeholder="<?php echo $field['price_placeholder']; ?>">
+                                        </label>
+                                    </div>
+                                <?php } ?>
 
                                <?php endforeach; ?>
 
