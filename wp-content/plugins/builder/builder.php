@@ -50,42 +50,9 @@ if ( ! class_exists( 'Property_Builder' ) ) {
             if ( is_admin() )
                 $this->admin = new Builder_Admin();
 
-
             // called after all plugins have loaded
             add_action( 'plugins_loaded', array( &$this, 'plugins_loaded' ) );
 	    }
-
-
-
-
-	    /**
-		 * Take care of anything that needs all plugins to be loaded
-		 */
-		public function plugins_loaded() {
-
-			if ( is_plugin_inactive('advanced-custom-fields-pro/acf.php' ) ) {
-
-				add_action('all_admin_notices', 'wp_manager_required_notice');
-
-				function wp_manager_required_notice() {
-
-			        $plugin_data = get_plugin_data(__FILE__);
-			        echo '
-			        <div class="error">
-			          <p>'.sprintf( __('<strong>%s</strong> You must install <strong><a href="https://github.com/wp-premium/advanced-custom-fields-pro" target="_blank">Advanced Custom Fields Pro</a></strong> plugin to use Builder.', 'wp_manager_txtd'), $plugin_data['Name'] ).'</p>
-			        </div>';
-				}
-
-			} else {
-
-				if ( function_exists('acf_add_local_field_group') ) :
-
-					// 
-					
-
-				endif;
-			}
-		}
 	}
 
 	$builder = new Property_Builder();
