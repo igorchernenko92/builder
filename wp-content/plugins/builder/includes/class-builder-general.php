@@ -32,25 +32,6 @@ class Builder_General {
 
 
     /**
-     *	builder_property_offer_raw()
-     *
-     *	Return property offer without formatting
-     *
-     *	@since 1.0.0
-     */
-    public static function builder_property_offer_raw( $post_id = '' ) {
-        if ( ! $post_id )
-            $post_id = get_the_ID();
-
-        // Get listing offer
-        $offer = get_field('property_offer', $post_id );
-
-
-        // Return offer key or label
-        return apply_filters( 'builder_get_property_offer', $offer, $post_id );
-    }
-
-    /**
      *	builder_property_offer_period_raw()
      *
      *	Return property offer period without formatting
@@ -142,7 +123,6 @@ class Builder_General {
 
 
         $property_price  = self::builder_property_price_raw( $post_id );
-        $property_offer  = self::builder_property_offer_raw( $post_id );
         $property_offer_period  = self::builder_property_offer_period_raw( $post_id );
 
         if ( !empty( $property_price ) ) {
