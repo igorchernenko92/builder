@@ -166,9 +166,10 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'input',
 				'options' => [
-					'input' 	=> _x( 'Input', 'Type View', 'elementor' ),
-					'select' 	=> _x( 'Select', 'Type View', 'elementor' ),
-					'checkbox' 	=> _x( 'Checkbox', 'Type View', 'elementor' ),
+					'input' 	        => _x( 'Input', 'Type View', 'elementor' ),
+					'select' 	        => _x( 'Select', 'Type View', 'elementor' ),
+					'multiple-select' 	=> _x( 'Multiple Select', 'Type View', 'elementor' ),
+					'checkbox' 	        => _x( 'Checkbox', 'Type View', 'elementor' ),
 				],
                 'condition' => [
                     'search_button' => '',
@@ -176,9 +177,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                 ],
 			]
 		);
-
-
-
 
 		$repeater->add_control(
             'label',
@@ -353,6 +351,24 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                                             </label>
                                         </div>
                                     <?php } ?>
+
+                                    <?php if ( 'multiple-select' == $field['type_view'] ) { ?>
+                                        <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
+                                            <label class="wrap-input">
+                                                <?php if ($field['label']) { ?>
+                                                    <span class="listings-search-field-label">
+                                                              <?php echo $field['label']; ?>
+                                                          </span>
+                                                <?php } ?>
+                                                <select class="select form-control" name="<?php echo $field['type_field']; ?>">
+                                                    <?php foreach ( $value_data[$field['type_field']] as $index => $option ) { ?>
+                                                        <option value="<?php echo $index; ?>"><?php echo $option; ?></option>
+                                                    <?php  }  ?>
+                                                </select>
+                                            </label>
+                                        </div>
+                                    <?php } ?>
+
 
 
                                     <?php  if ( 'input' == $field['type_view'] ) { ?>

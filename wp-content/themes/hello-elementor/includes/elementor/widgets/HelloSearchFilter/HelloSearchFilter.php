@@ -76,12 +76,6 @@ class HelloSearchFilter extends Base_Widget {
 			]
 		);
 
-
 		$this->end_controls_section();
-
 	}
-
-
-
-
 }
