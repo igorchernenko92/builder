@@ -95,7 +95,7 @@ class Skin2 extends Skin_Base {
 
                 <div class="hl-listing-card__bottom-item">
                     <i class="fa fa-calendar hl-listing-card__icon hl-listing-card__bottom-item-icon"></i>
-                    <time class="hl-listing-card__bottom-item-text">2 months ago</time>
+                    <time class="hl-listing-card__bottom-item-text"><?php echo  human_time_diff( get_the_time( 'U' ), current_time( 'timestamp' ) ).' '.__( 'ago' ); ?></time>
                 </div>
             </div>
         </div>
