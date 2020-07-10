@@ -31,14 +31,18 @@ class HelloSearchFilter extends Base_Widget {
 
         wp_register_script('hello-search-select2', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloSearchFilter/assets/js/select2.min.js', '', '1', true);
         wp_register_style('hello-search-select2-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloSearchFilter/assets/css/select2.min.css', '', 1);
+
+        wp_enqueue_script( 'hello-search-multiple',  get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloSearchFilter/assets/js/multiple-select.min.js', '', '1', true );
+        wp_enqueue_style( 'hello-search-multiple-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloSearchFilter/assets/css/multiple-select.min.css');
+
 	}
 
     public function get_script_depends() {
-        return ['hello-search-select2', 'hello-search-script' ];
+        return ['hello-search-select2', 'hello-search-script', 'hello-search-multiple' ];
     }
 
     public function get_style_depends() {
-        return ['hello-search-style', 'hello-search-select2-style'];
+        return ['hello-search-style', 'hello-search-select2-style', 'hello-search-multiple-style'];
     }
 
 	public function get_name() {
