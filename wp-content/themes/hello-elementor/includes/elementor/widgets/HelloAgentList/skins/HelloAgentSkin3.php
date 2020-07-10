@@ -31,7 +31,96 @@ class HelloAgentSkin3 extends HelloAgentSkinBase {
 		return __( 'Skin 3', 'elementor-pro' );
 	}
 
+    protected function render_post_header() {
+      ?>
+          <div <?php post_class( [ 'hl-agent' ] ); ?>>
+      <?php
+  }
+
+    public function render_agents_top() {
+        ?>
+            <div class='hl-agents-3'>
+        <?php
+    }
+
+    protected function render_content() {
+        $license = get_field('agent_license', get_the_ID());
+        $tax = get_field('agent_tax_number', get_the_ID());
+        $areas = get_field('agent_service_areas', get_the_ID());
+        $spec = get_field('agent_specialties', get_the_ID());
+        ?>
+
+        <div class="hl-agent__content">
+          <div class="hl-agent__content-top">
+            <a class="hl-agent__title" href="#">
+              Samuel Palmer
+            </a>
+
+            <span class="hl-agent__content-company">
+              Company Agent at <a href="#">Modern House Real Estate</a>
+            </span>
+          </div>
+
+          <ul class="hl-agent__table">
+            <?php if ($license) { ?>
+            <li class="hl-agent__table-row">
+              <span class="hl-agent__table-label">
+                Agent license:
+              </span>
+
+              <span class="hl-agent__table-value">
+                <?php echo $license; ?>
+              </span>
+            </li>
+            <?php } ?>
+
+            <?php if ($tax) { ?>
+            <li class="hl-agent__table-row">
+              <span class="hl-agent__table-label">
+                Tax Number:
+              </span>
+
+              <span class="hl-agent__table-value">
+                <?php echo $tax; ?>
+              </span>
+            </li>
+            <?php } ?>
+
+            <?php if ($areas) { ?>
+            <li class="hl-agent__table-row">
+              <span class="hl-agent__table-label">
+                Service Areas:
+              </span>
+
+              <span class="hl-agent__table-value">
+                <?php echo $areas; ?>
+              </span>
+            </li>
+            <?php } ?>
+
+            <?php if ($spec) { ?>
+            <li class="hl-agent__table-row">
+              <span class="hl-agent__table-label">
+                Specialties:
+              </span>
+
+              <span class="hl-agent__table-value">
+                <?php echo $spec; ?>
+              </span>
+            </li>
+            <?php } ?>
+          </ul>
+        </div>
+
+        <?php
+    }
 
 
+    protected function render_post() {
+        $this->render_post_header();
+        $this->render_avatar();
+        $this->render_content();
+        $this->render_post_footer();
+    }
 
 }

@@ -921,6 +921,10 @@ ol {
 /*    }*/
 /*}*/
 
+.hl-listing-card_skin-3 .hl-listing-wrap-price {
+    margin-top: 0;
+}
+
 .hl-listing-card_skin-3 {
     flex-direction: row;
     flex-wrap: wrap;

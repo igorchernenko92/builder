@@ -21,7 +21,7 @@
     align-items: stretch;
 }
 
-.hl-agent {
+.hl-agents .hl-agent {
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -35,7 +35,7 @@
     border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.hl-agent:hover {
+.hl-agents .hl-agent:hover {
     box-shadow: 0 70px 70px rgba(0, 0, 0, 0.2);
     transform: translate(0, -10px);
 }
@@ -64,55 +64,55 @@
     left: 0;
 }
 
-.hl-agent__title,
-.hl-agent__bottom-link {
+.hl-agents .hl-agent__title,
+.hl-agents .hl-agent__bottom-link {
     font-weight: bold;
     color: var(--blue);
     margin-bottom: 6px;
     transition: 0.3s all ease;
 }
 
-.hl-agent__bottom-link {
+.hl-agents .hl-agent__bottom-link {
     margin-bottom: 0;
     font-size: 14px;
 }
 
-.hl-agent__title:hover,
-.hl-agent__bottom-link:hover {
+.hl-agents .hl-agent__title:hover,
+.hl-agents .hl-agent__bottom-link:hover {
     color: var(--blue-dark);
 }
 
-.hl-agent__position {
+.hl-agents .hl-agent__position {
     font-weight: 500;
     display: block;
     margin-bottom: 20px;
 }
 
-.hl-agent__description {
+.hl-agents .hl-agent__description {
     color: #636363;
     line-height: 1.7;
     font-size: 14px;
     margin-bottom: 30px;
 }
 
-.hl-agent__description > * {
+.hl-agents .hl-agent__description > * {
     color: inherit;
     line-height: inherit;
     font-size: inherit;
 }
 
-.hl-agent__bottom {
+.hl-agents .hl-agent__bottom {
     margin-top: auto;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.hl-agent__table {
+.hl-agents-2 .hl-agent__table {
     font-size: 16px;
 }
 
-.hl-agent__table-row {
+.hl-agents-2 .hl-agent__table-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -120,11 +120,11 @@
     border-bottom: 1px solid #eef3f6;
 }
 
-/*.hl-agent__table-row:last-child {*/
+/*.hl-agents-2 .hl-agent__table-row:last-child {*/
 /*    border-bottom: none;*/
 /*}*/
 
-.hl-agent__table-label {
+.hl-agents-2 .hl-agent__table-label {
     font-weight: bold;
     color: #000;
     max-width: 40%;
@@ -132,20 +132,20 @@
     margin-right: 8px;
 }
 
-.hl-agent__table-value {
+.hl-agents-2 .hl-agent__table-value {
     color: #333;
     text-align: right;
     max-width: 60%;
 
 }
 
-.hl-agent__table-value a {
+.hl-agents-2 .hl-agent__table-value a {
     text-decoration: none;
     color: var(--blue);
     transition: 0.3s all ease;
 }
 
-.hl-agent__table-value a:hover {
+.hl-agents-2 .hl-agent__table-value a:hover {
     color: var(--blue-dark);
 }
 
@@ -180,4 +180,115 @@
     .hl-agents-2 {
         grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     }
+}
+
+.hl-agents-3 {
+    margin-left: -12px;
+    margin-right: -12px;
+}
+
+@media (max-width: 768px) {
+    .hl-agents-3 {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+.hl-agents-3 .hl-agent {
+    margin-bottom: 30px;
+    display: flex;
+    background-color: #fff;
+    padding: 24px;
+}
+
+@media (max-width: 768px) {
+    .hl-agents-3 .hl-agent {
+        display: block;
+    }
+}
+
+.hl-agents-3 .hl-agent > * {
+    width: 100%;
+    padding: 0 16px;
+}
+
+@media (max-width: 768px) {
+    .hl-agents-3 .hl-agent > * {
+        padding: 0;
+    }
+}
+
+.hl-agents-3 .hl-agent__wrap-img {
+    margin: 0;
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .hl-agents-3 .hl-agent__wrap-img {
+        margin-bottom: 12px;
+    }
+}
+
+.hl-agents-3 .hl-agent:last-child {
+    margin-bottom: 0;
+}
+
+.hl-agents-3 .hl-agent .hl-agent__wrap-img {
+    width: 100%;
+    max-width: calc(100% / 3);
+    border-radius: 0;
+}
+
+@media (max-width: 768px) {
+    .hl-agents-3 .hl-agent .hl-agent__wrap-img {
+        max-width: 100%;
+    }
+}
+
+.hl-agents-3 .hl-agent__title {
+    font-size: 24px;
+    display: block;
+    margin-bottom: 6px;
+    color: #000;
+}
+
+.hl-agents-3 .hl-agent__content-top {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #dce0e0;
+}
+
+.hl-agents-3 .hl-agent__table-row {
+    margin-bottom: 6px;
+    display: flex;
+}
+
+@media (max-width: 768px) {
+    .hl-agents-3 .hl-agent__table-row {
+        display: block;
+        margin-bottom: 10px;
+    }
+    .hl-agents-3 .hl-agent__table-row > * {
+        display: block;
+    }
+}
+
+.hl-agents-3 .hl-agent__table-row:last-child {
+    margin-bottom: 0;
+}
+
+.hl-agents-3 .hl-agent__table-label {
+    font-weight: bold;
+    margin-right: 6px;
+}
+
+@media (max-width: 768px) {
+    .hl-agents-3 .hl-agent__table-label {
+        margin-right: 0;
+        margin-bottom: 4px;
+    }
+}
+
+.hl-agents-3 .hl-agent__content-company a {
+    color: #00aeff;
 }
