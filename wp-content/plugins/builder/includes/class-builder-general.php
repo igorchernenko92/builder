@@ -197,6 +197,7 @@ class Builder_General {
         if ( ! $post_id ) return false;
 
         $terms = get_the_terms( $post_id, 'status' );
+        if ( !$terms ) return false;
         $term = $terms[0];
         $term_link = get_term_link( $term );
         $term_name = $term->name;
