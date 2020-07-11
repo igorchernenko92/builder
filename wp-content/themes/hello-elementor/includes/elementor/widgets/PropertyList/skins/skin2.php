@@ -78,6 +78,15 @@ class Skin2 extends Skin_Base {
         echo '</ul>';
 	}
 
+	protected function render_agent_time() {
+	  ?>
+      <div class="hl-listing-card__bottom-item hl-listing-card__bottom-item_time">
+          <i class="fa fa-calendar hl-listing-card__icon hl-listing-card__bottom-item-icon"></i>
+          <time class="hl-listing-card__bottom-item-text"><?php echo  human_time_diff( get_the_time( 'U' ), current_time( 'timestamp' ) ).' '.__( 'ago' ); ?></time>
+      </div>
+	  <?php
+	}
+
     protected function render_agent() {
 	     if ( ! $this->get_instance_value( 'show_agent' ) ) return;
         if ( ! $agent = get_field('property_agent') ) return;
@@ -88,15 +97,11 @@ class Skin2 extends Skin_Base {
         ?>
         <div class="hl-listing-card__bottom mt-auto">
             <div class="hl-listing-card__bottom-inner">
-                <a href="<?php echo $link ?>" class="hl-listing-card__bottom-item">
+                <a href="<?php echo $link ?>" class="hl-listing-card__agent hl-listing-card__bottom-item">
                     <?php echo $thumbnail; ?>
-                    <span class="hl-listing-card__bottom-item-text"><?php echo $name ?></span>
+                    <span class="hl-listing-card__agent-name"><?php echo $name ?></span>
                 </a>
-
-                <div class="hl-listing-card__bottom-item">
-                    <i class="fa fa-calendar hl-listing-card__icon hl-listing-card__bottom-item-icon"></i>
-                    <time class="hl-listing-card__bottom-item-text"><?php echo  human_time_diff( get_the_time( 'U' ), current_time( 'timestamp' ) ).' '.__( 'ago' ); ?></time>
-                </div>
+                <?php $this->render_agent_time(); ?>
             </div>
         </div>
         <?php

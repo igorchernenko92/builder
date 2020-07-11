@@ -895,6 +895,30 @@ ol {
 .hl-listing-card_skin-2 a.hl-listing-card__bottom-item:hover {
     color: var(--blue-1);
 }
+
+.hl-listing-card_skin-2 .hl-listing-card__agent {
+    display: flex;
+    align-items: center;
+    min-height: 30px;
+}
+
+.hl-listing-card_skin-2 .hl-listing-card__agent-img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 100%;
+}
+
+.hl-listing-card_skin-2 .hl-listing-card__agent-name {
+    font-weight: 500;
+    color: var(--dark);
+    transition: all var(--default-transition);
+    font-size: 13px;
+}
+
+.hl-listing-card_skin-2 .hl-listing-card__bottom-item_time {
+    flex-shrink: 0;
+}
 /* Skin 2 END */
 
 
