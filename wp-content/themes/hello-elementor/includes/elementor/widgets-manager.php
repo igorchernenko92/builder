@@ -63,7 +63,7 @@ class Widget_Manager {
         include_once( 'widgets/HelloMap/HelloGoogleMap.php' );
         include_once( 'widgets/HelloSearchFilter/HelloSearchFilter.php' );
 //        include_once( 'widgets/HelloPropertyFeatures/HelloPropertyFeatures.php' );
-        include_once( 'widgets/icon-box.php' );
+        include_once( 'widgets/HelloPropertyFeatures.php' );
 //
         include_once( 'widgets/ListingDetails.php' ); 
 

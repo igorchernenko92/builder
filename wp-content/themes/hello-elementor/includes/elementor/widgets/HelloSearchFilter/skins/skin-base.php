@@ -357,11 +357,11 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                                             <label class="wrap-input">
                                                 <?php if ($field['label']) { ?>
                                                     <span class="listings-search-field-label">
-                                                              <?php echo $field['label']; ?>
-                                                          </span>
+                                                        <?php echo $field['label']; ?>
+                                                    </span>
                                                 <?php } ?>
                                                 <span class="wrap-select">
-                                                  <select class="select-multiselect form-control" multiple="multiple" name="<?php echo $field['type_field']; ?>">
+                                                  <select class="select-multiselect form-control" multiple="multiple" name="<?php echo $field['type_field']; ?>[]">
                                                       <?php foreach ( $value_data[$field['type_field']] as $index => $option ) { ?>
                                                         <option value="<?php echo $index; ?>"><?php echo $option; ?></option>
                                                       <?php  }  ?>
