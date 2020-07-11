@@ -248,7 +248,7 @@ ol {
     margin: 0;
 }
 
-.hl-listing-price__value {
+.hl-listing-card .hl-listing-price__value {
     margin-right: 6px;
 }
 
