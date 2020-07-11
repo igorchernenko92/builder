@@ -731,7 +731,7 @@ trait DCE_Trait_Meta {
         return false;
     }
 
-    public function get_acf_fields($types = array(), $group = false, $select = true) {
+    public static function get_acf_fields($types = array(), $group = false, $select = true) {
 
         $acfList = [];
 
