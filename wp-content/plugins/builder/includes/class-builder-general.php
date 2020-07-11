@@ -149,10 +149,10 @@ class Builder_General {
             $currency_symbol =  self::builder_get_currency_symbol($currency);
             $offer_period  =  self::builder_get_offer_period($property_offer_period);
 
-            $property_price = '<span class="hl-listing-price__value">' . $currency_symbol . ' ' .  $property_price . '  </span>';
+            $property_price = '<span class="hl-listing-price__value">' . $currency_symbol . '' .  $property_price . '</span>';
 
             if ( $offer_period ) {
-                $property_price .= '<span class="hl-listing-price__label">' . $offer_period . ' </span>';
+                $property_price .= '<span class="hl-listing-price__label">' . $offer_period . '</span>';
             }
 
         }
@@ -160,6 +160,56 @@ class Builder_General {
         return apply_filters( 'builder_get_property_price', $property_price, $post_id );
 
     }
+
+
+
+    /**
+     *	hello_property_status_raw()
+     *
+     *	Return property status without formatting
+     *
+     *	@since 1.0.0
+     */
+//    public static function builder_property_status_raw( $post_id = '') {
+//        if ( ! $post_id )
+//            $post_id = get_the_ID();
+//
+//        if ( ! $post_id )
+//            return false;
+//
+//        $terms = get_the_terms( $post_id, 'status' );
+//
+//        return $terms[0];
+//    }
+
+
+    /**
+     * builder_property_status()
+     *
+     * Returns formatted property status
+     *
+     * @return string|bool Formatted property status or false
+     *
+     * @since 1.0.0
+     */
+    public static function builder_property_status( $post_id = '') {
+        if ( ! $post_id ) $post_id = get_the_ID();
+        if ( ! $post_id ) return false;
+
+        $terms = get_the_terms( $post_id, 'status' );
+        $term = $terms[0];
+        $term_link = get_term_link( $term );
+        $term_name = $term->name;
+
+        if ( is_wp_error($term_link) ) return false;
+
+        $property_status = '<div class="hl-listing-card__category hl-listing-card__tag-wrap">
+            <a href="' . $term_link . '" class="hl-listing-card__tag hl-listing-card__tag_green">' .  $term_name . '</a>
+          </div>';
+
+        return apply_filters( 'builder_get_property_status', $property_status, $post_id );
+    }
+
 
 
     /**
@@ -271,6 +321,9 @@ class Builder_General {
         );
 
         return apply_filters( 'property_currencies', $currencies );
-
     }
+
 }
+
+
+

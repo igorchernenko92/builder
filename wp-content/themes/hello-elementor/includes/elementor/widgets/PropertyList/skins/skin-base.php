@@ -1043,7 +1043,8 @@ abstract class Skin_Base extends Elementor_Skin_Base {
         <div class="hl-listing-card__location">
             <i class="fa fa-map-marker hl-listing-card__location-icon"></i>
             <?php foreach ( $terms as $key => $term ) {
-                if (end(array_keys($terms)) == $key) {
+                $array_keys = array_keys($terms);
+                if (end($array_keys) == $key) {
                     $delimiter = '';
                 }
                 ?>

@@ -51,7 +51,7 @@ if ( ! class_exists( 'Property_Builder' ) ) {
                 $this->admin = new Builder_Admin();
 
             // called after all plugins have loaded
-            add_action( 'plugins_loaded', array( &$this, 'plugins_loaded' ) );
+//            add_action( 'plugins_loaded', array( &$this, 'plugins_loaded' ) );
 	    }
 	}
 

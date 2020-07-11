@@ -64,6 +64,8 @@ class Widget_Manager {
         include_once( 'widgets/HelloSearchFilter/HelloSearchFilter.php' );
 //        include_once( 'widgets/HelloPropertyFeatures/HelloPropertyFeatures.php' );
         include_once( 'widgets/HelloPropertyFeatures.php' );
+        include_once( 'widgets/HelloPropertyPrice.php' );
+        include_once( 'widgets/HelloPropertyStatus.php' );
 //
         include_once( 'widgets/ListingDetails.php' ); 
 
@@ -91,6 +93,8 @@ class Widget_Manager {
 
 //        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloPropertyFeatures\HelloPropertyFeatures() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloPropertyFeatures() );
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloPropertyPrice() );
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloPropertyStatus() );
     }
 
     /**
@@ -140,18 +144,14 @@ class Widget_Manager {
                 $listings = new Property();
 
                 $manager->get_condition( 'general' )->register_sub_condition( $listings );
-
             }
         );
-//
-
 
         // Register widgets
         add_action( 'elementor/widgets/widgets_registered', [ $this, 'register_widgets' ] );
 
         // Add widget categories
         add_action( 'elementor/elements/categories_registered', [ $this, 'add_widget_categories'] );
-
     }
 }
 
