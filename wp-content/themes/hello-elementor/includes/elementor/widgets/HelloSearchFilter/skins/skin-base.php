@@ -386,20 +386,26 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
                                     <?php  if ( 'price' == $field['type_view'] ) { ?>
                                     <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
+                                      <div class="wrap-field-price">
                                         <label class="wrap-input">
                                             <?php if ($field['label']) { ?>
-                                                <span class="listings-search-field-label">
+                                              <span class="listings-search-field-label">
                                                     <?php echo $field['label']; ?>
                                                 </span>
                                             <?php } ?>
-                                            <input class="text form-control" name="property_price[min]" type="text" value="" placeholder="<?php echo $field['placeholder']; ?>">
-                                            <?php if ($field['price_label']) { ?>
-                                                <span class="listings-search-field-label">
-                                                    <?php echo $field['price_label']; ?>
-                                                </span>
-                                            <?php } ?>
-                                            <input class="text form-control" name="property_price[max]" type="text" value="" placeholder="<?php echo $field['price_placeholder']; ?>">
+                                          <input class="text form-control" name="property_price[min]" type="number" value="" placeholder="<?php echo $field['placeholder']; ?>">
                                         </label>
+                                      </div>
+                                      <div class="wrap-field-price">
+                                        <label class="wrap-input">
+                                            <?php if ($field['price_label']) { ?>
+                                              <span class="listings-search-field-label">
+                                              <?php echo $field['price_label']; ?>
+                                          </span>
+                                            <?php } ?>
+                                          <input class="text form-control" name="property_price[max]" type="number" value="" placeholder="<?php echo $field['price_placeholder']; ?>">
+                                        </label>
+                                      </div>
                                     </div>
                                 <?php } ?>
 

@@ -266,7 +266,8 @@
 @media (max-width: 768px) {
     .hl-agents-3 .hl-agent__table-row {
         display: block;
-        margin-bottom: 10px;
+        margin-bottom: 10px
+    ;
     }
     .hl-agents-3 .hl-agent__table-row > * {
         display: block;

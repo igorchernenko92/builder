@@ -44,6 +44,15 @@
     margin-left: 15px;
 }
 
+.wrap-field-price {
+    width: 100%;
+    max-width: calc(50% - 6px);
+}
+
+.wrap-field-price:first-child {
+    margin-right: auto;
+}
+
 @media (max-width: 992px) {
     .listings-search-default .wrap-field {
         width: 50% !important;
@@ -56,6 +65,15 @@
     }
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
+}
 
 
 /* Select 2 BEGIN */
