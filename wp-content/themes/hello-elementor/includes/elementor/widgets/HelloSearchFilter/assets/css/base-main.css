@@ -94,8 +94,9 @@ input[type=number] {
 
 .wrap-select .ms-drop ul > li > label {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     width: 100%;
+    white-space: initial !important;
 }
 
 .wrap-select .ms-drop ul > li > label span {
@@ -103,7 +104,7 @@ input[type=number] {
 }
 
 .wrap-select .ms-drop ul > li > label input {
-    margin-top: 0;
+    margin-top: 2px;
 }
 
 .wrap-select .ms-choice > span {
@@ -126,6 +127,9 @@ input[type=number] {
 .wrap-select .ms-drop.bottom {
     left: 0;
     top: calc(100% + 6px);
+    max-width: 100%;
+    width: 100%;
+    min-width: 200px;
 }
 
 .form-control,
@@ -288,3 +292,47 @@ textarea {
 }
 
 /* Select 2 END */
+
+.listing-search-padding-0 {
+
+}
+
+.listing-search-padding-1 {
+    padding-left: 20px !important;
+}
+
+.listing-search-padding-2 {
+    padding-left: 40px !important;
+}
+
+.listing-search-padding-3 {
+    padding-left: 60px !important;
+}
+
+.listing-search-padding-4 {
+    padding-left: 80px !important;
+}
+
+.listing-search-padding-5 {
+    padding-left: 100px !important;
+}
+
+.listing-search-padding-6 {
+    padding-left: 120px !important;
+}
+
+.listing-search-padding-7 {
+    padding-left: 140px !important;
+}
+
+.listing-search-padding-8 {
+    padding-left: 160px !important;
+}
+
+.listing-search-padding-9 {
+    padding-left: 180px !important;
+}
+
+.listing-search-padding-10 {
+    padding-left: 200px !important;
+}
