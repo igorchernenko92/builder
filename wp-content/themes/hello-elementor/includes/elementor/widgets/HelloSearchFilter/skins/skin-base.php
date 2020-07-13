@@ -143,15 +143,17 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'search',
 				'options' => [
-					'search' 				=> _x( 'Search', 'Type Field', 'elementor' ),
-					'property_year_built' 	=> _x( 'Year Built', 'Type Field', 'elementor' ),
-					'property_bedrooms' 	=> _x( 'Bedrooms', 'Type Field', 'elementor' ),
-					'property_bath' 		=> _x( 'Bath', 'Type Field', 'elementor' ),
-					'property_garages' 		=> _x( 'Garages', 'Type Field', 'elementor' ),
-					'property_rooms' 		=> _x( 'Rooms', 'Type Field', 'elementor' ),
-					'property_living_area' 	=> _x( 'Living Area', 'Type Field', 'elementor' ),
-					'property_terrace' 		=> _x( 'Terrace', 'Type Field', 'elementor' ),
-					'property_price' 		=> _x( 'Price', 'Type Field', 'elementor' ),
+					'search' 				=> __( 'Search', 'elementor' ),
+					'property_year_built' 	=> __( 'Year Built', 'elementor' ),
+					'property_bedrooms' 	=> __( 'Bedrooms', 'elementor' ),
+					'property_bath' 		=> __( 'Bath', 'elementor' ),
+					'property_garages' 		=> __( 'Garages', 'elementor' ),
+					'property_rooms' 		=> __( 'Rooms', 'elementor' ),
+					'property_living_area' 	=> __( 'Living Area', 'elementor' ),
+					'property_terrace' 		=> __( 'Terrace', 'elementor' ),
+					'property_price' 		=> __( 'Price', 'elementor' ),
+					'features' 		        => __( 'Features', 'elementor' ),
+					'location' 		        => __( 'Location', 'elementor' ),
 				],
                 'condition' => [
                     'search_button' => '',
@@ -302,8 +304,11 @@ abstract class Skin_Base extends Elementor_Skin_Base {
             'property_bedrooms' => ['' => 'Bedrooms', '1' => 1, '2' => 2, '3' => 3],
             'property_rooms' => ['' => 'Rooms','1' => 1, '2' => 2, '3' => 3, '4' => 4, '10' => 10],
             'property_bath' => ['' => 'Bath','1' => 1, '2' => 2, '3' => 3],
-            'property_garages' => ['' => 'Garages','1' => 1, '2' => 2, '3' => 3]
+            'property_garages' => ['' => 'Garages','1' => 1, '2' => 2, '3' => 3],
+            'featured' => [],
+//            'property_garages' => ['' => 'Garages','1' => 1, '2' => 2, '3' => 3],
         ];
+
         ?>
             <div id="home-search" class="site-section home-section">
                 <div class="container">
@@ -352,7 +357,24 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                                         </div>
                                     <?php } ?>
 
-                                    <?php if ( 'multiple-select' == $field['type_view'] ) { ?>
+                                    <?php if ( 'multiple-select' == $field['type_view'] ) {
+                                        $options = '';
+                                        if ( in_array( $field['type_field'], get_object_taxonomies('property') ) ) {
+                                            $terms = get_terms(
+                                                array(
+                                                    'taxonomy' => 'location',
+                                                    'hide_empty' => false,
+                                                )
+                                            );
+                                            $options = $this->get_terms_hierarchical($terms);
+                                        } else {
+                                             foreach ( $value_data[$field['type_field']] as $index => $option ) {
+                                                 $options .= '<option value="' . $index . '">' . $option . '</option>';
+                                              }
+                                        }
+
+                                        ?>
+
                                         <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
                                             <label class="wrap-input">
                                                 <?php if ($field['label']) { ?>
@@ -362,16 +384,12 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                                                 <?php } ?>
                                                 <span class="wrap-select">
                                                   <select class="select-multiselect form-control" multiple="multiple" name="<?php echo $field['type_field']; ?>[]">
-                                                      <?php foreach ( $value_data[$field['type_field']] as $index => $option ) { ?>
-                                                        <option value="<?php echo $index; ?>"><?php echo $option; ?></option>
-                                                      <?php  }  ?>
+                                                    <?php echo $options; ?>
                                                   </select>
                                                 </span>
                                             </label>
                                         </div>
                                     <?php } ?>
-
-
 
                                     <?php  if ( 'input' == $field['type_view'] ) { ?>
                                             <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
@@ -420,11 +438,31 @@ abstract class Skin_Base extends Elementor_Skin_Base {
         <?php
     }
 
-
 	public function render() {
-
-
         $this->render_search_form();
+    }
 
+    /**
+     *	get terms for multiselect
+     *
+     *	@uses	get_terms_hierarchical()
+     *	@return	array of terms
+     *
+     *	@since 1.0.0
+     */
+    protected function get_terms_hierarchical($terms, $output = '', $parent_id = 0, $level = 0) {
+        $outputTemplate = '<option class="%CLASS%" value="%SLUG%">%NAME%</option>';
+
+        foreach ($terms as $term) {
+            if ($parent_id == $term->parent) {
+                $itemOutput = str_replace('%SLUG%', $term->slug, $outputTemplate);
+                $itemOutput = str_replace('%CLASS%', 'listing-search-padding-' . $level, $itemOutput);
+                $itemOutput = str_replace('%NAME%', $term->name, $itemOutput);
+
+                $output .= $itemOutput;
+                $output = $this->get_terms_hierarchical($terms, $output, $term->term_id, $level + 1);
+            }
+        }
+        return $output;
     }
 }
