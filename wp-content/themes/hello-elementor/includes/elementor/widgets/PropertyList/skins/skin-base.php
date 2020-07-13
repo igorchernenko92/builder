@@ -898,20 +898,27 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		<?php
 	}
 
-	  protected function render_price() {
-        $terms = get_the_terms( get_the_ID(), 'status' );
+	protected function render_price() {
+    if ( $this->get_instance_value( 'hello_show_price' ) ) { ?>
+      <div class="hl-listing-price">
+          <?php echo builder_get_property_price(); ?>
+      </div>
+    <?php }
+  }
+
+  protected function render_status() {
+      echo builder_get_property_status();
+  }
+
+  protected function render_price_status() {
 	  ?>
       <div class="hl-listing-wrap-price">
-      <?php
-        if ( $this->get_instance_value( 'hello_show_price' ) ) { ?>
-          <div class="hl-listing-price">
-            <?php echo builder_get_property_price(); ?>
-          </div>
-       <?php }
-            echo builder_get_property_status();
+        <?php
+          $this->render_price();
+          $this->render_status();
         ?>
       </div>
-		<?php
+    <?php
 	}
 
 	protected function render_text_footer() {
@@ -1022,8 +1029,8 @@ abstract class Skin_Base extends Elementor_Skin_Base {
         ?>
         <ul class="hl-listing-card__tags">
             <?php if ( $featured ) { ?>
-                <li class="hl-listing-status">
-                    <a href="<?php echo get_term_link( $featured[0] ) ?>" class="hl-listing-status__inner hl-listing-status__inner_red"><?php echo $featured[0]->name ?></a>
+                <li class="hl-listing-card__wrap-tag">
+                    <a href="<?php echo get_term_link( $featured[0] ) ?>" class="hl-listing-card__tag hl-listing-card__tag_red"><?php echo $featured[0]->name ?></a>
                 </li>
             <?php } ?>
         </ul>
@@ -1302,7 +1309,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
           $this->start_content_wrapper();
               $this->render_title();
-              $this->render_price();
+              $this->render_price_status();
               $this->render_excerpt();
               $this->render_meta_data();
           $this->end_content_wrapper();

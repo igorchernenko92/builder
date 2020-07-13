@@ -122,7 +122,7 @@ class Skin2 extends Skin_Base {
                 $this->render_title();
                 $this->render_location();
                 $this->render_meta_data();
-                $this->render_price();
+                $this->render_price_status();
             $this->end_content_wrapper();
 
             $this->render_agent();

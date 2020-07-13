@@ -67,7 +67,7 @@ class Skin3 extends Skin_Base {
 
           $this->start_content_wrapper();
             $this->render_title();
-            $this->render_price();
+            $this->render_price_status();
             $this->render_excerpt();
             $this->render_meta_data();
           $this->end_content_wrapper();
