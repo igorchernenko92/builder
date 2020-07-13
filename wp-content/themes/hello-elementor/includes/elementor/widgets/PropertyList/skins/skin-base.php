@@ -901,18 +901,15 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 	  protected function render_price() {
         $terms = get_the_terms( get_the_ID(), 'status' );
 	  ?>
-      <div class="hl-listing-wrap-price"> <?php
+      <div class="hl-listing-wrap-price">
+      <?php
         if ( $this->get_instance_value( 'hello_show_price' ) ) { ?>
           <div class="hl-listing-price">
-            <?php  echo builder_get_property_price(); ?>
+            <?php echo builder_get_property_price(); ?>
           </div>
-        <?php }
-
-        if ( $terms ) { ?>
-          <div class="hl-listing-card__category hl-listing-card__tag-wrap">
-            <a href="<?php echo get_term_link( $terms[0] ) ?>" class="hl-listing-card__tag hl-listing-card__tag_green"><?php echo $terms[0]->name ?></a>
-          </div>
-        <?php } ?>
+       <?php }
+            echo builder_get_property_status();
+        ?>
       </div>
 		<?php
 	}
