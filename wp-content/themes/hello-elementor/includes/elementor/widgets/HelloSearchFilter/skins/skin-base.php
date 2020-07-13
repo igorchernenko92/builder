@@ -362,7 +362,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                                         if ( in_array( $field['type_field'], get_object_taxonomies('property') ) ) {
                                             $terms = get_terms(
                                                 array(
-                                                    'taxonomy' => 'location',
+                                                    'taxonomy' => $field['type_field'],
                                                     'hide_empty' => false,
                                                 )
                                             );
