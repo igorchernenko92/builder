@@ -204,8 +204,12 @@ class Builder_General {
 
         if ( is_wp_error($term_link) ) return false;
 
-        $property_status = '<div class="hl-listing-card__category hl-listing-card__tag-wrap">
-            <a href="' . $term_link . '" class="hl-listing-card__tag hl-listing-card__tag_green">' .  $term_name . '</a>
+        // hl-listing-status__inner_red     // #FF3B3D
+        // hl-listing-status__inner_green   // #06B236
+        // hl-listing-status__inner_blue    // #0073E1
+
+        $property_status = '<div class="hl-listing-status">
+            <a href="' . $term_link . '" class="hl-listing-status__inner hl-listing-status__inner_green">' .  $term_name . '</a>
           </div>';
 
         return apply_filters( 'builder_get_property_status', $property_status, $post_id );
