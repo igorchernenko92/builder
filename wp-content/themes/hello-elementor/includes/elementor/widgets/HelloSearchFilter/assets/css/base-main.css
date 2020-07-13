@@ -87,7 +87,11 @@ input[type=number] {
     outline: none;
 }
 
-.wrap-select .ms-drop ul>li {
+.wrap-select .ms-drop ul {
+    padding: 8px !important;
+}
+
+.wrap-select .ms-drop ul > li {
     display: flex;
     align-items: center;
 }
@@ -115,6 +119,11 @@ input[type=number] {
     font-weight: 500;
 }
 
+.wrap-select .ms-choice .placeholder {
+    opacity: 0.8;
+    font-weight: 400;
+}
+
 .wrap-select .ms-choice:hover,
 .wrap-select .ms-choice:focus,
 .wrap-select .ms-choice:active {
@@ -130,6 +139,11 @@ input[type=number] {
     max-width: 100%;
     width: 100%;
     min-width: 200px;
+}
+
+*::placeholder {
+    opacity: 0.8 !important;
+    font-weight: 400 !important;
 }
 
 .form-control,

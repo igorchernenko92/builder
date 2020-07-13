@@ -383,7 +383,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                                                     </span>
                                                 <?php } ?>
                                                 <span class="wrap-select">
-                                                  <select class="select-multiselect form-control" multiple="multiple" name="<?php echo $field['type_field']; ?>[]">
+                                                  <select class="select-multiselect form-control" data-placeholder="test placeholder" multiple="multiple" name="<?php echo $field['type_field']; ?>[]">
                                                     <?php echo $options; ?>
                                                   </select>
                                                 </span>

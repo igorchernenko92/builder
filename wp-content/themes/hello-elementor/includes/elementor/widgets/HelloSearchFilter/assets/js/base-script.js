@@ -35,8 +35,14 @@
       function initSelect () {
         $selectFields.each(function() {
           if ($(this).hasClass(".select-multiselect-init")) return;
-          $(this).multipleSelect(options);
-          $(this).parent().find(".ms-select-all span").text("Select all");
+          
+          const placeholder = $(this).data("placeholder");
+          
+          $(this).multipleSelect({
+            ...options,
+            placeholder,
+          });
+          $(this).parent().find(".ms-select-all span").text("Select all / Deselect all");
         });
       }
   
