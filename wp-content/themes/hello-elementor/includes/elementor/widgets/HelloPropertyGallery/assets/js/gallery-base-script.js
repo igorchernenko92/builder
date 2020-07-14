@@ -24,7 +24,6 @@
     }
   
     const HelloGallerySkinScript1 = function ($scope, $) {
-      console.log("HelloGallerySkinScript1")
       const $galleries_1 = $(".hl-gallery-1");
   
       const defaultOptionsGallery1 = function (params) {
@@ -39,8 +38,6 @@
       const initListingGallery1 = function ($gallery) {
         if (!$gallery) return;
         
-        console.log("exixsts")
-  
         const perViews = getPreViews($gallery.parent());
     
         const customOptions = {
@@ -85,15 +82,22 @@
       const $galleries_2 = $(".hl-gallery-2");
       if ($galleries_2.length) {
         $galleries_2.each(function () {
+          const images = $(this).find(".hl-gallery__list-item")
+          
           if ($(this).width() > 991) {
             $(this).addClass("hl-gallery-2_large")
+
+            if (images.length > 5) {
+              $(this).addClass("hl-gallery-2_show-all")
+            }
+          } else if (images.length > 6) {
+            $(this).addClass("hl-gallery-2_show-all")
           }
         })
       }
     };
     
     const HelloGallerySkinScript3 = function ($scope, $) {
-      console.log("HelloGallerySkinScript3")
       const $galleries_3 = $(".hl-gallery-3");
       
       const initListingGallery3 = function ($gallery_top, $gallery_thumbs) {
