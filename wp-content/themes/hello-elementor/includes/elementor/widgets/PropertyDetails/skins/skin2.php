@@ -21,4 +21,10 @@ class Skin2 extends Skin_Base {
 	public function get_title() {
 		return __( 'Skin 2', 'elementor-pro' );
 	}
+
+    protected function render_details_top() {
+        ?>
+            <div class="hl-details-2">
+        <?php
+    }
 }

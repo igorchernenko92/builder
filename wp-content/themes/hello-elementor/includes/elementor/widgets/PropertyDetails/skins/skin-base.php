@@ -79,20 +79,35 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
 	}
 
+	protected function render_details_top() {
+      ?>
+        <div class="hl-details-1">
+      <?php
+  }
+
     protected function render_details() {
         $settings = $this->parent->get_settings_for_display();
         $items =  $this->get_instance_value( 'hello_property_details' );
         $details_array = $this->details_array();
         $label = '';
 
-        foreach ( $items as $field ) {
-            $label = $details_array[ $field["type_field"] ];
-            if ($field['label']) {
-                $label = $field['label'];
-            } ?>
-            <div class="some_class"><?php echo $label ?> : <?php echo get_field($field["type_field"], get_the_ID())  ?></div>
-
-       <?php }
+        $this->render_details_top();
+            foreach ( $items as $field ) {
+                $label = $details_array[ $field["type_field"] ];
+                if ($field['label']) {
+                    $label = $field['label'];
+                } ?>
+                <div class="listing-details-detail">
+                  <div class="listing-details-label">
+                      <?php echo $label ?>
+                  </div>
+                  <div class="listing-details-value">
+                      <?php echo get_field($field["type_field"], get_the_ID())  ?>
+                  </div>
+                </div>
+           <?php } ?>
+        </div>
+        <?php
 
     }
 
