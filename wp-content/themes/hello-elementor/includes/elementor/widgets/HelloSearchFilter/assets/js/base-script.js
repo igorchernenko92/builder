@@ -43,6 +43,7 @@
             placeholder,
           });
           $(this).parent().find(".ms-select-all span").text("Select all / Deselect all");
+          $(this).parent().addClass("select-multiselect-init")
         });
       }
   
