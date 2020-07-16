@@ -22,14 +22,17 @@ class PropertyDetails extends Base_Widget {
 	public function __construct( $data = [], $args = null ) {
 
 		parent::__construct( $data, $args );
-	}
+
+        wp_register_script('hello-details-script', get_stylesheet_directory_uri() . '/includes/elementor/widgets/PropertyDetails/assets/js/base-script.js', '', '1', true);
+        wp_register_style('hello-details-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/PropertyDetails/assets/css/base-main.css', '', 1);
+    }
 
     public function get_script_depends() {
-        return ['' ];
+        return ['hello-details-script'];
     }
 
     public function get_style_depends() {
-        return [''];
+        return ['hello-details-style'];
     }
 
 	public function get_name() {
