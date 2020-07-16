@@ -94,9 +94,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
        <?php }
 
-        ?>
-
-        <?php
     }
 
 	public function render() {
