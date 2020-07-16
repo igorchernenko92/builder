@@ -62,6 +62,7 @@ class Widget_Manager {
         include_once( 'widgets/HelloAgentList/HelloAgents.php' );
         include_once( 'widgets/HelloMap/HelloGoogleMap.php' );
         include_once( 'widgets/HelloSearchFilter/HelloSearchFilter.php' );
+        include_once( 'widgets/PropertyDetails/PropertyDetails.php' );
 //        include_once( 'widgets/HelloPropertyFeatures/HelloPropertyFeatures.php' );
         include_once( 'widgets/HelloPropertyFeatures.php' );
         include_once( 'widgets/HelloPropertyPrice.php' );
@@ -85,11 +86,12 @@ class Widget_Manager {
         // Register Widgets
 
        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloMap\HelloGoogleMap() );
-       \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloSearchFilter\HelloSearchFilter() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingDetails() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\Property\Property() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloPropertyGallery\HelloPropertyGallery() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\Agents\HelloAgents() );
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloSearchFilter\HelloSearchFilter() );
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\PropertyDetails\PropertyDetails() );
 
 //        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloPropertyFeatures\HelloPropertyFeatures() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloPropertyFeatures() );
