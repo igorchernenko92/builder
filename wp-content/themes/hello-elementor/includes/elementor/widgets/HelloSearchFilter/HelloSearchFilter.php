@@ -313,14 +313,26 @@ class HelloSearchFilter extends Base_Widget {
                     [
                         'type_field' => 'search',
                         'type_view' => 'input',
+                        'width_field' => '30',
+                        'placeholder' => 'Search',
                     ],
                     [
-                        'type_field' => 'price',
+                        'type_field' => 'property_rooms',
                         'type_view' => 'select',
+                        'placeholder' => 'Rooms',
+                    ],
+                    [
+                        'type_field' => 'property_price',
+                        'type_view' => 'select',
+                        'width_field' => '30',
+                        'placeholder' => 'min',
+                        'price_placeholder' => 'max',
                     ],
                     [
                         'search_button' => 'yes',
-                        'background_color' => '#fff'
+                        'background_color' => '#4054B2',
+                        'button_text_color' => '#fff',
+                        'hover_animation' => 'grow',
                     ],
                 ],
                 'title_field' => '{{{ type_field }}}',
@@ -384,14 +396,16 @@ class HelloSearchFilter extends Base_Widget {
                                 </div>
                             <?php } // end search button
 
-                            if ( 'select' == $field['type_view'] ) { ?>
+                            if ( 'select' == $field['type_view'] ) {
+                                ?>
                                 <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
                                     <label class="wrap-input">
                                         <?php if ($field['label']) { ?>
                                             <span class="listings-search-field-label">
-                                                          <?php echo $field['label']; ?>
-                                                      </span>
+                                                  <?php echo $field['label']; ?>
+                                              </span>
                                         <?php } ?>
+
                                         <select class="select-2 form-control" name="<?php echo $field['type_field']; ?>">
                                             <?php foreach ( $value_data[$field['type_field']] as $index => $option ) { ?>
                                                 <option value="<?php echo $index; ?>"><?php echo $option; ?></option>
@@ -423,14 +437,14 @@ class HelloSearchFilter extends Base_Widget {
                                 <label class="wrap-input">
                                     <?php if ($field['label']) { ?>
                                         <span class="listings-search-field-label">
-                                                        <?php echo $field['label']; ?>
-                                                    </span>
+                                            <?php echo $field['label']; ?>
+                                        </span>
                                     <?php } ?>
                                     <span class="wrap-select">
-                                                  <select class="select-multiselect form-control" data-placeholder="test placeholder" multiple="multiple" name="<?php echo $field['type_field']; ?>[]">
-                                                    <?php echo $options; ?>
-                                                  </select>
-                                                </span>
+                                      <select class="select-multiselect form-control" data-placeholder="test placeholder" multiple="multiple" name="<?php echo $field['type_field']; ?>[]">
+                                        <?php echo $options; ?>
+                                      </select>
+                                    </span>
                                 </label>
                             </div>
                         <?php } ?>
@@ -440,8 +454,8 @@ class HelloSearchFilter extends Base_Widget {
                                 <label class="wrap-input">
                                     <?php if ($field['label']) { ?>
                                         <span class="listings-search-field-label">
-                                                          <?php echo $field['label']; ?>
-                                                      </span>
+                                              <?php echo $field['label']; ?>
+                                          </span>
                                     <?php } ?>
                                     <input class="text form-control" name="<?php echo $field['type_field']; ?>" type="text" value="" placeholder="<?php echo $field['placeholder']; ?>">
                                 </label>

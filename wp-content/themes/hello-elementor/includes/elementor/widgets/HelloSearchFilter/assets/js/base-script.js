@@ -51,12 +51,9 @@
     };
     initMultiselect();
   };
-  
-  const HelloSearchSkinScript2 = function() {}
-  
+
   $(window).on('elementor/frontend/init', function () {
-    elementorFrontend.hooks.addAction('frontend/element_ready/search_filter.skin1', HelloSearchSkinScript1);
-    elementorFrontend.hooks.addAction('frontend/element_ready/search_filter.skin2', HelloSearchSkinScript2);
+    elementorFrontend.hooks.addAction('frontend/element_ready/search_filter.default', HelloSearchSkinScript1);
   });
   
   
