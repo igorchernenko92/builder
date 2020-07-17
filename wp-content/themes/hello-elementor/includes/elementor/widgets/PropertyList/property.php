@@ -74,6 +74,7 @@ class Property extends Property_Base {
         $args = [
 			'posts_per_page' => $this->get_current_skin()->get_instance_value( 'posts_per_page' ),
 			'paged' => $this->get_current_page(),
+            'post__not_in' => array( get_the_ID() )
             ];
 
         $this->set_settings('property_post_type', 'property'); // query only property post type
