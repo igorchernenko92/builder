@@ -93,6 +93,10 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
         $this->render_details_top();
             foreach ( $items as $field ) {
+                $value = get_field($field["type_field"], get_the_ID());
+                if ( !$value ) {
+                    continue;
+                }
                 $label = $details_array[ $field["type_field"] ];
                 if ($field['label']) {
                     $label = $field['label'];
@@ -102,7 +106,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                       <?php echo $label ?>
                   </div>
                   <div class="listing-details-value">
-                      <?php echo get_field($field["type_field"], get_the_ID())  ?>
+                      <?php echo $value;  ?>
                   </div>
                 </div>
            <?php } ?>

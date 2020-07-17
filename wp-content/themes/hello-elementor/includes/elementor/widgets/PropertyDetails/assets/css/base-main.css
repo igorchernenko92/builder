@@ -14,7 +14,7 @@
 }
 
 .hl-details-1 .listing-details-value {
-    font-size: 2rem;
+    font-size: 1.5rem;
     line-height: 2.5rem;
     font-weight: bold;
     order: 1;
@@ -75,7 +75,7 @@
 }
 
 .hl-details-2 .listing-details-label {
-    font-weight: bold;
+    font-weight: 600;
     color: #000;
     max-width: 40%;
     flex-shrink: 0;
