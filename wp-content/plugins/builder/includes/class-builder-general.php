@@ -208,9 +208,9 @@ class Builder_General {
         // hl-listing-status__inner_green   // #06B236
         // hl-listing-status__inner_blue    // #0073E1
 
-        $property_status = '<div class="hl-listing-status">
-            <a href="' . $term_link . '" class="hl-listing-status__inner hl-listing-status__inner_green">' .  $term_name . '</a>
-          </div>';
+        $property_status = '<div class="hl-listing-status">';
+            $property_status .= '<a href="' . $term_link . '" class="hl-listing-status__inner hl-listing-status__inner_green">' .  $term_name . '</a>';
+        $property_status .= '</div>';
 
         return apply_filters( 'builder_get_property_status', $property_status, $post_id );
     }

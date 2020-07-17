@@ -924,7 +924,7 @@ class HelloGoogleMap extends Widget_Base {
                                                 $map_card_content .= builder_get_property_price();
                                                 $map_card_content .= '</div>';
 
-                                                $map_card_content .= '<span class="map-card__label">Featured</span>';
+                                                $map_card_content .= builder_get_property_status();
                                               $map_card_content .= '</div>';
 
                                                 $property_mata = $settings[ 'property_meta_data' ];
