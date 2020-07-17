@@ -286,6 +286,162 @@ class HelloGoogleMap extends Widget_Base {
             ]
         );
 
+
+        $this->add_control(
+            'show_meta_data',
+            [
+                'label' => __( 'Meta Data', 'elementor-pro' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => __( 'Show', 'elementor-pro' ),
+                'label_off' => __( 'Hide', 'elementor-pro' ),
+                'default' => 'yes',
+                'separator' => 'before',
+            ]
+        );
+
+        $repeater = new Repeater();
+
+        $repeater->add_control(
+            'property_meta_key',
+            [
+                'label' => __( 'Meta Data', 'elementor-pro' ),
+                'label_block' => true,
+                'type' => Controls_Manager::SELECT2,
+//                'default' => [ 'date', 'comments' ],
+                'multiple' => false,
+                'options' => [
+                    'property_rooms' => __( 'Rooms', 'elementor-pro' ),
+                    'property_bedrooms' => __( 'Beds', 'elementor-pro' ),
+                    'property_bath' => __( 'Bath', 'elementor-pro' ),
+                    'property_garages' => __( 'Garages', 'elementor-pro' ),
+                    'property_living_area' => __( 'Living Area', 'elementor-pro' ),
+                    'property_terrace' => __( 'Terrace', 'elementor-pro' ),
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'label',
+            [
+                'label' => __( 'Label', 'elementor' ),
+                'type' => Controls_Manager::TEXT,
+                'label_block' => true,
+                'placeholder' => __( '', 'elementor' ),
+                'default' => __( '', 'elementor' ),
+                'description' => __( 'Leave it empty if default', 'elementor' ),
+                'dynamic' => [
+                    'active' => true,
+                ],
+            ]
+        );
+
+//        $repeater->add_group_control(
+//            \Elementor\Group_Control_Typography::get_type(),
+//            [
+//                'name' => 'content_typography',
+//                'label' => __( 'Text Typography', 'plugin-domain' ),
+//                'scheme' => \Elementor\Scheme_Typography::TYPOGRAPHY_1,
+//                'selector' => '{{WRAPPER}} .hl-listing-card__meta_info-label',
+//            ]
+//        );
+
+        $repeater->add_control(
+            'hr',
+            [
+                'type' => \Elementor\Controls_Manager::DIVIDER,
+            ]
+        );
+
+
+        $repeater->add_control(
+            'icon_color',
+            [
+                'label' => __( 'Icon color', 'elementor-pro' ),
+                'type' => Controls_Manager::COLOR,
+                'scheme' => [
+                    'type' => \Elementor\Scheme_Color::get_type(),
+                    'value' => \Elementor\Scheme_Color::COLOR_1,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .elementor-post__title, {{WRAPPER}} .elementor-post__title a' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'selected_icon',
+            [
+                'label' => __( 'Icon', 'elementor' ),
+                'type' => Controls_Manager::ICONS,
+                'default' => [
+                    'value' => 'fas fa-check',
+                    'library' => 'fa-solid',
+                ],
+                'fa4compatibility' => 'icon',
+            ]
+        );
+
+        $this->add_control(
+            'property_meta_data',
+            [
+                'label' => '',
+                'type' => Controls_Manager::REPEATER,
+                'fields' => $repeater->get_controls(),
+                'default' => [
+                    [
+                        'label' => __( '', 'elementor' ),
+                        'property_meta_key' => 'property_rooms',
+                        'selected_icon' => [
+                            'value' => 'fas fa-door-open',
+                            'library' => 'fa-solid',
+                        ],
+                    ],
+                    [
+                        'label' => __( '', 'elementor' ),
+                        'property_meta_key' => 'property_bedrooms',
+                        'selected_icon' => [
+                            'value' => 'fas fa-bed',
+                            'library' => 'fa-solid',
+                        ],
+                    ],
+                    [
+                        'label' => __( '', 'elementor' ),
+                        'property_meta_key' => 'property_bath',
+                        'selected_icon' => [
+                            'value' => 'fas fa-bath',
+                            'library' => 'fa-solid',
+                        ],
+                    ],
+
+                    [
+                        'label' => __( '', 'elementor' ),
+                        'property_meta_key' => 'property_garages',
+                        'selected_icon' => [
+                            'value' => 'fas fa-car-alt',
+                            'library' => 'fa-solid',
+                        ],
+                    ],
+                    [
+                        'label' => __( '', 'elementor' ),
+                        'property_meta_key' => 'property_living_area',
+                        'selected_icon' => [
+                            'value' => 'fas fa-square-root-alt',
+                            'library' => 'fa-solid',
+                        ],
+                    ],
+                    [
+                        'label' => __( '', 'elementor' ),
+                        'property_meta_key' => 'property_terrace',
+                        'selected_icon' => [
+                            'value' => 'fas fa-house-damage',
+                            'library' => 'fa-solid',
+                        ],
+                    ],
+                ],
+                'title_field' => '{{{ elementor.helpers.renderIcon( this, selected_icon, {}, "i", "panel" ) || \'<i class="{{ icon }}" aria-hidden="true"></i>\' }}} {{{ property_meta_key }}}',
+            ]
+        );
+
         $this->end_controls_tab();
 
         $this->end_controls_tabs();
@@ -764,24 +920,29 @@ class HelloGoogleMap extends Widget_Base {
 
                                               $map_card_content .= '<div class="map-card__row">';
                                                 $map_card_content .= '<div class="map-card__price">';
-                                                $map_card_content .= '<span class="map-card__price-value">$ 1,600</span>';
-                                                $map_card_content .= '<span class="map-card__price-label">$ / Month</span>';
+
+                                                $map_card_content .= builder_get_property_price();
                                                 $map_card_content .= '</div>';
 
                                                 $map_card_content .= '<span class="map-card__label">Featured</span>';
                                               $map_card_content .= '</div>';
 
+                                                $property_mata = $settings[ 'property_meta_data' ];
+                                                $map_card_content .= '<div class="map-card__bottom">';
+                                                    $map_card_content .= '<ul class="map-card__details">';
+                                                        foreach ( $property_mata as $item ) {
+                                                            $value = get_field($item['property_meta_key'], get_the_ID());
+                                                            if ( !$value ) continue;
 
-                                              $map_card_content .= '<div class="map-card__bottom">';
-                                                $map_card_content .= '<ul class="map-card__details">';
-                                                  for ( $i = 0; $i < 5; $i++ ) {
-                                                      $map_card_content .=  '<li class="map-card__details-item">';
-                                                        $map_card_content .=  '<i class="fa fa-fas fa-door-open map-card__details-item-icon"></i>';
-                                                        $map_card_content .=  '<span class="map-card__details-item-value">4</span>';
-                                                      $map_card_content .=  '</li>';
-                                                  }
-                                                $map_card_content .= '</ul>';
-                                              $map_card_content .= '</div>';
+                                                            $map_card_content .= '<li class="hl-listing-card__info-item">';
+                                                                 $map_card_content .= '<i class="fa fa-' . $item['selected_icon']['value'] .' hl-listing-card__icon hl-listing-card__info-icon"></i>';
+                                                                 $map_card_content .= '<span class="hl-listing-card__info-value">' . $value . '</span>';
+                                                            $map_card_content .= '</li>';
+
+                                                        }
+
+                                                    $map_card_content .= '</ul>';
+                                                $map_card_content .= '</div>';
                                             $map_card_content .= '</div>';
 
 
