@@ -64,10 +64,13 @@ class Skin2 extends Skin_Base {
         ];
 		echo '<ul class="hl-listing-card__info">';
             foreach (  $settings as $item ) {
+                 $value = get_field($item['property_meta_key'], get_the_ID());
+                 if ( !$value ) continue;
+
                 $label = $item['label'];
                 if (!$label) $label = $options[$item['property_meta_key']];
 
-                $value = get_field($item['property_meta_key'], get_the_ID());
+
                 ?>
             <li class="hl-listing-card__info-item">
                 <i class="fa fa-<?php echo $item['selected_icon']['value']; ?> hl-listing-card__icon hl-listing-card__info-icon"></i>
