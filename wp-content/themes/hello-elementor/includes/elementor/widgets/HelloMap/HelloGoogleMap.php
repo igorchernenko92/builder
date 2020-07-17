@@ -934,11 +934,10 @@ class HelloGoogleMap extends Widget_Base {
                                                             $value = get_field($item['property_meta_key'], get_the_ID());
                                                             if ( !$value ) continue;
 
-                                                            $map_card_content .= '<li class="hl-listing-card__info-item">';
-                                                                 $map_card_content .= '<i class="fa fa-' . $item['selected_icon']['value'] .' hl-listing-card__icon hl-listing-card__info-icon"></i>';
-                                                                 $map_card_content .= '<span class="hl-listing-card__info-value">' . $value . '</span>';
+                                                            $map_card_content .= '<li class="map-card__details-item">';
+                                                                 $map_card_content .= '<i class="fa fa-' . $item['selected_icon']['value'] .' map-card__details-item-icon"></i>';
+                                                                 $map_card_content .= '<span class="map-card__details-item-value">' . $value . '</span>';
                                                             $map_card_content .= '</li>';
-
                                                         }
 
                                                     $map_card_content .= '</ul>';
