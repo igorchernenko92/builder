@@ -120,7 +120,7 @@ input[type=number] {
 }
 
 .wrap-select .ms-choice .placeholder {
-    opacity: 0.8;
+    opacity: 1 !important;
     font-weight: 400;
 }
 
@@ -147,8 +147,8 @@ select.select-multiselect {
 }
 
 *::placeholder {
-    opacity: 0.8 !important;
     font-weight: 400 !important;
+    color: #444 !important;
 }
 
 .form-control,
@@ -177,6 +177,8 @@ textarea {
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {
     padding: 0 !important;
+    font-weight: 400 !important;
+    opacity: 1 !important;
 }
 
 .wrap-select * {

@@ -977,7 +977,9 @@ ol {
 
 
 
-
+.hl-listing-card_skin-2 .hl-listing-wrap-price {
+    margin-top: auto;
+}
 
 /* Skin 3 BEGIN */
 .hl-listing-card_skin-3 {
