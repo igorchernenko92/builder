@@ -1,5 +1,5 @@
 <?php
-namespace PropertyBuilder\Elementor\Widgets\PropertyDetails\Skins;
+namespace PropertyBuilder\Elementor\Widgets\HelloPropertyDetails\Skins;
 
 use Elementor\Controls_Manager;
 use Elementor\Core\Schemes;
@@ -86,30 +86,29 @@ abstract class Skin_Base extends Elementor_Skin_Base {
   }
 
     protected function render_details() {
-        $settings = $this->parent->get_settings_for_display();
         $items =  $this->get_instance_value( 'hello_property_details' );
         $details_array = $this->details_array();
         $label = '';
-
         $this->render_details_top();
-            foreach ( $items as $field ) {
-                $value = get_field($field["type_field"], get_the_ID());
-                if ( !$value ) {
-                    continue;
-                }
-                $label = $details_array[ $field["type_field"] ];
-                if ($field['label']) {
-                    $label = $field['label'];
-                } ?>
-                <div class="listing-details-detail">
-                  <div class="listing-details-label">
-                      <?php echo $label ?>
-                  </div>
-                  <div class="listing-details-value">
-                      <?php echo $value;  ?>
-                  </div>
-                </div>
-           <?php } ?>
+
+        foreach ( $items as $field ) {
+            $value = get_field($field["type_field"], get_the_ID());
+            if ( !$value ) {
+                continue;
+            }
+            $label = $details_array[ $field["type_field"] ];
+            if ($field['label']) {
+                $label = $field['label'];
+            } ?>
+            <div class="listing-details-detail">
+              <div class="listing-details-label">
+                  <?php echo $label ?>
+              </div>
+              <div class="listing-details-value">
+                  <?php echo $value;  ?>
+              </div>
+            </div>
+       <?php } ?>
         </div>
         <?php
 

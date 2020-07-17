@@ -1,5 +1,5 @@
 <?php
-namespace PropertyBuilder\Elementor\Widgets\PropertyDetails\Skins;
+namespace PropertyBuilder\Elementor\Widgets\HelloPropertyDetails\Skins;
 
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Box_Shadow;
