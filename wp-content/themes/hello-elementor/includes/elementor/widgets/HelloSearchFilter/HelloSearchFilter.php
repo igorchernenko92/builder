@@ -356,6 +356,8 @@ class HelloSearchFilter extends Base_Widget {
         $items =  $settings[ 'hello_search_items' ];
         $search_result_page =  $settings[ 'hello_search_result_page' ];
 
+        $mapping_array = $this->mapping_array();
+
         $value_data = [
             'property_bedrooms' => ['' => 'Bedrooms', '1' => 1, '2' => 2, '3' => 3],
             'property_rooms' => ['' => 'Rooms','1' => 1, '2' => 2, '3' => 3, '4' => 4, '10' => 10],
@@ -374,6 +376,9 @@ class HelloSearchFilter extends Base_Widget {
                         <input type="hidden" id="page_id" name="page_id" value="<?php echo $search_result_page ?>">
                         <?php
                         foreach ( $items as $field ) :
+                            if ( !$field['placeholder'] ) {
+                                $field['placeholder'] = $mapping_array[$field['type_field']];
+                            }
 
                             if ( $field['type_field'] == 'property_price' ) {
                                 $field['type_view'] = 'price';
@@ -441,7 +446,7 @@ class HelloSearchFilter extends Base_Widget {
                                         </span>
                                     <?php } ?>
                                     <span class="wrap-select">
-                                      <select class="select-multiselect form-control" data-placeholder="test placeholder" multiple="multiple" name="<?php echo $field['type_field']; ?>[]">
+                                      <select class="select-multiselect form-control" data-placeholder="<?php echo $field['placeholder']; ?>" multiple="multiple" name="<?php echo $field['type_field']; ?>[]">
                                         <?php echo $options; ?>
                                       </select>
                                     </span>
@@ -449,7 +454,7 @@ class HelloSearchFilter extends Base_Widget {
                             </div>
                         <?php } ?>
 
-                            <?php  if ( 'input' == $field['type_view'] ) { ?>
+                            <?php  if ( 'input' == $field['type_view'] ) {?>
                             <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
                                 <label class="wrap-input">
                                     <?php if ($field['label']) { ?>
@@ -522,5 +527,31 @@ class HelloSearchFilter extends Base_Widget {
             }
         }
         return $output;
+    }
+
+
+
+    /**
+     *	get mapping array for placeholder
+     *
+     *	@return	array of values
+     *
+     *	@since 1.0.0
+     */
+    protected function mapping_array() {
+        $details = [
+            'property_id' 			=> __( 'Property ID', 'elementor' ),
+            'property_year_built' 	=> __( 'Year Built', 'elementor' ),
+            'property_bedrooms' 	=> __( 'Bedrooms', 'elementor' ),
+            'property_bath' 		=> __( 'Bath', 'elementor' ),
+            'property_garages' 		=> __( 'Garages', 'elementor' ),
+            'property_rooms' 		=> __( 'Rooms', 'elementor' ),
+            'property_living_area' 	=> __( 'Living Area', 'elementor' ),
+            'property_terrace' 		=> __( 'Terrace', 'elementor' ),
+            'property_price' 		=> __( 'Price', 'elementor' ),
+            'features' 		        => __( 'Features', 'elementor' ),
+            'location' 		        => __( 'Location', 'elementor' ),
+        ];
+        return $details;
     }
 }

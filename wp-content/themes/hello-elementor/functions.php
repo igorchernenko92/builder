@@ -392,9 +392,6 @@ function czc_disable_extra_image_sizes()
 }
 
 add_action( 'init', 'add_search_array' );
-
-
-
 function add_search_array() {
     $check_get = [
         'keyword',
@@ -410,11 +407,3 @@ function add_search_array() {
 
     update_option( 'hello_search_array', $check_get );
 }
-
-
-
-
-
-
-
-
