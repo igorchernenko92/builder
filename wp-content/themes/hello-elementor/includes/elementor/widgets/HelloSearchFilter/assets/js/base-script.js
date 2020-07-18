@@ -1,5 +1,7 @@
 (function($) {
   const HelloSearchSkinScript1 = function ($scope, $) {
+    console.log("sedf")
+    
     $("#search_filter_form").attr("autocomplete", "off");
     // Select 2
     const initSelect2 = function () {
@@ -54,6 +56,7 @@
 
   $(window).on('elementor/frontend/init', function () {
     elementorFrontend.hooks.addAction('frontend/element_ready/search_filter.default', HelloSearchSkinScript1);
+    elementorFrontend.hooks.addAction('frontend/element_ready/search_filter.skin1', HelloSearchSkinScript1);
   });
   
   
