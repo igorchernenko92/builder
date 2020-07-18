@@ -792,91 +792,74 @@ class HelloGoogleMap extends Widget_Base {
         }
 
 
-//                $terms_query = 'all';
-//                $taxquery = array();
-//                if ($settings['category'] != '') {
-//                    $terms_query = explode(',', $settings['category']);
-//                }
-//
-//                if (isset($settings['terms_' . $settings['taxonomy']]) && !empty($settings['terms_' . $settings['taxonomy']])) {
-//                    $terms_query = $settings['terms_' . $settings['taxonomy']];
-//                    $dce_key = array_search('dce_current_post_terms', $terms_query);
-//                    if ($dce_key !== false) {
-//                        unset($terms_query[$dce_key]);
-//                        $terms_list = wp_get_post_terms($id_page, $settings['taxonomy'], array('orderby' => 'name', 'order' => 'ASC', 'fields' => 'all', 'hide_empty' => true));
-//                        if (!empty($terms_list)) {
-//                            $terms_query = array();
-//                            foreach ($terms_list as $akey => $aterm) {
-//                                if (!in_array($aterm->term_id, $terms_query)) {
-//                                    $terms_query[] = $aterm->term_id;
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//                if ($settings['taxonomy'] != "")
-//                    $taxquery = array(
-//                        array(
-//                            'taxonomy' => $settings['taxonomy'],
-//                            'field' => 'id',
-//                            'terms' => $terms_query
-//                        )
-//                    );
 
+            $args = array(
+                'post_type' => 'property',
+                'posts_per_page' => -1,
+                'post_status' => 'publish',
+            );
 
+            $check_get = array_keys( get_option('hello_search_array') );
+            $getParam = (array)$_GET;
+            $property_tax = array_keys( get_object_taxonomies( 'property', 'objects' ) );
 
-                $args = array(
-                    'post_type' => 'property',
-                    'posts_per_page' => -1,
-                    'post_status' => 'publish',
-//                    'tax_query' => $taxquery,
-                );
+            foreach ( $getParam as $meta_key => $meta_value ) {
+                if ( in_array( $meta_key, $check_get ) && !empty( $meta_value ) ) {
+                    $type = '';
+                    $compare = '';
 
-                if ( is_tax() ) {
-                    $args['tax_query'][] = [
-                        [
-                            'taxonomy' => get_query_var( 'taxonomy' ),
-                            'field'    => 'slug',
-                            'terms'    => get_query_var( 'term' )
-                        ]
-                    ];
-                }
+                    if ( in_array($meta_key, $property_tax) ) { // if any of tax in the list add tax to query
+                        $args['tax_query'][] = [
+                            [
+                                'taxonomy' => $meta_key,
+                                'field'    => 'slug',
+                                'terms'    => $meta_value
+                            ]
+                        ];
+                        continue;
+                    }
 
+                    if ( 'property_year_built' == $meta_key ) {
+                        $type = 'DATE';
+                        $compare = '==';
+                        $meta_value = preg_replace( '/\s+/', '', $meta_value ); // date('Ymd'),
+                    }
 
-                foreach ( (array)$_GET as $meta_key => $meta_value ) {
+                    if ( 'property_price' == $meta_key ) {
+                        $type = 'numeric';
+                        $compare = 'BETWEEN';
 
-                    if ( in_array( $meta_key, $this->check_get ) && ! empty( $meta_value ) ) {
-
-                        if ( 'keyword' == $meta_key ) {
-
-                            $args['s'] = $meta_value;
-
-                        } elseif ( 'property_year_built' == $meta_key ) {
-
-                            $args['meta_query'][] = array(
-                                array(
-                                    'key' 		=> $meta_key,
-                                    'value' 	=> preg_replace( '/\s+/', '', $meta_value ), // date('Ymd'),
-                                    'type' 		=> 'DATE',
-                                    'compare' 	=> '=='
-                                )
-                            );
-
-                        } else {
-
-                            $args['meta_query'][] = array(
-                                array(
-                                    'key'   => $meta_key,
-                                    'value' => $meta_value
-                                )
-                            );
-
+                        if ( empty( $meta_value['min'] )  ) {
+                            $meta_value['min'] = 0;
                         }
 
-                    }
-                }
+                        if ( empty( $meta_value['max'] ) ) {
+                            $meta_value['max'] = 999999999;
+                        }
 
-                // QUERY - RELATIONSHIP - POST
+                        $meta_value = array( $meta_value['min'], $meta_value['max'] );
+                    }
+
+                    $args['meta_query'][] = array(
+                        array(
+                            'key'   => $meta_key,
+                            'value' => $meta_value,
+                            'type'    => $type,
+                            'compare' => $compare
+                        )
+                    );
+                }
+            }
+
+            if ( is_tax() ) {
+                $args['tax_query'][] = [
+                    [
+                        'taxonomy' => get_query_var( 'taxonomy' ),
+                        'field'    => 'slug',
+                        'terms'    => get_query_var( 'term' )
+                    ]
+                ];
+            }
 
                 if(isset($args) && count($args) ) {
                     $p_query = new \WP_Query($args);
