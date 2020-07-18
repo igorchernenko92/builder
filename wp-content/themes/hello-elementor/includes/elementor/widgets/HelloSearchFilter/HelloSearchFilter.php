@@ -404,14 +404,14 @@ class HelloSearchFilter extends Base_Widget {
                             if ( 'select' == $field['type_view'] ) {
                                 ?>
                                 <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
-                                    <label class="wrap-input">
+                                    <label class="wrap-input wrap-select">
                                         <?php if ($field['label']) { ?>
                                             <span class="listings-search-field-label">
                                                   <?php echo $field['label']; ?>
                                               </span>
                                         <?php } ?>
 
-                                        <select class="select-2 form-control" name="<?php echo $field['type_field']; ?>">
+                                        <select class="select-2 form-control" data-placeholder="<?php echo $field['placeholder']; ?>" name="<?php echo $field['type_field']; ?>">
                                             <?php foreach ( $value_data[$field['type_field']] as $index => $option ) { ?>
                                                 <option value="<?php echo $index; ?>"><?php echo $option; ?></option>
                                             <?php  }  ?>
