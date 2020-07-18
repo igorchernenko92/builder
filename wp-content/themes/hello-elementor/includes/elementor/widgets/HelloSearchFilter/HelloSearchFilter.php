@@ -19,8 +19,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 //include_once ( 'skins/skin2.php');
 
 class HelloSearchFilter extends Base_Widget {
-
+    private $type_list;
 	public function __construct( $data = [], $args = null ) {
+
+         $this->type_list = get_option('hello_search_array');
 
 		parent::__construct( $data, $args );
 //		wp_enqueue_style( 'ut-datepicker-css', get_template_directory_uri() . '/includes/elementor/widgets/assets/css/datepicker.css', array(), date("Ymd"), false );
@@ -184,19 +186,7 @@ class HelloSearchFilter extends Base_Widget {
                 'label'   => _x( 'Type field', 'Type Field', 'elementor' ),
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'search',
-                'options' => [
-                    'search' 				=> __( 'Search', 'elementor' ),
-                    'property_year_built' 	=> __( 'Year Built', 'elementor' ),
-                    'property_bedrooms' 	=> __( 'Bedrooms', 'elementor' ),
-                    'property_bath' 		=> __( 'Bath', 'elementor' ),
-                    'property_garages' 		=> __( 'Garages', 'elementor' ),
-                    'property_rooms' 		=> __( 'Rooms', 'elementor' ),
-                    'property_living_area' 	=> __( 'Living Area', 'elementor' ),
-                    'property_terrace' 		=> __( 'Terrace', 'elementor' ),
-                    'property_price' 		=> __( 'Price', 'elementor' ),
-                    'features' 		        => __( 'Features', 'elementor' ),
-                    'location' 		        => __( 'Location', 'elementor' ),
-                ],
+                'options' => $this->type_list,
                 'condition' => [
                     'search_button' => '',
                 ],
@@ -311,7 +301,7 @@ class HelloSearchFilter extends Base_Widget {
                 'fields' 		=> $repeater->get_controls(),
                 'default' 		=> [
                     [
-                        'type_field' => 'search',
+                        'type_field' => 'keyword',
                         'type_view' => 'input',
                         'width_field' => '30',
                         'placeholder' => 'Search',
@@ -356,15 +346,13 @@ class HelloSearchFilter extends Base_Widget {
         $items =  $settings[ 'hello_search_items' ];
         $search_result_page =  $settings[ 'hello_search_result_page' ];
 
-        $mapping_array = $this->mapping_array();
+        $mapping_array =  $this->type_list;
 
         $value_data = [
             'property_bedrooms' => ['' => 'Bedrooms', '1' => 1, '2' => 2, '3' => 3],
             'property_rooms' => ['' => 'Rooms','1' => 1, '2' => 2, '3' => 3, '4' => 4, '10' => 10],
             'property_bath' => ['' => 'Bath','1' => 1, '2' => 2, '3' => 3],
             'property_garages' => ['' => 'Garages','1' => 1, '2' => 2, '3' => 3],
-            'featured' => [],
-//            'property_garages' => ['' => 'Garages','1' => 1, '2' => 2, '3' => 3],
         ];
 
         ?>
@@ -527,31 +515,5 @@ class HelloSearchFilter extends Base_Widget {
             }
         }
         return $output;
-    }
-
-
-
-    /**
-     *	get mapping array for placeholder
-     *
-     *	@return	array of values
-     *
-     *	@since 1.0.0
-     */
-    protected function mapping_array() {
-        $details = [
-            'property_id' 			=> __( 'Property ID', 'elementor' ),
-            'property_year_built' 	=> __( 'Year Built', 'elementor' ),
-            'property_bedrooms' 	=> __( 'Bedrooms', 'elementor' ),
-            'property_bath' 		=> __( 'Bath', 'elementor' ),
-            'property_garages' 		=> __( 'Garages', 'elementor' ),
-            'property_rooms' 		=> __( 'Rooms', 'elementor' ),
-            'property_living_area' 	=> __( 'Living Area', 'elementor' ),
-            'property_terrace' 		=> __( 'Terrace', 'elementor' ),
-            'property_price' 		=> __( 'Price', 'elementor' ),
-            'features' 		        => __( 'Features', 'elementor' ),
-            'location' 		        => __( 'Location', 'elementor' ),
-        ];
-        return $details;
     }
 }

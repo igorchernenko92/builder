@@ -82,7 +82,7 @@ class Property extends Property_Base {
 
         $this->set_settings('property_post_type', 'property'); // query only property post type
 
-        $check_get = get_option('hello_search_array');
+        $check_get = array_keys( get_option('hello_search_array') );
         $getParam = (array)$_GET;
         $property_tax = array_keys( get_object_taxonomies( 'property', 'objects' ) );
 

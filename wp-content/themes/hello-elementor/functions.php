@@ -405,15 +405,21 @@ function add_search_array() {
         'property_price',
     ];
 
-    $property_tax = array_keys( get_object_taxonomies( 'property', 'objects' ) );
+    $check_get = [
+        'keyword' 				=> __( 'Search', 'elementor' ),
+        'property_year_built' 	=> __( 'Year Built', 'elementor' ),
+        'property_bedrooms' 	=> __( 'Bedrooms', 'elementor' ),
+        'property_bath' 		=> __( 'Bath', 'elementor' ),
+        'property_garages' 		=> __( 'Garages', 'elementor' ),
+        'property_rooms' 		=> __( 'Rooms', 'elementor' ),
+        'property_living_area' 	=> __( 'Living Area', 'elementor' ),
+        'property_terrace' 		=> __( 'Terrace', 'elementor' ),
+        'property_price' 		=> __( 'Price', 'elementor' ),
+    ];
 
-//    foreach( get_object_taxonomies( 'property', 'objects' ) as $tax  ) {
-//        var_dump($tax->name);
-//        var_dump($tax->label);
-//    }
-
-
-    $check_get = array_merge($check_get, $property_tax);
+    foreach( get_object_taxonomies( 'property', 'objects' ) as $tax  ) {
+        $check_get[$tax->name] = $tax->label;
+    }
 
     update_option( 'hello_search_array', $check_get );
 }
