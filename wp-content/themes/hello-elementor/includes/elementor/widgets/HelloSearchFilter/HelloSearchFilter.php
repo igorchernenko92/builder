@@ -21,10 +21,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 class HelloSearchFilter extends Base_Widget {
     private $type_list;
 	public function __construct( $data = [], $args = null ) {
+	    parent::__construct( $data, $args );
+        $this->type_list = get_option('hello_search_array');
 
-	    $this->type_list = get_option('hello_search_array');
-
-		parent::__construct( $data, $args );
 //		wp_enqueue_style( 'ut-datepicker-css', get_template_directory_uri() . '/includes/elementor/widgets/assets/css/datepicker.css', array(), date("Ymd"), false );
 //		wp_enqueue_script( 'ut-datepicker-js', get_template_directory_uri() . '/includes/elementor/widgets/assets/js/datepicker.js', array(), date("Ymd"), false );
 

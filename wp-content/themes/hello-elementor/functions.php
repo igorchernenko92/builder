@@ -394,19 +394,6 @@ function czc_disable_extra_image_sizes()
 add_action( 'init', 'add_search_array' );
 function add_search_array() {
     $check_get = [
-        'keyword',
-        'property_year_built',
-        'property_bedrooms',
-        'property_bath',
-        'property_garages',
-        'property_rooms',
-        'property_living_area',
-        'property_terrace',
-        'property_price',
-    ];
-
-    $check_get = [
-        'keyword' 				=> __( 'Search', 'elementor' ),
         'property_year_built' 	=> __( 'Year Built', 'elementor' ),
         'property_bedrooms' 	=> __( 'Bedrooms', 'elementor' ),
         'property_bath' 		=> __( 'Bath', 'elementor' ),
@@ -415,6 +402,7 @@ function add_search_array() {
         'property_living_area' 	=> __( 'Living Area', 'elementor' ),
         'property_terrace' 		=> __( 'Terrace', 'elementor' ),
         'property_price' 		=> __( 'Price', 'elementor' ),
+        'keyword' 				=> __( 'Search', 'elementor' ),
     ];
 
     foreach( get_object_taxonomies( 'property', 'objects' ) as $tax  ) {

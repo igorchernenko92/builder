@@ -18,10 +18,12 @@ include_once ( 'skins/skin1.php');
 include_once ( 'skins/skin2.php');
 
 class HelloPropertyDetails extends Base_Widget {
+    private $type_list;
 
 	public function __construct( $data = [], $args = null ) {
-
 		parent::__construct( $data, $args );
+
+        $this->type_list = get_option('hello_search_array');
 
         wp_register_script('hello-details-script', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloPropertyDetails/assets/js/base-script.js', '', '1', true);
         wp_register_style('hello-details-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloPropertyDetails/assets/css/base-main.css', '', 1);
@@ -42,6 +44,10 @@ class HelloPropertyDetails extends Base_Widget {
 	public function get_title() {
 		return __( 'Property Details', 'elementor' );
 	}
+
+    public function get_type_list() {
+        return $this->type_list;
+    }
 
 	public function get_icon() {
 		return 'eicon-search-results';

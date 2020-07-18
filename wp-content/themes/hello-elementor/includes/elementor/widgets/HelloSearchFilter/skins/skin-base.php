@@ -57,8 +57,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
             'property_rooms' => ['' => 'Rooms','1' => 1, '2' => 2, '3' => 3, '4' => 4, '10' => 10],
             'property_bath' => ['' => 'Bath','1' => 1, '2' => 2, '3' => 3],
             'property_garages' => ['' => 'Garages','1' => 1, '2' => 2, '3' => 3],
-            'featured' => [],
-//            'property_garages' => ['' => 'Garages','1' => 1, '2' => 2, '3' => 3],
         ];
 
         ?>

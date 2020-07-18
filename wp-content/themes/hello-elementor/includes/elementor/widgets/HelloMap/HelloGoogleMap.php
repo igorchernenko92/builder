@@ -23,20 +23,12 @@ include_once ( 'DCE_Helper.php');
  *
  */
 class HelloGoogleMap extends Widget_Base {
-
-    private $check_get = [
-        'keyword',
-        'property_year_built',
-        'property_bedrooms',
-        'property_bath',
-        'property_garages',
-        'property_rooms',
-        'property_living_area',
-        'property_terrace',
-    ];
+    private $type_list;
 
     public function __construct($data = [], $args = null) {
         parent::__construct($data, $args);
+        $this->type_list = get_option('hello_search_array');
+
         wp_register_script( 'hello-google-script', 'https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCyzLPGLgRv_SOdc3anLhP8olpjrBocu6I', [], '1.0.0', true );
         wp_register_script( 'hello-markerclusterer-js', 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js', array(), date("Ymd"), false );
         wp_register_script( 'hello-map-script', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloMap/assets/js/google-maps.js', [ 'elementor-frontend' ], '1.0.0', true );
@@ -56,6 +48,10 @@ class HelloGoogleMap extends Widget_Base {
 
     public function get_title() {
         return __('Hello Google Map', 'builder');
+    }
+
+    public function get_type_list() {
+        return $this->type_list;
     }
 
     public function get_description() {
@@ -309,14 +305,7 @@ class HelloGoogleMap extends Widget_Base {
                 'type' => Controls_Manager::SELECT2,
 //                'default' => [ 'date', 'comments' ],
                 'multiple' => false,
-                'options' => [
-                    'property_rooms' => __( 'Rooms', 'elementor-pro' ),
-                    'property_bedrooms' => __( 'Beds', 'elementor-pro' ),
-                    'property_bath' => __( 'Bath', 'elementor-pro' ),
-                    'property_garages' => __( 'Garages', 'elementor-pro' ),
-                    'property_living_area' => __( 'Living Area', 'elementor-pro' ),
-                    'property_terrace' => __( 'Terrace', 'elementor-pro' ),
-                ],
+                'options' => $this->get_type_list(),
             ]
         );
 

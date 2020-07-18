@@ -16,7 +16,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 abstract class Skin_Base extends Elementor_Skin_Base {
-
     public function get_id() {
         return 'skin-base';
     }
@@ -42,7 +41,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 				'label'   => _x( 'Type field', 'Type Field', 'elementor' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'property_id',
-				'options' => $this->details_array(),
+				'options' => $this->parent->get_type_list()
 			]
 		);
 
@@ -93,7 +92,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
     protected function render_details() {
         $items =  $this->get_instance_value( 'hello_property_details' );
-        $details_array = $this->details_array();
+        $details_array = $this->parent->get_type_list();
         $label = '';
         $this->render_details_top();
 
@@ -121,22 +120,4 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 	public function render() {
         $this->render_details();
     }
-
-    protected function details_array() {
-        $details = [
-                'property_id' 			=> __( 'Property ID', 'elementor' ),
-                'property_year_built' 	=> __( 'Year Built', 'elementor' ),
-                'property_bedrooms' 	=> __( 'Bedrooms', 'elementor' ),
-                'property_bath' 		=> __( 'Bath', 'elementor' ),
-                'property_garages' 		=> __( 'Garages', 'elementor' ),
-                'property_rooms' 		=> __( 'Rooms', 'elementor' ),
-                'property_living_area' 	=> __( 'Living Area', 'elementor' ),
-                'property_terrace' 		=> __( 'Terrace', 'elementor' ),
-                'property_price' 		=> __( 'Price', 'elementor' ),
-//					'features' 		        => __( 'Features', 'elementor' ),
-//					'location' 		        => __( 'Location', 'elementor' ),
-        ];
-        return $details;
-    }
-
 }

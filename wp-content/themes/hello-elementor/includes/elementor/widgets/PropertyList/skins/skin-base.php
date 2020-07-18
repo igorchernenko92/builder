@@ -327,14 +327,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                 'type' => Controls_Manager::SELECT2,
 //                'default' => [ 'date', 'comments' ],
                 'multiple' => false,
-                'options' => [
-                    'property_rooms' => __( 'Rooms', 'elementor-pro' ),
-                    'property_bedrooms' => __( 'Beds', 'elementor-pro' ),
-                    'property_bath' => __( 'Bath', 'elementor-pro' ),
-                    'property_garages' => __( 'Garages', 'elementor-pro' ),
-                    'property_living_area' => __( 'Living Area', 'elementor-pro' ),
-                    'property_terrace' => __( 'Terrace', 'elementor-pro' ),
-                ],
+                'options' => $this->parent->get_type_list(),
             ]
         );
 

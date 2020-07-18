@@ -54,14 +54,7 @@ class Skin2 extends Skin_Base {
 		if ( empty( $settings ) ) {
 			return;
 		}
-		$options = [
-            'property_bedrooms' => __( 'Beds', 'elementor-pro' ),
-            'property_bath' => __( 'Bath', 'elementor-pro' ),
-            'property_garages' => __( 'Garages', 'elementor-pro' ),
-            'property_rooms' => __( 'Rooms', 'elementor-pro' ),
-            'property_living_area' => __( 'Living Area', 'elementor-pro' ),
-            'property_terrace' => __( 'Terrace', 'elementor-pro' ),
-        ];
+		$options = $this->parent->get_type_list();
 		echo '<ul class="hl-listing-card__info">';
             foreach (  $settings as $item ) {
                  $value = get_field($item['property_meta_key'], get_the_ID());
