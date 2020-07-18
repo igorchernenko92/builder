@@ -184,14 +184,14 @@ class Builder_General {
 
 
     /**
-     * builder_property_status()
-     *
-     * Returns formatted property status
-     *
-     * @return string|bool Formatted property status or false
-     *
-     * @since 1.0.0
-     */
+ * builder_property_status()
+ *
+ * Returns formatted property status
+ *
+ * @return string|bool Formatted property status or false
+ *
+ * @since 1.0.0
+ */
     public static function builder_property_status( $post_id = '') {
         if ( ! $post_id ) $post_id = get_the_ID();
         if ( ! $post_id ) return false;
@@ -206,10 +206,54 @@ class Builder_General {
 
         $term_color = get_field('status_color', $term->taxonomy . '_' . $term->term_id); // format - #0073e1
         $property_status = '<div class="hl-listing-status">';
-            $property_status .= '<a href="' . $term_link . '" style="background-color: ' . $term_color . ';" class="hl-listing-status__inner">' .  $term_name . '</a>';
+        $property_status .= '<a href="' . $term_link . '" style="background-color: ' . $term_color . ';" class="hl-listing-status__inner">' .  $term_name . '</a>';
         $property_status .= '</div>';
 
         return apply_filters( 'builder_get_property_status', $property_status, $post_id );
+    }
+
+
+
+    /**
+     * options_array()
+     *
+     * Returns array of options
+     *
+     * @return array
+     *
+     * @since 1.0.0
+     */
+    public static function builder_options_array( $is_tax,  $include, $exclude ) {
+
+        $options_array = [
+            'property_year_built' 	=> __( 'Year Built', 'elementor' ),
+            'property_bedrooms' 	=> __( 'Bedrooms', 'elementor' ),
+            'property_bath' 		=> __( 'Bath', 'elementor' ),
+            'property_garages' 		=> __( 'Garages', 'elementor' ),
+            'property_rooms' 		=> __( 'Rooms', 'elementor' ),
+            'property_living_area' 	=> __( 'Living Area', 'elementor' ),
+            'property_terrace' 		=> __( 'Terrace', 'elementor' ),
+            'property_price' 		=> __( 'Price', 'elementor' ),
+            'keyword' 				=> __( 'Search', 'elementor' ),
+        ];
+
+        if ( $is_tax ) {
+            foreach( get_object_taxonomies( 'property', 'objects' ) as $tax  ) {
+                $options_array[$tax->name] = $tax->label;
+            }
+        }
+
+        //include
+        if ( is_array( $include ) && (!empty($include)) ) $options_array = array_merge($options_array, $include);
+
+        //exclude
+        if ( is_array( $exclude ) && ( !empty( $exclude ) ) ) {
+            foreach ( $exclude as $item ) {
+                unset($options_array[$item]);
+            }
+        }
+
+        return apply_filters( 'options_array', $options_array );
     }
 
 

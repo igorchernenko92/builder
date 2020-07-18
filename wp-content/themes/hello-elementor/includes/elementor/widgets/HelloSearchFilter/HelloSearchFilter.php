@@ -19,10 +19,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 //include_once ( 'skins/skin2.php');
 
 class HelloSearchFilter extends Base_Widget {
-    private $type_list;
 	public function __construct( $data = [], $args = null ) {
 	    parent::__construct( $data, $args );
-        $this->type_list = get_option('hello_search_array');
 
 //		wp_enqueue_style( 'ut-datepicker-css', get_template_directory_uri() . '/includes/elementor/widgets/assets/css/datepicker.css', array(), date("Ymd"), false );
 //		wp_enqueue_script( 'ut-datepicker-js', get_template_directory_uri() . '/includes/elementor/widgets/assets/js/datepicker.js', array(), date("Ymd"), false );
@@ -49,10 +47,6 @@ class HelloSearchFilter extends Base_Widget {
 	public function get_name() {
 		return 'search_filter';
 	}
-
-    public function get_type_list() {
-        return $this->type_list;
-    }
 
 	public function get_title() {
 		return __( 'Hello Search Filter', 'elementor' );
@@ -189,7 +183,7 @@ class HelloSearchFilter extends Base_Widget {
                 'label'   => _x( 'Type field', 'Type Field', 'elementor' ),
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'search',
-                'options' => $this->type_list,
+                'options' => builder_get_options_array(),
                 'condition' => [
                     'search_button' => '',
                 ],
@@ -349,7 +343,7 @@ class HelloSearchFilter extends Base_Widget {
         $items =  $settings[ 'hello_search_items' ];
         $search_result_page =  $settings[ 'hello_search_result_page' ];
 
-        $mapping_array = $this->get_type_list();
+        $mapping_array = builder_get_options_array();
 
         $value_data = [
             'property_bedrooms' => ['' => 'Bedrooms', '1' => 1, '2' => 2, '3' => 3],

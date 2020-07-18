@@ -23,7 +23,7 @@ class HelloPropertyDetails extends Base_Widget {
 	public function __construct( $data = [], $args = null ) {
 		parent::__construct( $data, $args );
 
-        $this->type_list = get_option('hello_search_array');
+        $this->type_list = builder_get_options_array(false, ['property_id' => __( 'Property ID', 'elementor' )], ['keyword']);
 
         wp_register_script('hello-details-script', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloPropertyDetails/assets/js/base-script.js', '', '1', true);
         wp_register_style('hello-details-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloPropertyDetails/assets/css/base-main.css', '', 1);

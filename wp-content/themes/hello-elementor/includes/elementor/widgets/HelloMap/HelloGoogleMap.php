@@ -24,10 +24,13 @@ include_once ( 'DCE_Helper.php');
  */
 class HelloGoogleMap extends Widget_Base {
     private $type_list;
+    private $type_list_meta;
 
     public function __construct($data = [], $args = null) {
         parent::__construct($data, $args);
-        $this->type_list = get_option('hello_search_array');
+
+        $this->type_list = builder_get_options_array();
+        $this->type_list_meta = builder_get_options_array(false, [], ['property_year_built', 'property_price', 'keyword' ]);
 
         wp_register_script( 'hello-google-script', 'https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCyzLPGLgRv_SOdc3anLhP8olpjrBocu6I', [], '1.0.0', true );
         wp_register_script( 'hello-markerclusterer-js', 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js', array(), date("Ymd"), false );
@@ -53,6 +56,11 @@ class HelloGoogleMap extends Widget_Base {
     public function get_type_list() {
         return $this->type_list;
     }
+
+    public function get_type_list_meta() {
+        return $this->type_list_meta;
+    }
+
 
     public function get_description() {
         return __('Build a map using data from a Google Maps ACF', 'builder');
@@ -305,7 +313,7 @@ class HelloGoogleMap extends Widget_Base {
                 'type' => Controls_Manager::SELECT2,
 //                'default' => [ 'date', 'comments' ],
                 'multiple' => false,
-                'options' => $this->get_type_list(),
+                'options' => $this->get_type_list_meta(),
             ]
         );
 
@@ -788,7 +796,7 @@ class HelloGoogleMap extends Widget_Base {
                 'post_status' => 'publish',
             );
 
-            $check_get = array_keys( get_option('hello_search_array') );
+            $check_get = array_keys( $this->get_type_list() );
             $getParam = (array)$_GET;
             $property_tax = array_keys( get_object_taxonomies( 'property', 'objects' ) );
 

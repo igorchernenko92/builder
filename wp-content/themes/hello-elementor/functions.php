@@ -391,24 +391,6 @@ function czc_disable_extra_image_sizes()
     }
 }
 
-//details, properties, map
-add_action( 'init', 'add_search_array' );
-function add_search_array() {
-    $check_get = [
-        'property_year_built' 	=> __( 'Year Built', 'elementor' ),
-        'property_bedrooms' 	=> __( 'Bedrooms', 'elementor' ),
-        'property_bath' 		=> __( 'Bath', 'elementor' ),
-        'property_garages' 		=> __( 'Garages', 'elementor' ),
-        'property_rooms' 		=> __( 'Rooms', 'elementor' ),
-        'property_living_area' 	=> __( 'Living Area', 'elementor' ),
-        'property_terrace' 		=> __( 'Terrace', 'elementor' ),
-        'property_price' 		=> __( 'Price', 'elementor' ),
-        'keyword' 				=> __( 'Search', 'elementor' ),
-    ];
 
-    foreach( get_object_taxonomies( 'property', 'objects' ) as $tax  ) {
-        $check_get[$tax->name] = $tax->label;
-    }
 
-    update_option( 'hello_search_array', $check_get );
-}
+

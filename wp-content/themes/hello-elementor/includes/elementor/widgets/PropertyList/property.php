@@ -20,9 +20,11 @@ include_once ( 'skins/skin3.php');
 
 class Property extends Property_Base {
     private $type_list;
+    private $type_list_meta;
 
     public function __construct($data = [], $args = null) {
-        $this->type_list = get_option('hello_search_array');
+        $this->type_list = builder_get_options_array();
+        $this->type_list_meta = builder_get_options_array(false, [], ['property_year_built', 'property_price', 'keyword' ]);
 
         parent::__construct($data, $args);
         wp_register_script('hello-carousel-script', get_stylesheet_directory_uri() . '/includes/elementor/widgets/PropertyList/assets/js/base-script.js', '', '1', true);
@@ -39,6 +41,10 @@ class Property extends Property_Base {
 
     public function get_type_list() {
         return $this->type_list;
+    }
+
+    public function get_type_list_meta() {
+        return $this->type_list_meta;
     }
 
 	public function get_name() {

@@ -327,7 +327,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                 'type' => Controls_Manager::SELECT2,
 //                'default' => [ 'date', 'comments' ],
                 'multiple' => false,
-                'options' => $this->parent->get_type_list(),
+                'options' => $this->parent->get_type_list_meta(),
             ]
         );
 
@@ -1129,7 +1129,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 		if ( empty( $settings ) ) {
 			return;
 		}
-		$options = $this->parent->get_type_list();
+		$options = $this->parent->get_type_list_meta();
 		echo '<ul class="hl-listing-card__info">';
             foreach ( $settings as $item ) {
                 $value = get_field($item['property_meta_key'], get_the_ID());

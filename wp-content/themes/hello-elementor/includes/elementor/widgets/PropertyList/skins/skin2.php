@@ -54,7 +54,8 @@ class Skin2 extends Skin_Base {
 		if ( empty( $settings ) ) {
 			return;
 		}
-		$options = $this->parent->get_type_list();
+		$options = $this->parent->get_type_list_meta();
+//		var_dump(builder_get_options_array(false, [], ['keyword', 'property_year_built', 'property_price']));
 		echo '<ul class="hl-listing-card__info">';
             foreach (  $settings as $item ) {
                  $value = get_field($item['property_meta_key'], get_the_ID());

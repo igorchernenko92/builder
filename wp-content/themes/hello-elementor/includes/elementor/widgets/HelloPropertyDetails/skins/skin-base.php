@@ -40,7 +40,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 			[
 				'label'   => _x( 'Type field', 'Type Field', 'elementor' ),
 				'type'    => Controls_Manager::SELECT,
-				'default' => 'property_id',
+				'default' => 'property_details',
 				'options' => $this->parent->get_type_list()
 			]
 		);
