@@ -391,6 +391,7 @@ function czc_disable_extra_image_sizes()
     }
 }
 
+//details, properties, map
 add_action( 'init', 'add_search_array' );
 function add_search_array() {
     $check_get = [
