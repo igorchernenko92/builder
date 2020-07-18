@@ -576,7 +576,7 @@ class HelloPropertyFeatures extends Widget_Base {
 		$settings = $this->get_settings_for_display();
         $terms = get_the_terms( get_the_ID(), 'features' );
 
-//        var_dump($settings['primary_color']);
+        if ( !$terms ) return;
 
         echo "
           <style>

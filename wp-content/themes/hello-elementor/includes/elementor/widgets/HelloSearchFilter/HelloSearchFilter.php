@@ -376,7 +376,7 @@ class HelloSearchFilter extends Base_Widget {
                         <input type="hidden" id="page_id" name="page_id" value="<?php echo $search_result_page ?>">
                         <?php
                         foreach ( $items as $field ) :
-                            if ( !$field['placeholder'] ) {
+                            if ( !$field['placeholder'] && isset($mapping_array[$field['type_field']]) ) {
                                 $field['placeholder'] = $mapping_array[$field['type_field']];
                             }
 
