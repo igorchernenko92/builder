@@ -22,7 +22,7 @@ class HelloSearchFilter extends Base_Widget {
     private $type_list;
 	public function __construct( $data = [], $args = null ) {
 
-         $this->type_list = get_option('hello_search_array');
+	    $this->type_list = get_option('hello_search_array');
 
 		parent::__construct( $data, $args );
 //		wp_enqueue_style( 'ut-datepicker-css', get_template_directory_uri() . '/includes/elementor/widgets/assets/css/datepicker.css', array(), date("Ymd"), false );
@@ -50,6 +50,10 @@ class HelloSearchFilter extends Base_Widget {
 	public function get_name() {
 		return 'search_filter';
 	}
+
+    public function get_type_list() {
+        return $this->type_list;
+    }
 
 	public function get_title() {
 		return __( 'Hello Search Filter', 'elementor' );
@@ -346,7 +350,7 @@ class HelloSearchFilter extends Base_Widget {
         $items =  $settings[ 'hello_search_items' ];
         $search_result_page =  $settings[ 'hello_search_result_page' ];
 
-        $mapping_array =  $this->type_list;
+        $mapping_array = $this->get_type_list();
 
         $value_data = [
             'property_bedrooms' => ['' => 'Bedrooms', '1' => 1, '2' => 2, '3' => 3],

@@ -19,8 +19,11 @@ include_once ( 'skins/skin3.php');
 
 
 class Property extends Property_Base {
+    private $type_list;
 
     public function __construct($data = [], $args = null) {
+        $this->type_list = get_option('hello_search_array');
+
         parent::__construct($data, $args);
         wp_register_script('hello-carousel-script', get_stylesheet_directory_uri() . '/includes/elementor/widgets/PropertyList/assets/js/base-script.js', '', '1', true);
         wp_register_style('hello-carousel-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/PropertyList/assets/css/base-main.css', '', 1);
@@ -32,6 +35,10 @@ class Property extends Property_Base {
 
     public function get_style_depends() {
         return ['hello-carousel-style'];
+    }
+
+    public function get_type_list() {
+        return $this->type_list;
     }
 
 	public function get_name() {
@@ -82,7 +89,7 @@ class Property extends Property_Base {
 
         $this->set_settings('property_post_type', 'property'); // query only property post type
 
-        $check_get = array_keys( get_option('hello_search_array') );
+        $check_get = array_keys( $this->get_type_list() );
         $getParam = (array)$_GET;
         $property_tax = array_keys( get_object_taxonomies( 'property', 'objects' ) );
 
