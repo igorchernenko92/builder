@@ -83,7 +83,7 @@ class Property extends ThemeBuilder\Conditions\Condition_Base {
 	 * @return bool
 	 */
 	public function check( $args ) {
-		return is_post_type_archive( 'listings' ) || is_tax( get_object_taxonomies( 'listings' ) );
+		return is_post_type_archive( 'property' ) || is_tax( get_object_taxonomies( 'property' ) );
 	}
 
 }

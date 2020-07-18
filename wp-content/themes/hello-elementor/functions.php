@@ -405,5 +405,15 @@ function add_search_array() {
         'property_price',
     ];
 
+    $property_tax = array_keys( get_object_taxonomies( 'property', 'objects' ) );
+
+//    foreach( get_object_taxonomies( 'property', 'objects' ) as $tax  ) {
+//        var_dump($tax->name);
+//        var_dump($tax->label);
+//    }
+
+
+    $check_get = array_merge($check_get, $property_tax);
+
     update_option( 'hello_search_array', $check_get );
 }

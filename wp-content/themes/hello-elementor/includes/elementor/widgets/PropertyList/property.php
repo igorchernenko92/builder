@@ -74,18 +74,33 @@ class Property extends Property_Base {
         $args = [
 			'posts_per_page' => $this->get_current_skin()->get_instance_value( 'posts_per_page' ),
 			'paged' => $this->get_current_page(),
-            'post__not_in' => array( get_the_ID() )
-            ];
+        ];
+
+        if ( is_singular('propperty') ) {
+            $args['post__not_in'] = array( get_the_ID() );
+        }
 
         $this->set_settings('property_post_type', 'property'); // query only property post type
 
         $check_get = get_option('hello_search_array');
         $getParam = (array)$_GET;
+        $property_tax = array_keys( get_object_taxonomies( 'property', 'objects' ) );
 
         foreach ( $getParam as $meta_key => $meta_value ) {
             if ( in_array( $meta_key, $check_get ) && !empty( $meta_value ) ) {
                 $type = '';
                 $compare = '';
+
+                if ( in_array($meta_key, $property_tax) ) { // if any of tax in the list add tax to query
+                    $args['tax_query'][] = [
+                        [
+                            'taxonomy' => $meta_key,
+                            'field'    => 'slug',
+                            'terms'    => $meta_value
+                        ]
+                    ];
+                    continue;
+                }
 
                 if ( 'property_year_built' == $meta_key ) {
                     $type = 'DATE';
@@ -108,11 +123,6 @@ class Property extends Property_Base {
                     $meta_value = array( $meta_value['min'], $meta_value['max'] );
                 }
 
-
-
-//                if ( 'keyword' == $meta_key ) {
-//                    $args['s'] = $meta_value;
-//                } else {
                     $args['meta_query'][] = array(
                         array(
                             'key'   => $meta_key,
@@ -121,9 +131,6 @@ class Property extends Property_Base {
                             'compare' => $compare
                         )
                     );
-
-//
-//                }
             }
         }
 
