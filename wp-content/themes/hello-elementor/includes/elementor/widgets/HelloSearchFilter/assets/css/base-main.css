@@ -115,7 +115,7 @@ input[type=number] {
     top: 50%;
     transform: translate(0, -50%);
     padding: 2px 16px;
-    color: #444;
+    color: #777777;
     font-weight: 500;
 }
 
@@ -146,9 +146,14 @@ select.select-multiselect {
     min-width: 200px;
 }
 
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #777777 !important;
+}
+
 *::placeholder {
     font-weight: 400 !important;
-    color: #444 !important;
+    color: #777777 !important;
 }
 
 .form-control,
@@ -286,7 +291,6 @@ textarea {
     font-size: 14px;
     line-height: 22px;
     padding: 4px 16px;
-    transition: 0.3s all ease;
 }
 @media (max-width: 768px) {
     .select2-container--default .select2-results__option {

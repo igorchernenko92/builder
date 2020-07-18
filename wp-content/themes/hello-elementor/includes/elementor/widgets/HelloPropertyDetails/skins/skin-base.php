@@ -85,6 +85,12 @@ abstract class Skin_Base extends Elementor_Skin_Base {
       <?php
   }
 
+  protected function render_details_bottom() {
+      ?>
+        </div>
+      <?php
+  }
+
     protected function render_details() {
         $items =  $this->get_instance_value( 'hello_property_details' );
         $details_array = $this->details_array();
@@ -108,10 +114,8 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                   <?php echo $value;  ?>
               </div>
             </div>
-       <?php } ?>
-        </div>
-        <?php
-
+       <?php }
+        $this->render_details_bottom();
     }
 
 	public function render() {
