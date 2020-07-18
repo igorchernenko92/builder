@@ -94,16 +94,16 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
                                     if ( 'select' == $field['type_view'] ) { ?>
                                         <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
-                                            <label class="wrap-input">
-                                                    <?php if ($field['label']) { ?>
-                                                      <span class="listings-search-field-label">
-                                                          <?php echo $field['label']; ?>
+                                            <label class="wrap-input wrap-select">
+                                                      <?php if ($field['label']) { ?>
+                                                        <span class="listings-search-field-label">
+                                                        <?php echo $field['label']; ?>
                                                       </span>
                                                     <?php } ?>
                                                     <select class="select-2 form-control" name="<?php echo $field['type_field']; ?>">
                                                         <?php foreach ( $value_data[$field['type_field']] as $index => $option ) { ?>
-                                                            <option value="<?php echo $index; ?>"><?php echo $option; ?></option>
-                                                         <?php  }  ?>
+                                                          <option value="<?php echo $index; ?>"><?php echo $option; ?></option>
+                                                        <?php  }  ?>
                                                     </select>
                                             </label>
                                         </div>

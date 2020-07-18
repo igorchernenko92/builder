@@ -1,7 +1,5 @@
 (function($) {
   const HelloSearchSkinScript1 = function ($scope, $) {
-    console.log("sedf")
-    
     $("#search_filter_form").attr("autocomplete", "off");
     // Select 2
     const initSelect2 = function () {
@@ -13,11 +11,13 @@
         $selectFields.each(function() {
           if ($(this).hasClass("select2-hidden-accessible")) return;
         
-          $(this).wrap("<div class='wrap-select'></div>");
           const $wrapperCurSelect = $(this).parent();
           $wrapperCurSelect.append(svgIcon);
+  
+          const placeholder = $(this).data("placeholder");
         
           $(this).select2({
+            placeholder,
             dropdownParent: $wrapperCurSelect,
             dropdownAutoWidth: true,
             width: 'auto',
@@ -56,7 +56,6 @@
 
   $(window).on('elementor/frontend/init', function () {
     elementorFrontend.hooks.addAction('frontend/element_ready/search_filter.default', HelloSearchSkinScript1);
-    elementorFrontend.hooks.addAction('frontend/element_ready/search_filter.skin1', HelloSearchSkinScript1);
   });
   
   
