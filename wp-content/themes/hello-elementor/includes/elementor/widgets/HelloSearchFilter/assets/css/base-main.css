@@ -94,6 +94,7 @@ input[type=number] {
 .wrap-select .ms-drop ul > li {
     display: flex;
     align-items: center;
+    padding: 0;
 }
 
 .wrap-select .ms-drop ul > li > label {
@@ -101,14 +102,17 @@ input[type=number] {
     align-items: flex-start;
     width: 100%;
     white-space: initial !important;
+
 }
 
 .wrap-select .ms-drop ul > li > label span {
     width: 100%;
+    padding: 4px 0;
 }
 
 .wrap-select .ms-drop ul > li > label input {
-    margin-top: 2px;
+    margin-top: 6px;
+    padding: 4px 0;
 }
 
 .wrap-select .ms-choice > span {
