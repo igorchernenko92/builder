@@ -142,6 +142,13 @@
         initListingSlider($slider);
       })
     }
+    
+    $(".hl-listings.hl-listings_large").each(function () {
+      const laptopCount = getPreViews($(this)).laptop
+      if (laptopCount === 1) {
+        $(this).removeClass("hl-listings_large")
+      }
+    })
   };
   
   $(window).on('elementor/frontend/init', function () {

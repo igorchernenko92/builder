@@ -989,7 +989,7 @@ ol {
 }
 
 @media (min-width: 560px) {
-    .hl-listing-card_skin-3 {
+    .hl-listings_large .hl-listing-card_skin-3 {
         flex-direction: row;
     }
 }
@@ -1017,14 +1017,14 @@ ol {
 }
 
 @media (min-width: 560px) {
-    .hl-listing-card_skin-3 .hl-listing-card__picture,
-    .hl-listing-card_skin-3 .hl-listing-card__body {
+    .hl-listings_large .hl-listing-card_skin-3 .hl-listing-card__picture,
+    .hl-listings_large .hl-listing-card_skin-3 .hl-listing-card__body {
         max-width: 50%;
     }
 }
 
-.hl-listing-card_skin-3 .hl-listing-card__picture,
-.hl-listing-card_skin-3 .hl-listing-card__body {
+.hl-listings_large .hl-listing-card_skin-3 .hl-listing-card__picture,
+.hl-listings_large .hl-listing-card_skin-3 .hl-listing-card__body {
     min-width: 280px;
     flex-basis: 50%;
 }
