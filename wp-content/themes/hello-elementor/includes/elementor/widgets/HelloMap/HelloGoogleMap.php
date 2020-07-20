@@ -848,6 +848,16 @@ class HelloGoogleMap extends Widget_Base {
                 }
             }
 
+        if ( is_singular('agent') ) {
+            $agent_posts = get_field('agent_properties', get_the_ID());
+
+            if ( $agent_posts ) {
+                $args['post__in'] = $agent_posts;
+            } else {
+                $args['post__in'] = array('99999999'); // if no property related to agent show nothing
+            }
+        }
+
             if ( is_tax() ) {
                 $args['tax_query'][] = [
                     [

@@ -75,7 +75,7 @@ class Skin2 extends Skin_Base {
         echo '</ul>';
 	}
 
-	protected function render_agent_time() {
+	protected function render_time() {
 	  ?>
       <div class="hl-listing-card__bottom-item hl-listing-card__bottom-item_time">
           <i class="fa fa-calendar hl-listing-card__icon hl-listing-card__bottom-item-icon"></i>
@@ -85,7 +85,7 @@ class Skin2 extends Skin_Base {
 	}
 
     protected function render_agent() {
-	     if ( ! $this->get_instance_value( 'show_agent' ) ) return;
+	    if ( ! $this->get_instance_value( 'show_agent' ) ) return;
         if ( ! $agent = get_field('property_agent') ) return;
 
         $name = $agent[0]->post_title;
@@ -98,7 +98,7 @@ class Skin2 extends Skin_Base {
                     <?php echo $thumbnail; ?>
                     <span class="hl-listing-card__agent-name"><?php echo $name ?></span>
                 </a>
-                <?php $this->render_agent_time(); ?>
+                <?php $this->render_time(); ?>
             </div>
         </div>
         <?php

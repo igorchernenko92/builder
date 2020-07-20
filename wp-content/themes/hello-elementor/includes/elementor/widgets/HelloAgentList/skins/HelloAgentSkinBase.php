@@ -181,8 +181,6 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
             while ( $query->have_posts() ) {
                 $query->the_post();
 
-                $website = get_field('agent_website', get_the_ID());
-
                 $this->current_permalink = get_permalink();
                 $this->render_post();
             }
