@@ -165,6 +165,14 @@ ol {
     transform: translate(50%, -50%);
 }
 
+.hl-gallery-2 .hl-gallery__list {
+    visibility: hidden;
+}
+
+.hl-gallery_show .hl-gallery__list {
+    visibility: visible;
+}
+
 .hl-gallery-1 .hl-gallery__slider-nav,
 .hl-gallery-3 .hl-gallery__slider-nav {
     position: absolute;

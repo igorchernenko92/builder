@@ -93,6 +93,8 @@
           } else if (images.length > 6) {
             $(this).addClass("hl-gallery-2_show-all")
           }
+
+          $(this).addClass("hl-gallery_show")
         })
       }
     };
