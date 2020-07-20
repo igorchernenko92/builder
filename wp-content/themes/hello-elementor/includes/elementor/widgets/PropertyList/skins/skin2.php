@@ -85,12 +85,7 @@ class Skin2 extends Skin_Base {
 	  <?php
 	}
 
-    protected function render_agent() {
-//	    if ( ! $this->get_instance_value( 'show_agent' ) ) return;
-//        if ( ! $agent = get_field('property_agent') ) return;
-
-
-        ?>
+    protected function render_agent() { ?>
         <div class="hl-listing-card__bottom mt-auto">
             <div class="hl-listing-card__bottom-inner">
                 <?php if ( $this->get_instance_value( 'show_agent' ) && $agent = get_field('property_agent') ) {
