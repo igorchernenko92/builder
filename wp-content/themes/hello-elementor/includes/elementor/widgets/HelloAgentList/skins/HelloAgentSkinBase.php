@@ -166,7 +166,9 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
 
 //      if single agent page show only one
 	    if ( $settings [ $this->get_control_id( 'is_agent_page' ) ] ) {
+            $this->render_agents_top();
             $this->render_post();
+            $this->render_agents_bottom();
 	        return;
         }
 

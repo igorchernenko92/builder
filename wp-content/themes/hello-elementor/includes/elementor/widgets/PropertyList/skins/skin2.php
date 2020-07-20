@@ -50,21 +50,22 @@ class Skin2 extends Skin_Base {
     }
 
 	protected function render_meta_data() {
+		if ( ! $this->get_instance_value( 'show_meta_data' ) ) {
+            return;
+        }
+
 		$settings = $this->get_instance_value( 'property_meta_data' );
 		if ( empty( $settings ) ) {
 			return;
 		}
 		$options = $this->parent->get_type_list_meta();
-//		var_dump(builder_get_options_array(false, [], ['keyword', 'property_year_built', 'property_price']));
 		echo '<ul class="hl-listing-card__info">';
-            foreach (  $settings as $item ) {
-                 $value = get_field($item['property_meta_key'], get_the_ID());
-                 if ( !$value ) continue;
+            foreach ( $settings as $item ) {
+                $value = get_field($item['property_meta_key'], get_the_ID());
+                if ( !$value ) continue;
 
                 $label = $item['label'];
                 if (!$label) $label = $options[$item['property_meta_key']];
-
-
                 ?>
             <li class="hl-listing-card__info-item">
                 <i class="fa fa-<?php echo $item['selected_icon']['value']; ?> hl-listing-card__icon hl-listing-card__info-icon"></i>
@@ -85,19 +86,23 @@ class Skin2 extends Skin_Base {
 	}
 
     protected function render_agent() {
-	    if ( ! $this->get_instance_value( 'show_agent' ) ) return;
-        if ( ! $agent = get_field('property_agent') ) return;
+//	    if ( ! $this->get_instance_value( 'show_agent' ) ) return;
+//        if ( ! $agent = get_field('property_agent') ) return;
 
-        $name = $agent[0]->post_title;
-        $link = get_the_permalink($agent[0]->ID);
-        $thumbnail = get_the_post_thumbnail( $agent[0]->ID, 'large', ['class' => "hl-listing-card__agent-img hl-img-responsive"] )
+
         ?>
         <div class="hl-listing-card__bottom mt-auto">
             <div class="hl-listing-card__bottom-inner">
-                <a href="<?php echo $link ?>" class="hl-listing-card__agent hl-listing-card__bottom-item">
-                    <?php echo $thumbnail; ?>
-                    <span class="hl-listing-card__agent-name"><?php echo $name ?></span>
-                </a>
+                <?php if ( $this->get_instance_value( 'show_agent' ) && $agent = get_field('property_agent') ) {
+                    $name = $agent[0]->post_title;
+                    $link = get_the_permalink($agent[0]->ID);
+                    $thumbnail = get_the_post_thumbnail( $agent[0]->ID, 'large', ['class' => "hl-listing-card__agent-img hl-img-responsive"] )
+                ?>
+                    <a href="<?php echo $link ?>" class="hl-listing-card__agent hl-listing-card__bottom-item">
+                        <?php echo $thumbnail; ?>
+                        <span class="hl-listing-card__agent-name"><?php echo $name ?></span>
+                    </a>
+                <?php } ?>
                 <?php $this->render_time(); ?>
             </div>
         </div>
