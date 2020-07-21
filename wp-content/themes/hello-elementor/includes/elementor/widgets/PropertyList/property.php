@@ -85,7 +85,7 @@ class Property extends Property_Base {
 
 	public function query_posts() {
         $args = [
-			'posts_per_page' => $this->get_current_skin()->get_instance_value( 'posts_per_page' ),
+            'posts_per_page' => $this->get_current_skin()->get_instance_value( 'posts_per_page' ),
 			'paged' => $this->get_current_page(),
         ];
 

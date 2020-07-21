@@ -25,7 +25,6 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
 
 	protected function _register_controls_actions() {
 		add_action( 'elementor/element/hello-agents/section_layout/before_section_end', [ $this, 'register_layout_sections' ] );
-//        add_action( 'elementor/element/property/section_query/after_section_end', [ $this, 'register_query_sections' ] );
     }
 
 	public function register_query_sections( Widget_Base $widget ) {
@@ -172,10 +171,15 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
 	        return;
         }
 
-        $this->parent->query_posts();
+        $args = array(
+            'post_type' => 'agent',
+            'post_status' => 'publish',
+            'posts_per_page' => $this->get_instance_value( 'posts_per_page' ),
+        );
 
-        $query = $this->parent->get_query();
-        if ( ! $query->found_posts ) {
+        $query = new \WP_Query($args);
+
+        if ( ! $query->have_posts() ) {
             return;
         }
 

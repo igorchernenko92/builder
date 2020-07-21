@@ -79,10 +79,7 @@ class HelloAgents extends Widget_Base {
 //			'paged' => $this->get_current_page(),
             ];
 
-        $this->set_settings('property_post_type', 'agent');
 
-		$elementor_query = Module_Query::instance();
-		$this->query = $elementor_query->get_query( $this, $this->get_name(), $query_args, [] );
 	}
 
 	protected function register_query_section_controls() {
@@ -95,30 +92,6 @@ class HelloAgents extends Widget_Base {
             ]
         );
         $this->end_controls_section();
-
-
-
-		$this->start_controls_section(
-			'section_query',
-			[
-				'label' => __( 'Query', 'elementor-pro' ),
-				'tab' => Controls_Manager::TAB_CONTENT,
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Related::get_type(),
-			[
-				'name' => $this->get_name(),
-				'presets' => [ 'full' ],
-				'exclude' => [
-					'posts_per_page',
-                    'query_id',
-				],
-			]
-		);
-
-		$this->end_controls_section();
 
 	}
 
