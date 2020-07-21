@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
 
     public function get_id() {
-        return 'skin-agents-base';
+        return 'skin-base';
     }
 
 	protected $current_permalink;
@@ -46,6 +46,11 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
             $default = 'yes';
         }
 
+        $is_prop = '';
+        if ( is_singular('property') ) {
+            $is_prop = 'yes';
+        }
+
         $this->add_control(
             'is_agent_page',
             [
@@ -53,6 +58,9 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
                 'type' => Controls_Manager::SWITCHER,
                 'default' => $default,
                 'frontend_available' => true,
+                'condition' => [
+                    $this->get_control_id( 'is_property_page' ) => '',
+                ]
             ]
         );
 
@@ -61,7 +69,7 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
             [
                 'label' => __('Is Property Page', 'builder'),
                 'type' => Controls_Manager::SWITCHER,
-                'default' => 'false',
+                'default' => $is_prop,
                 'frontend_available' => true,
                 'condition' => [
                     $this->get_control_id( 'is_agent_page' ) => '',
@@ -79,6 +87,7 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
                 'default' => 6,
                 'condition' => [
                     $this->get_control_id( 'is_agent_page' ) => '',
+                    $this->get_control_id( 'is_property_page' ) => '',
                 ]
             ]
         );
