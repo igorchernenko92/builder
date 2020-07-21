@@ -70,6 +70,52 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
             ]
         );
 
+        $repeater = new Repeater();
+
+        $repeater->add_control(
+            'agent_meta_key',
+            [
+                'label' => __( 'Meta Data', 'elementor-pro' ),
+                'label_block' => true,
+                'type' => Controls_Manager::SELECT2,
+                'multiple' => false,
+                'options' => $this->parent->get_meta()
+            ]
+        );
+
+        $repeater->add_control(
+            'label',
+            [
+                'label' => __( 'Label', 'elementor' ),
+                'type' => Controls_Manager::TEXT,
+                'label_block' => true,
+                'placeholder' => __( '', 'elementor' ),
+                'default' => __( '', 'elementor' ),
+                'description' => __( 'Leave it empty if default', 'elementor' ),
+                'dynamic' => [
+                    'active' => true,
+                ],
+            ]
+        );
+
+
+        $this->add_control(
+            'agent_meta_data',
+            [
+                'label' => '',
+                'type' => Controls_Manager::REPEATER,
+                'fields' => $repeater->get_controls(),
+                'default' => [
+                    [
+                        'label' => __( '', 'elementor' ),
+                        'agent_meta_key' => 'agent_mobile',
+                    ],
+
+                ],
+                'title_field' => '{{{ agent_meta_key }}}',
+            ]
+        );
+
     }
 
 
@@ -163,6 +209,9 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
     public function render() {
         $settings = $this->parent->get_active_settings();
 
+
+
+
 //      if single agent page show only one
 	    if ( $settings [ $this->get_control_id( 'is_agent_page' ) ] ) {
             $this->render_agents_top();
@@ -178,7 +227,6 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
         );
 
         $query = new \WP_Query($args);
-
         if ( ! $query->have_posts() ) {
             return;
         }
@@ -197,17 +245,15 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
     }
 
 	protected function render_post() {
-      $spec = get_field('agent_specialties', get_the_ID());
-      $areas = get_field('agent_service_areas', get_the_ID());
-      $email = get_field('agent_email', get_the_ID());
-      $position = get_field('agent_position', get_the_ID());
-      $com_name = get_field('agent_company_name', get_the_ID());
-      $license = get_field('agent_license', get_the_ID());
-      $tax = get_field('agent_tax_number', get_the_ID());
-      $tel = get_field('agent_mobile', get_the_ID());
-      $office_number = get_field('agent_office_number', get_the_ID());
-      $language = get_field('agent_language', get_the_ID());
-      $website = get_field('agent_website', get_the_ID());
+        $options = $this->parent->get_meta();
+        $agents_meta = $this->get_instance_value( 'agent_meta_data' );
+
+        foreach ( $agents_meta as $item ) {
+            $label = $item['label'];
+            if (!$label)  $label = $options[$item['agent_meta_key']];
+
+            $value = get_field($item['agent_meta_key'], get_the_ID());
+        }
 
       $this->render_post_header();
           $this->render_avatar();

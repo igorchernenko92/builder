@@ -1226,8 +1226,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
             $this->render_list($query);
         }
 
-
-
         wp_reset_postdata();
 
 //        $this->render_loop_footer();

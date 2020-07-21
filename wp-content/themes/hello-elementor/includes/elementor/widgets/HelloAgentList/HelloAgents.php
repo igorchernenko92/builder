@@ -21,16 +21,29 @@ include_once ( 'skins/HelloAgentSkin3.php');
  */
 class HelloAgents extends Widget_Base {
 
-    protected $query = null;
+    private $meta;
 
     public function __construct($data = [], $args = null) {
+        $this->meta = [
+            'agent_specialties' => __( 'Specialties', 'builder' ),
+            'agent_service_areas' => __( 'Service Areas', 'builder' ),
+            'agent_tax_number' => __( 'Tax Number', 'builder' ),
+            'agent_license' => __( 'Agent license', 'builder' ),
+            'agent_position' => __( 'Position', 'builder' ),
+            'agent_company_name' => __( 'Company Name', 'builder' ),
+            'agent_mobile' => __( 'Mobile Number', 'builder' ),
+            'agent_office_number' => __( 'Office Number', 'builder' ),
+            'agent_language' => __( 'Language', 'builder' ),
+            'agent_website' => __( 'Website', 'builder' ),
+        ];
+
         parent::__construct($data, $args);
         wp_register_script('hello-carousel-agents-script', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloAgentList/assets/js/base-script.js', '', '1', true);
         wp_register_style('hello-carousel-agents-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloAgentList/assets/css/base-main.css', '', 1);
     }
 
-    public function get_query() {
-        return $this->query;
+    public function get_meta() {
+        return $this->meta;
     }
 
     public function get_script_depends() {
@@ -74,11 +87,6 @@ class HelloAgents extends Widget_Base {
 	}
 
 	public function query_posts() {
-		$query_args = [
-			'posts_per_page' => $this->get_current_skin()->get_instance_value( 'posts_per_page' ),
-//			'paged' => $this->get_current_page(),
-            ];
-
 
 	}
 
