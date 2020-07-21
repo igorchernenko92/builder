@@ -130,7 +130,19 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
                 'default' => [
                     [
                         'label' => __( '', 'elementor' ),
+                        'agent_meta_key' => 'agent_company_name',
+                    ],
+                    [
+                        'label' => __( '', 'elementor' ),
                         'agent_meta_key' => 'agent_mobile',
+                    ],
+                    [
+                        'label' => __( '', 'elementor' ),
+                        'agent_meta_key' => 'agent_email',
+                    ],
+                    [
+                        'label' => __( '', 'elementor' ),
+                        'agent_meta_key' => 'agent_service_areas',
                     ],
 
                 ],
@@ -186,16 +198,16 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
     }
 
     protected function render_title() {
-        $name = get_the_title($this->parent->get_the_id());
+        $name = esc_html( get_the_title($this->parent->get_the_id()) );
         if ($name) { ?>
-          <a href="<?php echo  $this->current_permalink ?>" target="_blank" class="hl-agent__title"><?php echo $name ?></a>
+          <a href="<?php echo esc_url( $this->current_permalink ) ?>" target="_blank" class="hl-agent__title"><?php echo esc_html( $name ) ?></a>
         <?php }
     }
 
     protected function render_position() {
         $spec = get_field('agent_specialties', $this->parent->get_the_id());
         if ($spec) { ?>
-          <p class="hl-agent__position"><?php echo $spec ?></p>
+          <p class="hl-agent__position"><?php echo esc_html( $spec ) ?></p>
         <?php }
     }
 
@@ -203,7 +215,7 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
 	    $content = get_field('agent_description', $this->parent->get_the_id());
 	    if (trim($content)) { ?>
           <div class="hl-agent__description">
-                <?php echo trim($content); ?>
+                <?php echo trim(esc_html($content)); ?>
           </div>
         <?php }
     }
@@ -211,7 +223,7 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
     protected function render_bottom() {
         ?>
           <div class="hl-agent__bottom">
-            <a href="<?php echo  $this->current_permalink ?>" target="_blank" class="hl-agent__bottom-link"><?php echo __('View profile', 'builder') ?></a>
+            <a href="<?php echo esc_url($this->current_permalink) ?>" target="_blank" class="hl-agent__bottom-link"><?php echo esc_html__('View profile', 'builder') ?></a>
           </div>
         <?php
     }
@@ -231,10 +243,8 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
     public function render() {
         $settings = $this->parent->get_active_settings();
 
-
-
 //      if single agent page show only one
-	    if ( $settings [ $this->get_control_id( 'is_agent_page' ) && is_singular('agent') ] ) {
+	    if ( $settings [ $this->get_control_id( 'is_agent_page' ) ] && is_singular('agent') ) {
 	        $this->parent->set_the_id($this->parent->get_the_id());
             $this->render_agents_top();
             $this->render_post();
@@ -247,6 +257,7 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
             $property_agent = get_field('property_agent', $this->parent->get_the_id());
 
             $this->parent->set_the_id($property_agent[0]->ID); // set prop agent id
+            $this->current_permalink = get_permalink($property_agent[0]->ID);
 
             $this->render_agents_top();
             $this->render_post();
@@ -254,7 +265,6 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
 
             return;
         }
-
 
         $args = array(
             'post_type' => 'agent',
@@ -273,13 +283,12 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
 
                 $this->parent->set_the_id(get_the_ID());
 
-                $this->current_permalink = get_permalink();
+                $this->current_permalink = get_permalink(get_the_ID());
                 $this->render_post();
             }
         $this->render_agents_bottom();
 
         wp_reset_postdata();
-
     }
 
 	protected function render_post() {

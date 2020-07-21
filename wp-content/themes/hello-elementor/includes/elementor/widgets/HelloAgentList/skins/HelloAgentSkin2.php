@@ -38,60 +38,28 @@ class HelloAgentSkin2 extends HelloAgentSkinBase {
     }
 
     protected function render_table() {
-        $id = $this->parent->get_the_id();
-        $license = get_field('agent_license', $id);
-        $tax = get_field('agent_tax_number', $id);
-        $areas = get_field('agent_service_areas', $id);
-        $spec = get_field('agent_specialties', $id);
+        $options = $this->parent->get_meta();
+        $agents_meta = $this->get_instance_value( 'agent_meta_data' );
       ?>
             <ul class="hl-agent__table">
-                <?php if ($license) { ?>
+                <?php  foreach ( $agents_meta as $item ) {
+                    $label = $item['label'];
+                    if (!$label)  $label = $options[$item['agent_meta_key']];
+
+                    $value = get_field($item['agent_meta_key'], $this->parent->get_the_id());
+                    if ( !$value ) continue;
+                ?>
+
                   <li class="hl-agent__table-row">
                       <span class="hl-agent__table-label">
-                          Agent license
+                            <?php echo esc_html($label); ?>:
                       </span>
 
                       <span class="hl-agent__table-value">
-                          <?php echo $license; ?>
+                          <?php echo esc_html($value); ?>
                       </span>
                   </li>
-                <?php } ?>
-
-                <?php if ($tax) { ?>
-                  <li class="hl-agent__table-row">
-                      <span class="hl-agent__table-label">
-                          Tax Number
-                      </span>
-
-                      <span class="hl-agent__table-value">
-                          <?php echo $tax; ?>
-                      </span>
-                  </li>
-                <?php } ?>
-
-                <?php if ($areas) { ?>
-                  <li class="hl-agent__table-row">
-                      <span class="hl-agent__table-label">
-                          Service Areas
-                      </span>
-
-                      <span class="hl-agent__table-value">
-                          <?php echo $areas; ?>
-                      </span>
-                  </li>
-                <?php } ?>
-
-                <?php if ($spec) { ?>
-                  <li class="hl-agent__table-row">
-                      <span class="hl-agent__table-label">
-                          Specialties
-                      </span>
-
-                      <span class="hl-agent__table-value">
-                        <?php echo $spec; ?>
-                      </span>
-                  </li>
-                <?php } ?>
+            <?php  }  ?>
             </ul>
         <?php
     }

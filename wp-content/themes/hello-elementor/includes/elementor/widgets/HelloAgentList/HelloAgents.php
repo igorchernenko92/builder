@@ -27,6 +27,7 @@ class HelloAgents extends Widget_Base {
     public function __construct($data = [], $args = null) {
         $this->meta = [
             'agent_specialties' => __( 'Specialties', 'builder' ),
+            'agent_email' => __( 'Email', 'builder' ),
             'agent_service_areas' => __( 'Service Areas', 'builder' ),
             'agent_tax_number' => __( 'Tax Number', 'builder' ),
             'agent_license' => __( 'Agent license', 'builder' ),
