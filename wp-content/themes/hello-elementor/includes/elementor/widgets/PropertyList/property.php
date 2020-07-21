@@ -167,34 +167,13 @@ class Property extends Property_Base {
             }
         }
 
-
 		$elementor_query = Module_Query::instance();
 		$this->query = $elementor_query->get_query( $this, $this->get_name(), $args, [] );
 
 	}
 
 	protected function register_query_section_controls() {
-		$this->start_controls_section(
-			'section_query',
-			[
-				'label' => __( 'Query', 'elementor-pro' ),
-				'tab' => Controls_Manager::TAB_CONTENT,
-			]
-		);
 
-
-		$this->add_group_control(
-			Group_Control_Related::get_type(),
-			[
-				'name' => $this->get_name(),
-				'presets' => [ 'full' ],
-				'exclude' => [
-					'posts_per_page', //use the one from Layout section
-				],
-			]
-		);
-
-		$this->end_controls_section();
 	}
 
 }
