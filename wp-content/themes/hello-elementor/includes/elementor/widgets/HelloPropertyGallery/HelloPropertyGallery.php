@@ -18,7 +18,7 @@ include_once ( 'skins/skin3.php');
 
 
 class HelloPropertyGallery extends Widget_Base {
-
+    protected $_has_template_content = false;
     public function __construct($data = [], $args = null) {
         parent::__construct($data, $args);
         wp_register_script('hello-property-gallery-script', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloPropertyGallery/assets/js/gallery-base-script.js', '', '1', true);

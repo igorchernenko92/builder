@@ -20,9 +20,9 @@ include_once ( 'skins/HelloAgentSkin3.php');
  * Class Posts
  */
 class HelloAgents extends Widget_Base {
-
     private $meta;
     private $id;
+    protected $_has_template_content = false;
 
     public function __construct($data = [], $args = null) {
         $this->meta = [

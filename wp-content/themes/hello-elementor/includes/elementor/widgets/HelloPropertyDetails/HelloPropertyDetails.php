@@ -19,6 +19,7 @@ include_once ( 'skins/skin2.php');
 
 class HelloPropertyDetails extends Base_Widget {
     private $type_list;
+    protected $_has_template_content = false;
 
 	public function __construct( $data = [], $args = null ) {
 		parent::__construct( $data, $args );
