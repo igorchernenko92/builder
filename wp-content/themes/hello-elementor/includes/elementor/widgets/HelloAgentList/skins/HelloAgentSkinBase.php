@@ -177,7 +177,7 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
     }
 
     protected function render_title() {
-        $name = get_the_title();
+        $name = get_the_title($this->parent->get_the_id());
         if ($name) { ?>
           <a href="<?php echo  $this->current_permalink ?>" target="_blank" class="hl-agent__title"><?php echo $name ?></a>
         <?php }
