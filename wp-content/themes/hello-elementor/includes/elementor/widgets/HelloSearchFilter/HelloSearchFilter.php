@@ -19,8 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 //include_once ( 'skins/skin2.php');
 
 class HelloSearchFilter extends Base_Widget {
-    protected $_has_template_content = false;
-
 	public function __construct( $data = [], $args = null ) {
 	    parent::__construct( $data, $args );
 
