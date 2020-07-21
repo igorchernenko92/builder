@@ -49,10 +49,23 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
         $this->add_control(
             'is_agent_page',
             [
-                'label' => __('Agent Page', 'builder'),
+                'label' => __('Is Agent Page', 'builder'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => $default,
                 'frontend_available' => true,
+            ]
+        );
+
+        $this->add_control(
+            'is_property_page',
+            [
+                'label' => __('Is Property Page', 'builder'),
+                'type' => Controls_Manager::SWITCHER,
+                'default' => 'false',
+                'frontend_available' => true,
+                'condition' => [
+                    $this->get_control_id( 'is_agent_page' ) => '',
+                ]
             ]
         );
 
@@ -150,7 +163,7 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
         $attr = array(
             'class' => "hl-agent__picture",
         );
-        $thumbnail = get_the_post_thumbnail( get_the_ID(), 'large', $attr );
+        $thumbnail = get_the_post_thumbnail( $this->parent->get_the_id(), 'large', $attr );
 
         if ($thumbnail) { ?>
           <a class="hl-agent__wrap-img" href="<?php echo $this->current_permalink; ?>">
@@ -171,14 +184,14 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
     }
 
     protected function render_position() {
-        $spec = get_field('agent_specialties', get_the_ID());
+        $spec = get_field('agent_specialties', $this->parent->get_the_id());
         if ($spec) { ?>
           <p class="hl-agent__position"><?php echo $spec ?></p>
         <?php }
     }
 
     protected function render_description() {
-	    $content = get_field('agent_description', get_the_ID());
+	    $content = get_field('agent_description', $this->parent->get_the_id());
 	    if (trim($content)) { ?>
           <div class="hl-agent__description">
                 <?php echo trim($content); ?>
@@ -211,14 +224,28 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
 
 
 
-
 //      if single agent page show only one
-	    if ( $settings [ $this->get_control_id( 'is_agent_page' ) ] ) {
+	    if ( $settings [ $this->get_control_id( 'is_agent_page' ) && is_singular('agent') ] ) {
+	        $this->parent->set_the_id($this->parent->get_the_id());
             $this->render_agents_top();
             $this->render_post();
             $this->render_agents_bottom();
+
 	        return;
         }
+
+        if ( $settings [ $this->get_control_id( 'is_property_page' ) ] && is_singular('property') ) {
+            $property_agent = get_field('property_agent', $this->parent->get_the_id());
+
+            $this->parent->set_the_id($property_agent[0]->ID); // set prop agent id
+
+            $this->render_agents_top();
+            $this->render_post();
+            $this->render_agents_bottom();
+
+            return;
+        }
+
 
         $args = array(
             'post_type' => 'agent',
@@ -234,6 +261,8 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
         $this->render_agents_top();
             while ( $query->have_posts() ) {
                 $query->the_post();
+
+                $this->parent->set_the_id(get_the_ID());
 
                 $this->current_permalink = get_permalink();
                 $this->render_post();
@@ -252,7 +281,7 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
             $label = $item['label'];
             if (!$label)  $label = $options[$item['agent_meta_key']];
 
-            $value = get_field($item['agent_meta_key'], get_the_ID());
+            $value = get_field($item['agent_meta_key'], $this->parent->get_the_id());
         }
 
       $this->render_post_header();

@@ -44,10 +44,12 @@ class HelloAgentSkin3 extends HelloAgentSkinBase {
     }
 
     protected function render_content() {
-        $license = get_field('agent_license', get_the_ID());
-        $tax = get_field('agent_tax_number', get_the_ID());
-        $areas = get_field('agent_service_areas', get_the_ID());
-        $spec = get_field('agent_specialties', get_the_ID());
+        $id = $this->parent->get_the_id();
+
+        $license = get_field('agent_license', $id);
+        $tax = get_field('agent_tax_number', $id);
+        $areas = get_field('agent_service_areas', $id);
+        $spec = get_field('agent_specialties', $id);
         ?>
 
         <div class="hl-agent__content">
