@@ -354,8 +354,15 @@ function create_taxonomies() {
 /**
  * Implement widgets creating
  */
+require get_template_directory() . '/includes/import/functions.php';
 require get_template_directory() . '/includes/elementor/widgets-manager.php';
-require get_template_directory() . '/includes/acfFields.php';
+
+// acf sync files
+require get_template_directory() . '/acfe-php/group_5ecbc332768f3.php';
+require get_template_directory() . '/acfe-php/group_5efc7f9a053c7.php';
+require get_template_directory() . '/acfe-php/group_5efdb7d7d47d7.php';
+require get_template_directory() . '/acfe-php/group_5f11cc6d60bd4.php';
+//require get_template_directory() . '/includes/acfFields.php';
 
 
 //$creds = array();
