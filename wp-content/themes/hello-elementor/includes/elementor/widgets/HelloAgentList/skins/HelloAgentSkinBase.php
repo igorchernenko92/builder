@@ -41,14 +41,16 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
 
 
     public function register_layout_controls () {
-        $default = '';
-	    if ( is_singular('agent') ) {
-            $default = 'yes';
-        }
+        global $post;
 
         $is_prop = '';
-        if ( is_singular('property') ) {
+        if ( 'property' == $post->post_type ) {
             $is_prop = 'yes';
+        }
+
+        $is_agent = '';
+        if( 'agent' == $post->post_type ){
+            $is_agent = 'yes';
         }
 
         $this->add_control(
@@ -56,7 +58,7 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
             [
                 'label' => __('Is Agent Page', 'builder'),
                 'type' => Controls_Manager::SWITCHER,
-                'default' => $default,
+                'default' => $is_agent,
                 'frontend_available' => true,
                 'condition' => [
                     $this->get_control_id( 'is_property_page' ) => '',

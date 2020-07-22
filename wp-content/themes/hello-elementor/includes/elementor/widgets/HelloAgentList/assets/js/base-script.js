@@ -1,6 +1,5 @@
 (function($) {
   var WidgetElements_ACFSliderHandler1 = function ($scope, $) {
-    console.log("awsd")
     function getPreViews($carousel) {
       const slidesPerView = {};
       const carouselWidth = {
@@ -32,7 +31,6 @@
   
     $(".hl-agents-3").each(function () {
       const laptopCount = getPreViews($(this)).laptop
-      console.log(laptopCount)
       if (laptopCount === 1) {
         $(this).addClass("hl-agents-3_small")
       }
