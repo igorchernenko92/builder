@@ -167,7 +167,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 			[
 				'label' => __( 'Posts Per Page', 'elementor-pro' ),
 				'type' => Controls_Manager::NUMBER,
-				'default' => 6,
+				'default' => '-1',
 			]
 		);
 	}

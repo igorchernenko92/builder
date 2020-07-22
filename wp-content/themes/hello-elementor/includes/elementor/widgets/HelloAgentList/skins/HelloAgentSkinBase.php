@@ -86,7 +86,7 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
                 'label' => __( 'Posts Per Page', 'elementor-pro' ),
                 'description' => __( '-1 for all agents', 'elementor-pro' ),
                 'type' => Controls_Manager::NUMBER,
-                'default' => 6,
+                'default' => -1,
                 'condition' => [
                     $this->get_control_id( 'is_agent_page' ) => '',
                     $this->get_control_id( 'is_property_page' ) => '',
