@@ -831,7 +831,7 @@ class WP_Import_Custom extends WP_Importer {
 							$value = maybe_unserialize( $meta['value'] );
 						}
 
-						add_post_meta( $post_id, wp_slash( $key ),  $value );
+						add_post_meta( $post_id, wp_slash( $key ),   $value );
 
 						do_action( 'import_post_meta', $post_id, $key, $value );
 
