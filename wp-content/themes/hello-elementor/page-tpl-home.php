@@ -2,6 +2,14 @@
 
 
 
+
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+<meta name="google-signin-client_id" content="390155665774-rblk9ocv18mt5npcj79fpufqt5ni5g95.apps.googleusercontent.com">
+
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+
 <div class="modal-ajax">
     <div class="modal-ajax-text">
         <div class="loadingio-spinner-chunk-dg4okpfq5gf"><div class="ldio-ycybe7qwk3">
@@ -10,23 +18,7 @@
     </div>
 </div>
 
-<style type="text/css">
-    .modal-ajax {
-        display: none;
-        position: fixed;
-        height: 100%;
-        width: 100%;
-        background: rgba(100, 100, 100, 0.7);
-        z-index: 100000;
-    }
 
-    .modal-ajax-text {
-        font-size: 60px;
-        text-align: center;
-        color: #fff;
-        margin-top: 240px;
-    }
-</style>
 
 <!--<script src="https://apis.google.com/js/platform.js" async defer></script>-->
 <!---->
@@ -139,7 +131,24 @@ get_footer();
 
 
 ?>
+
 <style type="text/css">
+    .modal-ajax {
+        display: none;
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        background: rgba(100, 100, 100, 0.7);
+        z-index: 100000;
+    }
+
+    .modal-ajax-text {
+        font-size: 60px;
+        text-align: center;
+        color: #fff;
+        margin-top: 240px;
+    }
+
     @keyframes ldio-ycybe7qwk3-r {
         0%, 25%, 50%, 75%, 100% { animation-timing-function: cubic-bezier(0,1,0,1) }
         0% { transform: scale(0.7000000000000001) rotate(180deg) }
