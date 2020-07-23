@@ -568,7 +568,7 @@ class WP_Import_Custom extends WP_Importer {
 			// Export gets meta straight from the DB so could have a serialized string
 			$value = maybe_unserialize( $meta['value'] );
 
-			add_term_meta( $term_id, wp_slash( $key ), wp_slash_strings_only( $value ) );
+			add_term_meta( $term_id, wp_slash( $key ), $value );
 
 			/**
 			 * Fires after term meta is imported.
@@ -798,7 +798,7 @@ class WP_Import_Custom extends WP_Importer {
 						foreach( $comment['commentmeta'] as $meta ) {
 							$value = maybe_unserialize( $meta['value'] );
 
-							add_comment_meta( $inserted_comments[ $key ], wp_slash( $meta['key'] ), wp_slash_strings_only( $value ) );
+							add_comment_meta( $inserted_comments[ $key ], wp_slash( $meta['key'] ), $value );
 						}
 
 						$num_comments++;
