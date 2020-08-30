@@ -354,7 +354,7 @@ function create_taxonomies() {
 /**
  * Implement widgets creating
  */
-require get_template_directory() . '/includes/import/functions.php';
+//require get_template_directory() . '/includes/import/functions.php';
 require get_template_directory() . '/includes/elementor/widgets-manager.php';
 
 // acf sync files
