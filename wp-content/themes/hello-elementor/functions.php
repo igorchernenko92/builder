@@ -222,7 +222,7 @@ function register_widgets() {
 
 }
 
-//add_action( 'init', 'register_widgets', 10 );
+add_action( 'init', 'register_widgets', 10 );
 
 
 function my_acf_init() {
@@ -354,7 +354,7 @@ function create_taxonomies() {
 /**
  * Implement widgets creating
  */
-require get_template_directory() . '/includes/import/functions.php';
+//require get_template_directory() . '/includes/import/functions.php';
 require get_template_directory() . '/includes/elementor/widgets-manager.php';
 
 // acf sync files
@@ -400,4 +400,21 @@ function czc_disable_extra_image_sizes()
 
 
 
+//global $wpdb;
+//
+//$el_data = $wpdb->get_results( "SELECT * FROM wp_postmeta WHERE post_id = 2889" );
+//$fields_to_update = ['_elementor_controls_usage', '_elementor_css', '_elementor_data'];
+//
+//for ( $i = 0; $i < count($el_data); $i++ ) {
+//    if ( in_array($el_data[$i]->meta_key, $fields_to_update)) {
+//        $wpdb->update( 'wp_200_postmeta',
+//            array( "meta_value" => $el_data[$i]->meta_value, ),
+//            array( 'post_id' => 2889, 'meta_key' => $el_data[$i]->meta_key ),
+//            array( '%s' ),
+//            array( '%d', '%s' ) );
+//    }
+//}
+//Plugin::$instance->files_manager->clear_cache();
+
+//copy( wp_upload_dir()['basedir'] . '/elementor/css/post-2889.css',  wp_upload_dir()['basedir'] . '/sites/200/elementor/css/post-2889.css');
 

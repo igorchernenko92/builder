@@ -9,7 +9,9 @@ Author URI: http://www.sitepoint.com/author/fzahari/
 */
 
 /** WordPress Import Administration API */
-require_once ABSPATH . 'wp-admin/includes/import.php';
+//require_once ABSPATH . 'wp-admin/includes/import.php';
+//
+use Elementor\Plugin;
 
 if ( ! class_exists( 'WP_Importer' ) ) {
     $class_wp_importer = ABSPATH . 'wp-admin/includes/class-wp-importer.php';
@@ -17,7 +19,7 @@ if ( ! class_exists( 'WP_Importer' ) ) {
         require $class_wp_importer;
 }
 
-require_once dirname( __FILE__ ) . '/class-wp-import.php';
+//require_once dirname( __FILE__ ) . '/class-wp-import.php';
 
 /** WXR_Parser class */
 require_once dirname( __FILE__ ) . '/parsers/class-wxr-parser.php';
@@ -216,14 +218,16 @@ function import_data($blog_id) {
     $menu = trailingslashit( WP_CONTENT_DIR ) . 'uploads/menu.xml';
     $media = trailingslashit( WP_CONTENT_DIR ) . 'uploads/media.xml';
     $all = trailingslashit( WP_CONTENT_DIR ) . 'uploads/all.xml';
+    $neww = trailingslashit( WP_CONTENT_DIR ) . 'uploads/neww.xml';
 
 //    prevent outputting
     ob_start();
-    $import->import($templates);
+//    $import->import($templates);
     $import->import($pages);
-    $import->import($property);
-    $import->import($menu);
-    $import->import($media);
+//    $import->import($property);
+//    $import->import($menu);
+//    $import->import($media);
+//    $import->import($neww);
 
     //    prevent outputting
     ob_end_clean();
@@ -239,23 +243,27 @@ function su_image_submission_cb() {
     $import = new WP_Import_Custom();
     $import->fetch_attachments = true;
 
-    $templates = trailingslashit( WP_CONTENT_DIR ) . 'uploads/templates.xml';
-    $pages = trailingslashit( WP_CONTENT_DIR ) . 'uploads/pages.xml';
-    $property = trailingslashit( WP_CONTENT_DIR ) . 'uploads/property.xml';
-    $menu = trailingslashit( WP_CONTENT_DIR ) . 'uploads/menu.xml';
-    $media = trailingslashit( WP_CONTENT_DIR ) . 'uploads/media.xml';
-    $all = trailingslashit( WP_CONTENT_DIR ) . 'uploads/all.xml';
+//    $templates = trailingslashit( WP_CONTENT_DIR ) . 'uploads/templates.xml';
+//    $pages = trailingslashit( WP_CONTENT_DIR ) . 'uploads/pages.xml';
+//    $property = trailingslashit( WP_CONTENT_DIR ) . 'uploads/property.xml';
+//    $menu = trailingslashit( WP_CONTENT_DIR ) . 'uploads/menu.xml';
+//    $media = trailingslashit( WP_CONTENT_DIR ) . 'uploads/media.xml';
+//    $all = trailingslashit( WP_CONTENT_DIR ) . 'uploads/all.xml';
+    $all = trailingslashit( WP_CONTENT_DIR ) . 'uploads/pagess.xml';
 
 //    prevent outputting
 //    ob_start();
-    $import->import($templates);
-    $import->import($pages);
-    $import->import($property);
-    $import->import($menu);
-    $import->import($media);
+//    $import->import($templates);
+//    $import->import($pages);
+//    $import->import($property);
+//    $import->import($menu);
+//    $import->import($media);
+    $import->import($all);
 
     //    prevent outputting
 //    ob_end_clean();
+
+
 
     $homepage = get_page_by_title( 'first main page' );
     if ( $homepage ) {
@@ -263,8 +271,32 @@ function su_image_submission_cb() {
         update_option( 'show_on_front', 'page' );
     }
 
+
+
+//    global $wpdb;
+//    $postId = 2889;
+//
+//    $el_data = $wpdb->get_results( "SELECT * FROM wp_postmeta WHERE post_id = $postId" );
+//    $fields_to_update = ['_elementor_controls_usage', '_elementor_css', '_elementor_data'];
+//
+//    for ( $i = 0; $i < count($el_data); $i++ ) {
+//        if ( in_array($el_data[$i]->meta_key, $fields_to_update)) {
+//            $wpdb->update( 'wp_200_postmeta',
+//                array( "meta_value" => $el_data[$i]->meta_value, ),
+//                array( 'post_id' => $postId, 'meta_key' => $el_data[$i]->meta_key ),
+//                array( '%s' ),
+//                array( '%d', '%s' ) );
+//        }
+//    }
+//    Plugin::$instance->files_manager->clear_cache();
+
+
     wp_die();
 
 }
 add_action( 'wp_ajax_myajax-submit', 'su_image_submission_cb' );
 add_action( 'wp_ajax_nopriv_myajax-submit', 'su_image_submission_cb' );
+
+
+//global $wpdb,$ip;
+//$results = $wpdb->get_results( "SELECT user_ip FROM $table_name");

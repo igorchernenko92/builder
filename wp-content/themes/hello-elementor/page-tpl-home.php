@@ -28,15 +28,19 @@
     }
 </style>
 
-<!--<script src="https://apis.google.com/js/platform.js" async defer></script>-->
-<!---->
-<!--<meta name="google-signin-client_id" content="390155665774-rblk9ocv18mt5npcj79fpufqt5ni5g95.apps.googleusercontent.com">-->
-<!---->
-<!--<div class="g-signin2" data-onsuccess="onSignIn"></div>-->
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+<meta name="google-signin-client_id" content="390155665774-rblk9ocv18mt5npcj79fpufqt5ni5g95.apps.googleusercontent.com">
+
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
 
 
 
 <script>
+    jQuery( "body" ).on( "click", ".builder_import_sign_in", function() {
+        jQuery('.abcRioButtonLightBlue').trigger('click');
+    });
+
 
     jQuery( "body" ).on( "click", ".g-signin2", function() {
         localStorage.setItem('check', '1'); // check if click was
@@ -72,6 +76,8 @@
         if ( localStorage.getItem('check') === '0' ) { // prevent two time function call
             return;
         }
+
+
         jQuery('.modal-ajax').show();
         var id_token = googleUser.getAuthResponse().id_token;
         var profile = googleUser.getBasicProfile();
