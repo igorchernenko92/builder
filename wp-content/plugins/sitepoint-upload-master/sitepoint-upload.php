@@ -222,10 +222,10 @@ function import_data($blog_id) {
 
 //    prevent outputting
     ob_start();
-//    $import->import($templates);
+    $import->import($templates);
     $import->import($pages);
-//    $import->import($property);
-//    $import->import($menu);
+    $import->import($property);
+    $import->import($menu);
 //    $import->import($media);
 //    $import->import($neww);
 
@@ -243,47 +243,46 @@ function su_image_submission_cb() {
     $import = new WP_Import_Custom();
     $import->fetch_attachments = true;
 
-//    $templates = trailingslashit( WP_CONTENT_DIR ) . 'uploads/templates.xml';
-//    $pages = trailingslashit( WP_CONTENT_DIR ) . 'uploads/pages.xml';
-//    $property = trailingslashit( WP_CONTENT_DIR ) . 'uploads/property.xml';
-//    $menu = trailingslashit( WP_CONTENT_DIR ) . 'uploads/menu.xml';
-//    $media = trailingslashit( WP_CONTENT_DIR ) . 'uploads/media.xml';
+    $templates = trailingslashit( WP_CONTENT_DIR ) . 'uploads/templates.xml';
+    $pages = trailingslashit( WP_CONTENT_DIR ) . 'uploads/pages.xml';
+    $property = trailingslashit( WP_CONTENT_DIR ) . 'uploads/properties.xml';
+    $menu = trailingslashit( WP_CONTENT_DIR ) . 'uploads/menu.xml';
+    $media = trailingslashit( WP_CONTENT_DIR ) . 'uploads/media.xml';
 //    $all = trailingslashit( WP_CONTENT_DIR ) . 'uploads/all.xml';
-    $all = trailingslashit( WP_CONTENT_DIR ) . 'uploads/pagess.xml';
+//    $all = trailingslashit( WP_CONTENT_DIR ) . 'uploads/pagess.xml';
 
 //    prevent outputting
 //    ob_start();
 //    $import->import($templates);
 //    $import->import($pages);
 //    $import->import($property);
-//    $import->import($menu);
+    $import->import($menu);
 //    $import->import($media);
-    $import->import($all);
+//    $import->import($all);
 
     //    prevent outputting
 //    ob_end_clean();
 
 
 
-    $homepage = get_page_by_title( 'first main page' );
-    if ( $homepage ) {
-        update_option( 'page_on_front', $homepage->ID );
-        update_option( 'show_on_front', 'page' );
-    }
+//    $homepage = get_page_by_title( 'first main page' );
+//    if ( $homepage ) {
+//        update_option( 'page_on_front', $homepage->ID );
+//        update_option( 'show_on_front', 'page' );
+//    }
 
 
 
 //    global $wpdb;
-//    $postId = 2889;
 //
-//    $el_data = $wpdb->get_results( "SELECT * FROM wp_postmeta WHERE post_id = $postId" );
+//    $el_data = $wpdb->get_results( "SELECT * FROM wp_postmeta WHERE post_id = $post_id" );
 //    $fields_to_update = ['_elementor_controls_usage', '_elementor_css', '_elementor_data'];
 //
 //    for ( $i = 0; $i < count($el_data); $i++ ) {
 //        if ( in_array($el_data[$i]->meta_key, $fields_to_update)) {
 //            $wpdb->update( 'wp_200_postmeta',
 //                array( "meta_value" => $el_data[$i]->meta_value, ),
-//                array( 'post_id' => $postId, 'meta_key' => $el_data[$i]->meta_key ),
+//                array( 'post_id' => $post_id, 'meta_key' => $el_data[$i]->meta_key ),
 //                array( '%s' ),
 //                array( '%d', '%s' ) );
 //        }
