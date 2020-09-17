@@ -844,13 +844,14 @@ class WP_Import_Custom extends WP_Importer {
             }
 
             global $wpdb;
+            $blog_id = get_current_blog_id();
 
             $el_data = $wpdb->get_results( "SELECT * FROM wp_postmeta WHERE post_id = $post_id" );
             $fields_to_update = ['_elementor_controls_usage', '_elementor_css', '_elementor_data'];
 
             for ( $i = 0; $i < count($el_data); $i++ ) {
                 if ( in_array($el_data[$i]->meta_key, $fields_to_update)) {
-                    $wpdb->update( 'wp_200_postmeta',
+                    $wpdb->update( 'wp_'. $blog_id .'_postmeta',
                         array( "meta_value" => $el_data[$i]->meta_value, ),
                         array( 'post_id' => $post_id, 'meta_key' => $el_data[$i]->meta_key ),
                         array( '%s' ),

@@ -214,11 +214,9 @@ function import_data($blog_id) {
 
     $templates = trailingslashit( WP_CONTENT_DIR ) . 'uploads/templates.xml';
     $pages = trailingslashit( WP_CONTENT_DIR ) . 'uploads/pages.xml';
-    $property = trailingslashit( WP_CONTENT_DIR ) . 'uploads/property.xml';
+    $property = trailingslashit( WP_CONTENT_DIR ) . 'uploads/properties.xml';
     $menu = trailingslashit( WP_CONTENT_DIR ) . 'uploads/menu.xml';
     $media = trailingslashit( WP_CONTENT_DIR ) . 'uploads/media.xml';
-    $all = trailingslashit( WP_CONTENT_DIR ) . 'uploads/all.xml';
-    $neww = trailingslashit( WP_CONTENT_DIR ) . 'uploads/neww.xml';
 
 //    prevent outputting
     ob_start();
@@ -226,6 +224,7 @@ function import_data($blog_id) {
     $import->import($pages);
     $import->import($property);
     $import->import($menu);
+    $import->import($media);
 //    $import->import($media);
 //    $import->import($neww);
 
@@ -249,15 +248,14 @@ function su_image_submission_cb() {
     $menu = trailingslashit( WP_CONTENT_DIR ) . 'uploads/menu.xml';
     $media = trailingslashit( WP_CONTENT_DIR ) . 'uploads/media.xml';
 //    $all = trailingslashit( WP_CONTENT_DIR ) . 'uploads/all.xml';
-//    $all = trailingslashit( WP_CONTENT_DIR ) . 'uploads/pagess.xml';
 
 //    prevent outputting
 //    ob_start();
-//    $import->import($templates);
-//    $import->import($pages);
-//    $import->import($property);
+    $import->import($templates);
+    $import->import($pages);
+    $import->import($property);
     $import->import($menu);
-//    $import->import($media);
+    $import->import($media);
 //    $import->import($all);
 
     //    prevent outputting
