@@ -75,7 +75,7 @@ class HelloAgents extends Widget_Base {
 	}
 
 	public function get_keywords() {
-		return [ 'posts', 'cpt', 'item', 'loop', 'query', 'cards', 'custom post type' ];
+		return [ 'item', 'cards', 'agent', 'agents', 'broker', 'brokers' ];
 	}
 
 	public function on_import( $element ) {

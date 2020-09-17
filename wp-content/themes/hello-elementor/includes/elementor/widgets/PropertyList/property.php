@@ -56,7 +56,7 @@ class Property extends Property_Base {
 	}
 
 	public function get_keywords() {
-		return [ 'posts', 'cpt', 'item', 'loop', 'query', 'cards', 'custom post type' ];
+		return [ 'posts', 'item', 'cards', 'custom post type', 'listing', 'listings', 'property', 'properties' ];
 	}
 
 	public function on_import( $element ) {

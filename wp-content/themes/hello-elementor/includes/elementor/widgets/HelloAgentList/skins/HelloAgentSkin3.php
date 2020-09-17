@@ -39,7 +39,7 @@ class HelloAgentSkin3 extends HelloAgentSkinBase {
 
     public function render_agents_top() {
         ?>
-            <div class='hl-agents-3'>
+            <div class='hl-agents-3 hl-agents-main'>
         <?php
     }
 

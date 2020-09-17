@@ -356,3 +356,11 @@
 .hl-agents-3_small .hl-agent .hl-agent__wrap-img {
     max-width: 100%;
 }
+
+.hl-agents-main .agent {
+    overflow: hidden;
+}
+
+.hl-agent__table-row {
+    font-size: 14px;
+}

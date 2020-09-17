@@ -71,9 +71,6 @@ class HelloGoogleMap extends Widget_Base {
     }
 
 
-    public function get_style_depends() {
-        return ['dce-acfGooglemap'];
-    }
     static public function get_position() {
         return 4;
     }

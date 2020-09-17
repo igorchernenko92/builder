@@ -66,7 +66,7 @@ class HelloAgentSkin2 extends HelloAgentSkinBase {
 
     public function render_agents_top() {
         ?>
-          <div class='hl-agents-2'>
+          <div class='hl-agents-2 hl-agents-main'>
         <?php
     }
 

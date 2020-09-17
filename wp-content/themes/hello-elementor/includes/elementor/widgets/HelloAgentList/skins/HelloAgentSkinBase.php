@@ -80,7 +80,7 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
         );
 
 
-        $this->add_control(
+        $this->add_responsive_control(
             'posts_per_page',
             [
                 'label' => __( 'Posts Per Page', 'elementor-pro' ),
@@ -93,6 +93,49 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
                 ]
             ]
         );
+
+        $this->add_responsive_control(
+            'agent_items_width',
+            [
+                'label' => __( 'Item width', 'elementor-pro' ),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px' ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 500,
+                    ],
+                ],
+                'default' => [
+                    'size' => 300,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .hl-agents-main' => 'grid-template-columns: repeat(auto-fill, minmax({{SIZE}}{{UNIT}}, 1fr)) ',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'agent_items_gap',
+            [
+                'label' => __( 'Gaps', 'elementor-pro' ),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px' ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 150,
+                    ],
+                ],
+                'default' => [
+                    'size' => 40,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .hl-agents-main' => 'grid-gap: {{SIZE}}{{UNIT}}',
+                ],
+            ]
+        );
+
 
         $repeater = new Repeater();
 

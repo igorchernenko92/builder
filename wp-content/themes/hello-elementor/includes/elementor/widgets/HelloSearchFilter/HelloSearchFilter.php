@@ -44,6 +44,10 @@ class HelloSearchFilter extends Base_Widget {
         return ['hello-search-style', 'hello-search-select2-style', 'hello-search-multiple-style'];
     }
 
+    public function get_keywords() {
+        return [ 'filter', 'search' ];
+    }
+
 	public function get_name() {
 		return 'search_filter';
 	}
