@@ -258,9 +258,10 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
 
     protected function render_description() {
 	    $content = get_field('agent_description', $this->parent->get_the_id());
-	    if (trim($content)) { ?>
+	    if ($content = trim($content)) {
+	        ?>
           <div class="hl-agent__description">
-                <?php echo trim(esc_html($content)); ?>
+                <?php echo  wp_trim_words( wp_kses_post( $content ), 20 ); ?>
           </div>
         <?php }
     }
