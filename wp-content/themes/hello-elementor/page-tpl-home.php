@@ -1,8 +1,6 @@
 <?php  get_header(); ?>
 
 
-
-
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 
 <meta name="google-signin-client_id" content="390155665774-rblk9ocv18mt5npcj79fpufqt5ni5g95.apps.googleusercontent.com">

@@ -243,7 +243,7 @@ function register_widgets() {
 
 }
 
-add_action( 'init', 'register_widgets', 10 );
+//add_action( 'init', 'register_widgets', 10 );
 
 
 function my_acf_init() {
@@ -419,6 +419,14 @@ function czc_disable_extra_image_sizes()
     }
 }
 
+
+add_action( 'wp_footer', function () { ?>
+    <script>
+        jQuery(document).ready(function($) {
+            $('.elementor-nav-menu--main > ul').attr('data-sm-options', '{ showTimeout: 0, hideTimeout: 0 }');
+        });
+    </script>
+<?php } );
 
 
 //global $wpdb;

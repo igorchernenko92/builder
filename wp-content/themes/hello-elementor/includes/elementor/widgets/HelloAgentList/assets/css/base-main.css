@@ -35,10 +35,10 @@
     border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.hl-agents .hl-agent:hover {
-    box-shadow: 0 70px 70px rgba(0, 0, 0, 0.2);
-    transform: translate(0, -10px);
-}
+/*.hl-agents .hl-agent:hover {*/
+/*    box-shadow: 0 70px 70px rgba(0, 0, 0, 0.2);*/
+/*    transform: translate(0, -10px);*/
+/*}*/
 
 .hl-agent__wrap-img {
     width: 150px;
