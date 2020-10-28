@@ -1,13 +1,15 @@
-*
-# ignore everything in the root except the "wp-content" directory.
-!wp-content/
+languages
 
-# ignore everything in the "wp-content" directory, except:
-# "mu-plugins", "plugins", "themes" directory
+plugins
+!plugins/sitepoint-upload-master/
 
-!wp-content/mu-plugins/
-!wp-content/plugins/sitepoint-upload-master/
-!wp-content/themes/hello-elementor/
+themes/*
+!themes/hello-elementor/*
+
+
+
+uploads
+index.php
 
 # ignore node dependency directories
 node_modules/
