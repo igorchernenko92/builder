@@ -80,6 +80,7 @@
   
     const HelloGallerySkinScript2 = function ($scope, $) {
       const $galleries_2 = $(".hl-gallery-2");
+      
       if ($galleries_2.length) {
         $galleries_2.each(function () {
           const images = $(this).find(".hl-gallery__list-item")
@@ -92,6 +93,28 @@
             }
           } else if (images.length > 6) {
             $(this).addClass("hl-gallery-2_show-all")
+          }
+          
+          if (window.innerWidth <= 768) {
+            const swiperGallery = $(this).find(".swiper-container");
+            swiperGallery.find(".swiper-wrapper").removeClass("hl-gallery__list");
+            
+            const customOptions = {
+              navigation: {
+                nextEl: $(this).find(".hl-gallery__slider-nav_next"),
+                prevEl: $(this).find(".hl-gallery__slider-nav_prev")
+              },
+              slidesPerView: 1,
+            };
+  
+            if (!swiperGallery.hasClass("swiper-container-initialized")) {
+              new Swiper(swiperGallery, {
+                spaceBetween: 15,
+                speed: 600,
+                allowTouchMove: false,
+                ...customOptions,
+              });
+            }
           }
 
           $(this).addClass("hl-gallery_show")

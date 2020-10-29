@@ -35,13 +35,14 @@ class Hello_Gallery_Skin2 extends Hello_Gallery_Skin_Base {
       $gallery = get_field('property_gallery', get_the_ID() );
       $unique_id_gallery = uniqid();
       ?>
-          <div class="hl-gallery__list">
+        <div class="swiper-container">
+          <div class="hl-gallery__list swiper-wrapper">
               <?php foreach ($gallery as $index => $attachment) {
                   $link_key = 'link_' . $index;
                   $link = $this->get_link_url( $attachment );
                   $this->parent->add_lightbox_data_attributes( $link_key, $attachment['id'], $open_lightbox, $this->get_id() . $unique_id_gallery );
                   $this->parent->add_render_attribute( $link_key, [
-                      'class' => 'hl-gallery__list-item',
+                      'class' => 'hl-gallery__list-item swiper-slide',
                   ] );
 
                   if ( $open_lightbox == 'yes' ) {
@@ -64,6 +65,19 @@ class Hello_Gallery_Skin2 extends Hello_Gallery_Skin_Base {
                   </a>
               <?php } ?>
           </div>
+
+          <button class='hl-gallery__slider-nav_prev hl-gallery__slider-nav hl-listing-card__carousel-nav'>
+            <svg xmlns="http://www.w3.org/2000/svg" fill='currentColor' width="24" height="24" viewBox="0 0 24 24">
+              <path fill="#222" fill-rule="nonzero" d="M9 17.523L10.39 19 17 12l-6.61-7L9 6.477 14.215 12z"/>
+            </svg>
+          </button>
+
+          <button class='hl-gallery__slider-nav_next hl-gallery__slider-nav hl-listing-card__carousel-nav'>
+            <svg xmlns="http://www.w3.org/2000/svg" fill='currentColor' width="24" height="24" viewBox="0 0 24 24">
+              <path fill="#222" fill-rule="nonzero" d="M9 17.523L10.39 19 17 12l-6.61-7L9 6.477 14.215 12z"/>
+            </svg>
+          </button>
+        </div>
       <?php
   }
 

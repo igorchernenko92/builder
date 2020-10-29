@@ -137,6 +137,7 @@
 .hl-agents-2 .hl-agent__table-value {
     color: #333;
     text-align: right;
+    overflow-wrap: break-word;
     max-width: 60%;
 }
 

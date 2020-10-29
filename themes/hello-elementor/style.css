@@ -597,3 +597,13 @@ li {
 * {
   outline: none;
 }
+
+.post-location .elementor-icon-box-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+
+.post-location .elementor-icon-box-wrapper .elementor-icon-box-icon {
+    margin-right: 6px !important;
+}
