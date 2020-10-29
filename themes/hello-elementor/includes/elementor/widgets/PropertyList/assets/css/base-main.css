@@ -1261,3 +1261,40 @@ ol {
 }
 /* Skin 3 END */
 
+
+.hl-listings-carousel__top-navs {
+    z-index: 6;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 992px) {
+    .hl-listings-carousel__top-navs {
+        display: none;
+    }
+}
+
+.hl-listings-carousel__top-navs > * {
+    position: static !important;
+    border-radius: 0 !important;
+    background-color: #ec4944 !important;
+    transform: none !important;
+    margin-right: 8px !important;
+}
+
+.hl-listings-carousel__top-navs > *:last-child {
+    margin-right: 0 !important;
+}
+
+.hl-listings-carousel__top-navs svg {
+    width: 34px !important;
+    height: 34px !important;
+    opacity: 1 !important;
+}
+
+.hl-listings-carousel__top-navs > *:before {
+    background-color: transparent !important;
+    display: none !important;
+}
