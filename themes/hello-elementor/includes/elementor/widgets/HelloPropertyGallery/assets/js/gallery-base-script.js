@@ -83,6 +83,7 @@
       
       if ($galleries_2.length) {
         $galleries_2.each(function () {
+          const _this = $(this)
           const images = $(this).find(".hl-gallery__list-item")
           
           if ($(this).width() > 991) {
@@ -95,28 +96,46 @@
             $(this).addClass("hl-gallery-2_show-all")
           }
           
-          if (window.innerWidth <= 768) {
-            const swiperGallery = $(this).find(".swiper-container");
-            swiperGallery.find(".swiper-wrapper").removeClass("hl-gallery__list");
-            
-            const customOptions = {
-              navigation: {
-                nextEl: $(this).find(".hl-gallery__slider-nav_next"),
-                prevEl: $(this).find(".hl-gallery__slider-nav_prev")
-              },
-              slidesPerView: 1,
-            };
+          let initSkin2Gallery = null;
+          
+          function checkWidth () {
+            const swiperGallery = _this.find(".swiper-container");
   
-            if (!swiperGallery.hasClass("swiper-container-initialized")) {
-              new Swiper(swiperGallery, {
-                spaceBetween: 15,
-                speed: 600,
-                allowTouchMove: false,
-                ...customOptions,
-              });
+            if (window.innerWidth <= 768) {
+              swiperGallery.find(".swiper-wrapper").removeClass("hl-gallery__list");
+  
+              if (!initSkin2Gallery) {
+                const customOptions = {
+                  navigation: {
+                    nextEl: _this.find(".hl-gallery__slider-nav_next"),
+                    prevEl: _this.find(".hl-gallery__slider-nav_prev")
+                  },
+                  slidesPerView: 1,
+                };
+  
+                if (!swiperGallery.hasClass("swiper-container-initialized")) {
+                  initSkin2Gallery = new Swiper(swiperGallery, {
+                    spaceBetween: 15,
+                    speed: 600,
+                    allowTouchMove: false,
+                    ...customOptions,
+                  });
+                }
+              }
+            } else {
+              if (initSkin2Gallery) {
+                initSkin2Gallery.destroy()
+              }
+              swiperGallery.find(".swiper-wrapper").addClass("hl-gallery__list");
             }
           }
-
+  
+          checkWidth()
+          
+          $(window).resize(function () {
+            checkWidth()
+          });
+      
           $(this).addClass("hl-gallery_show")
         })
       }

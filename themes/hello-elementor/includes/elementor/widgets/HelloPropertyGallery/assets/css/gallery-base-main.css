@@ -173,7 +173,7 @@ ol {
     visibility: visible;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
     .hl-gallery-2 .hl-gallery__slider-nav {
         display: none !important;
     }
@@ -454,7 +454,7 @@ ol {
     }
 }
 
-@media(max-width: 768px) {
+@media(max-width: 789px) {
     .hl-gallery-2 .hl-gallery__list-item {
         display: block !important;
         padding: 0 !important;
