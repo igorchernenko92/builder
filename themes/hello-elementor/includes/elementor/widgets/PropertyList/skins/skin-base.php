@@ -1234,7 +1234,24 @@ abstract class Skin_Base extends Elementor_Skin_Base {
     protected function render_carousel($query) {
 	    ?>
         <div class='hl-listings-carousel'>
-            <div class='swiper-container'>
+
+        <?php if ( $this->get_instance_value( 'carousel_show_arrows' ) ) {  ?>
+          <div class="hl-listings-carousel__top-navs">
+              <button class='hl-listings-carousel__nav_prev hl-listings-carousel__nav'>
+                <svg xmlns="http://www.w3.org/2000/svg" fill='currentColor' width="24" height="24" viewBox="0 0 24 24">
+                  <path fill="#fff" fill-rule="nonzero" d="M9 17.523L10.39 19 17 12l-6.61-7L9 6.477 14.215 12z"/>
+                </svg>
+              </button>
+
+              <button class='hl-listings-carousel__nav_next hl-listings-carousel__nav'>
+                <svg xmlns="http://www.w3.org/2000/svg" fill='currentColor' width="24" height="24" viewBox="0 0 24 24">
+                  <path fill="#fff" fill-rule="nonzero" d="M9 17.523L10.39 19 17 12l-6.61-7L9 6.477 14.215 12z"/>
+                </svg>
+              </button>
+            </div>
+        <?php } ?>
+
+          <div class='swiper-container'>
                 <div class='swiper-wrapper'>
                   <?php
                     while ( $query->have_posts() ) {
@@ -1255,18 +1272,18 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
 
 
-        <?php if ( $this->get_instance_value( 'carousel_show_arrows' ) ) {  ?>
-              <button class='hl-listings-carousel__nav_prev hl-listings-carousel__nav'>
-                <svg xmlns="http://www.w3.org/2000/svg" fill='currentColor' width="24" height="24" viewBox="0 0 24 24">
-                  <path fill="#222" fill-rule="nonzero" d="M9 17.523L10.39 19 17 12l-6.61-7L9 6.477 14.215 12z"/>
-                </svg>
-              </button>
+        <?php if ( false ) {  ?>
+            <button class='hl-listings-carousel__nav_prev hl-listings-carousel__nav'>
+              <svg xmlns="http://www.w3.org/2000/svg" fill='currentColor' width="24" height="24" viewBox="0 0 24 24">
+                <path fill="#222" fill-rule="nonzero" d="M9 17.523L10.39 19 17 12l-6.61-7L9 6.477 14.215 12z"/>
+              </svg>
+            </button>
 
-              <button class='hl-listings-carousel__nav_next hl-listings-carousel__nav'>
-                <svg xmlns="http://www.w3.org/2000/svg" fill='currentColor' width="24" height="24" viewBox="0 0 24 24">
-                  <path fill="#222" fill-rule="nonzero" d="M9 17.523L10.39 19 17 12l-6.61-7L9 6.477 14.215 12z"/>
-                </svg>
-              </button>
+            <button class='hl-listings-carousel__nav_next hl-listings-carousel__nav'>
+              <svg xmlns="http://www.w3.org/2000/svg" fill='currentColor' width="24" height="24" viewBox="0 0 24 24">
+                <path fill="#222" fill-rule="nonzero" d="M9 17.523L10.39 19 17 12l-6.61-7L9 6.477 14.215 12z"/>
+              </svg>
+            </button>
         <?php } ?>
 
         </div>
