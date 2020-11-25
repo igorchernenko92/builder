@@ -65,6 +65,7 @@ class Widget_Manager {
         include_once( 'widgets/HelloPropertyDetails/HelloPropertyDetails.php' );
 //        include_once( 'widgets/HelloPropertyFeatures/HelloPropertyFeatures.php' );
         include_once( 'widgets/HelloPropertyFeatures.php' );
+        include_once( 'widgets/HelloPropertySlider/HelloPropertySlider.php' );
         include_once( 'widgets/HelloPropertyPrice.php' );
         include_once( 'widgets/HelloPropertyStatus.php' );
 //
@@ -95,6 +96,7 @@ class Widget_Manager {
 
 //        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloPropertyFeatures\HelloPropertyFeatures() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloPropertyFeatures() );
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloPropertySlider\HelloPropertySlider() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloPropertyPrice() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloPropertyStatus() );
     }
