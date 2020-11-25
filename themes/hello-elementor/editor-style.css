@@ -6,7 +6,9 @@
  * Loading first in the style.scss & editor-style.scss
  */
 p {
-  margin-bottom: 0.75rem; }
+  margin-bottom: 0;
+  margin-top: 0;
+}
 
 img {
   max-width: 100%;
