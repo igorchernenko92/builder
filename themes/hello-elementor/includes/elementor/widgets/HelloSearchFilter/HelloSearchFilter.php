@@ -25,11 +25,11 @@ class HelloSearchFilter extends Base_Widget {
 //		wp_enqueue_style( 'ut-datepicker-css', get_template_directory_uri() . '/includes/elementor/widgets/assets/css/datepicker.css', array(), date("Ymd"), false );
 //		wp_enqueue_script( 'ut-datepicker-js', get_template_directory_uri() . '/includes/elementor/widgets/assets/js/datepicker.js', array(), date("Ymd"), false );
 
-        wp_register_script('hello-search-script', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloSearchFilter/assets/js/base-script.js', '', '1', true);
-        wp_register_style('hello-search-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloSearchFilter/assets/css/base-main.css', '', 1);
+        wp_enqueue_script('hello-search-script', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloSearchFilter/assets/js/base-script.js', '', '1', true);
+        wp_enqueue_style('hello-search-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloSearchFilter/assets/css/base-main.css', '', 1);
 
-        wp_register_script('hello-search-select2', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloSearchFilter/assets/js/select2.min.js', '', '1', true);
-        wp_register_style('hello-search-select2-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloSearchFilter/assets/css/select2.min.css', '', 1);
+        wp_enqueue_script('hello-search-select2', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloSearchFilter/assets/js/select2.min.js', '', '1', true);
+        wp_enqueue_style('hello-search-select2-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloSearchFilter/assets/css/select2.min.css', '', 1);
 
         wp_enqueue_script( 'hello-search-multiple',  get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloSearchFilter/assets/js/multiple-select.min.js', '', '1', true );
         wp_enqueue_style( 'hello-search-multiple-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloSearchFilter/assets/css/multiple-select.min.css');
