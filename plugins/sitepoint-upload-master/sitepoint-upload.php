@@ -84,7 +84,7 @@ function su_load_scripts() {
 
     wp_localize_script( 'image-form-js', 'myajax', $data );
 }
-add_action('wp_enqueue_scripts', 'su_load_scripts');
+//add_action('wp_enqueue_scripts', 'su_load_scripts');
 
 
 
