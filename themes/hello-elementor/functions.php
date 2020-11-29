@@ -107,15 +107,6 @@ if ( ! function_exists( 'hello_elementor_scripts_styles' ) ) {
 				HELLO_ELEMENTOR_VERSION
 			);
 		}
-
-		if ( apply_filters( 'hello_elementor_enqueue_theme_style', true ) ) {
-			wp_enqueue_style(
-				'hello-elementor-theme-style',
-				get_template_directory_uri() . '/theme' . $min_suffix . '.css',
-				[],
-				HELLO_ELEMENTOR_VERSION
-			);
-		}
         wp_enqueue_script('jquery');
 	}
 }
