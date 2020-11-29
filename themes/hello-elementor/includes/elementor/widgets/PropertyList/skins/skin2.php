@@ -44,7 +44,7 @@ class Skin2 extends Skin_Base {
       ?>
         <div class="hl-listing-card__picture-preview">
           <a href="#" class="hl-listing-card__picture-preview-title">View Property</a>
-          <span class="hl-listing-card__picture-preview-subtitle">Real Estatey</span>
+          <span class="hl-listing-card__picture-preview-subtitle">Real Estate</span>
         </div>
       <?php
     }
