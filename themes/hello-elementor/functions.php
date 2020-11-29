@@ -84,22 +84,6 @@ if ( ! function_exists( 'hello_elementor_setup' ) ) {
 			 * Editor Style.
 			 */
 			add_editor_style( 'editor-style.css' );
-
-			/*
-			 * WooCommerce.
-			 */
-			$hook_result = apply_filters_deprecated( 'elementor_hello_theme_add_woocommerce_support', [ true ], '2.0', 'hello_elementor_add_woocommerce_support' );
-			if ( apply_filters( 'hello_elementor_add_woocommerce_support', $hook_result ) ) {
-				// WooCommerce in general.
-				add_theme_support( 'woocommerce' );
-				// Enabling WooCommerce product gallery features (are off by default since WC 3.0.0).
-				// zoom.
-				add_theme_support( 'wc-product-gallery-zoom' );
-				// lightbox.
-				add_theme_support( 'wc-product-gallery-lightbox' );
-				// swipe.
-				add_theme_support( 'wc-product-gallery-slider' );
-			}
 		}
 	}
 }
@@ -403,21 +387,21 @@ require get_template_directory() . '/acfe-php/group_5f11cc6d60bd4.php';
 
 
 
-add_action( 'init', 'czc_disable_extra_image_sizes' );
-add_filter( 'image_resize_dimensions', 'czc_disable_crop', 10, 6 );
-function czc_disable_crop( $enable, $orig_w, $orig_h, $dest_w, $dest_h, $crop )
-{
-    // Instantly disable this filter after the first run
-    // remove_filter( current_filter(), __FUNCTION__ );
-    // return image_resize_dimensions( $orig_w, $orig_h, $dest_w, $dest_h, false );
-    return false;
-}
-function czc_disable_extra_image_sizes()
-{
-    foreach (get_intermediate_image_sizes() as $size) {
-        remove_image_size($size);
-    }
-}
+//add_action( 'init', 'czc_disable_extra_image_sizes' );
+//add_filter( 'image_resize_dimensions', 'czc_disable_crop', 10, 6 );
+//function czc_disable_crop( $enable, $orig_w, $orig_h, $dest_w, $dest_h, $crop )
+//{
+//    // Instantly disable this filter after the first run
+//    // remove_filter( current_filter(), __FUNCTION__ );
+//    // return image_resize_dimensions( $orig_w, $orig_h, $dest_w, $dest_h, false );
+//    return false;
+//}
+//function czc_disable_extra_image_sizes()
+//{
+//    foreach (get_intermediate_image_sizes() as $size) {
+//        remove_image_size($size);
+//    }
+//}
 
 
 add_action( 'wp_footer', function () { ?>
@@ -427,6 +411,7 @@ add_action( 'wp_footer', function () { ?>
         });
     </script>
 <?php } );
+
 
 
 //global $wpdb;
@@ -446,4 +431,39 @@ add_action( 'wp_footer', function () { ?>
 //Plugin::$instance->files_manager->clear_cache();
 
 //copy( wp_upload_dir()['basedir'] . '/elementor/css/post-2889.css',  wp_upload_dir()['basedir'] . '/sites/200/elementor/css/post-2889.css');
+
+
+function redirectWhenRoleMatches($user_id, $provider) {
+    $user       = get_userdata($user_id);
+    $user_roles = $user->roles;
+
+//    if (in_array('subscriber', $user_roles, true)) {
+
+
+    $main_site = 'buildable.pro';
+    $bytes = random_bytes(3); // need for creating unique site name
+    $randName = bin2hex($bytes);     // need for creating unique site name
+    $newdomain = "{$randName}.$main_site"; // create unique domain
+
+
+    $blog_id = wpmu_create_blog( $newdomain, '/', $randName, 1 , array( 'public' => 1 ) ); // create blog by admin (id=1)
+    add_user_to_blog($blog_id, $user_id, 'editor');
+
+    $location = 'http://' . $newdomain;  // send link to front
+
+
+
+    add_filter($provider->getId() . '_register_redirect_url', function () use ($location) {
+        return $location;
+    });
+
+        //Or you can also use it by specifying the id of the provider directly, like:
+        /*
+        add_filter('facebook_login_redirect_url', function () {
+            return 'https://example.com/page-for-subscribers';
+        });
+        */
+//    }
+}
+add_action('nsl_register_new_user', 'redirectWhenRoleMatches', 10, 2);
 
