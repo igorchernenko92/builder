@@ -1,4 +1,4 @@
-/*! elementor-pro - v3.0.3 - 02-09-2020 */
+/*! elementor-pro - v3.0.8 - 26-11-2020 */
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -7041,7 +7041,7 @@ GlobalWidgetView = WidgetView.extend({
         previewSettings = self.model.get('previewSettings'),
         globalModel = self.getGlobalModel();
 
-    if (previewSettings) {
+    if (previewSettings && $e.commandsInternal.is('editor/documents/attach-preview')) {
       globalModel.set('settingsLoadedStatus', 'loaded').trigger('settings:loaded');
       var settingsModel = globalModel.get('settings');
       settingsModel.handleRepeaterData(previewSettings);
@@ -11388,7 +11388,13 @@ module.exports = elementorModules.editor.utils.Module.extend({
     return networkClass;
   },
   getNetworkTitle: function getNetworkTitle(buttonSettings) {
-    return buttonSettings.text || this.config[buttonSettings.button].title;
+    var _this$getNetworkData;
+
+    // BC for items that are already selected and have been removed from the options list.
+    return buttonSettings.text || ((_this$getNetworkData = this.getNetworkData(buttonSettings)) === null || _this$getNetworkData === void 0 ? void 0 : _this$getNetworkData.title);
+  },
+  getNetworkData: function getNetworkData(buttonSettings) {
+    return this.config[buttonSettings.button];
   },
   hasCounter: function hasCounter(networkName, settings) {
     return 'icon' !== settings.view && 'yes' === settings.show_counter && this.config[networkName].has_counter;
