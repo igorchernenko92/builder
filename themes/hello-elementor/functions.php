@@ -116,6 +116,7 @@ if ( ! function_exists( 'hello_elementor_scripts_styles' ) ) {
 				HELLO_ELEMENTOR_VERSION
 			);
 		}
+        wp_enqueue_script('jquery');
 	}
 }
 add_action( 'wp_enqueue_scripts', 'hello_elementor_scripts_styles' );
@@ -378,32 +379,12 @@ require get_template_directory() . '/acfe-php/group_5f11cc6d60bd4.php';
 
 //add_filter( 'http_request_host_is_external', '__return_true' );
 
-//add_filter( 'wp_image_editors', 'change_graphic_lib' );
-
-//function change_graphic_lib($array) {
-//    return array( 'WP_Image_Editor_GD', 'WP_Image_Editor_Imagick' );
-//}
 
 
 
 
-//add_action( 'init', 'czc_disable_extra_image_sizes' );
-//add_filter( 'image_resize_dimensions', 'czc_disable_crop', 10, 6 );
-//function czc_disable_crop( $enable, $orig_w, $orig_h, $dest_w, $dest_h, $crop )
-//{
-//    // Instantly disable this filter after the first run
-//    // remove_filter( current_filter(), __FUNCTION__ );
-//    // return image_resize_dimensions( $orig_w, $orig_h, $dest_w, $dest_h, false );
-//    return false;
-//}
-//function czc_disable_extra_image_sizes()
-//{
-//    foreach (get_intermediate_image_sizes() as $size) {
-//        remove_image_size($size);
-//    }
-//}
-
-
+//Have the option to remove delay on drop-down menu
+//https://github.com/elementor/elementor/issues/9400
 add_action( 'wp_footer', function () { ?>
     <script>
         jQuery(document).ready(function($) {

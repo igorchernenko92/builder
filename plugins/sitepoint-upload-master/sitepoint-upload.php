@@ -77,14 +77,13 @@ function su_load_scripts() {
     wp_enqueue_script('image-form-js', plugin_dir_url( __FILE__ ) . 'js/script.js', array('jquery'), '0.1.0', true);
 
     $data = array(
-//                'upload_url' => admin_url('async-upload.php'),
                 'ajax_url'   => admin_url('admin-ajax.php'),
                 'nonce'      => wp_create_nonce('myajax-nonce')
             );
 
     wp_localize_script( 'image-form-js', 'myajax', $data );
 }
-//add_action('wp_enqueue_scripts', 'su_load_scripts');
+add_action('wp_enqueue_scripts', 'su_load_scripts');
 
 
 
