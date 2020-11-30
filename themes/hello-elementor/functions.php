@@ -404,7 +404,7 @@ add_action( 'wp_footer', function () { ?>
 
 //copy( wp_upload_dir()['basedir'] . '/elementor/css/post-2889.css',  wp_upload_dir()['basedir'] . '/sites/200/elementor/css/post-2889.css');
 
-function redirectWhenRoleMatches($user_id, $provider) {
+function siteAndUserCreation($user_id, $provider) {
     delete_user_option( $user_id, 'capabilities' );
     delete_user_option( $user_id, 'user_level' );
     do_action( 'wpmu_new_user', $user_id );
@@ -416,17 +416,14 @@ function redirectWhenRoleMatches($user_id, $provider) {
     $newdomain = "{$randName}.$main_site"; // create unique domain
 
     $blog_id = wpmu_create_blog( $newdomain, '/', $randName, $user_id);
-
-
-
-    $location = get_blogs_of_user($user_id)[ array_key_first(get_blogs_of_user($user_id)) ]->siteurl;  // send link to front
+    $location = get_site_url( $blog_id, '', '' );  // send link to front
 
     add_filter($provider->getId() . '_register_redirect_url', function () use ($location) {
         return $location;
     });
 
 }
-add_action('nsl_register_new_user', 'redirectWhenRoleMatches', 10, 2);
+add_action('nsl_register_new_user', 'siteAndUserCreation', 10, 2);
 
 
 //add_filter('nsl_registration_user_data', function ($user_data, $provider, $errors) {
