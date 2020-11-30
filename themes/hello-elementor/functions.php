@@ -404,13 +404,10 @@ add_action( 'wp_footer', function () { ?>
 
 //copy( wp_upload_dir()['basedir'] . '/elementor/css/post-2889.css',  wp_upload_dir()['basedir'] . '/sites/200/elementor/css/post-2889.css');
 
-
 function redirectWhenRoleMatches($user_id, $provider) {
-    $user       = get_userdata($user_id);
-    $user_roles = $user->roles;
 
-//    if (in_array('subscriber', $user_roles, true)) {
 
+    wp_delete_user($user_id);
 
     $main_site = 'buildable.pro';
     $bytes = random_bytes(3); // need for creating unique site name
@@ -418,8 +415,27 @@ function redirectWhenRoleMatches($user_id, $provider) {
     $newdomain = "{$randName}.$main_site"; // create unique domain
 
 
+
+
+
+    $username = 'user-' . $randName;
+    $password = wp_generate_password( 12 );
+    $email = "email+$randName@example.com";
+    $user_id = wpmu_create_user( $username, $password, $email ); // create network user
+    $user = new WP_User($user_id); // create for adding user role
+    $user->set_role('editor');  //set user new role
+
+
+
+
+
+
     $blog_id = wpmu_create_blog( $newdomain, '/', $randName, 1 , array( 'public' => 1 ) ); // create blog by admin (id=1)
     add_user_to_blog($blog_id, $user_id, 'editor');
+
+    wp_set_current_user($user_id, $email); // log in user
+    wp_set_auth_cookie($user_id);
+    do_action('wp_login', $email);
 
     $location = 'http://' . $newdomain;  // send link to front
 
