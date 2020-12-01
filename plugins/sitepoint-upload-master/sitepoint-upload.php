@@ -13,28 +13,28 @@ Author URI: http://www.sitepoint.com/author/fzahari/
 //
 use Elementor\Plugin;
 
-//if ( ! class_exists( 'WP_Importer' ) ) {
-//    $class_wp_importer = ABSPATH . 'wp-admin/includes/class-wp-importer.php';
-//    if ( file_exists( $class_wp_importer ) )
-//        require $class_wp_importer;
-//}
+if ( ! class_exists( 'WP_Importer' ) ) {
+    $class_wp_importer = ABSPATH . 'wp-admin/includes/class-wp-importer.php';
+    if ( file_exists( $class_wp_importer ) )
+        require $class_wp_importer;
+}
 
 //require_once dirname( __FILE__ ) . '/class-wp-import.php';
 
-///** WXR_Parser class */
-//require_once dirname( __FILE__ ) . '/parsers/class-wxr-parser.php';
-//
-///** WXR_Parser_SimpleXML class */
-//require_once dirname( __FILE__ ) . '/parsers/class-wxr-parser-simplexml.php';
-//
-///** WXR_Parser_XML class */
-//require_once dirname( __FILE__ ) . '/parsers/class-wxr-parser-xml.php';
-//
-///** WXR_Parser_Regex class */
-//require_once dirname( __FILE__ ) . '/parsers/class-wxr-parser-regex.php';
-//
-///** WP_Import class */
-//require_once dirname( __FILE__ ) . '/class-wp-import.php';
+/** WXR_Parser class */
+require_once dirname( __FILE__ ) . '/parsers/class-wxr-parser.php';
+
+/** WXR_Parser_SimpleXML class */
+require_once dirname( __FILE__ ) . '/parsers/class-wxr-parser-simplexml.php';
+
+/** WXR_Parser_XML class */
+require_once dirname( __FILE__ ) . '/parsers/class-wxr-parser-xml.php';
+
+/** WXR_Parser_Regex class */
+require_once dirname( __FILE__ ) . '/parsers/class-wxr-parser-regex.php';
+
+/** WP_Import class */
+require_once dirname( __FILE__ ) . '/class-wp-import.php';
 
 
 

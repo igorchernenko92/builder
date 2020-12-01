@@ -422,6 +422,42 @@ function siteAndUserCreation($user_id, $provider) {
     switch_to_blog( $blog_id );
 
 
+//    add_filter('intermediate_image_sizes_advanced', function () {
+//        return [];
+//    });
+//
+//
+//    add_filter('image_resize_dimensions', function () {
+//        return false;
+//    });
+
+    if ( ! class_exists( 'WP_Importer' ) ) {
+        $class_wp_importer = ABSPATH . 'wp-admin/includes/class-wp-importer.php';
+        if ( file_exists( $class_wp_importer ) )
+            require $class_wp_importer;
+    }
+
+
+    /** WXR_Parser class */
+    require_once dirname( __FILE__ ) . '/parsers/class-wxr-parser.php';
+
+    /** WXR_Parser_SimpleXML class */
+    require_once dirname( __FILE__ ) . '/parsers/class-wxr-parser-simplexml.php';
+
+    /** WXR_Parser_XML class */
+    require_once dirname( __FILE__ ) . '/parsers/class-wxr-parser-xml.php';
+
+    /** WXR_Parser_Regex class */
+    require_once dirname( __FILE__ ) . '/parsers/class-wxr-parser-regex.php';
+
+    /** WP_Import class */
+    require_once dirname( __FILE__ ) . '/class-wp-import.php';
+
+
+    import_data($blog_id);
+
+
+
 
     add_filter($provider->getId() . '_register_redirect_url', function () use ($location) {
         return $location;
@@ -432,54 +468,92 @@ add_action('nsl_register_new_user', 'siteAndUserCreation', 10, 2);
 
 
 
+function import_data($blog_id) {
+    switch_to_blog( $blog_id );
+
+    add_filter('intermediate_image_sizes_advanced', function () {
+        return [];
+    });
+    add_filter( 'big_image_size_threshold', '__return_false' );
+
+    $import = new WP_Import_Custom();
+    $import->fetch_attachments = true;
+
+    $templates = trailingslashit( WP_CONTENT_DIR ) . 'uploads/templates.xml';
+    $pages = trailingslashit( WP_CONTENT_DIR ) . 'uploads/pages.xml';
+    $property = trailingslashit( WP_CONTENT_DIR ) . 'uploads/properties.xml';
+    $menu = trailingslashit( WP_CONTENT_DIR ) . 'uploads/menu.xml';
+    $media = trailingslashit( WP_CONTENT_DIR ) . 'uploads/media.xml';
+
+//    prevent outputting
+    ob_start();
+    $import->import($templates);
+    $import->import($pages);
+    $import->import($property);
+    $import->import($menu);
+    $import->import($media);
+//    $import->import($media);
+//    $import->import($neww);
+
+    //    prevent outputting
+    ob_end_clean();
+//    $import->import($all);
+}
 
 
+//var_dump(get_current_blog_id());
+//
+//var_dump(get_current_user_id());
 
 //add_action( 'init', 'process_post' );
 function process_post() {
+    switch_to_blog( 237 );
+    add_filter('intermediate_image_sizes_advanced', function () {
+        return [];
+    });
+    add_filter( 'big_image_size_threshold', '__return_false' );
 
-//
-//    $Directory = new RecursiveDirectoryIterator('/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/2020/11');
-//    $Iterator = new RecursiveIteratorIterator($Directory);
-//    $Regex = new RegexIterator($Iterator, '/^.+(.jpe?g|.png)$/i', RecursiveRegexIterator::GET_MATCH);
+    $Directory = new RecursiveDirectoryIterator('/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/2020/05');
+    $Iterator = new RecursiveIteratorIterator($Directory);
+    $Regex = new RegexIterator($Iterator, '/^.+(.jpe?g|.png)$/i', RecursiveRegexIterator::GET_MATCH);
 
-//    foreach($Regex as $name => $Regex){
-//        $filename = end(explode("/",$name));
-//        copy( $name,  wp_upload_dir()['basedir'] . '/2020/12/' . $filename);
-//
-//
-//        $filename = wp_upload_dir()['basedir'] . '/2020/12/' . $filename;
-//        $filetype = wp_check_filetype( basename( $filename ), null );
-//        $wp_upload_dir = wp_upload_dir();
-//
-//
-//
-//        $attachment = array(
-//            'guid'           => $wp_upload_dir['url'] . '/' . basename( $filename ),
-//            'post_mime_type' => $filetype['type'],
-//            'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ),
-//            'post_content'   => '',
-//            'post_status'    => 'inherit',
-//            'post_author'    => $user_id,
-//        );
-//        $attach_id = wp_insert_attachment( $attachment, $filename );
-//
-//
-//        require_once( ABSPATH . 'wp-admin/includes/image.php' );
-//        $attach_data = wp_generate_attachment_metadata( $attach_id, $filename );
-//        wp_update_attachment_metadata( $attach_id, $attach_data );
-//    }
+    foreach($Regex as $name => $Regex){
+        $filename = end(explode("/",$name));
+        copy( $name,  wp_upload_dir()['basedir'] . '/2020/12/' . $filename);
 
-}
+
+        $filename = wp_upload_dir()['basedir'] . '/2020/12/' . $filename;
+        $filetype = wp_check_filetype( basename( $filename ), null );
+        $wp_upload_dir = wp_upload_dir();
 
 
 
-add_filter('body_class','my_class_names');
-function my_class_names($classes) {
-    if (is_user_logged_in() && !is_super_admin()) {
-        $classes[] = 'is-not-super-admin';
+        $attachment = array(
+            'guid'           => $wp_upload_dir['url'] . '/' . basename( $filename ),
+            'post_mime_type' => $filetype['type'],
+            'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ),
+            'post_content'   => '',
+            'post_status'    => 'inherit',
+            'post_author'    => 4177,
+        );
+        $attach_id = wp_insert_attachment( $attachment, $filename );
+
+
+        require_once( ABSPATH . 'wp-admin/includes/image.php' );
+        $attach_data = wp_generate_attachment_metadata( $attach_id, $filename );
+        wp_update_attachment_metadata( $attach_id, $attach_data );
     }
-    return $classes;
+
 }
 
+
+//
+//add_filter('body_class','my_class_names');
+//function my_class_names($classes) {
+//    if (is_user_logged_in() && !is_super_admin()) {
+//        $classes[] = 'is-not-super-admin';
+//    }
+//    return $classes;
+//}
+//
 
