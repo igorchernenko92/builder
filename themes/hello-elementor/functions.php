@@ -404,6 +404,8 @@ add_action( 'wp_footer', function () { ?>
 
 //copy( wp_upload_dir()['basedir'] . '/elementor/css/post-2889.css',  wp_upload_dir()['basedir'] . '/sites/200/elementor/css/post-2889.css');
 
+//var_dump(wp_upload_dir()['basedir'] . '/2020/11/1-1-150x150.jpg');
+
 function siteAndUserCreation($user_id, $provider) {
     delete_user_option( $user_id, 'capabilities' );
     delete_user_option( $user_id, 'user_level' );
@@ -417,6 +419,9 @@ function siteAndUserCreation($user_id, $provider) {
 
     $blog_id = wpmu_create_blog( $newdomain, '/', $randName, $user_id);
     $location = get_site_url( $blog_id, '', '' );  // send link to front
+    switch_to_blog( $blog_id );
+
+
 
     add_filter($provider->getId() . '_register_redirect_url', function () use ($location) {
         return $location;
@@ -426,34 +431,48 @@ function siteAndUserCreation($user_id, $provider) {
 add_action('nsl_register_new_user', 'siteAndUserCreation', 10, 2);
 
 
-//add_filter('nsl_registration_user_data', function ($user_data, $provider, $errors) {
-//    var_dump($user_data);
+
+
+
+
+//add_action( 'init', 'process_post' );
+function process_post() {
+
 //
-//    $main_site = 'buildable.pro';
-//    $bytes = random_bytes(3); // need for creating unique site name
-//    $randName = bin2hex($bytes);     // need for creating unique site name
-//    $newdomain = "{$randName}.$main_site"; // create unique domain
-//
-//
-//
-//    $username = 'user-' . $randName;
-//    $password = wp_generate_password( 12 );
-//    $email = "email+$randName@example.com";
-//
-//    $user_id = wpmu_create_user( $email, $password, $email ); // create network user
-//    $blog_id = wpmu_create_blog( $newdomain, '/', $randName, $user_id);
-//
-//    $location = 'https://' . $newdomain;  // send link to front
-//    $errors->add('invalid_email', '' . __('ERROR') . ': ' . __('Sorry, email is missing or invalid!'));
+//    $Directory = new RecursiveDirectoryIterator('/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/2020/11');
+//    $Iterator = new RecursiveIteratorIterator($Directory);
+//    $Regex = new RegexIterator($Iterator, '/^.+(.jpe?g|.png)$/i', RecursiveRegexIterator::GET_MATCH);
+
+//    foreach($Regex as $name => $Regex){
+//        $filename = end(explode("/",$name));
+//        copy( $name,  wp_upload_dir()['basedir'] . '/2020/12/' . $filename);
 //
 //
-////    add_filter($provider->getId() . '_register_redirect_url', function () use ($location) {
-////        return $location;
-////    });
+//        $filename = wp_upload_dir()['basedir'] . '/2020/12/' . $filename;
+//        $filetype = wp_check_filetype( basename( $filename ), null );
+//        $wp_upload_dir = wp_upload_dir();
 //
 //
-//    return $user_data;
-//}, 10, 3);
+//
+//        $attachment = array(
+//            'guid'           => $wp_upload_dir['url'] . '/' . basename( $filename ),
+//            'post_mime_type' => $filetype['type'],
+//            'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ),
+//            'post_content'   => '',
+//            'post_status'    => 'inherit',
+//            'post_author'    => $user_id,
+//        );
+//        $attach_id = wp_insert_attachment( $attachment, $filename );
+//
+//
+//        require_once( ABSPATH . 'wp-admin/includes/image.php' );
+//        $attach_data = wp_generate_attachment_metadata( $attach_id, $filename );
+//        wp_update_attachment_metadata( $attach_id, $attach_data );
+//    }
+
+}
+
+
 
 add_filter('body_class','my_class_names');
 function my_class_names($classes) {
