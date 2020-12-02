@@ -505,44 +505,74 @@ function import_data($blog_id) {
 //
 //var_dump(get_current_user_id());
 
-//add_action( 'init', 'process_post' );
+//var_dump(get_current_blog_id());
+add_action( 'init', 'process_post' );
 function process_post() {
-    switch_to_blog( 237 );
-    add_filter('intermediate_image_sizes_advanced', function () {
-        return [];
-    });
-    add_filter( 'big_image_size_threshold', '__return_false' );
-
-    $Directory = new RecursiveDirectoryIterator('/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/2020/05');
-    $Iterator = new RecursiveIteratorIterator($Directory);
-    $Regex = new RegexIterator($Iterator, '/^.+(.jpe?g|.png)$/i', RecursiveRegexIterator::GET_MATCH);
-
-    foreach($Regex as $name => $Regex){
-        $filename = end(explode("/",$name));
-        copy( $name,  wp_upload_dir()['basedir'] . '/2020/12/' . $filename);
 
 
-        $filename = wp_upload_dir()['basedir'] . '/2020/12/' . $filename;
-        $filetype = wp_check_filetype( basename( $filename ), null );
-        $wp_upload_dir = wp_upload_dir();
+    global $wpdb;
+//
+//    $newtable = $wpdb->get_results( " SELECT * FROM wp_posts WHERE post_type = 'attachment' AND post_parent != '0';", 'ARRAY_A' );
+//
+//    $Directory = new RecursiveDirectoryIterator('/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/2020/');
+//    $Iterator = new RecursiveIteratorIterator($Directory);
+//    $Regex = new RegexIterator($Iterator, '/^.+(.jpe?g|.png)$/i', RecursiveRegexIterator::GET_MATCH);
+//
+//    foreach($Regex as $name => $Regex) {
+//        $filename = end(explode("/", $name));
+//        copy($name, wp_upload_dir()['basedir'] . '/2020/12/' . $filename);
+//    }
+//
+//    foreach ( $newtable as $record ) {
+//
+//        $record['guid'] = str_replace("buildable.pro", "7a5611.buildable.pro", $record['guid']);
+//
+//     $wpdb->insert('wp_241_posts', $record);
+//
+//    }
 
 
 
-        $attachment = array(
-            'guid'           => $wp_upload_dir['url'] . '/' . basename( $filename ),
-            'post_mime_type' => $filetype['type'],
-            'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ),
-            'post_content'   => '',
-            'post_status'    => 'inherit',
-            'post_author'    => 4177,
-        );
-        $attach_id = wp_insert_attachment( $attachment, $filename );
 
 
-        require_once( ABSPATH . 'wp-admin/includes/image.php' );
-        $attach_data = wp_generate_attachment_metadata( $attach_id, $filename );
-        wp_update_attachment_metadata( $attach_id, $attach_data );
-    }
+
+//
+//    switch_to_blog( 237 );
+//    add_filter('intermediate_image_sizes_advanced', function () {
+//        return [];
+//    });
+//    add_filter( 'big_image_size_threshold', '__return_false' );
+//
+//    $Directory = new RecursiveDirectoryIterator('/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/2020/05');
+//    $Iterator = new RecursiveIteratorIterator($Directory);
+//    $Regex = new RegexIterator($Iterator, '/^.+(.jpe?g|.png)$/i', RecursiveRegexIterator::GET_MATCH);
+//
+//    foreach($Regex as $name => $Regex){
+//        $filename = end(explode("/",$name));
+//        copy( $name,  wp_upload_dir()['basedir'] . '/2020/12/' . $filename);
+//
+//
+//        $filename = wp_upload_dir()['basedir'] . '/2020/12/' . $filename;
+//        $filetype = wp_check_filetype( basename( $filename ), null );
+//        $wp_upload_dir = wp_upload_dir();
+
+
+
+//        $attachment = array(
+//            'guid'           => $wp_upload_dir['url'] . '/' . basename( $filename ),
+//            'post_mime_type' => $filetype['type'],
+//            'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ),
+//            'post_content'   => '',
+//            'post_status'    => 'inherit',
+//            'post_author'    => 4177,
+//        );
+//        $attach_id = wp_insert_attachment( $attachment, $filename );
+//
+//
+//        require_once( ABSPATH . 'wp-admin/includes/image.php' );
+//        $attach_data = wp_generate_attachment_metadata( $attach_id, $filename );
+//        wp_update_attachment_metadata( $attach_id, $attach_data );
+//    }
 
 }
 
