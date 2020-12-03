@@ -408,6 +408,56 @@ add_action( 'wp_footer', function () { ?>
 
 //var_dump(get_current_blog_id());
 
+function recurse_copy($src,$dst) {
+    $dir = opendir($src);
+    @mkdir($dst);
+    while(false !== ( $file = readdir($dir)) ) {
+        if (( $file != '.' ) && ( $file != '..' )) {
+            if ( is_dir($src . '/' . $file) ) {
+                recurse_copy($src . '/' . $file,$dst . '/' . $file);
+            }
+            else {
+                copy($src . '/' . $file,$dst . '/' . $file);
+            }
+        }
+    }
+    closedir($dir);
+}
+
+
+//add_action( 'init', 'copy_media' );
+function copy_media($blog_id, $blog_url, $user_id) {
+    switch_to_blog(1);
+    $args = array('post_type'=>'attachment','numberposts'=>-1,'post_status'=>null);
+    $attachments = get_posts($args);
+//    restore_current_blog();
+    switch_to_blog($blog_id);
+
+    if($attachments){
+        foreach($attachments as $attachment) {
+
+            switch_to_blog(1);
+            $post = get_post($attachment->ID, ARRAY_A);
+            $metadata = wp_get_attachment_metadata($attachment->ID);
+            switch_to_blog($blog_id);
+            if ( ($post['post_parent'] != 0) && ($metadata != '') ) {
+                unset($post['ID']);
+                $post['guid'] = str_replace("buildable.pro", $blog_url, $post['guid']);
+                $post['post_author'] = $user_id;
+
+
+                $post_id = wp_insert_post($post);
+                update_post_meta( $post_id, '_wp_attachment_metadata', $metadata );
+
+//                var_dump($post);
+//            var_dump($metadata);
+//            echo '<br><br>';
+            }
+        }
+    }
+//echo $i;
+}
+
 function import_data($blog_id) {
     switch_to_blog( $blog_id );
 
@@ -419,7 +469,7 @@ function import_data($blog_id) {
     $pages = trailingslashit( WP_CONTENT_DIR ) . 'uploads/pages.xml';
     $property = trailingslashit( WP_CONTENT_DIR ) . 'uploads/properties.xml';
     $menu = trailingslashit( WP_CONTENT_DIR ) . 'uploads/menu.xml';
-    $media = trailingslashit( WP_CONTENT_DIR ) . 'uploads/media.xml';
+//    $media = trailingslashit( WP_CONTENT_DIR ) . 'uploads/media.xml';
 
 //    prevent outputting
     ob_start();
@@ -427,7 +477,7 @@ function import_data($blog_id) {
     $import->import($pages);
     $import->import($property);
     $import->import($menu);
-    $import->import($media);
+//    $import->import($media);
 //    $import->import($media);
 //    $import->import($neww);
 
@@ -474,26 +524,11 @@ function siteAndUserCreation($user_id, $provider) {
     /** WP_Import class */
     require_once dirname( __FILE__ ) . '/class-wp-import.php';
 
-    add_action( 'init', 'czc_disable_extra_image_sizes' );
-    add_filter( 'image_resize_dimensions', 'czc_disable_crop', 10, 6 );
-    function czc_disable_crop( $enable, $orig_w, $orig_h, $dest_w, $dest_h, $crop )
-    {
-        // Instantly disable this filter after the first run
-        // remove_filter( current_filter(), __FUNCTION__ );
-        // return image_resize_dimensions( $orig_w, $orig_h, $dest_w, $dest_h, false );
-        return false;
-    }
-    function czc_disable_extra_image_sizes() {
-        foreach ( get_intermediate_image_sizes() as $size ) {
-            remove_image_size( $size );
-        }
-    }
 
+    recurse_copy('/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/2020/', '/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/sites/' . $blog_id . '/2020/');
 
-//    import_data($blog_id);
-
-
-
+    copy_media($blog_id, $newdomain, $user_id);
+    import_data($blog_id);
 
 
     add_filter($provider->getId() . '_register_redirect_url', function () use ($location) {
@@ -502,69 +537,6 @@ function siteAndUserCreation($user_id, $provider) {
 
 }
 add_action('nsl_register_new_user', 'siteAndUserCreation', 10, 2);
-
-function recurse_copy($src,$dst) {
-    $dir = opendir($src);
-    @mkdir($dst);
-    while(false !== ( $file = readdir($dir)) ) {
-        if (( $file != '.' ) && ( $file != '..' )) {
-            if ( is_dir($src . '/' . $file) ) {
-                recurse_copy($src . '/' . $file,$dst . '/' . $file);
-            }
-            else {
-                copy($src . '/' . $file,$dst . '/' . $file);
-            }
-        }
-    }
-    closedir($dir);
-}
-
-recurse_copy('/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/2020/', '/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/sites/226/2020/');
-
-//var_dump(get_current_blog_id());
-//var_dump(get_current_user_id());
-
-
-add_action( 'init', 'process_post' );
-function process_post() {
-    if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-        return;
-    }
-
-    switch_to_blog(1);
-    $args = array('post_type'=>'attachment','numberposts'=>-1,'post_status'=>null);
-    $attachments = get_posts($args);
-    restore_current_blog();
-
-    if($attachments){
-        foreach($attachments as $attachment) {
-
-            switch_to_blog(1);
-            $post = get_post($attachment->ID, ARRAY_A);
-            $metadata = wp_get_attachment_metadata($attachment->ID);
-            restore_current_blog();
-            if ( ($post['post_parent'] != 0) && ($metadata != '') ) {
-                unset($post['ID']);
-                $post['guid'] = str_replace("buildable.pro", "84aa83.buildable.pro", $post['guid']);
-                $post['post_author'] = get_current_user_id();
-
-
-                $post_id = wp_insert_post($post);
-                update_post_meta( $post_id, '_wp_attachment_metadata', $metadata );
-
-//                var_dump($post);
-//            var_dump($metadata);
-//            echo '<br><br>';
-            }
-        }
-    }
-//echo $i;
-
-
-
-
-
-}
 
 
 
