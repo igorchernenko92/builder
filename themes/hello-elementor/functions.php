@@ -181,7 +181,7 @@ if ( ! function_exists( 'hello_elementor_body_open' ) ) {
 
 
 //TODO: make function fire once
-function register_widgets() {
+function update_elementor_locations() {
 
 //    $condition_general = ['include/general'];
 //    update_metadata( 'post', 83, '_elementor_conditions', $condition_general );
@@ -219,7 +219,7 @@ function register_widgets() {
 
 }
 
-//add_action( 'init', 'register_widgets', 10 );
+//add_action( 'init', 'update_elementor_locations', 10 );
 
 
 function my_acf_init() {
@@ -404,9 +404,7 @@ add_action( 'wp_footer', function () { ?>
 
 //copy( wp_upload_dir()['basedir'] . '/elementor/css/post-2889.css',  wp_upload_dir()['basedir'] . '/sites/200/elementor/css/post-2889.css');
 
-//var_dump(wp_upload_dir()['basedir'] . '/2020/11/1-1-150x150.jpg');
 
-//var_dump(get_current_blog_id());
 
 function recurse_copy($src,$dst) {
     $dir = opendir($src);
@@ -445,7 +443,6 @@ function copy_media($blog_id, $blog_url, $user_id) {
                 $post['guid'] = str_replace("buildable.pro", $blog_url, $post['guid']);
                 $post['post_author'] = $user_id;
 
-
                 $post_id = wp_insert_post($post);
                 update_post_meta( $post_id, '_wp_attachment_metadata', $metadata );
 
@@ -458,6 +455,7 @@ function copy_media($blog_id, $blog_url, $user_id) {
 //echo $i;
 }
 
+
 function import_data($blog_id) {
     switch_to_blog( $blog_id );
 
@@ -469,7 +467,7 @@ function import_data($blog_id) {
     $pages = trailingslashit( WP_CONTENT_DIR ) . 'uploads/pages.xml';
     $property = trailingslashit( WP_CONTENT_DIR ) . 'uploads/properties.xml';
     $menu = trailingslashit( WP_CONTENT_DIR ) . 'uploads/menu.xml';
-//    $media = trailingslashit( WP_CONTENT_DIR ) . 'uploads/media.xml';
+    $media = trailingslashit( WP_CONTENT_DIR ) . 'uploads/media.xml';
 
 //    prevent outputting
     ob_start();
@@ -477,15 +475,14 @@ function import_data($blog_id) {
     $import->import($pages);
     $import->import($property);
     $import->import($menu);
-//    $import->import($media);
-//    $import->import($media);
+    $import->import($media);
 //    $import->import($neww);
 
     //    prevent outputting
     ob_end_clean();
 //    $import->import($all);
 }
-
+//var_dump(get_current_blog_id());
 function siteAndUserCreation($user_id, $provider) {
     delete_user_option( $user_id, 'capabilities' );
     delete_user_option( $user_id, 'user_level' );
@@ -500,12 +497,12 @@ function siteAndUserCreation($user_id, $provider) {
     $blog_id = wpmu_create_blog( $newdomain, '/', $randName, $user_id);
     $location = get_site_url( $blog_id, '', '' );  // send link to front
     switch_to_blog( $blog_id );
-
+//    recurse_copy('/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/2020/', '/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/sites/' . $blog_id . '/2020');
 
     if ( ! class_exists( 'WP_Importer' ) ) {
         $class_wp_importer = ABSPATH . 'wp-admin/includes/class-wp-importer.php';
         if ( file_exists( $class_wp_importer ) )
-            require $class_wp_importer;
+            require_once $class_wp_importer;
     }
 
 
@@ -524,11 +521,9 @@ function siteAndUserCreation($user_id, $provider) {
     /** WP_Import class */
     require_once dirname( __FILE__ ) . '/class-wp-import.php';
 
-
-    recurse_copy('/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/2020/', '/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/sites/' . $blog_id . '/2020/');
-
     copy_media($blog_id, $newdomain, $user_id);
     import_data($blog_id);
+    update_elementor_locations();
 
 
     add_filter($provider->getId() . '_register_redirect_url', function () use ($location) {
@@ -537,8 +532,6 @@ function siteAndUserCreation($user_id, $provider) {
 
 }
 add_action('nsl_register_new_user', 'siteAndUserCreation', 10, 2);
-
-
 
 add_filter('body_class','my_class_names');
 function my_class_names($classes) {
