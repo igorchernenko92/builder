@@ -426,19 +426,20 @@ function recurse_copy($src,$dst) {
 //add_action( 'init', 'copy_media' );
 function copy_media($blog_id, $blog_url, $user_id) {
     switch_to_blog(1);
-    $args = array('post_type'=>'attachment','numberposts'=>-1,'post_status'=>null);
+
+    $args = array('post_type' => 'attachment','numberposts' => -1,'post_status' => null);
     $attachments = get_posts($args);
 //    restore_current_blog();
     switch_to_blog($blog_id);
 
-    if($attachments){
+    if($attachments) {
         foreach($attachments as $attachment) {
 
             switch_to_blog(1);
 
             $post = get_post($attachment->ID, ARRAY_A);
             $metadata = wp_get_attachment_metadata($attachment->ID);
-            $attached_file = get_post_meta( $attachment->ID, '_wp_attached_file', true );
+            $attached_file = get_post_meta($attachment->ID, '_wp_attached_file', true);
 
             switch_to_blog($blog_id);
             if ( ($post['post_parent'] != 0) && ($metadata != '') ) {
@@ -448,6 +449,7 @@ function copy_media($blog_id, $blog_url, $user_id) {
 
                 $post_id = wp_insert_post($post);
                 update_post_meta( $post_id, '_wp_attachment_metadata', $metadata );
+                update_post_meta( $post_id, '_wp_attached_file', $attached_file );
 
 //                var_dump($post);
 //            var_dump($metadata);
@@ -500,7 +502,6 @@ function siteAndUserCreation($user_id, $provider) {
     $blog_id = wpmu_create_blog( $newdomain, '/', $randName, $user_id);
     $location = get_site_url( $blog_id, '', '' );  // send link to front
     switch_to_blog( $blog_id );
-//    recurse_copy('/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/2020/', '/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/sites/' . $blog_id . '/2020');
 
     if ( ! class_exists( 'WP_Importer' ) ) {
         $class_wp_importer = ABSPATH . 'wp-admin/includes/class-wp-importer.php';
@@ -536,6 +537,17 @@ function siteAndUserCreation($user_id, $provider) {
 }
 add_action('nsl_register_new_user', 'siteAndUserCreation', 10, 2);
 
+//delete_option(get_current_blog_id(). '_check_media_files') ;
+//check if files are copied. I do'nt know why but it's not working from site migration function
+add_action( 'init', 'check_media_files' );
+function check_media_files() {
+    $option_name = get_current_blog_id() . '_check_media_files';
+    if ( !get_option($option_name) ) {
+        recurse_copy('/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/2020/', '/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/sites/' . get_current_blog_id() . '/2020');
+        update_option($option_name, 'true');
+    }
+}
+
 add_filter('body_class','my_class_names');
 function my_class_names($classes) {
     if (is_user_logged_in() && !is_super_admin()) {
@@ -543,5 +555,10 @@ function my_class_names($classes) {
     }
     return $classes;
 }
+
+
+
+
+
 
 
