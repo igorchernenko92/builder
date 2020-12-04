@@ -435,8 +435,11 @@ function copy_media($blog_id, $blog_url, $user_id) {
         foreach($attachments as $attachment) {
 
             switch_to_blog(1);
+
             $post = get_post($attachment->ID, ARRAY_A);
             $metadata = wp_get_attachment_metadata($attachment->ID);
+            $attached_file = get_post_meta( $attachment->ID, '_wp_attached_file', true );
+
             switch_to_blog($blog_id);
             if ( ($post['post_parent'] != 0) && ($metadata != '') ) {
                 unset($post['ID']);
