@@ -196,7 +196,8 @@ function update_elementor_locations() {
 
     foreach ( $query->posts as $post ) {
         $post_id = $post->ID;
-
+//        var_dump($post->post_title);
+//        echo '<br><br>';
         $document = \Elementor\Plugin::instance()->documents->get($post_id);
 //         check for error if class is non not_supported
         if ($document instanceof Elementor\Modules\Library\Documents\Not_Supported) {
@@ -214,6 +215,8 @@ function update_elementor_locations() {
             }
         }
     }
+
+
 
     update_option( 'elementor_pro_theme_builder_conditions', $all_conditions );
 
@@ -464,29 +467,29 @@ function copy_media($blog_id, $blog_url, $user_id) {
 function import_data($blog_id) {
     switch_to_blog( $blog_id );
 
-
     $import = new WP_Import_Custom();
 //    $import->fetch_attachments = true;
 
     $templates = trailingslashit( WP_CONTENT_DIR ) . 'uploads/templates.xml';
     $pages = trailingslashit( WP_CONTENT_DIR ) . 'uploads/pages.xml';
     $property = trailingslashit( WP_CONTENT_DIR ) . 'uploads/properties.xml';
+    $agent = trailingslashit( WP_CONTENT_DIR ) . 'uploads/agents.xml';
     $menu = trailingslashit( WP_CONTENT_DIR ) . 'uploads/menu.xml';
     $media = trailingslashit( WP_CONTENT_DIR ) . 'uploads/media.xml';
 
-//    prevent outputting
+//  prevent outputting
     ob_start();
     $import->import($templates);
     $import->import($pages);
     $import->import($property);
+    $import->import($agent);
     $import->import($menu);
     $import->import($media);
-//    $import->import($neww);
 
-    //    prevent outputting
+    //prevent outputting
     ob_end_clean();
-//    $import->import($all);
 }
+
 //var_dump(get_current_blog_id());
 function siteAndUserCreation($user_id, $provider) {
     delete_user_option( $user_id, 'capabilities' );
@@ -546,11 +549,12 @@ function siteAndUserCreation($user_id, $provider) {
 add_action('nsl_register_new_user', 'siteAndUserCreation', 10, 2);
 
 //delete_option(get_current_blog_id(). '_check_media_files') ;
-//check if files are copied. I do'nt know why but it's not working from site migration function
+//check if media files are copied. I don't know why but it's not working from site migration function
 add_action( 'init', 'check_media_files' );
 function check_media_files() {
     $option_name = get_current_blog_id() . '_check_media_files';
     if ( !get_option($option_name) ) {
+//        TODO: get the path via vars
         recurse_copy('/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/2020/', '/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/sites/' . get_current_blog_id() . '/2020');
         update_option($option_name, 'true');
     }
@@ -563,22 +567,6 @@ function my_class_names($classes) {
     }
     return $classes;
 }
-
-
-
-
-function mytheme_add_cpt_support() {
-        $cpt_support = [ 'page', 'post', 'agent', 'property' ];
-        update_option( 'elementor_cpt_support', $cpt_support );
-
-
-}
-//add_action( 'init', 'mytheme_add_cpt_support' );
-
-
-
-
-
 
 
 
