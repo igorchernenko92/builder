@@ -529,6 +529,14 @@ function siteAndUserCreation($user_id, $provider) {
     import_data($blog_id);
     update_elementor_locations();
 
+    $homepage = get_page_by_title( 'Home page 1' );
+    if ( $homepage ) {
+        update_option( 'page_on_front', $homepage->ID );
+        update_option( 'show_on_front', 'page' );
+    }
+
+    $cpt_support = [ 'page', 'post', 'agent', 'property' ];
+    update_option( 'elementor_cpt_support', $cpt_support );
 
     add_filter($provider->getId() . '_register_redirect_url', function () use ($location) {
         return $location;
@@ -555,6 +563,21 @@ function my_class_names($classes) {
     }
     return $classes;
 }
+
+
+
+
+function mytheme_add_cpt_support() {
+        $cpt_support = [ 'page', 'post', 'agent', 'property' ];
+        update_option( 'elementor_cpt_support', $cpt_support );
+
+
+}
+//add_action( 'init', 'mytheme_add_cpt_support' );
+
+
+
+
 
 
 
