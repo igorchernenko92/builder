@@ -442,6 +442,25 @@ function copy_media($blog_id, $blog_url, $user_id) {
 //echo $i;
 }
 
+//add_action( 'init', 'update_media_gallery_for_properties' );
+function update_media_gallery_for_properties() {
+    $query = new \WP_Query( [
+        'posts_per_page' => -1,
+        'post_type' => 'property',
+    ] );
+    $array_with_media_id = [];
+
+//    fill array with proper id's
+    for ( $i = 45; $i < 111; $i++ ) {
+        array_push($array_with_media_id, $i);
+    }
+//  set array of images id to property
+    foreach ( $query->posts as $post ) {
+        update_field( 'property_gallery', array_slice($array_with_media_id,0, 5), $post->ID );
+        array_splice($array_with_media_id,0, 5);
+    }
+}
+
 
 function import_data($blog_id) {
     switch_to_blog( $blog_id );
@@ -519,7 +538,7 @@ function siteAndUserCreation($user_id, $provider) {
 
     $cpt_support = [ 'page', 'post', 'agent', 'property' ];
     update_option( 'elementor_cpt_support', $cpt_support );
-//    update_elementor_locations();
+    update_media_gallery_for_properties();
 
     add_filter($provider->getId() . '_register_redirect_url', function () use ($location) {
         return $location;
@@ -537,7 +556,7 @@ function check_media_files() {
 //        TODO: get the path via vars
         recurse_copy('/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/2020/', '/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/sites/' . get_current_blog_id() . '/2020');
         update_option($option_name, 'true');
-        update_elementor_locations();
+        update_elementor_locations(); // update it once after import
     }
 }
 
@@ -548,9 +567,3 @@ function my_class_names($classes) {
     }
     return $classes;
 }
-
-
-
-
-
-
