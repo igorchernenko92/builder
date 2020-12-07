@@ -180,49 +180,39 @@ if ( ! function_exists( 'hello_elementor_body_open' ) ) {
 
 
 
-//TODO: make function fire once
+
 function update_elementor_locations() {
-
-//    $condition_general = ['include/general'];
-//    update_metadata( 'post', 83, '_elementor_conditions', $condition_general );
-
     $all_conditions = [];
     $query = new \WP_Query( [
         'posts_per_page' => -1,
         'post_type' => 'elementor_library',
-//        'fields' => 'ids',
         'meta_key' => '_elementor_conditions',
     ] );
 
     foreach ( $query->posts as $post ) {
         $post_id = $post->ID;
-//        var_dump($post->post_title);
-//        echo '<br><br>';
         $document = \Elementor\Plugin::instance()->documents->get($post_id);
-//         check for error if class is non not_supported
+//         check for error if class is not not_supported
         if ($document instanceof Elementor\Modules\Library\Documents\Not_Supported) {
             continue;
         }
         if ( $document ) {
             $conditions = $document->get_meta( '_elementor_conditions' );
-
             $location = $document->get_location();
+
             if ( $location ) {
-                if ( ! isset( $conditions[ $location ] ) ) {
-                    $all_conditions[ $location ] = [];
-                }
                 $all_conditions[ $location ][ $document->get_main_id() ] = $conditions;
             }
         }
     }
 
-
-
     update_option( 'elementor_pro_theme_builder_conditions', $all_conditions );
-
 }
 
 //add_action( 'init', 'update_elementor_locations', 10 );
+
+
+
 
 
 function my_acf_init() {
@@ -363,17 +353,6 @@ require get_template_directory() . '/acfe-php/group_5efc7f9a053c7.php';
 require get_template_directory() . '/acfe-php/group_5efdb7d7d47d7.php';
 require get_template_directory() . '/acfe-php/group_5f11cc6d60bd4.php';
 //require get_template_directory() . '/includes/acfFields.php';
-
-
-//$creds = array();
-//$creds['user_login'] = 'email+1217@example.com';
-//$creds['user_password'] = 'fake-password';
-////$creds['remember'] = true;
-//wp_signon($creds);
-
-//add_filter( 'http_request_host_is_external', '__return_true' );
-
-
 
 
 
@@ -530,7 +509,7 @@ function siteAndUserCreation($user_id, $provider) {
 
     copy_media($blog_id, $newdomain, $user_id);
     import_data($blog_id);
-    update_elementor_locations();
+
 
     $homepage = get_page_by_title( 'Home page 1' );
     if ( $homepage ) {
@@ -540,6 +519,7 @@ function siteAndUserCreation($user_id, $provider) {
 
     $cpt_support = [ 'page', 'post', 'agent', 'property' ];
     update_option( 'elementor_cpt_support', $cpt_support );
+//    update_elementor_locations();
 
     add_filter($provider->getId() . '_register_redirect_url', function () use ($location) {
         return $location;
@@ -557,6 +537,7 @@ function check_media_files() {
 //        TODO: get the path via vars
         recurse_copy('/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/2020/', '/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/sites/' . get_current_blog_id() . '/2020');
         update_option($option_name, 'true');
+        update_elementor_locations();
     }
 }
 
