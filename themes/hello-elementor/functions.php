@@ -510,20 +510,10 @@ function siteAndUserCreation($user_id, $provider) {
             require_once $class_wp_importer;
     }
 
-
-    /** WXR_Parser class */
     require_once dirname( __FILE__ ) . '/parsers/class-wxr-parser.php';
-
-    /** WXR_Parser_SimpleXML class */
     require_once dirname( __FILE__ ) . '/parsers/class-wxr-parser-simplexml.php';
-
-    /** WXR_Parser_XML class */
     require_once dirname( __FILE__ ) . '/parsers/class-wxr-parser-xml.php';
-
-    /** WXR_Parser_Regex class */
     require_once dirname( __FILE__ ) . '/parsers/class-wxr-parser-regex.php';
-
-    /** WP_Import class */
     require_once dirname( __FILE__ ) . '/class-wp-import.php';
 
     copy_media($blog_id, $newdomain, $user_id);
@@ -567,3 +557,19 @@ function my_class_names($classes) {
     }
     return $classes;
 }
+
+
+function bleye_add_responsive_column_order( $element, $args ) {
+    $element->add_responsive_control(
+        'responsive_column_order',
+        [
+            'label' => __( 'Responsive Column Order', 'bleye-elementor-extras' ),
+            'type' => \Elementor\Controls_Manager::NUMBER,
+            'separator' => 'before',
+            'selectors' => [
+                '{{WRAPPER}}' => '-webkit-order: {{VALUE}}; -ms-flex-order: {{VALUE}}; order: {{VALUE}};',
+            ],
+        ]
+    );
+}
+add_action( 'elementor/element/column/layout/before_section_end', 'bleye_add_responsive_column_order', 10, 2 );
