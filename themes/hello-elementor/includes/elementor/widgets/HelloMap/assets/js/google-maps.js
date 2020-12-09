@@ -268,7 +268,7 @@ var isAdminBar = false,
                 if (elementSettingsMap.markerclustererControl) {
                     // Add a marker clusterer to manage the markers.
                     var markerCluster = new MarkerClusterer(map, markers,
-                            {imagePath: '/wp-content/plugins/dynamic-content-for-elementor/assets/lib/gmap/markerclusterer/img/m'});
+                            {imagePath: '/wp-content/themes/hello-elementor/assets/images/m'});
                 }
 
             // } else {
