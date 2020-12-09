@@ -453,15 +453,6 @@ ol {
         display: block;
     }
 }
-
-@media(max-width: 789px) {
-    .hl-gallery-2 .hl-gallery__list-item {
-        display: block !important;
-        padding: 0 !important;
-        max-width: 100% !important;
-        margin-bottom: 0;
-    }
-}
 /* Skin 2 END */
 
 
