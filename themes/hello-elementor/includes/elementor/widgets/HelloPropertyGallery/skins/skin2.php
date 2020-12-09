@@ -34,10 +34,15 @@ class Hello_Gallery_Skin2 extends Hello_Gallery_Skin_Base {
       $open_lightbox = $this->get_instance_value( 'open_lightbox' );
       $gallery = get_field('property_gallery', get_the_ID() );
       $unique_id_gallery = uniqid();
+      $image_size = 'large'; // need to load first image bigger
       ?>
         <div class="swiper-container">
           <div class="hl-gallery__list swiper-wrapper">
               <?php foreach ($gallery as $index => $attachment) {
+
+                  if ($index !== array_key_first($gallery)) {
+                      $image_size = 'medium_large';
+                  }
                   $link_key = 'link_' . $index;
                   $link = $this->get_link_url( $attachment );
                   $this->parent->add_lightbox_data_attributes( $link_key, $attachment['id'], $open_lightbox, $this->get_id() . $unique_id_gallery );
@@ -57,7 +62,7 @@ class Hello_Gallery_Skin2 extends Hello_Gallery_Skin_Base {
 
                       <img
                         class="hl-gallery__image"
-                        src="<?php echo $attachment['sizes']['medium_large']; ?>"
+                        src="<?php echo $attachment['sizes'][$image_size]; ?>"
                         title="<?php echo $attachment['title']; ?>"
                         alt="<?php echo $attachment['alt']; ?>"
                       >

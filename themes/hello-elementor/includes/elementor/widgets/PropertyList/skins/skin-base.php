@@ -1057,7 +1057,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
         $attr = array(
             'class' => "hl-listing-card__picture-img img-responsive",
         );
-        $thumbnail = get_the_post_thumbnail( get_the_ID(), 'large', $attr );
+        $thumbnail = get_the_post_thumbnail( get_the_ID(), 'medium', $attr );
 
         ?>
 

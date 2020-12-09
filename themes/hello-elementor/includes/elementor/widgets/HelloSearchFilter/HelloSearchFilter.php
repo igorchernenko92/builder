@@ -13,17 +13,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-// include_once ( 'property-base.php');
-//include_once ( 'skins/skin-base.php');
-//include_once ( 'skins/skin1.php');
-//include_once ( 'skins/skin2.php');
-
 class HelloSearchFilter extends Base_Widget {
 	public function __construct( $data = [], $args = null ) {
 	    parent::__construct( $data, $args );
 
 //		wp_enqueue_style( 'ut-datepicker-css', get_template_directory_uri() . '/includes/elementor/widgets/assets/css/datepicker.css', array(), date("Ymd"), false );
 //		wp_enqueue_script( 'ut-datepicker-js', get_template_directory_uri() . '/includes/elementor/widgets/assets/js/datepicker.js', array(), date("Ymd"), false );
+
 
         wp_enqueue_script('hello-search-script', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloSearchFilter/assets/js/base-script.js', '', '1', true);
         wp_enqueue_style('hello-search-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloSearchFilter/assets/css/base-main.css', '', 1);
@@ -33,6 +29,7 @@ class HelloSearchFilter extends Base_Widget {
 
         wp_enqueue_script( 'hello-search-multiple',  get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloSearchFilter/assets/js/multiple-select.min.js', '', '1', true );
         wp_enqueue_style( 'hello-search-multiple-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloSearchFilter/assets/css/multiple-select.min.css');
+
 
 	}
 

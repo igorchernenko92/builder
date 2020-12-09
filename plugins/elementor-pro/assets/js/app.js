@@ -1,4 +1,4 @@
-/*! elementor-pro - v3.0.3 - 02-09-2020 */
+/*! elementor-pro - v3.0.8 - 26-11-2020 */
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -7297,6 +7297,7 @@ var SiteTemplateHeader = function SiteTemplateHeader(props) {
     active: props.isActive
   }), /*#__PURE__*/_react.default.createElement(_appUi.Heading, {
     tag: "h1",
+    title: title,
     variant: "text-sm",
     className: "eps-card__headline"
   }, title), props.extended && /*#__PURE__*/_react.default.createElement(MetaData, null), props.extended && /*#__PURE__*/_react.default.createElement(ActionButtons, null));
@@ -8763,7 +8764,7 @@ function ConditionsRows() {
     onClick: create,
     port: true
   }))), /*#__PURE__*/_react.default.createElement("div", {
-    className: "e-site-editor-conditions__save-button-container"
+    className: "e-site-editor-conditions__footer"
   }, /*#__PURE__*/_react.default.createElement(_appUi.Button, {
     variant: "contained",
     color: "primary",

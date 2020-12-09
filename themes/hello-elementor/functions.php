@@ -29,163 +29,139 @@ if ( ! did_action( 'elementor/loaded' ) ) {
 use ElementorPro\Modules\ThemeBuilder\Documents\Theme_Document;
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+    exit; // Exit if accessed directly.
 }
 
 define( 'HELLO_ELEMENTOR_VERSION', '2.2.0' );
 
 if ( ! isset( $content_width ) ) {
-	$content_width = 800; // Pixels.
+    $content_width = 800; // Pixels.
 }
 add_filter( 'big_image_size_threshold', '__return_false' );
 if ( ! function_exists( 'hello_elementor_setup' ) ) {
-	/**
-	 * Set up theme support.
-	 *
-	 * @return void
-	 */
-	function hello_elementor_setup() {
-		$hook_result = apply_filters_deprecated( 'elementor_hello_theme_load_textdomain', [ true ], '2.0', 'hello_elementor_load_textdomain' );
-		if ( apply_filters( 'hello_elementor_load_textdomain', $hook_result ) ) {
-			load_theme_textdomain( 'hello-elementor', get_template_directory() . '/languages' );
-		}
+    /**
+     * Set up theme support.
+     *
+     * @return void
+     */
+    function hello_elementor_setup() {
+        $hook_result = apply_filters_deprecated( 'elementor_hello_theme_load_textdomain', [ true ], '2.0', 'hello_elementor_load_textdomain' );
+        if ( apply_filters( 'hello_elementor_load_textdomain', $hook_result ) ) {
+            load_theme_textdomain( 'hello-elementor', get_template_directory() . '/languages' );
+        }
 
-		$hook_result = apply_filters_deprecated( 'elementor_hello_theme_register_menus', [ true ], '2.0', 'hello_elementor_register_menus' );
-		if ( apply_filters( 'hello_elementor_register_menus', $hook_result ) ) {
-			register_nav_menus( array( 'menu-1' => __( 'Primary', 'hello-elementor' ) ) );
-		}
+        $hook_result = apply_filters_deprecated( 'elementor_hello_theme_register_menus', [ true ], '2.0', 'hello_elementor_register_menus' );
+        if ( apply_filters( 'hello_elementor_register_menus', $hook_result ) ) {
+            register_nav_menus( array( 'menu-1' => __( 'Primary', 'hello-elementor' ) ) );
+        }
 
-		$hook_result = apply_filters_deprecated( 'elementor_hello_theme_add_theme_support', [ true ], '2.0', 'hello_elementor_add_theme_support' );
-		if ( apply_filters( 'hello_elementor_add_theme_support', $hook_result ) ) {
-			add_theme_support( 'post-thumbnails' );
-			add_theme_support( 'automatic-feed-links' );
-			add_theme_support( 'title-tag' );
-			add_theme_support(
-				'html5',
-				array(
-					'search-form',
-					'comment-form',
-					'comment-list',
-					'gallery',
-					'caption',
-				)
-			);
-			add_theme_support(
-				'custom-logo',
-				array(
-					'height'      => 100,
-					'width'       => 350,
-					'flex-height' => true,
-					'flex-width'  => true,
-				)
-			);
+        $hook_result = apply_filters_deprecated( 'elementor_hello_theme_add_theme_support', [ true ], '2.0', 'hello_elementor_add_theme_support' );
+        if ( apply_filters( 'hello_elementor_add_theme_support', $hook_result ) ) {
+            add_theme_support( 'post-thumbnails' );
+            add_theme_support( 'automatic-feed-links' );
+            add_theme_support( 'title-tag' );
+            add_theme_support(
+                'html5',
+                array(
+                    'search-form',
+                    'comment-form',
+                    'comment-list',
+                    'gallery',
+                    'caption',
+                )
+            );
+            add_theme_support(
+                'custom-logo',
+                array(
+                    'height'      => 100,
+                    'width'       => 350,
+                    'flex-height' => true,
+                    'flex-width'  => true,
+                )
+            );
 
-			/*
-			 * Editor Style.
-			 */
-			add_editor_style( 'editor-style.css' );
-
-			/*
-			 * WooCommerce.
-			 */
-			$hook_result = apply_filters_deprecated( 'elementor_hello_theme_add_woocommerce_support', [ true ], '2.0', 'hello_elementor_add_woocommerce_support' );
-			if ( apply_filters( 'hello_elementor_add_woocommerce_support', $hook_result ) ) {
-				// WooCommerce in general.
-				add_theme_support( 'woocommerce' );
-				// Enabling WooCommerce product gallery features (are off by default since WC 3.0.0).
-				// zoom.
-				add_theme_support( 'wc-product-gallery-zoom' );
-				// lightbox.
-				add_theme_support( 'wc-product-gallery-lightbox' );
-				// swipe.
-				add_theme_support( 'wc-product-gallery-slider' );
-			}
-		}
-	}
+            /*
+             * Editor Style.
+             */
+            add_editor_style( 'editor-style.css' );
+        }
+    }
 }
 add_action( 'after_setup_theme', 'hello_elementor_setup' );
 
 if ( ! function_exists( 'hello_elementor_scripts_styles' ) ) {
-	/**
-	 * Theme Scripts & Styles.
-	 *
-	 * @return void
-	 */
-	function hello_elementor_scripts_styles() {
-		$enqueue_basic_style = apply_filters_deprecated( 'elementor_hello_theme_enqueue_style', [ true ], '2.0', 'hello_elementor_enqueue_style' );
-		$min_suffix          = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+    /**
+     * Theme Scripts & Styles.
+     *
+     * @return void
+     */
+    function hello_elementor_scripts_styles() {
+        $enqueue_basic_style = apply_filters_deprecated( 'elementor_hello_theme_enqueue_style', [ true ], '2.0', 'hello_elementor_enqueue_style' );
+        $min_suffix          = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-		if ( apply_filters( 'hello_elementor_enqueue_style', $enqueue_basic_style ) ) {
-			wp_enqueue_style(
-				'hello-elementor',
-				get_template_directory_uri() . '/style' . $min_suffix . '.css',
-				[],
-				HELLO_ELEMENTOR_VERSION
-			);
-		}
-
-		if ( apply_filters( 'hello_elementor_enqueue_theme_style', true ) ) {
-			wp_enqueue_style(
-				'hello-elementor-theme-style',
-				get_template_directory_uri() . '/theme' . $min_suffix . '.css',
-				[],
-				HELLO_ELEMENTOR_VERSION
-			);
-		}
-	}
+        if ( apply_filters( 'hello_elementor_enqueue_style', $enqueue_basic_style ) ) {
+            wp_enqueue_style(
+                'hello-elementor',
+                get_template_directory_uri() . '/style' . $min_suffix . '.css',
+                [],
+                HELLO_ELEMENTOR_VERSION
+            );
+        }
+        wp_enqueue_script('jquery');
+    }
 }
 add_action( 'wp_enqueue_scripts', 'hello_elementor_scripts_styles' );
 
 if ( ! function_exists( 'hello_elementor_register_elementor_locations' ) ) {
-	/**
-	 * Register Elementor Locations.
-	 *
-	 * @param ElementorPro\Modules\ThemeBuilder\Classes\Locations_Manager $elementor_theme_manager theme manager.
-	 *
-	 * @return void
-	 */
-	function hello_elementor_register_elementor_locations( $elementor_theme_manager ) {
-		$hook_result = apply_filters_deprecated( 'elementor_hello_theme_register_elementor_locations', [ true ], '2.0', 'hello_elementor_register_elementor_locations' );
-		if ( apply_filters( 'hello_elementor_register_elementor_locations', $hook_result ) ) {
-			$elementor_theme_manager->register_all_core_location();
-		}
-	}
+    /**
+     * Register Elementor Locations.
+     *
+     * @param ElementorPro\Modules\ThemeBuilder\Classes\Locations_Manager $elementor_theme_manager theme manager.
+     *
+     * @return void
+     */
+    function hello_elementor_register_elementor_locations( $elementor_theme_manager ) {
+        $hook_result = apply_filters_deprecated( 'elementor_hello_theme_register_elementor_locations', [ true ], '2.0', 'hello_elementor_register_elementor_locations' );
+        if ( apply_filters( 'hello_elementor_register_elementor_locations', $hook_result ) ) {
+            $elementor_theme_manager->register_all_core_location();
+        }
+    }
 }
 add_action( 'elementor/theme/register_locations', 'hello_elementor_register_elementor_locations' );
 
 if ( ! function_exists( 'hello_elementor_content_width' ) ) {
-	/**
-	 * Set default content width.
-	 *
-	 * @return void
-	 */
-	function hello_elementor_content_width() {
-		$GLOBALS['content_width'] = apply_filters( 'hello_elementor_content_width', 800 );
-	}
+    /**
+     * Set default content width.
+     *
+     * @return void
+     */
+    function hello_elementor_content_width() {
+        $GLOBALS['content_width'] = apply_filters( 'hello_elementor_content_width', 800 );
+    }
 }
 add_action( 'after_setup_theme', 'hello_elementor_content_width', 0 );
 
 if ( is_admin() ) {
-	require get_template_directory() . '/includes/admin-functions.php';
+    require get_template_directory() . '/includes/admin-functions.php';
 }
 
 if ( ! function_exists( 'hello_elementor_check_hide_title' ) ) {
-	/**
-	 * Check hide title.
-	 *
-	 * @param bool $val default value.
-	 *
-	 * @return bool
-	 */
-	function hello_elementor_check_hide_title( $val ) {
-		if ( defined( 'ELEMENTOR_VERSION' ) ) {
-			$current_doc = \Elementor\Plugin::instance()->documents->get( get_the_ID() );
-			if ( $current_doc && 'yes' === $current_doc->get_settings( 'hide_title' ) ) {
-				$val = false;
-			}
-		}
-		return $val;
-	}
+    /**
+     * Check hide title.
+     *
+     * @param bool $val default value.
+     *
+     * @return bool
+     */
+    function hello_elementor_check_hide_title( $val ) {
+        if ( defined( 'ELEMENTOR_VERSION' ) ) {
+            $current_doc = \Elementor\Plugin::instance()->documents->get( get_the_ID() );
+            if ( $current_doc && 'yes' === $current_doc->get_settings( 'hide_title' ) ) {
+                $val = false;
+            }
+        }
+        return $val;
+    }
 }
 add_filter( 'hello_elementor_page_title', 'hello_elementor_check_hide_title' );
 
@@ -193,57 +169,50 @@ add_filter( 'hello_elementor_page_title', 'hello_elementor_check_hide_title' );
  * Wrapper function to deal with backwards compatibility.
  */
 if ( ! function_exists( 'hello_elementor_body_open' ) ) {
-	function hello_elementor_body_open() {
-		if ( function_exists( 'wp_body_open' ) ) {
-			wp_body_open();
-		} else {
-			do_action( 'wp_body_open' );
-		}
-	}
+    function hello_elementor_body_open() {
+        if ( function_exists( 'wp_body_open' ) ) {
+            wp_body_open();
+        } else {
+            do_action( 'wp_body_open' );
+        }
+    }
 }
 
 
 
-//TODO: make function fire once
-function register_widgets() {
 
-//    $condition_general = ['include/general'];
-//    update_metadata( 'post', 83, '_elementor_conditions', $condition_general );
-
+function update_elementor_locations() {
     $all_conditions = [];
     $query = new \WP_Query( [
         'posts_per_page' => -1,
         'post_type' => 'elementor_library',
-//        'fields' => 'ids',
         'meta_key' => '_elementor_conditions',
     ] );
 
     foreach ( $query->posts as $post ) {
         $post_id = $post->ID;
-
         $document = \Elementor\Plugin::instance()->documents->get($post_id);
-//         check for error if class is non not_supported
+//         check for error if class is not not_supported
         if ($document instanceof Elementor\Modules\Library\Documents\Not_Supported) {
             continue;
         }
-            if ( $document ) {
+        if ( $document ) {
             $conditions = $document->get_meta( '_elementor_conditions' );
-
             $location = $document->get_location();
+
             if ( $location ) {
-                if ( ! isset( $conditions[ $location ] ) ) {
-                    $all_conditions[ $location ] = [];
-                }
                 $all_conditions[ $location ][ $document->get_main_id() ] = $conditions;
             }
         }
     }
 
     update_option( 'elementor_pro_theme_builder_conditions', $all_conditions );
-
 }
 
-//add_action( 'init', 'register_widgets', 10 );
+//add_action( 'init', 'update_elementor_locations', 10 );
+
+
+
 
 
 function my_acf_init() {
@@ -386,40 +355,9 @@ require get_template_directory() . '/acfe-php/group_5f11cc6d60bd4.php';
 //require get_template_directory() . '/includes/acfFields.php';
 
 
-//$creds = array();
-//$creds['user_login'] = 'email+1217@example.com';
-//$creds['user_password'] = 'fake-password';
-////$creds['remember'] = true;
-//wp_signon($creds);
 
-//add_filter( 'http_request_host_is_external', '__return_true' );
-
-//add_filter( 'wp_image_editors', 'change_graphic_lib' );
-
-//function change_graphic_lib($array) {
-//    return array( 'WP_Image_Editor_GD', 'WP_Image_Editor_Imagick' );
-//}
-
-
-
-
-add_action( 'init', 'czc_disable_extra_image_sizes' );
-add_filter( 'image_resize_dimensions', 'czc_disable_crop', 10, 6 );
-function czc_disable_crop( $enable, $orig_w, $orig_h, $dest_w, $dest_h, $crop )
-{
-    // Instantly disable this filter after the first run
-    // remove_filter( current_filter(), __FUNCTION__ );
-    // return image_resize_dimensions( $orig_w, $orig_h, $dest_w, $dest_h, false );
-    return false;
-}
-function czc_disable_extra_image_sizes()
-{
-    foreach (get_intermediate_image_sizes() as $size) {
-        remove_image_size($size);
-    }
-}
-
-
+//Have the option to remove delay on drop-down menu
+//https://github.com/elementor/elementor/issues/9400
 add_action( 'wp_footer', function () { ?>
     <script>
         jQuery(document).ready(function($) {
@@ -427,6 +365,7 @@ add_action( 'wp_footer', function () { ?>
         });
     </script>
 <?php } );
+
 
 
 //global $wpdb;
@@ -447,3 +386,184 @@ add_action( 'wp_footer', function () { ?>
 
 //copy( wp_upload_dir()['basedir'] . '/elementor/css/post-2889.css',  wp_upload_dir()['basedir'] . '/sites/200/elementor/css/post-2889.css');
 
+
+
+function recurse_copy($src,$dst) {
+    $dir = opendir($src);
+    @mkdir($dst);
+    while(false !== ( $file = readdir($dir)) ) {
+        if (( $file != '.' ) && ( $file != '..' )) {
+            if ( is_dir($src . '/' . $file) ) {
+                recurse_copy($src . '/' . $file,$dst . '/' . $file);
+            }
+            else {
+                copy($src . '/' . $file,$dst . '/' . $file);
+            }
+        }
+    }
+    closedir($dir);
+}
+
+
+//add_action( 'init', 'copy_media' );
+function copy_media($blog_id, $blog_url, $user_id) {
+    switch_to_blog(1);
+
+    $args = array('post_type' => 'attachment','numberposts' => -1,'post_status' => null);
+    $attachments = get_posts($args);
+//    restore_current_blog();
+    switch_to_blog($blog_id);
+
+    if($attachments) {
+        foreach($attachments as $attachment) {
+
+            switch_to_blog(1);
+
+            $post = get_post($attachment->ID, ARRAY_A);
+            $metadata = wp_get_attachment_metadata($attachment->ID);
+            $attached_file = get_post_meta($attachment->ID, '_wp_attached_file', true);
+
+            switch_to_blog($blog_id);
+            if ( ($post['post_parent'] != 0) && ($metadata != '') ) {
+                unset($post['ID']);
+                $post['guid'] = str_replace("buildable.pro", $blog_url, $post['guid']);
+                $post['post_author'] = $user_id;
+
+                $post_id = wp_insert_post($post);
+                update_post_meta( $post_id, '_wp_attachment_metadata', $metadata );
+                update_post_meta( $post_id, '_wp_attached_file', $attached_file );
+
+//                var_dump($post);
+//            var_dump($metadata);
+//            echo '<br><br>';
+            }
+        }
+    }
+//echo $i;
+}
+
+//add_action( 'init', 'update_media_gallery_for_properties' );
+function update_media_gallery_for_properties() {
+    $query = new \WP_Query( [
+        'posts_per_page' => -1,
+        'post_type' => 'property',
+    ] );
+    $array_with_media_id = [];
+
+//    fill array with proper id's
+    for ( $i = 45; $i < 111; $i++ ) {
+        array_push($array_with_media_id, $i);
+    }
+//  set array of images id to property
+    foreach ( $query->posts as $post ) {
+        update_field( 'property_gallery', array_slice($array_with_media_id,0, 5), $post->ID );
+        array_splice($array_with_media_id,0, 5);
+    }
+}
+
+
+function import_data($blog_id) {
+    switch_to_blog( $blog_id );
+
+    $import = new WP_Import_Custom();
+//    $import->fetch_attachments = true;
+
+    $templates = trailingslashit( WP_CONTENT_DIR ) . 'uploads/templates.xml';
+    $pages = trailingslashit( WP_CONTENT_DIR ) . 'uploads/pages.xml';
+    $property = trailingslashit( WP_CONTENT_DIR ) . 'uploads/properties.xml';
+    $agent = trailingslashit( WP_CONTENT_DIR ) . 'uploads/agents.xml';
+    $menu = trailingslashit( WP_CONTENT_DIR ) . 'uploads/menu.xml';
+    $media = trailingslashit( WP_CONTENT_DIR ) . 'uploads/media.xml';
+
+//  prevent outputting
+    ob_start();
+    $import->import($templates);
+    $import->import($pages);
+    $import->import($property);
+    $import->import($agent);
+    $import->import($menu);
+    $import->import($media);
+
+    //prevent outputting
+    ob_end_clean();
+}
+
+//var_dump(get_current_blog_id());
+function siteAndUserCreation($user_id, $provider) {
+    delete_user_option( $user_id, 'capabilities' );
+    delete_user_option( $user_id, 'user_level' );
+    do_action( 'wpmu_new_user', $user_id );
+
+
+    $main_site = 'buildable.pro';
+    $bytes = random_bytes(3); // need for creating unique site name
+    $randName = bin2hex($bytes);     // need for creating unique site name
+    $newdomain = "{$randName}.$main_site"; // create unique domain
+
+    $blog_id = wpmu_create_blog( $newdomain, '/', $randName, $user_id);
+    $location = get_site_url( $blog_id, '', '' );  // send link to front
+    switch_to_blog( $blog_id );
+
+    if ( ! class_exists( 'WP_Importer' ) ) {
+        $class_wp_importer = ABSPATH . 'wp-admin/includes/class-wp-importer.php';
+        if ( file_exists( $class_wp_importer ) )
+            require_once $class_wp_importer;
+    }
+
+
+    /** WXR_Parser class */
+    require_once dirname( __FILE__ ) . '/parsers/class-wxr-parser.php';
+
+    /** WXR_Parser_SimpleXML class */
+    require_once dirname( __FILE__ ) . '/parsers/class-wxr-parser-simplexml.php';
+
+    /** WXR_Parser_XML class */
+    require_once dirname( __FILE__ ) . '/parsers/class-wxr-parser-xml.php';
+
+    /** WXR_Parser_Regex class */
+    require_once dirname( __FILE__ ) . '/parsers/class-wxr-parser-regex.php';
+
+    /** WP_Import class */
+    require_once dirname( __FILE__ ) . '/class-wp-import.php';
+
+    copy_media($blog_id, $newdomain, $user_id);
+    import_data($blog_id);
+
+
+    $homepage = get_page_by_title( 'Home page 1' );
+    if ( $homepage ) {
+        update_option( 'page_on_front', $homepage->ID );
+        update_option( 'show_on_front', 'page' );
+    }
+
+    $cpt_support = [ 'page', 'post', 'agent', 'property' ];
+    update_option( 'elementor_cpt_support', $cpt_support );
+    update_media_gallery_for_properties();
+
+    add_filter($provider->getId() . '_register_redirect_url', function () use ($location) {
+        return $location;
+    });
+
+}
+add_action('nsl_register_new_user', 'siteAndUserCreation', 10, 2);
+
+//delete_option(get_current_blog_id(). '_check_media_files') ;
+//check if media files are copied. I don't know why but it's not working from site migration function
+add_action( 'init', 'check_media_files' );
+function check_media_files() {
+    $option_name = get_current_blog_id() . '_check_media_files';
+    if ( !get_option($option_name) ) {
+//        TODO: get the path via vars
+        recurse_copy('/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/2020/', '/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/sites/' . get_current_blog_id() . '/2020');
+        update_option($option_name, 'true');
+        update_elementor_locations(); // update it once after import
+    }
+}
+
+add_filter('body_class','my_class_names');
+function my_class_names($classes) {
+    if (is_user_logged_in() && !is_super_admin()) {
+        $classes[] = 'is-not-super-admin';
+    }
+    return $classes;
+}

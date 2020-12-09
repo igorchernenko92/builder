@@ -164,18 +164,18 @@ select.select-multiselect {
     color: #777777 !important;
 }
 
-.form-control,
-input[type=date],
-input[type=email],
-input[type=number],
-input[type=password],
-input[type=search],
-input[type=tel],
-input[type=text],
-input[type=url],
-select,
+.home-section .form-control,
+.home-section input[type=date],
+.home-section input[type=email],
+.home-section input[type=number],
+.home-section input[type=password],
+.home-section input[type=search],
+.home-section input[type=tel],
+.home-section input[type=text],
+.home-section input[type=url],
+.home-section select,
 .select2.select2-container,
-textarea {
+.home-section textarea {
     padding: 6px 16px;
     border-radius: 4px;
     height: 42px;
