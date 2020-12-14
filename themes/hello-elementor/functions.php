@@ -558,8 +558,8 @@ function my_class_names($classes) {
     return $classes;
 }
 
-
-function bleye_add_responsive_column_order( $element, $args ) {
+add_action( 'elementor/element/column/layout/before_section_end', 'add_responsive_column_order', 10, 2 );
+function add_responsive_column_order( $element, $args ) {
     $element->add_responsive_control(
         'responsive_column_order',
         [
@@ -572,4 +572,66 @@ function bleye_add_responsive_column_order( $element, $args ) {
         ]
     );
 }
-add_action( 'elementor/element/column/layout/before_section_end', 'bleye_add_responsive_column_order', 10, 2 );
+
+
+
+
+add_filter('manage_property_posts_columns', 'property_table_head');
+function property_table_head( $defaults ) {
+    unset($defaults['title']);
+    unset($defaults['tags']);
+    unset($defaults['date']);
+    $defaults['tax']  = 'Status';
+    $defaults['id']  = 'ID';
+    $defaults['image']  = 'Image';
+    $defaults['title'] = 'Title';
+    $defaults['price']  = 'Price';
+    $defaults['agent']  = 'Agent';
+    $defaults['date'] = 'Posted';
+
+    $output_css = '<style type="text/css">
+        .manage-column.column-image { width: 8% }
+        .manage-column.column-tax { width: 11% }
+        .manage-column.column-title { width: 25% }
+        .manage-column.column-id { width: 10% }
+    </style>';
+    echo $output_css;
+
+    return $defaults;
+}
+
+add_action( 'manage_property_posts_custom_column', 'bs_event_table_content', 10, 2 );
+
+function bs_event_table_content( $column_name, $post_id ) {
+    if ($column_name == 'image') {
+        echo '<a href="' . get_edit_post_link( $post_id ) . '">' . get_the_post_thumbnail( $post_id, [75, 75] ) . '</a>';
+    }
+
+    if ($column_name == 'price') {
+        echo builder_get_property_price($post_id);
+    }
+
+    if ($column_name == 'tax') {
+        $terms = get_the_terms( $post_id, 'status' );
+        foreach($terms as $term) {
+            echo '<span style="background-color: ' . get_field('status_color', $term) . '; padding: 6px 17px; color: #fff;border-radius: 3px;font-size: 12px;">' . $term->name . '</span>';
+        }
+    }
+
+    if ($column_name == 'id') {
+        echo get_field('property_id', $post_id );
+    }
+
+    if ($column_name == 'agent') {
+        $agent = get_field('property_agent', $post_id )[0];
+
+//        var_dump($agent->ID);
+//        var_dump($agent->post_title);
+
+        echo '<a href="' . get_edit_post_link( $agent->ID ) . '">'  . $agent->post_title . '</a>';
+    }
+
+}
+
+
+

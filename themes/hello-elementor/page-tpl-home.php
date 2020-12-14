@@ -1,20 +1,20 @@
 <?php  get_header(); ?>
 
 
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-
-<meta name="google-signin-client_id" content="390155665774-rblk9ocv18mt5npcj79fpufqt5ni5g95.apps.googleusercontent.com">
-
-<div class="g-signin2" data-onsuccess="onSignIn"></div>
-
-
-<div class="modal-ajax">
-    <div class="modal-ajax-text">
-        <div class="loadingio-spinner-chunk-dg4okpfq5gf"><div class="ldio-ycybe7qwk3">
-                <div><div><div></div><div></div><div></div><div></div></div></div>
-            </div></div>
-    </div>
-</div>
+<!--<script src="https://apis.google.com/js/platform.js" async defer></script>-->
+<!---->
+<!--<meta name="google-signin-client_id" content="390155665774-rblk9ocv18mt5npcj79fpufqt5ni5g95.apps.googleusercontent.com">-->
+<!---->
+<!--<div class="g-signin2" data-onsuccess="onSignIn"></div>-->
+<!---->
+<!---->
+<!--<div class="modal-ajax">-->
+<!--    <div class="modal-ajax-text">-->
+<!--        <div class="loadingio-spinner-chunk-dg4okpfq5gf"><div class="ldio-ycybe7qwk3">-->
+<!--                <div><div><div></div><div></div><div></div><div></div></div></div>-->
+<!--            </div></div>-->
+<!--    </div>-->
+<!--</div>-->
 
 
 
@@ -27,25 +27,6 @@
     jQuery( "body" ).on( "click", ".g-signin2", function() {
         localStorage.setItem('check', '1'); // check if click was
     });
-
-    //var data = {
-    //    token: 31414,
-    //    name:  '234234',
-    //    action: 'login_or_register',
-    //    email:  '2342423',
-    //};
-    //
-    //jQuery.ajax({
-    //    url: "<?php //echo admin_url('admin-ajax.php')  ?>// ",
-    //    type: 'POST',
-    //    data: data,
-    //    success: function (data) {
-    //        console.log(data);
-    //        // location.href = data;
-    //    },
-    //});
-
-
 
     function signOut() {
         var auth2 = gapi.auth2.getAuthInstance();
