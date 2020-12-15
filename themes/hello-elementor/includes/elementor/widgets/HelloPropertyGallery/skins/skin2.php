@@ -33,6 +33,7 @@ class Hello_Gallery_Skin2 extends Hello_Gallery_Skin_Base {
   protected function render_gellery_images() {
       $open_lightbox = $this->get_instance_value( 'open_lightbox' );
       $gallery = get_field('property_gallery', get_the_ID() );
+      if (!$gallery) return;
       $unique_id_gallery = uniqid();
       $image_size = 'large'; // need to load first image bigger
       ?>

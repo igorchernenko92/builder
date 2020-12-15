@@ -600,9 +600,16 @@ function property_table_head( $defaults ) {
     return $defaults;
 }
 
-add_action( 'manage_property_posts_custom_column', 'bs_event_table_content', 10, 2 );
+add_action( 'manage_property_posts_custom_column', 'bs_property_table_content', 10, 2 );
 
-function bs_event_table_content( $column_name, $post_id ) {
+function bs_property_table_content( $column_name, $post_id ) {
+    if ($column_name == 'tax') {
+        $terms = get_the_terms( $post_id, 'status' );
+        foreach($terms as $term) {
+            echo '<span style="background-color: ' . get_field('status_color', $term) . '; padding: 6px 17px; color: #fff;border-radius: 3px;font-size: 12px;">' . $term->name . '</span>';
+        }
+    }
+
     if ($column_name == 'image') {
         echo '<a href="' . get_edit_post_link( $post_id ) . '">' . get_the_post_thumbnail( $post_id, [75, 75] ) . '</a>';
     }
@@ -611,22 +618,12 @@ function bs_event_table_content( $column_name, $post_id ) {
         echo builder_get_property_price($post_id);
     }
 
-    if ($column_name == 'tax') {
-        $terms = get_the_terms( $post_id, 'status' );
-        foreach($terms as $term) {
-            echo '<span style="background-color: ' . get_field('status_color', $term) . '; padding: 6px 17px; color: #fff;border-radius: 3px;font-size: 12px;">' . $term->name . '</span>';
-        }
-    }
-
     if ($column_name == 'id') {
         echo get_field('property_id', $post_id );
     }
 
     if ($column_name == 'agent') {
         $agent = get_field('property_agent', $post_id )[0];
-
-//        var_dump($agent->ID);
-//        var_dump($agent->post_title);
 
         echo '<a href="' . get_edit_post_link( $agent->ID ) . '">'  . $agent->post_title . '</a>';
     }
