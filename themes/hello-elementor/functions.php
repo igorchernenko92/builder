@@ -386,7 +386,13 @@ add_action( 'wp_footer', function () { ?>
 
 //copy( wp_upload_dir()['basedir'] . '/elementor/css/post-2889.css',  wp_upload_dir()['basedir'] . '/sites/200/elementor/css/post-2889.css');
 
+function status_term_default_value() {
+    $term_rent = get_term_by('slug', 'for-rent', 'status');
+    $term_sale = get_term_by('slug', 'for-sale', 'status');
 
+    update_field( 'status_color', '#06B236', $term_rent );
+    update_field( 'status_color', '#1348c2', $term_sale );
+}
 
 function recurse_copy($src,$dst) {
     $dir = opendir($src);
@@ -525,10 +531,11 @@ function siteAndUserCreation($user_id, $provider) {
         update_option( 'page_on_front', $homepage->ID );
         update_option( 'show_on_front', 'page' );
     }
-
+    status_term_default_value();
     $cpt_support = [ 'page', 'post', 'agent', 'property' ];
     update_option( 'elementor_cpt_support', $cpt_support );
     update_media_gallery_for_properties();
+
 
     add_filter($provider->getId() . '_register_redirect_url', function () use ($location) {
         return $location;
@@ -629,6 +636,3 @@ function bs_property_table_content( $column_name, $post_id ) {
     }
 
 }
-
-
-
