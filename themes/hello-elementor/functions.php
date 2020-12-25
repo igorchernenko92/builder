@@ -710,23 +710,23 @@ function update_elementor_style_kit() {
 
 //delete_option(get_current_blog_id(). '_check_media_files') ;
 //check if media files are copied. I don't know why but it's not working from site migration function
-add_action( 'init', 'check_media_files' );
-function check_media_files() {
-    $option_name = get_current_blog_id() . '_check_media_files';
-    if ( !get_option($option_name) ) {
-//        TODO: get the path via vars
-        recurse_copy('/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/2020/', '/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/sites/' . get_current_blog_id() . '/2020');
-        update_option($option_name, 'true');
-        update_elementor_locations(); // update it once after import
-        update_option( 'elementor_active_kit', 5321 );
-
-        // TODO: remove this default kits from import files
-        wp_delete_post(146, true);
-        wp_delete_post(5333, true);
-
-    }
-//    update_elementor_style_kit();
-}
+//add_action( 'init', 'check_media_files' );
+//function check_media_files() {
+//    $option_name = get_current_blog_id() . '_check_media_files';
+//    if ( !get_option($option_name) ) {
+////        TODO: get the path via vars
+//        recurse_copy('/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/2020/', '/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/sites/' . get_current_blog_id() . '/2020');
+//        update_option($option_name, 'true');
+//        update_elementor_locations(); // update it once after import
+//        update_option( 'elementor_active_kit', 5321 );
+//
+//        // TODO: remove this default kits from import files
+//        wp_delete_post(146, true);
+//        wp_delete_post(5333, true);
+//
+//    }
+////    update_elementor_style_kit();
+//}
 
 
 

@@ -36,62 +36,132 @@ class Skin4 extends Skin_Base {
 
     protected function render_post_header() {
         ?>
-    <div <?php post_class( [ 'hl-listing-card hl-listing-card_skin-3 hl-listing-card_hover' ] ); ?>>
+    <div <?php post_class( [ 'hl-listing-card hl-listing-card_skin-4 hl-listing-card_hover' ] ); ?>>
         <?php
     }
 
-    protected function render_agent() {
-        ?>
+    protected function render_picture_preview() {
+      ?>
+        <div class="hl-listing-card__picture-preview">
+          <a href="#" class="hl-listing-card__picture-preview-title">View Property</a>
+          <span class="hl-listing-card__picture-preview-subtitle">Real Estate</span>
+        </div>
+      <?php
+    }
+
+	protected function render_meta_data() {
+		if ( ! $this->get_instance_value( 'show_meta_data' ) ) {
+            return;
+        }
+
+		$settings = $this->get_instance_value( 'property_meta_data' );
+		if ( empty( $settings ) ) {
+			return;
+		}
+		$options = $this->parent->get_type_list_meta();
+		echo '<ul class="hl-listing-card__info">';
+            foreach ( $settings as $item ) {
+                $value = get_field($item['property_meta_key'], get_the_ID());
+                if ( !$value ) continue;
+
+                $label = $item['label'];
+                if (!$label) $label = $options[$item['property_meta_key']];
+                ?>
+            <li class="hl-listing-card__info-item">
+                <i class="fa fa-<?php echo $item['selected_icon']['value']; ?> hl-listing-card__icon hl-listing-card__info-icon"></i>
+                <span class="hl-listing-card__info-value"><?php echo $value; ?> <?php echo $label; ?></span>
+            </li>
+
+       <?php }
+        echo '</ul>';
+	}
+
+	protected function render_time() {
+	  ?>
+      <div class="hl-listing-card__bottom-item hl-listing-card__bottom-item_time">
+          <i class="fa fa-calendar hl-listing-card__icon hl-listing-card__bottom-item-icon"></i>
+          <time class="hl-listing-card__bottom-item-text"><?php echo  human_time_diff( get_the_time( 'U' ), current_time( 'timestamp' ) ).' '.__( 'ago' ); ?></time>
+      </div>
+	  <?php
+	}
+
+    protected function render_agent() { ?>
         <div class="hl-listing-card__bottom mt-auto">
             <div class="hl-listing-card__bottom-inner">
-                <a href="#" class="hl-listing-card__agent">
-                    <img
-                        src="https://tokyowpresidence.b-cdn.net/wp-content/uploads/2014/05/agent3-1-19-120x120.jpg"
-                        class="hl-listing-card__agent-img hl-img-responsive"
-                        alt=""
-                    >
-                </a>
+                <?php if ( $this->get_instance_value( 'show_agent' ) && $agent = get_field('property_agent') ) {
+                    $name = $agent[0]->post_title;
+                    $link = get_the_permalink($agent[0]->ID);
+                    $thumbnail = get_the_post_thumbnail( $agent[0]->ID, 'large', ['class' => "hl-listing-card__agent-img hl-img-responsive"] )
+                ?>
+                    <a href="<?php echo $link ?>" class="hl-listing-card__agent hl-listing-card__bottom-item">
+                        <?php echo $thumbnail; ?>
+                        <span class="hl-listing-card__agent-name"><?php echo $name ?></span>
+                    </a>
+                <?php } ?>
+                <?php $this->render_time(); ?>
             </div>
         </div>
         <?php
     }
 
-    protected function render_post() {
-        $this->render_post_header();
-          $this->start_picture_wrapper();
-            $this->render_tags();
-            $this->render_agent();
-            $this->render_post_image();
-            $this->render_thumb_carousel();
-          $this->end_picture_wrapper();
+    protected function render_tags() {
+        $featured = get_the_terms( get_the_ID(), 'featured' );
+        $status = get_the_terms( get_the_ID(), 'status' );
+        ?>
+        <ul class="hl-listing-card__tags">
+            <?php if ( $featured ) { ?>
+                <li class="hl-listing-card__wrap-tag">
+                    <a href="<?php echo get_term_link( $featured[0] ) ?>" class="hl-listing-card__tag hl-listing-card__tag_green"><?php echo $featured[0]->name ?></a>
+                </li>
+            <?php } ?>
 
-          $this->start_content_wrapper();
-            $this->render_title();
-            $this->render_price_status();
-            $this->render_excerpt();
-            $this->render_meta_data();
-          $this->end_content_wrapper();
-        $this->render_post_footer();
+            <?php if ( $status ) { ?>
+                <li class="hl-listing-card__wrap-tag">
+                    <a href="<?php echo get_term_link( $status[0] ) ?>" class="hl-listing-card__tag hl-listing-card__tag_blue"><?php echo $status[0]->name ?></a>
+                </li>
+            <?php } ?>
+        </ul>
+      <?php
     }
 
-    public function render() {
-        $this->parent->query_posts();
+    protected function render_price_status() {
+	    ?>
+        <div class="hl-listing-wrap-price">
+          <?php
+            $this->render_price();
+          ?>
+        </div>
+      <?php
+	  }
 
-        /** @var \WP_Query $query */
-        $query = $this->parent->get_query();
-        if ( ! $query->found_posts ) {
-            return;
-        }
+    protected function render_wrap_title() {
+      ?>
+          <div class="hl-listing-card__wrap-title">
+              <?php
+                  $this->render_price_status();
+                  $this->render_title();
+              ?>
+          </div>
+      <?php
+    }
 
-        echo "<div class='hl-listings hl-listings_large'>";
-          while ( $query->have_posts() ) {
-            $query->the_post();
-            $this->current_permalink = get_permalink();
-            $this->render_post();
-          }
-        echo "</div>";
+    protected function render_post() {
+        $this->render_post_header();
+            $this->start_picture_wrapper();
+                $this->render_tags();
+                $this->render_wrap_title();
+                $this->render_picture_preview();
+                $this->render_post_image();
+                $this->render_thumb_carousel();
+            $this->end_picture_wrapper();
 
-        wp_reset_postdata();
+            $this->start_content_wrapper();
+                $this->render_location();
+                $this->render_meta_data();
+            $this->end_content_wrapper();
+
+            $this->render_agent();
+        $this->render_post_footer();
     }
 
 }
