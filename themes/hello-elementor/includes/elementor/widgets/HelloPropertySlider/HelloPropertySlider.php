@@ -14,7 +14,7 @@ include_once ( 'skins/skin1.php');
 include_once ( 'skins/skin2.php');
 
 class HelloPropertySlider extends Base_Widget {
-
+    protected $_has_template_content = false;
 	public function __construct( $data = [], $args = null ) {
 
 		parent::__construct( $data, $args );
@@ -68,15 +68,15 @@ class HelloPropertySlider extends Base_Widget {
 		$this->end_controls_section();
 
 
-        $this->start_controls_section(
-            'property_style_icon',
-            [
-                'label' => __( 'Icon', 'elementor' ),
-            ]
-        );
-
-
-        $this->end_controls_section();
+//        $this->start_controls_section(
+//            'property_style_icon',
+//            [
+//                'label' => __( 'Icon', 'elementor' ),
+//            ]
+//        );
+//
+//
+//        $this->end_controls_section();
 
 	}
 

@@ -390,7 +390,7 @@ class HelloSearchFilter extends Base_Widget {
                             if ( 'select' == $field['type_view'] ) {
 
 
-                             if ( !$value_data[$field['type_field']] ) {
+                             if ( !isset($value_data[$field['type_field']]) ) {
                                    continue;
                              }
 
