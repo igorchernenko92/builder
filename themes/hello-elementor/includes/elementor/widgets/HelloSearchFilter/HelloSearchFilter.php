@@ -388,6 +388,12 @@ class HelloSearchFilter extends Base_Widget {
                             <?php } // end search button
 
                             if ( 'select' == $field['type_view'] ) {
+
+
+                             if ( !$value_data[$field['type_field']] ) {
+                                   continue;
+                             }
+
                                 ?>
                                 <div class="wrap-field" style="width:<?php echo $field['width_field']; ?>%;">
                                     <label class="wrap-input">
@@ -399,7 +405,9 @@ class HelloSearchFilter extends Base_Widget {
 
                                       <div class="wrap-select">
                                           <select class="select-2 form-control" data-placeholder="<?php echo $field['placeholder']; ?>" name="<?php echo $field['type_field']; ?>">
-                                            <?php foreach ( $value_data[$field['type_field']] as $index => $option ) { ?>
+                                            <?php
+
+                                            foreach ( $value_data[$field['type_field']] as $index => $option ) { ?>
                                                 <option value="<?php echo $index; ?>"><?php echo $option; ?></option>
                                             <?php  }  ?>
                                           </select>
