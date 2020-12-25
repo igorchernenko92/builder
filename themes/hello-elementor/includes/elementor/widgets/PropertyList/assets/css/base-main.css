@@ -278,8 +278,8 @@ ol {
 }
 
 .swiper-slide .hl-listing-card {
-    box-shadow: none !important;
-    /*border: 1px solid rgba(0, 0, 0, 0.08);*/
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    box-shadow: rgba(99, 99, 99, 0.07) 0px 1px 8px 0px;
 }
 
 .swiper-slide .hl-listing-card:hover {
@@ -1677,3 +1677,5 @@ ol {
     background-color: transparent !important;
     display: none !important;
 }
+
+

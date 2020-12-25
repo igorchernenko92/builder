@@ -69,7 +69,9 @@ class Widget_Manager {
         include_once( 'widgets/HelloPropertyPrice.php' );
         include_once( 'widgets/HelloPropertyStatus.php' );
 //
-        include_once( 'widgets/ListingDetails.php' ); 
+        include_once( 'widgets/ListingDetails.php' );
+
+        include_once( 'widgets/hello-max-width.php' );
 
     }
 

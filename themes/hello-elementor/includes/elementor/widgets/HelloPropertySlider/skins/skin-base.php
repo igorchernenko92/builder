@@ -54,7 +54,10 @@ abstract class Skin_Base extends Elementor_Skin_Base {
         $post_id = $post->ID;
         $post_title = $post->post_title;
         $location = get_field('property_location', $post_id, true)['address'] ?? '';
-
+        $rooms = get_field('property_rooms', $post_id, true);
+        $bedrooms = get_field('property_bedrooms', $post_id, true);
+        $bathrooms = get_field('property_bath', $post_id, true);
+        $area = get_field('property_living_area', $post_id, true);
 
 
         ?>
@@ -67,7 +70,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                 $thumbnail = get_the_post_thumbnail( $post_id, 'large', $attr );
                     echo $thumbnail;
                 ?>
-<!--                <img class="hl-property-slider__item-bg" src="--><?php //echo $img; ?><!--" alt="">-->
                 <div class="hl-property-slider__item-inner">
                     <div class="hl-property-slider__item-block">
                         <a href="<?php echo get_post_permalink($post_id) ?>" class="hl-property-slider__item-title">
@@ -83,32 +85,52 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                         <?php endif; ?>
 
                         <ul class="hl-property-slider__item-list">
+                            <li class="hl-property-slider__item-list-item">
+                                <i class="fa fa-fas fa-door-open hl-property-slider__item-list-item-icon"></i>
+                                <div class="hl-property-slider__item-list-item-text" >
+                                    <span><?php echo intval($rooms) ?> </span> <span>Rooms</span>
+                                </div>
+                            </li>
 
+                            <li class="hl-property-slider__item-list-item">
+                                <i class="fa fa-fas fa-bed hl-property-slider__item-list-item-icon"></i>
+                                <div class="hl-property-slider__item-list-item-text" >
+                                    <span><?php echo intval($bedrooms) ?> </span> <span>Bedrooms</span>
+                                </div>
+                            </li>
+
+                            <li class="hl-property-slider__item-list-item">
+                                <i class="fa fa-fas fa-bath hl-property-slider__item-list-item-icon"></i>
+                                <div class="hl-property-slider__item-list-item-text" >
+                                    <span><?php echo intval($bathrooms) ?> </span> <span>Bathrooms</span>
+                                </div>
+                            </li>
 
                             <li class="hl-property-slider__item-list-item">
                                 <i class="fa fa-fas fa-square-root-alt hl-property-slider__item-list-item-icon"></i>
-                                <span class="hl-property-slider__item-list-item-text">
-                                    Plus property 4
-                                </span>
+                                <div class="hl-property-slider__item-list-item-text" >
+                                    <span><?php echo intval($area) ?> </span> <span>sq ft</span>
+                                </div>
                             </li>
                         </ul>
 
                         <div class="hl-property-slider__item-bottom">
-                            <ul class="hl-property-slider__item-rating">
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star"></i></li>
-                                <li><i class="fas fa-star-half-alt"></i></li>
-                                <li><i class="fas fa-star-half-alt"></i></li>
-                            </ul>
+<!--                            <ul class="hl-property-slider__item-rating">-->
+<!--                                <li><i class="fas fa-star"></i></li>-->
+<!--                                <li><i class="fas fa-star"></i></li>-->
+<!--                                <li><i class="fas fa-star"></i></li>-->
+<!--                                <li><i class="fas fa-star-half-alt"></i></li>-->
+<!--                                <li><i class="fas fa-star-half-alt"></i></li>-->
+<!--                            </ul>-->
 
                             <div class="hl-property-slider__item-price">
-                                <span class="hl-property-slider__item-text">
-                                    starts from
-                                </span>
-                                <div class="hl-property-slider__item-price-sum">
-                                    $21000
-                                </div>
+                                <?php  echo builder_get_property_price($post_id); ?>
+<!--                                <span class="hl-property-slider__item-text">-->
+<!--                                    starts from-->
+<!--                                </span>-->
+<!--                                <div class="hl-property-slider__item-price-sum">-->
+<!--                                    $21000-->
+<!--                                </div>-->
                             </div>
                         </div>
                     </div>
