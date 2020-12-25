@@ -30,42 +30,18 @@ abstract class Skin_Base extends Elementor_Skin_Base {
     public function register_main_controls( Widget_Base $widget ) {
         $this->parent = $widget;
 
-        $this->add_control(
-            'selected_icon',
+
+        $this->add_responsive_control(
+            'posts_per_page',
             [
-                'label' => __( 'Icon', 'elementor' ),
-                'type' => Controls_Manager::ICONS,
-                'fa4compatibility' => 'icon',
-                'default' => [
-                    'value' => 'fas fa-star',
-                    'library' => 'fa-solid',
-                ],
+                'label' => __( 'Posts Per Page', 'elementor-pro' ),
+                'description' => __( '-1 for all', 'elementor-pro' ),
+                'type' => Controls_Manager::NUMBER,
+                'default' => -1,
             ]
         );
 
-        $this->add_control(
-            'position',
-            [
-                'label' => __( 'Icon Position', 'elementor' ),
-                'type' => Controls_Manager::CHOOSE,
-                'default' => 'top',
-                'options' => [
-                    'left' => [
-                        'title' => __( 'Left', 'elementor' ),
-                        'icon' => 'eicon-h-align-left',
-                    ],
-                    'top' => [
-                        'title' => __( 'Top', 'elementor' ),
-                        'icon' => 'eicon-v-align-top',
-                    ],
-                    'right' => [
-                        'title' => __( 'Right', 'elementor' ),
-                        'icon' => 'eicon-h-align-right',
-                    ],
-                ],
-                'prefix_class' => 'elementor-position-',
-            ]
-        );
+
 
     }
 
@@ -73,44 +49,41 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 //        $this->start_controls_tabs( 'icon_colors' );
     }
 
-    public function render_item($img) {
+    public function render_item($post) {
+        $post = sanitize_post( $post, 'display' );
+        $post_id = $post->ID;
+        $post_title = $post->post_title;
+        $location = get_field('property_location', $post_id, true)['address'] ?? '';
+
+
+
         ?>
             <div class="hl-property-slider__item">
-                <img class="hl-property-slider__item-bg" src="<?php echo $img; ?>" alt="">
+
+                <?php
+                $attr = array(
+                    'class' => "hl-property-slider__item-bg",
+                );
+                $thumbnail = get_the_post_thumbnail( $post_id, 'large', $attr );
+                    echo $thumbnail;
+                ?>
+<!--                <img class="hl-property-slider__item-bg" src="--><?php //echo $img; ?><!--" alt="">-->
                 <div class="hl-property-slider__item-inner">
                     <div class="hl-property-slider__item-block">
-                        <a href="#" class="hl-property-slider__item-title">
-                            Slider property title
+                        <a href="<?php echo get_post_permalink($post_id) ?>" class="hl-property-slider__item-title">
+                            <?php echo $post_title; ?>
                         </a>
-
-                        <div class="hl-property-slider__item-location">
-                            <i class="fa fa-map-marker-alt hl-property-slider__item-location-icon"></i>
-                            <span class="hl-property-slider__item-location-text">
-                                159 Dudley Rd, Birmingham, UK
-                            </span>
-                        </div>
+                        <?php if ($location) : ?>
+                            <div class="hl-property-slider__item-location">
+                                <i class="fa fa-map-marker-alt hl-property-slider__item-location-icon"></i>
+                                <span class="hl-property-slider__item-location-text">
+                                     <?php echo $location; ?>
+                                </span>
+                            </div>
+                        <?php endif; ?>
 
                         <ul class="hl-property-slider__item-list">
-                            <li class="hl-property-slider__item-list-item">
-                                <i class="fa fa-fas fa-door-open hl-property-slider__item-list-item-icon"></i>
-                                <span class="hl-property-slider__item-list-item-text">
-                                    Plus property 1
-                                </span>
-                            </li>
 
-                            <li class="hl-property-slider__item-list-item">
-                                <i class="fa fa-fas fa-bed hl-property-slider__item-list-item-icon"></i>
-                                <span class="hl-property-slider__item-list-item-text">
-                                    Plus property 2
-                                </span>
-                            </li>
-
-                            <li class="hl-property-slider__item-list-item">
-                                <i class="fa fa-fas fa-bath hl-property-slider__item-list-item-icon"></i>
-                                <span class="hl-property-slider__item-list-item-text">
-                                    Plus property 3
-                                </span>
-                            </li>
 
                             <li class="hl-property-slider__item-list-item">
                                 <i class="fa fa-fas fa-square-root-alt hl-property-slider__item-list-item-icon"></i>
@@ -145,11 +118,23 @@ abstract class Skin_Base extends Elementor_Skin_Base {
     }
 
 	public function render() {
+
+        $args = array(
+            'post_type' => 'property',
+            'post_status' => 'publish',
+            'posts_per_page' => $this->get_instance_value( 'posts_per_page' ),
+        );
+
+        $query = new \WP_Query($args);
+        if ( ! $query->have_posts() ) {
+            return;
+        }
+
         $images = [
-                'http://demo.lion-coders.com/html/sarchholm-real-estate-template/images/featured/featured_1.jpg',
-                'http://demo.lion-coders.com/html/sarchholm-real-estate-template/images/featured/featured_2.jpg',
-                'http://demo.lion-coders.com/html/sarchholm-real-estate-template/images/featured/featured_3.jpg',
-                'http://demo.lion-coders.com/html/sarchholm-real-estate-template/images/featured/featured_4.jpg',
+                'http://demo.lion-coders.com/html/sarchholm-real-estate-template/images/featured/featured_5.jpg',
+                'http://demo.lion-coders.com/html/sarchholm-real-estate-template/images/featured/featured_5.jpg',
+                'http://demo.lion-coders.com/html/sarchholm-real-estate-template/images/featured/featured_5.jpg',
+                'http://demo.lion-coders.com/html/sarchholm-real-estate-template/images/featured/featured_5.jpg',
                 'http://demo.lion-coders.com/html/sarchholm-real-estate-template/images/featured/featured_5.jpg',
         ]
         ?>
@@ -157,15 +142,23 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
                     <?php
-                        $gallery = [0, 1, 2, 3, 4];
-                        if ($gallery) {
-                            foreach ($gallery as $count) { ?>
-                                <div class="swiper-slide">
-                                    <?php $this->render_item($images[$count]); ?>
-                                </div>
-                            <?php
-                            }
-                        }
+
+
+                    foreach ( $query->posts as $post ) {
+                        echo '<div class="swiper-slide">';
+                            $this->render_item($post);
+                        echo '</div>';
+                    }
+
+//                        $gallery = [0, 1, 2, 3, 4];
+//                        if ($gallery) {
+//                            foreach ($gallery as $count) { ?>
+<!--                                <div class="swiper-slide">-->
+<!--                                    --><?php //$this->render_item($images[$count]); ?>
+<!--                                </div>-->
+<!--                            --><?php
+//                            }
+//                        }
                     ?>
                     </div>
 

@@ -16,6 +16,7 @@ include_once ( 'skins/skin-base.php');
 include_once ( 'skins/skin1.php');
 include_once ( 'skins/skin2.php');
 include_once ( 'skins/skin3.php');
+include_once ( 'skins/skin4.php');
 
 
 class Property extends Property_Base {
@@ -71,6 +72,7 @@ class Property extends Property_Base {
 		$this->add_skin( new Skins\Skin1( $this ) );
 		$this->add_skin( new Skins\Skin2( $this ) );
 		$this->add_skin( new Skins\Skin3( $this ) );
+		$this->add_skin( new Skins\Skin4( $this ) );
 	}
 
 	protected function _register_controls() {
