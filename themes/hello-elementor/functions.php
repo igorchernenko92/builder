@@ -536,11 +536,6 @@ function siteAndUserCreation($user_id, $provider) {
     copy_media($blog_id, $newdomain, $user_id);
     import_data($blog_id);
 
-// TODO: remove this default kits from import files
-    wp_delete_post(146, true);
-    wp_delete_post(5321, true);
-
-
 
     $homepage = get_page_by_title( 'Home page 1' );
     if ( $homepage ) {
@@ -666,27 +661,48 @@ function bs_property_table_content( $column_name, $post_id ) {
 
 //add_action( 'init', 'update_elementor_style_kit', 10 );
 function update_elementor_style_kit() {
-
+    $option_name = get_current_blog_id() . '_check_style_kit';
     $current_blog_id = get_current_blog_id();
 
-    if ( $current_blog_id != 1 ) {
+    if (( $current_blog_id != 1 ) && ( !get_option($option_name) )) {
         global $wpdb;
         $main_active_kit = $wpdb->get_results( "SELECT * FROM wp_options WHERE option_name = 'elementor_active_kit'" );
         $site_active_kit = $wpdb->get_results( "SELECT * FROM wp_".$current_blog_id."_options WHERE option_name = 'elementor_active_kit'" );
-        $main_active_kit_id = $main_active_kit[0]->option_value;
-        $site_active_kit_id = $site_active_kit[0]->option_value;
 
 
-        $main_kit = $wpdb->get_results( "SELECT * FROM wp_postmeta WHERE post_id = " . $main_active_kit_id . " AND meta_key = '_elementor_page_settings'" );
-        $site_kit = $wpdb->get_results( "SELECT * FROM wp_" . $current_blog_id . "_postmeta WHERE post_id = " . $site_active_kit_id . " AND meta_key = '_elementor_page_settings'" );
-        $main_kit_data = $main_kit[0]->meta_value;
 
-        if ( !$site_kit ) {
-            $wpdb->insert( 'wp_'.$current_blog_id.'_postmeta', array( "meta_value" => $main_kit_data, 'post_id' => $site_active_kit_id, 'meta_key' => '_elementor_page_settings'), array( '%s', '%d', '%s' ) );
-            Elementor\Plugin::$instance->files_manager->clear_cache();
+        if ( $site_active_kit ) {
+            $main_active_kit_id = $main_active_kit[0]->option_value;
+            $site_active_kit_id = $site_active_kit[0]->option_value;
+
+            $main_kit = $wpdb->get_results( "SELECT * FROM wp_postmeta WHERE post_id = " . $main_active_kit_id . " AND meta_key = '_elementor_page_settings'" );
+            $site_kit = $wpdb->get_results( "SELECT * FROM wp_" . $current_blog_id . "_postmeta WHERE post_id = " . $site_active_kit_id . " AND meta_key = '_elementor_page_settings'" );
+            $main_kit_data = $main_kit[0]->meta_value;
+
+
+
+            if ( !$site_kit ) {
+                $wpdb->insert( 'wp_'.$current_blog_id.'_postmeta', array( "meta_value" => $main_kit_data, 'post_id' => $site_active_kit_id, 'meta_key' => '_elementor_page_settings'), array( '%s', '%d', '%s' ) );
+                Elementor\Plugin::$instance->files_manager->clear_cache();
+
+                update_option($option_name, 'true');
+            }
         }
 
+        //add temporary style. Need it for first page load.
+        // clear_cache() - applied AFTER the page is loaded, and user see not proper colors. Need to update it for first load
+
+        echo '<style>
+                .hello_search_button {
+                  background-color: #1348C2 !important;
+                }
+                .e-form__buttons button {
+                 background-color: #1348C2 !important;
+                }
+        </style>';
     }
+
+
 
 
 }
@@ -702,24 +718,21 @@ function check_media_files() {
         recurse_copy('/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/2020/', '/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/sites/' . get_current_blog_id() . '/2020');
         update_option($option_name, 'true');
         update_elementor_locations(); // update it once after import
-        update_elementor_style_kit();
+        update_option( 'elementor_active_kit', 5321 );
 
-
-        //add temporary style. Need it for first page load.
-        // clear_cache() - applied AFTER the page is loaded, and user see not proper colors. Need to update it for first load
-
-        echo '<style>
-                .hello_search_button {
-                  background-color: #1348C2 !important;
-                }
-                .e-form__buttons button {
-                 background-color: #1348C2 !important;
-                }
-        </style>';
+        // TODO: remove this default kits from import files
+        wp_delete_post(146, true);
+        wp_delete_post(5333, true);
 
     }
+//    update_elementor_style_kit();
 }
 
+
+
+//function ocdi_after_import_setup() {
+//    update_option( 'elementor_active_kit', 5321 );
+//}
 
 
 
