@@ -107,21 +107,20 @@ class Skin4 extends Skin_Base {
     protected function render_tags() {
         $featured = get_the_terms( get_the_ID(), 'featured' );
         $status = get_the_terms( get_the_ID(), 'status' );
-        ?>
-        <ul class="hl-listing-card__tags">
-            <?php if ( $featured ) { ?>
-                <li class="hl-listing-card__wrap-tag">
-                    <a href="<?php echo get_term_link( $featured[0] ) ?>" class="hl-listing-card__tag hl-listing-card__tag_green"><?php echo $featured[0]->name ?></a>
-                </li>
-            <?php } ?>
 
-            <?php if ( $status ) { ?>
-                <li class="hl-listing-card__wrap-tag">
-                    <a href="<?php echo get_term_link( $status[0] ) ?>" class="hl-listing-card__tag hl-listing-card__tag_blue"><?php echo $status[0]->name ?></a>
-                </li>
-            <?php } ?>
-        </ul>
-      <?php
+        if ( $featured ) { ?>
+              <div class="hl-listing-card__wrap-tag hl-listing-card__wrap-tag_left">
+                  <a href="<?php echo get_term_link( $featured[0] ) ?>" class="hl-listing-card__tag hl-listing-card__tag_green"><?php echo $featured[0]->name ?></a>
+              </div>
+          <?php
+        }
+
+        if ( $status ) { ?>
+            <div class="hl-listing-card__wrap-tag hl-listing-card__wrap-tag_right">
+                <a href="<?php echo get_term_link( $status[0] ) ?>" class="hl-listing-card__tag hl-listing-card__tag_blue"><?php echo $status[0]->name ?></a>
+            </div>
+          <?php
+        }
     }
 
     protected function render_price_status() {
