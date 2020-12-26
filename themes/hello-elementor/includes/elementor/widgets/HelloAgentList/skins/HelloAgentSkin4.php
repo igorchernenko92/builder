@@ -31,12 +31,61 @@ class HelloAgentSkin4 extends HelloAgentSkinBase {
 		return __( 'Skin 4', 'elementor-pro' );
 	}
 
-    protected function render_loop_header() {
-
+    public function render_agents_top() {
+        ?>
+            <div class='hl-agents-4'>
+        <?php
     }
 
-    protected function render_loop_footer() {
+    protected function render_bottom() {
+        ?>
+          <div class="hl-agent__bottom">
+            <ul class="hl-agent__socials">
+              <li class="hl-agent__socials-item">
+                <a href="#" class="hl-agent__socials-link">
+                  <i class="fas fa-envelope"></i>
+                </a>
+              </li>
+              <li class="hl-agent__socials-item">
+                <a href="#" class="hl-agent__socials-link">
+                  <i class="fas fa-envelope"></i>
+                </a>
+              </li>
+              <li class="hl-agent__socials-item">
+                <a href="#" class="hl-agent__socials-link">
+                  <i class="fas fa-envelope"></i>
+                </a>
+              </li>
+              <li class="hl-agent__socials-item">
+                <a href="#" class="hl-agent__socials-link">
+                  <i class="fas fa-envelope"></i>
+                </a>
+              </li>
+            </ul>
 
+            <ul class="hl-agent__socials">
+              <li class="hl-agent__socials-item">
+                <a href="#" class="hl-agent__socials-link">
+                  <i class="fas fa-phone-alt"></i>
+                </a>
+              </li>
+              <li class="hl-agent__socials-item">
+                <a href="#" class="hl-agent__socials-link">
+                  <i class="fas fa-envelope"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        <?php
     }
 
+    protected function render_post() {
+        $this->render_post_header();
+        $this->render_avatar();
+        $this->render_title();
+        $this->render_position();
+        $this->render_description();
+        $this->render_bottom();
+        $this->render_post_footer();
+    }
 }

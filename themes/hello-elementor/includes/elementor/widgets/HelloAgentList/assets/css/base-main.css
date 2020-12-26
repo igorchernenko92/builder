@@ -365,3 +365,122 @@
 .hl-agent__table-row {
     font-size: 14px;
 }
+
+
+/* Skin 4 BEGIN */
+.hl-agents-4 {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    grid-gap: 24px;
+    align-content: stretch;
+    align-items: stretch;
+}
+
+.hl-agents-4 .hl-agent {
+    box-shadow: 0 4px 16px rgba(51, 51, 51, 0.08);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.09);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    transition: all var(--default-transition);
+}
+
+.hl-agents-4 .hl-agent:hover {
+    box-shadow: 0 0 28px rgba(91, 91, 91, 0.28);
+    transform: translate(0%, -5px);
+}
+
+.hl-agents-4 .hl-agent > *:not(.hl-agent__wrap-img) {
+    padding: 0 18px;
+}
+
+.hl-agents-4 .hl-agent > *:last-child {
+    padding: 18px;
+    border-top: 1px solid #efefef;
+    margin-top: auto;
+}
+
+.hl-agents-4 .hl-agent__wrap-img {
+    display: block;
+    margin: 0 0 24px;
+    width: 100%;
+    border-radius: 0;
+}
+
+.hl-agents-4 .hl-agent__wrap-img img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+}
+
+.hl-agents-4 .hl-agent__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.hl-agents-4 .hl-agent__socials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.hl-agents-4 .hl-agent__socials-item {
+    margin-right: 8px;
+}
+.hl-agents-4 .hl-agent__socials-item:last-child {
+    margin-right: 0;
+}
+.hl-agents-4 .hl-agent__socials-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(11, 12, 23, 0.1);
+    border-radius: 1000px;
+    width: 23px;
+    height: 23px;
+    transition: 0.3s all ease;
+}
+.hl-agents-4 .hl-agent__socials-link:hover {
+    opacity: 0.8;
+}
+.hl-agents-4 .hl-agent__socials-link i {
+    font-size: 11px;
+    color: #969BAB;
+}
+
+.hl-agents-4 .hl-agent__title {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 24px;
+    color: #343B4C;
+    transition: 0.3s all ease;
+    display: block;
+    margin-bottom: 8px;
+}
+.hl-agents-4 .hl-agent__title:hover {
+    color: #0987F8;
+}
+.hl-agents-4 .hl-agent__position {
+    display: block;
+    font-size: 14px;
+    line-height: 20px;
+    color: #0987F8;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+.hl-agents-4 .hl-agent__description {
+    color: #343B4C;
+    font-size: 12px;
+    line-height: 18px;
+    margin-bottom: 16px;
+}
+.hl-agents-4 {}
+.hl-agents-4 {}
+.hl-agents-4 {}
+.hl-agents-4 {}
+.hl-agents-4 {}
+/* Skin 4 END */
