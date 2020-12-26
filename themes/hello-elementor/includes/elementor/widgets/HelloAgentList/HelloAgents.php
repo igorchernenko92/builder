@@ -15,6 +15,7 @@ include_once ( 'skins/HelloAgentSkinBase.php');
 include_once ( 'skins/HelloAgentSkin1.php');
 include_once ( 'skins/HelloAgentSkin2.php');
 include_once ( 'skins/HelloAgentSkin3.php');
+include_once ( 'skins/HelloAgentSkin4.php');
 
 /**
  * Class Posts
@@ -90,6 +91,7 @@ class HelloAgents extends Widget_Base {
 		$this->add_skin( new Skins\HelloAgentSkin1( $this ) );
 		$this->add_skin( new Skins\HelloAgentSkin2( $this ) );
 		$this->add_skin( new Skins\HelloAgentSkin3( $this ) );
+		$this->add_skin( new Skins\HelloAgentSkin4( $this ) );
 	}
 
 	protected function _register_controls() {

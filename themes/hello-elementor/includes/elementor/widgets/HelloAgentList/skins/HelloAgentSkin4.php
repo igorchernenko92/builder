@@ -28,7 +28,7 @@ class HelloAgentSkin4 extends HelloAgentSkinBase {
 	}
 
 	public function get_title() {
-		return __( 'Skin 1', 'elementor-pro' );
+		return __( 'Skin 4', 'elementor-pro' );
 	}
 
     protected function render_loop_header() {
