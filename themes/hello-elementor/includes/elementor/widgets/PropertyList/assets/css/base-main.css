@@ -338,8 +338,8 @@ ol {
     }
 
     .hl-listing-card_skin-4.hl-listing-card_hover:hover {
-        box-shadow: 0 0 38px rgba(91, 91, 91, 0.38);
-        transform: translate(0%, -5px);
+        box-shadow: 0 0 19px rgba(91, 91, 91, 0.38);
+        transform: translate(0%, -1px);
     }
 }
 
