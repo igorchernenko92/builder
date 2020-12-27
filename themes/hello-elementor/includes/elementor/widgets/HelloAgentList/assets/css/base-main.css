@@ -388,8 +388,8 @@
 }
 
 .hl-agents-4 .hl-agent:hover {
-    box-shadow: 0 0 28px rgba(91, 91, 91, 0.28);
-    transform: translate(0%, -5px);
+    box-shadow: 0 0 14px rgba(91, 91, 91, 0.28);
+    transform: translate(0%, -1px);
 }
 
 .hl-agents-4 .hl-agent > *:not(.hl-agent__wrap-img) {

@@ -120,6 +120,20 @@ class HelloSearchFilter extends Base_Widget {
         );
 
         $repeater->add_control(
+            'border_radius',
+            [
+                'label' => __( 'Border radius', 'elementor' ),
+                'type' => Controls_Manager::TEXT,
+                'selectors' => [
+                    '{{WRAPPER}} .hello_search_button' => 'border-radius: {{VALUE}}px;',
+                ],
+                'condition' => [
+                    'search_button' => 'yes',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
             'background_color',
             [
                 'label' => __( 'Background Color', 'elementor' ),
@@ -165,6 +179,8 @@ class HelloSearchFilter extends Base_Widget {
             ]
         );
 
+
+
         $repeater->add_control(
             'hover_animation',
             [
@@ -175,8 +191,6 @@ class HelloSearchFilter extends Base_Widget {
                 ],
             ]
         );
-
-
 
         $repeater->add_control(
             'type_field',
