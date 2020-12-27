@@ -330,16 +330,21 @@ ol {
     /*margin-top: 25px;*/
 }
 
+.hl-listing-card_hover {
+    bottom: 0;
+    position: relative;
+}
+
 @media (min-width: 992px) {
     .hl-listing-card_skin-1.hl-listing-card_hover:hover,
     .hl-listing-card_skin-2.hl-listing-card_hover:hover {
         box-shadow: 0 3px 23px 9px rgba(7,152,255,0.15);
-        transform: translate(0%, -5px);
+        bottom: 5px;
     }
 
     .hl-listing-card_skin-4.hl-listing-card_hover:hover {
         box-shadow: 0 0 19px rgba(91, 91, 91, 0.38);
-        transform: translate(0%, -1px);
+        bottom: 5px;
     }
 }
 
