@@ -72,6 +72,7 @@ class Widget_Manager {
         include_once( 'widgets/ListingDetails.php' );
 
         include_once( 'widgets/hello-max-width.php' );
+        include_once( 'widgets/hello-responsive-custom-positioning.php' );
 
     }
 
