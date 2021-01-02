@@ -701,10 +701,6 @@ function update_elementor_style_kit() {
                 }
         </style>';
     }
-
-
-
-
 }
 
 
@@ -730,9 +726,30 @@ function check_media_files() {
 
 
 
-//function ocdi_after_import_setup() {
-//    update_option( 'elementor_active_kit', 5321 );
-//}
+add_filter( 'elementor_pro/custom_fonts/font_display', function( $current_value, $font_family, $data ) {
+    return 'swap';
+}, 10, 3 );
 
 
 
+
+/**
+ * Cleanup orphaned tables during site deletion
+ *
+ * @param $blog_id
+ */
+add_action( 'wp_uninitialize_site', 'action_function_name_3048' );
+function action_function_name_3048( $old_site ){
+    global $wpdb;
+    $blog_id = $old_site->blog_id;
+
+    $prep_query = $wpdb->prepare("SELECT table_name FROM information_schema.TABLES WHERE table_name LIKE %s;", $wpdb->esc_like("{$wpdb->base_prefix}{$blog_id}_") . '%');
+    $table_list = $wpdb->get_results($prep_query, ARRAY_A);
+
+    foreach ($table_list as $index => $data) {
+        $table_name = $data['table_name'];
+
+        $sql = "DROP TABLE IF EXISTS $table_name";
+        $wpdb->query($sql);
+    }
+}
