@@ -41,6 +41,14 @@ abstract class Skin_Base extends Elementor_Skin_Base {
             ]
         );
 
+        $this->add_control(
+            'featured',
+            [
+                'label' => __( 'Featured', 'elementor-pro' ),
+                'type' => Controls_Manager::SWITCHER,
+            ]
+        );
+
 
 
     }
@@ -65,16 +73,26 @@ abstract class Skin_Base extends Elementor_Skin_Base {
       <?php
     }
 
-    public function render_tags() {
-      ?>
-        <div class="hl-listing-card__wrap-tag hl-listing-card__wrap-tag_left">
-          <a href="#" class="hl-listing-card__tag hl-listing-card__tag_green">Feature</a>
-        </div>
 
-        <div class="hl-listing-card__wrap-tag hl-listing-card__wrap-tag_right">
-          <a href="#" class="hl-listing-card__tag hl-listing-card__tag_blue">For Sale</a>
-        </div>
-      <?php
+
+    protected function render_tags($post) {
+        $post_id = $post->ID;
+        $featured = get_the_terms( $post_id, 'featured' );
+        $status = get_the_terms( $post_id, 'status' );
+
+        if ( $featured ) { ?>
+            <div class="hl-listing-card__wrap-tag hl-listing-card__wrap-tag_left">
+                <a href="<?php echo get_term_link( $featured[0] ) ?>" class="hl-listing-card__tag hl-listing-card__tag_green"><?php echo $featured[0]->name ?></a>
+            </div>
+            <?php
+        }
+
+        if ( $status ) { ?>
+            <div class="hl-listing-card__wrap-tag hl-listing-card__wrap-tag_right">
+                <a href="<?php echo get_term_link( $status[0] ) ?>" class="hl-listing-card__tag hl-listing-card__tag_blue"><?php echo $status[0]->name ?></a>
+            </div>
+            <?php
+        }
     }
 
     public function render_title($post_id, $post_title) {
@@ -105,7 +123,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
       <?php
     }
 
-    public function render_meta_data($meta_data) {
+    public function     render_meta_data($meta_data) {
       $icons_classes = [
           "rooms" => "fa-door-open",
           "bedrooms" => "fa-bed",
@@ -136,20 +154,39 @@ abstract class Skin_Base extends Elementor_Skin_Base {
       <?php
     }
 
-    public function render_bottom() {
-      ?>
-        <div class="hl-listing-card__bottom mt-auto">
-          <div class="hl-listing-card__bottom-inner">
-            <a href="http://localhost/?agent=dina-riner" class="hl-listing-card__agent hl-listing-card__bottom-item">
-              <img width="350" height="350" src="http://localhost/wp-content/uploads/2020/07/Artboard-2team.jpg" class="hl-listing-card__agent-img hl-img-responsive wp-post-image" alt="" loading="lazy">                        <span class="hl-listing-card__agent-name">Dina Riner</span>
-            </a>
-            <div class="hl-listing-card__bottom-item hl-listing-card__bottom-item_time">
-              <i class="fa fa-calendar hl-listing-card__icon hl-listing-card__bottom-item-icon"></i>
-              <time class="hl-listing-card__bottom-item-text">5 months ago</time>
-            </div>
-          </div>
+    protected function render_time() {
+        ?>
+        <div class="hl-listing-card__bottom-item hl-listing-card__bottom-item_time">
+            <i class="fa fa-calendar hl-listing-card__icon hl-listing-card__bottom-item-icon"></i>
+            <time class="hl-listing-card__bottom-item-text"><?php echo  human_time_diff( get_the_time( 'U' ), current_time( 'timestamp' ) ).' '.__( 'ago' ); ?></time>
         </div>
-      <?php
+        <?php
+    }
+
+    protected function render_agent($post) {
+        $post_id = $post->ID;
+        ?>
+        <div class="hl-listing-card__bottom mt-auto">
+            <div class="hl-listing-card__bottom-inner">
+                <?php
+                if ( $agent = get_field('property_agent', $post_id) ) {
+                    $name = $agent[0]->post_title;
+                    $link = get_the_permalink($agent[0]->ID);
+                    $thumbnail = get_the_post_thumbnail( $agent[0]->ID, 'large', ['class' => "hl-listing-card__agent-img hl-img-responsive"] )
+                    ?>
+                    <a href="<?php echo $link ?>" class="hl-listing-card__agent hl-listing-card__bottom-item">
+                        <?php echo $thumbnail; ?>
+                        <span class="hl-listing-card__agent-name"><?php echo $name ?></span>
+                    </a>
+                <?php } ?>
+                <?php $this->render_time(); ?>
+            </div>
+        </div>
+        <?php
+    }
+
+    public function render_bottom($post) {
+        $this->render_agent($post);
     }
 
     public function render_item($post) {
@@ -175,7 +212,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
               <div class="hl-property-slider__item-block">
                   <div class="hl-listing-card hl-listing-card_skin-4">
                       <?php
-                        $this->render_tags();
+                        $this->render_tags($post);
 
                         if ($post_title) :
                             $this->render_title($post_id, $post_title);
@@ -189,11 +226,9 @@ abstract class Skin_Base extends Elementor_Skin_Base {
                             $this->render_location($location);
                         endif;
 
-                        if ($location) :
-                            $this->render_meta_data($meta_data);
-                        endif;
 
-                        $this->render_bottom();
+                        $this->render_meta_data($meta_data);
+                        $this->render_bottom($post);
                       ?>
                   </div>
               </div>
@@ -208,6 +243,17 @@ abstract class Skin_Base extends Elementor_Skin_Base {
             'post_status' => 'publish',
             'posts_per_page' => $this->get_instance_value( 'posts_per_page' ),
         );
+
+
+          if ( $this->get_instance_value( 'featured' ) ) {
+              $args['tax_query'][] = [
+                  [
+                      'taxonomy' => 'featured',
+                      'field'    => 'slug',
+                      'terms'    => 'featured'
+                  ]
+              ];
+          }
 
         $query = new \WP_Query($args);
         if ( ! $query->have_posts() ) {
