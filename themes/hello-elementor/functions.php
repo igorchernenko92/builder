@@ -753,3 +753,25 @@ function action_function_name_3048( $old_site ){
         $wpdb->query($sql);
     }
 }
+
+
+add_action( 'admin_menu', 'remove_import_menu' );
+function remove_import_menu() {
+    global $current_user;
+
+    if ( !is_super_admin() ) {
+        remove_submenu_page( 'tools.php', 'export.php' );
+    }
+}
+
+add_action( 'admin_head-export.php', 'prevent_export_url_access' );
+
+function prevent_export_url_access() {
+    global $current_user;
+
+    if ( !is_super_admin() ) {
+
+        wp_redirect( admin_url( 'index.php' ) );
+        exit;
+    }
+}

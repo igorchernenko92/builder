@@ -321,11 +321,13 @@ select.select-multiselect {
 }
 
 .hello_search_button {
-    border: none;
+    border: none !important;
+    outline: none;
 }
 
 .hello_search_button:focus {
-    outline: none;
+    border: none !important;
+    outline: none !important;
 }
 
 /* Select 2 END */
