@@ -775,3 +775,30 @@ function prevent_export_url_access() {
         exit;
     }
 }
+
+
+add_action( 'admin_menu', 'prevent_export_url_access1' );
+
+function prevent_export_url_access1() {
+
+    if  ( $_GET['post_type'] == 'elementor_library' ) {
+
+        ?>
+        <style>
+            #bulk-action-selector-top option[value=elementor_export_multiple_templates] {
+                display: none;
+            }
+
+            #bulk-action-selector-bottom option[value=elementor_export_multiple_templates] {
+                display: none;
+            }
+        </style>
+  <?php  }
+
+
+
+
+}
+
+
+
