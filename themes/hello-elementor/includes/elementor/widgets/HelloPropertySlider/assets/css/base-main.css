@@ -568,3 +568,6 @@
 .hl-property-slider-2 {}
 /* Skin 2 END */
 
+.swiper-container-fade .swiper-slide-active {
+    z-index: 10;
+}
