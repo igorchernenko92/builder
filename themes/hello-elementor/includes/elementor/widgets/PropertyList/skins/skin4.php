@@ -110,16 +110,13 @@ class Skin4 extends Skin_Base {
 
         if ( $featured ) { ?>
               <div class="hl-listing-card__wrap-tag hl-listing-card__wrap-tag_left">
-                  <a href="<?php echo get_term_link( $featured[0] ) ?>" class="hl-listing-card__tag hl-listing-card__tag_green"><?php echo $featured[0]->name ?></a>
+                  <a href="<?php echo get_term_link( $featured[0] ) ?>" class="hl-listing-card__tag hl-listing-card__tag_red"><?php echo $featured[0]->name ?></a>
               </div>
           <?php
         }
 
-        if ( $status ) { ?>
-            <div class="hl-listing-card__wrap-tag hl-listing-card__wrap-tag_right">
-                <a href="<?php echo get_term_link( $status[0] ) ?>" class="hl-listing-card__tag hl-listing-card__tag_blue"><?php echo $status[0]->name ?></a>
-            </div>
-          <?php
+        if ( $status ) {
+            $this->render_status();
         }
     }
 
