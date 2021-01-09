@@ -1350,10 +1350,16 @@ ol {
     justify-content: center;
 }
 
-.hl-listing-card_skin-4 .hl-listing-card__wrap-tag {
+.hl-listing-card_skin-4 .hl-listing-card__wrap-tag,
+.hl-listing-card_skin-4 .hl-listing-status {
     top: 18px;
     position: absolute;
     z-index: 5;
+}
+
+
+.hl-listing-card_skin-4 .hl-listing-status {
+    right: 18px;
 }
 
 .hl-listing-card__wrap-tag_left {
