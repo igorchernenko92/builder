@@ -205,7 +205,7 @@ class Builder_General {
         if ( is_wp_error($term_link) ) return false;
 
         $term_color = get_field('status_color', $term->taxonomy . '_' . $term->term_id); // format - #0073e1
-        $property_status = '<div class="hl-listing-status">';
+        $property_status = '<div class="hl-listing-status hl-listing-card__wrap-tag hl-listing-card__wrap-tag_right">';
         $property_status .= '<a href="' . $term_link . '" style="background-color: ' . $term_color . ';" class="hl-listing-status__inner">' .  $term_name . '</a>';
         $property_status .= '</div>';
 
