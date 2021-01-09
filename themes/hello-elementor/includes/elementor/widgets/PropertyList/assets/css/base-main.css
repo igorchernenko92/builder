@@ -11,11 +11,6 @@
 }
 
 /* Common BEGIN */
-body,
-html {
-    overflow-x: hidden;
-}
-
 .img-placeholder {
     position: absolute;
     top: 0;
