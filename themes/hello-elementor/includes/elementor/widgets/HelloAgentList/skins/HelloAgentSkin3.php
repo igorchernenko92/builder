@@ -39,51 +39,66 @@ class HelloAgentSkin3 extends HelloAgentSkinBase {
 
     public function render_agents_top() {
         ?>
-            <div class='hl-agents-3 hl-agents-main'>
+            <div class='hl-agents-3 hl-agents-4'>
+        <?php
+    }
+
+    protected function render_bottom() {
+        ?>
+          <div class="hl-agent__bottom">
+            <ul class="hl-agent__socials">
+              <li class="hl-agent__socials-item">
+                <a href="#" class="hl-agent__socials-link">
+                  <i class="fas fa-envelope"></i>
+                </a>
+              </li>
+              <li class="hl-agent__socials-item">
+                <a href="#" class="hl-agent__socials-link">
+                  <i class="fas fa-envelope"></i>
+                </a>
+              </li>
+              <li class="hl-agent__socials-item">
+                <a href="#" class="hl-agent__socials-link">
+                  <i class="fas fa-envelope"></i>
+                </a>
+              </li>
+              <li class="hl-agent__socials-item">
+                <a href="#" class="hl-agent__socials-link">
+                  <i class="fas fa-envelope"></i>
+                </a>
+              </li>
+            </ul>
+
+            <ul class="hl-agent__socials">
+              <li class="hl-agent__socials-item">
+                <a href="#" class="hl-agent__socials-link">
+                  <i class="fas fa-phone-alt"></i>
+                </a>
+              </li>
+              <li class="hl-agent__socials-item">
+                <a href="#" class="hl-agent__socials-link">
+                  <i class="fas fa-envelope"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
         <?php
     }
 
     protected function render_content() {
-        $id = $this->parent->get_the_id();
-        $options = $this->parent->get_meta();
-        $agents_meta = $this->get_instance_value( 'agent_meta_data' );
-        ?>
-
-        <div class="hl-agent__content">
-          <div class="hl-agent__content-top">
-          <?php  $this->render_title();  ?>
-          </div>
-
-            <ul class="hl-agent__table">
-                <?php  foreach ( $agents_meta as $item ) {
-                    $label = $item['label'];
-                    if (!$label)  $label = $options[$item['agent_meta_key']];
-
-                    $value = get_field($item['agent_meta_key'], $this->parent->get_the_id());
-                    if ( !$value ) continue;
-                ?>
-                  <li class="hl-agent__table-row">
-                      <span class="hl-agent__table-label">
-                            <?php echo esc_html($label); ?>:
-                      </span>
-
-                      <span class="hl-agent__table-value">
-                          <?php echo esc_html($value); ?>
-                      </span>
-                  </li>
-            <?php  }  ?>
-            </ul>
-        </div>
-
-        <?php
+      echo "<div class='hl-agent__content'>";
+        $this->render_title();
+        $this->render_position();
+        $this->render_description();
+        $this->render_bottom();
+        $this->render_post_footer();
+      echo "</div>";
     }
-
 
     protected function render_post() {
         $this->render_post_header();
         $this->render_avatar();
         $this->render_content();
-        $this->render_post_footer();
     }
 
 }
