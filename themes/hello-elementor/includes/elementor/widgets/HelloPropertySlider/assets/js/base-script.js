@@ -7,6 +7,11 @@
         spaceBetween: 15,
         effect: 'fade',
         speed: 600,
+        preloadImages: false,
+        lazyLoading: true,
+        lazy: {
+          loadPrevNext: true,
+        },
         ...params,
       }
     };

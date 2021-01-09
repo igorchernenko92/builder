@@ -210,7 +210,8 @@ abstract class Skin_Base extends Elementor_Skin_Base {
         $thumbnail_url = get_the_post_thumbnail_url( $post_id, 'large', $attr );
 
         ?>
-            <div class="hl-property-slider__item" style="background-image: url('<?php echo $thumbnail_url; ?>')">
+            <div class="hl-property-slider__item swiper-lazy" data-background="<?php echo $thumbnail_url; ?>">
+              <div class="swiper-lazy-preloader"></div>
               <div class="hl-property-slider__item-block">
                   <div class="hl-listing-card hl-listing-card_skin-4">
                       <?php
