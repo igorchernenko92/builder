@@ -91,14 +91,25 @@ class HelloAgentSkin3 extends HelloAgentSkinBase {
         $this->render_position();
         $this->render_description();
         $this->render_bottom();
-        $this->render_post_footer();
+      echo "</div>";
+    }
+
+    protected function render_wrap_main_start() {
+      echo "<div class='hl-agents-main'>";
+    }
+
+    protected function render_wrap_main_end() {
       echo "</div>";
     }
 
     protected function render_post() {
         $this->render_post_header();
-        $this->render_avatar();
-        $this->render_content();
+          $this->render_wrap_main_start();
+            $this->render_avatar();
+            $this->render_content();
+          $this->render_wrap_main_end();
+          $this->render_bottom();
+        $this->render_post_footer();
     }
 
 }
