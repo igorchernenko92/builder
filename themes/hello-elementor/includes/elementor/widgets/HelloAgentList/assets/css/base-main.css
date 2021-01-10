@@ -327,6 +327,9 @@
     align-items: center;
     justify-content: space-between;
 }
+.hl-agent__socials {
+    list-style: none;
+}
 .hl-agents-4 .hl-agent__socials {
     display: flex;
     align-items: center;
