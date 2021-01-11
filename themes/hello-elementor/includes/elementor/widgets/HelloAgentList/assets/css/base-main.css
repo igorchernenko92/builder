@@ -269,7 +269,7 @@
         padding: 20px 18px !important;
     }
 
-    .hl-agents-3.hl-agents-4 .hl-agent__bottom {
+    .hl-agents-3.hl-agents-4:not(.hl-agents-3_small) .hl-agent__bottom {
         padding: 14px 18px 0 18px;
         margin: 0 -18px;
     }
