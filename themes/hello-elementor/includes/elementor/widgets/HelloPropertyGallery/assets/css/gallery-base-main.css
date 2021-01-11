@@ -448,6 +448,14 @@ ol {
         display: block;
     }
 }
+
+@media(max-width: 768px) {
+    .hl-gallery__list-item {
+        max-width: 100%;
+        padding: 0;
+        margin-bottom: 0;
+    }
+}
 /* Skin 2 END */
 
 
