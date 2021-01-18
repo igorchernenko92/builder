@@ -63,16 +63,14 @@ class Widget_Manager {
         include_once( 'widgets/HelloMap/HelloGoogleMap.php' );
         include_once( 'widgets/HelloSearchFilter/HelloSearchFilter.php' );
         include_once( 'widgets/HelloPropertyDetails/HelloPropertyDetails.php' );
-//        include_once( 'widgets/HelloPropertyFeatures/HelloPropertyFeatures.php' );
         include_once( 'widgets/HelloPropertyFeatures.php' );
         include_once( 'widgets/HelloPropertySlider/HelloPropertySlider.php' );
+        include_once( 'widgets/HelloBreadcrumbs/HelloBreadcrumbs.php' );
         include_once( 'widgets/HelloPropertyPrice.php' );
         include_once( 'widgets/HelloPropertyStatus.php' );
-//
-        include_once( 'widgets/ListingDetails.php' );
 
+        include_once( 'widgets/ListingDetails.php' );
         include_once( 'widgets/hello-max-width.php' );
-        include_once( 'widgets/hello-responsive-custom-positioning.php' );
 
     }
 
@@ -88,7 +86,6 @@ class Widget_Manager {
         $this->include_widgets_files();
 
         // Register Widgets
-
        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloMap\HelloGoogleMap() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\ListingDetails() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\Property\Property() );
@@ -96,8 +93,8 @@ class Widget_Manager {
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\Agents\HelloAgents() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloSearchFilter\HelloSearchFilter() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloPropertyDetails\HelloPropertyDetails() );
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloBreadcrumbs\HelloBreadcrumbs() );
 
-//        \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloPropertyFeatures\HelloPropertyFeatures() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloPropertyFeatures() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloPropertySlider\HelloPropertySlider() );
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\HelloPropertyPrice() );
