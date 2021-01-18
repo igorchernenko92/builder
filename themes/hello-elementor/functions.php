@@ -398,20 +398,22 @@ function status_term_default_value() {
 }
 
 function recurse_copy($src,$dst) {
-    $dir = opendir($src);
-    @mkdir($dst);
-    while(false !== ( $file = readdir($dir)) ) {
-        if (( $file != '.' ) && ( $file != '..' )) {
-            if ( is_dir($src . '/' . $file) ) {
-                recurse_copy($src . '/' . $file,$dst . '/' . $file);
-            }
-            else {
-                copy($src . '/' . $file,$dst . '/' . $file);
+    if ($dir = opendir($src)) {
+        @mkdir($dst);
+        while (false !== ($file = readdir($dir))) {
+            if (($file != '.') && ($file != '..')) {
+                if (is_dir($src . '/' . $file)) {
+                    recurse_copy($src . '/' . $file, $dst . '/' . $file);
+                } else {
+                    copy($src . '/' . $file, $dst . '/' . $file);
+                }
             }
         }
+        closedir($dir);
     }
-    closedir($dir);
 }
+
+//var_dump(get_current_blog_id());
 
 
 //add_action( 'init', 'copy_media' );
@@ -547,28 +549,6 @@ function siteAndUserCreation($user_id, $provider) {
     update_option( 'elementor_cpt_support', $cpt_support );
     update_media_gallery_for_properties();
 
-    //migrate default kit setting from main site
-//    global $wpdb;
-//    $main_active_kit = $wpdb->get_results( "SELECT * FROM wp_options WHERE option_name = 'elementor_active_kit'" );
-//    $site_active_kit = $wpdb->get_results( "SELECT * FROM wp_".$blog_id."_options WHERE option_name = 'elementor_active_kit'" );
-//    $main_active_kit_id = $main_active_kit[0]->option_value;
-//    $site_active_kit_id = $site_active_kit[0]->option_value;
-//
-//
-//    $main_kit = $wpdb->get_results( "SELECT * FROM wp_postmeta WHERE post_id = " . $main_active_kit_id . " AND meta_key = '_elementor_page_settings'" );
-//    $site_kit = $wpdb->get_results( "SELECT * FROM wp_" . $blog_id . "_postmeta WHERE post_id = " . $site_active_kit_id . " AND meta_key = '_elementor_page_settings'" );
-//    $main_kit_data = $main_kit[0]->meta_value;
-//
-//
-//    if ( !$site_kit ) {
-//        $wpdb->insert( 'wp_'.$blog_id.'_postmeta', array( "meta_value" => $main_kit_data, 'post_id' => $site_active_kit_id, 'meta_key' => '_elementor_page_settings'), array( '%s', '%d', '%s' ) );
-//        Elementor\Plugin::$instance->files_manager->clear_cache();
-//    }
-
-
-
-
-
     add_filter($provider->getId() . '_register_redirect_url', function () use ($location) {
         return $location;
     });
@@ -703,7 +683,6 @@ function update_elementor_style_kit() {
     }
 }
 
-
 //delete_option(get_current_blog_id(). '_check_media_files') ;
 //check if media files are copied. I don't know why but it's not working from site migration function
 add_action( 'init', 'check_media_files' );
@@ -711,7 +690,7 @@ function check_media_files() {
     $option_name = get_current_blog_id() . '_check_media_files';
     if ( !get_option($option_name) ) {
 //        TODO: get the path via vars
-        recurse_copy('/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/2020/', '/home/508171.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/sites/' . get_current_blog_id() . '/2020');
+        recurse_copy('/home/534553.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/2020/', '/home/534553.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/sites/' . get_current_blog_id() . '/2020');
         update_option($option_name, 'true');
         update_elementor_locations(); // update it once after import
         update_option( 'elementor_active_kit', 5321 );
@@ -794,10 +773,6 @@ function prevent_export_url_access1() {
             }
         </style>
   <?php  }
-
-
-
-
 }
 
 
