@@ -456,3 +456,31 @@
 .hl-agents-4 {}
 .hl-agents-4 {}
 /* Skin 4 END */
+
+
+.sticky-agent .hl-agent__bottom {
+    display: none !important;
+}
+
+.sticky-agent .hl-agent__position {
+    display: none !important;
+}
+
+.sticky-agent .hl-agents-3.hl-agents-3_small .hl-agent__wrap-img {
+    width: 60px !important;
+    height: 60px !important;
+}
+
+.sticky-agent .hl-agents-4 .hl-agent__title {
+    font-size: 16px !important;
+    line-height: 16px !important;
+}
+
+.sticky-agent .hl-agents-4 .hl-agent__position {
+    font-size: 14px !important;
+    line-height: 14px !important;
+}
+
+.sticky-agent .hl-agents-3.hl-agents-3_small .hl-agents-main {
+    margin-bottom: 0 !important;
+}

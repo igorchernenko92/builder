@@ -73,7 +73,7 @@ class HelloPropertyStatus extends Widget_Base {
 	 * @return array Widget keywords.
 	 */
 	public function get_keywords() {
-		return [ 'icon box', 'icon' ];
+		return [ 'icon box', 'icon', 'hello', 'status', 'property' ];
 	}
 
 	/**
@@ -88,63 +88,76 @@ class HelloPropertyStatus extends Widget_Base {
 		$this->start_controls_section(
 			'section_icon',
 			[
-				'label' => __( 'Hello Price', 'elementor' ),
+				'label' => __( 'Hello Property Status', 'elementor' ),
 			]
 		);
 
 
-        $this->add_responsive_control(
-            'text_align',
-            [
-                'label' => __( 'Alignment', 'elementor' ),
-                'type' => Controls_Manager::CHOOSE,
-                'options' => [
-                    'left' => [
-                        'title' => __( 'Left', 'elementor' ),
-                        'icon' => 'eicon-text-align-left',
-                    ],
-                    'center' => [
-                        'title' => __( 'Center', 'elementor' ),
-                        'icon' => 'eicon-text-align-center',
-                    ],
-                    'right' => [
-                        'title' => __( 'Right', 'elementor' ),
-                        'icon' => 'eicon-text-align-right',
-                    ],
-                    'justify' => [
-                        'title' => __( 'Justified', 'elementor' ),
-                        'icon' => 'eicon-text-align-justify',
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .elementor-widget-container' => 'text-align: {{VALUE}};',
-                ],
-            ]
-        );
-
-
-
         $this->add_control(
-            'title_color',
+            'property_status_border_radius',
             [
-                'label' => __( 'Color', 'elementor' ),
-                'type' => Controls_Manager::COLOR,
-                'default' => '',
+                'label' => __( 'Border Radius', 'elementor-pro' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%' ],
                 'selectors' => [
-                    '{{WRAPPER}} .hl-listing-price__value, {{WRAPPER}} .hl-listing-price__label' => 'color: {{VALUE}};',
-                ],
-                'scheme' => [
-                    'type' => Schemes\Color::get_type(),
-                    'value' => Schemes\Color::COLOR_1,
-                ],
+                    '{{WRAPPER}} .hl-listing-status__inner' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ]
             ]
         );
+
+
+//        $this->add_responsive_control(
+//            'text_align',
+//            [
+//                'label' => __( 'Alignment', 'elementor' ),
+//                'type' => Controls_Manager::CHOOSE,
+//                'options' => [
+//                    'left' => [
+//                        'title' => __( 'Left', 'elementor' ),
+//                        'icon' => 'eicon-text-align-left',
+//                    ],
+//                    'center' => [
+//                        'title' => __( 'Center', 'elementor' ),
+//                        'icon' => 'eicon-text-align-center',
+//                    ],
+//                    'right' => [
+//                        'title' => __( 'Right', 'elementor' ),
+//                        'icon' => 'eicon-text-align-right',
+//                    ],
+//                    'justify' => [
+//                        'title' => __( 'Justified', 'elementor' ),
+//                        'icon' => 'eicon-text-align-justify',
+//                    ],
+//                ],
+//                'selectors' => [
+//                    '{{WRAPPER}} .elementor-widget-container' => 'text-align: {{VALUE}};',
+//                ],
+//            ]
+//        );
+
+
+
+//        $this->add_control(
+//            'title_color',
+//            [
+//                'label' => __( 'Color', 'elementor' ),
+//                'type' => Controls_Manager::COLOR,
+//                'default' => '',
+//                'selectors' => [
+//                    '{{WRAPPER}} .hl-listing-price__value, {{WRAPPER}} .hl-listing-price__label' => 'color: {{VALUE}};',
+//                ],
+//                'scheme' => [
+//                    'type' => Schemes\Color::get_type(),
+//                    'value' => Schemes\Color::COLOR_1,
+//                ],
+//            ]
+//        );
 
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
                 'name' => 'title_typography',
-                'selector' => '{{WRAPPER}} .hl-listing-price__value, {{WRAPPER}} .hl-listing-price__label',
+                'selector' => '{{WRAPPER}} .hl-listing-status__inner',
                 'scheme' => Schemes\Typography::TYPOGRAPHY_1,
             ]
         );
@@ -173,6 +186,12 @@ class HelloPropertyStatus extends Widget_Base {
 	 */
 	protected function render() {
 		$settings = $this->get_settings_for_display();
+
+		echo '<style>
+            .hl-listing-status__inner {
+                padding: 7px 21px !important;
+            }
+        </style>';
 
 		echo builder_get_property_status();
 	}

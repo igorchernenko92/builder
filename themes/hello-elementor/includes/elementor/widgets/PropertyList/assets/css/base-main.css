@@ -357,7 +357,6 @@ ol {
     background-color: #274abb;
     color: #fff;
     text-align: center;
-    line-height: 19px;
     transition: opacity var(--default-transition);
     font-weight: 600;
     padding: 6px 14px;
@@ -1277,6 +1276,7 @@ ol {
     border-radius: 12px;
     border: 1px solid rgba(0, 0, 0, 0.09);
     overflow: hidden;
+    font-family: "Gotham Pro", sans-serif;
 }
 
 .hl-listing-card_skin-4:hover .hl-listing-card__picture-preview {
@@ -1460,7 +1460,7 @@ ol {
 .hl-listing-card_skin-4 .hl-listing-card__title,
 .hl-listing-card_skin-4 .hl-listing-card__title a {
     margin: 0;
-    font-weight: bold;
+    font-weight: 600;
     display: block;
     font-size: 18px;
     line-height: 20px;
@@ -1487,7 +1487,8 @@ ol {
 @media (max-width: 576px) {
     .hl-listing-card_skin-4 .hl-listing-card__title,
     .hl-listing-card_skin-4 .hl-listing-card__title a {
-        font-size: 16px;
+        font-size: 20px;
+        line-height: 22px;
     }
 
     .hl-listing-card_skin-4 .hl-listing-wrap-price {
@@ -1495,7 +1496,7 @@ ol {
     }
 
     .hl-listing-card_skin-4 .hl-listing-price {
-        font-size: 14px;
+        font-size: 15px;
     }
 }
 
@@ -1546,7 +1547,7 @@ ol {
 
 @media (max-width: 768px) {
     .hl-listing-card_skin-4 .hl-listing-card__info-value {
-        font-size: 11px;
+        font-size: 14px;
         text-align: center;
     }
 }
@@ -1625,7 +1626,7 @@ ol {
     }
 
     .hl-listing-card_skin-4 .hl-listing-card__agent-name {
-        font-size: 12px;
+        font-size: 13px;
     }
 
     .hl-listing-card_skin-4 .hl-listing-card__bottom-inner {
@@ -1633,7 +1634,7 @@ ol {
     }
 
     .hl-listing-card_skin-4 .hl-listing-card__bottom-item-text {
-        font-size: 12px;
+        font-size: 13px;
     }
 }
 

@@ -906,4 +906,15 @@ body.rtl #comments ol.comment-list .children:before {
     float: right; } }
 
 /* end theme css*/
+@media (max-width: 767px) {
+  .elementor-widget-icon-box.post-location .elementor-icon-box-wrapper {
+    display: flex !important;
+    align-items: center !important;
+  }
 
+
+  .elementor-widget-icon-box.post-location .elementor-icon-box-icon {
+    margin-right: 6px !important;
+  }
+
+}
