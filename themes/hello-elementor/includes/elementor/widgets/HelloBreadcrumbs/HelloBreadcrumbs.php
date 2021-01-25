@@ -84,6 +84,24 @@ class HelloBreadcrumbs extends Widget_Base {
             ]
         );
 
+        $this->add_control(
+            'hello_breadcrumbs_current_color',
+            [
+                'label' => __( 'Current Color', 'elementor' ),
+                'type' => Controls_Manager::COLOR,
+                'scheme' => [
+                    'type' => Schemes\Color::get_type(),
+                    'value' => Schemes\Color::COLOR_1,
+                ],
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .hello_breadcrumbs_block' => 'color: {{VALUE}} !important;'
+                ],
+            ]
+        );
+
+
+
 
 
 
@@ -94,11 +112,11 @@ class HelloBreadcrumbs extends Widget_Base {
 	protected function hello_breadCrumbs() {
         $pageNum = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
 
-        $separator = '<span> > </span>'; //  »
+        $separator = '<span> / </span>';
 
         global $post;
 
-        if( is_front_page() ){
+        if( is_front_page() ) {
 
 //            if( $pageNum > 1 ) {
 //                echo '<a href="' . site_url() . '">Главная</a>' . $separator . $pageNum . '-я страница';
@@ -111,7 +129,7 @@ class HelloBreadcrumbs extends Widget_Base {
             echo '<a href="' . site_url() . '">Home</a>' . $separator;
 
             if( is_single() ) {
-                the_category(', '); echo $separator; the_title();
+                the_title();
             } 
             elseif ( is_tax() ){
 
@@ -134,7 +152,7 @@ class HelloBreadcrumbs extends Widget_Base {
                     echo join( $separator, array_reverse( $breadcrumbs ) ) . $separator;
                 }
 
-               echo '<span>' . get_the_title() . '</span>';
+               echo  get_the_title();
 
             } elseif ( is_category() ) {
 
@@ -165,7 +183,7 @@ class HelloBreadcrumbs extends Widget_Base {
                 $userdata = get_userdata($author);
                 echo 'Author: ' . $userdata->display_name;
 
-            } elseif ( is_404() ) { // если страницы не существует
+            } elseif ( is_404() ) {
 
                 echo '404';
 
