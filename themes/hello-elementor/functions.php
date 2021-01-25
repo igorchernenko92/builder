@@ -24,6 +24,9 @@ use Elementor\Core\Responsive\Files\Frontend;
 //
 //}
 
+
+define("UPLOAD_PATH",     "/home/534553.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads");
+
 if ( ! did_action( 'elementor/loaded' ) ) {
 //    add_action( 'admin_notices', 'admin_notice_missing_main_plugin' );
     return;
@@ -492,6 +495,7 @@ function import_data($blog_id) {
     $agent = trailingslashit( WP_CONTENT_DIR ) . 'uploads/agents.xml';
     $menu = trailingslashit( WP_CONTENT_DIR ) . 'uploads/menu.xml';
     $media = trailingslashit( WP_CONTENT_DIR ) . 'uploads/media.xml';
+    $media = trailingslashit( WP_CONTENT_DIR ) . 'uploads/fonts.xml';
 
 //  prevent outputting
     ob_start();
@@ -704,11 +708,29 @@ function check_media_files() {
 }
 
 
-
+//do not know if this works
 add_filter( 'elementor_pro/custom_fonts/font_display', function( $current_value, $font_family, $data ) {
     return 'swap';
 }, 10, 3 );
 
+
+
+/*
+ * php delete function that deals with directories recursively
+ */
+function delete_files($target) {
+    if(is_dir($target)){
+        $files = glob( $target . '*', GLOB_MARK ); //GLOB_MARK adds a slash to directories returned
+
+        foreach( $files as $file ){
+            delete_files( $file );
+        }
+
+        rmdir( $target );
+    } elseif(is_file($target)) {
+        unlink( $target );
+    }
+}
 
 
 
@@ -722,6 +744,9 @@ function action_function_name_3048( $old_site ){
     global $wpdb;
     $blog_id = $old_site->blog_id;
 
+//    delete files recursively
+    delete_files(UPLOAD_PATH . '/sites/' . get_current_blog_id());
+
     $prep_query = $wpdb->prepare("SELECT table_name FROM information_schema.TABLES WHERE table_name LIKE %s;", $wpdb->esc_like("{$wpdb->base_prefix}{$blog_id}_") . '%');
     $table_list = $wpdb->get_results($prep_query, ARRAY_A);
 
@@ -733,6 +758,8 @@ function action_function_name_3048( $old_site ){
     }
 }
 
+
+//var_dump(UPLOAD_PATH . '/sites/' . get_current_blog_id());
 
 add_action( 'admin_menu', 'remove_import_menu' );
 function remove_import_menu() {
@@ -774,6 +801,11 @@ function prevent_export_url_access1() {
         </style>
   <?php  }
 }
+
+
+
+
+
 
 
 
