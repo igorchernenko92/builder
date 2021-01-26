@@ -177,3 +177,10 @@ Widget_Manager::instance();
 
 
 
+add_filter( 'elementor_pro/custom_fonts/font_display', function( $current_value, $font_family, $data ) {
+    return 'swap';
+}, 10, 3 );
+
+
+
+
