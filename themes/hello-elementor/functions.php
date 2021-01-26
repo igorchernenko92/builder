@@ -373,25 +373,6 @@ add_action( 'wp_footer', function () { ?>
 <?php } );
 
 
-
-//global $wpdb;
-//
-//$el_data = $wpdb->get_results( "SELECT * FROM wp_postmeta WHERE post_id = 2889" );
-//$fields_to_update = ['_elementor_controls_usage', '_elementor_css', '_elementor_data'];
-//
-//for ( $i = 0; $i < count($el_data); $i++ ) {
-//    if ( in_array($el_data[$i]->meta_key, $fields_to_update)) {
-//        $wpdb->update( 'wp_200_postmeta',
-//            array( "meta_value" => $el_data[$i]->meta_value, ),
-//            array( 'post_id' => 2889, 'meta_key' => $el_data[$i]->meta_key ),
-//            array( '%s' ),
-//            array( '%d', '%s' ) );
-//    }
-//}
-//Plugin::$instance->files_manager->clear_cache();
-
-//copy( wp_upload_dir()['basedir'] . '/elementor/css/post-2889.css',  wp_upload_dir()['basedir'] . '/sites/200/elementor/css/post-2889.css');
-
 function status_term_default_value() {
     $term_rent = get_term_by('slug', 'for-rent', 'status');
     $term_sale = get_term_by('slug', 'for-sale', 'status');
