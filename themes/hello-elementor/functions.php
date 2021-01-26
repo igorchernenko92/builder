@@ -495,7 +495,7 @@ function import_data($blog_id) {
     $agent = trailingslashit( WP_CONTENT_DIR ) . 'uploads/agents.xml';
     $menu = trailingslashit( WP_CONTENT_DIR ) . 'uploads/menu.xml';
     $media = trailingslashit( WP_CONTENT_DIR ) . 'uploads/media.xml';
-    $media = trailingslashit( WP_CONTENT_DIR ) . 'uploads/fonts.xml';
+    $fonts = trailingslashit( WP_CONTENT_DIR ) . 'uploads/fonts.xml';
 
 //  prevent outputting
     ob_start();
@@ -505,6 +505,7 @@ function import_data($blog_id) {
     $import->import($agent);
     $import->import($menu);
     $import->import($media);
+    $import->import($fonts);
 
     //prevent outputting
     ob_end_clean();
@@ -553,6 +554,13 @@ function siteAndUserCreation($user_id, $provider) {
     update_option( 'elementor_cpt_support', $cpt_support );
     update_media_gallery_for_properties();
 
+//  change url for proper fonts work
+    $meta_values = get_post_meta( 6121, 'elementor_font_files', true );
+    $site_url =  str_replace('https://', '', get_site_url());
+    $arrayToSave = json_decode(str_replace('buildable.pro', $site_url, json_encode($meta_values)), true);
+    update_post_meta(6121, 'elementor_font_files', $arrayToSave);
+
+
     add_filter($provider->getId() . '_register_redirect_url', function () use ($location) {
         return $location;
     });
@@ -570,6 +578,8 @@ function my_class_names($classes) {
     return $classes;
 }
 
+
+//TODO: move it to proper place
 add_action( 'elementor/element/column/layout/before_section_end', 'add_responsive_column_order', 10, 2 );
 function add_responsive_column_order( $element, $args ) {
     $element->add_responsive_control(
