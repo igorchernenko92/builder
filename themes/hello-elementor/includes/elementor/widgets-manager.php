@@ -121,6 +121,21 @@ class Widget_Manager {
 
     }
 
+
+    public function add_responsive_column_order( $element ) {
+        $element->add_responsive_control(
+            'responsive_column_order',
+            [
+                'label' => __( 'Responsive Column Order', 'bleye-elementor-extras' ),
+                'type' => \Elementor\Controls_Manager::NUMBER,
+                'separator' => 'before',
+                'selectors' => [
+                    '{{WRAPPER}}' => '-webkit-order: {{VALUE}}; -ms-flex-order: {{VALUE}}; order: {{VALUE}};',
+                ],
+            ]
+        );
+    }
+
     /**
      *  Widget_Manager class constructor
      *
@@ -135,21 +150,20 @@ class Widget_Manager {
         add_action(
             'elementor/documents/register',
             function( $manager ) {
-
                 $manager->register_document_type( 'property-archive', PropertyArchive::get_class_full_name() );
-
             }
         );
 
         add_action(
             'elementor/theme/register_conditions',
             function( $manager ) {
-
                 $listings = new Property();
-
                 $manager->get_condition( 'general' )->register_sub_condition( $listings );
             }
         );
+
+        // Add responsive columns
+        add_action( 'elementor/element/column/layout/before_section_end', [ $this, 'add_responsive_column_order' ] );
 
         // Register widgets
         add_action( 'elementor/widgets/widgets_registered', [ $this, 'register_widgets' ] );

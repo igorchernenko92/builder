@@ -44,6 +44,7 @@ if ( ! isset( $content_width ) ) {
     $content_width = 800; // Pixels.
 }
 add_filter( 'big_image_size_threshold', '__return_false' );
+
 if ( ! function_exists( 'hello_elementor_setup' ) ) {
     /**
      * Set up theme support.
@@ -560,25 +561,6 @@ function my_class_names($classes) {
 }
 
 
-//TODO: move it to proper place
-add_action( 'elementor/element/column/layout/before_section_end', 'add_responsive_column_order', 10, 2 );
-function add_responsive_column_order( $element, $args ) {
-    $element->add_responsive_control(
-        'responsive_column_order',
-        [
-            'label' => __( 'Responsive Column Order', 'bleye-elementor-extras' ),
-            'type' => \Elementor\Controls_Manager::NUMBER,
-            'separator' => 'before',
-            'selectors' => [
-                '{{WRAPPER}}' => '-webkit-order: {{VALUE}}; -ms-flex-order: {{VALUE}}; order: {{VALUE}};',
-            ],
-        ]
-    );
-}
-
-
-
-
 add_filter('manage_property_posts_columns', 'property_table_head');
 function property_table_head( $defaults ) {
     unset($defaults['title']);
@@ -638,7 +620,6 @@ add_action( 'init', 'check_media_files' );
 function check_media_files() {
     $option_name = get_current_blog_id() . '_check_media_files';
     if ( !get_option($option_name) ) {
-//        TODO: get the path via vars
         recurse_copy(UPLOAD_PATH . '/2020/', UPLOAD_PATH . '/sites/' . get_current_blog_id() . '/2020');
         update_option($option_name, 'true');
         update_elementor_locations(); // update it once after import
@@ -746,11 +727,3 @@ function prevent_export_url_access1() {
         </style>
   <?php  }
 }
-
-
-
-
-
-
-
-
