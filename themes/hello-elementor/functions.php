@@ -25,7 +25,7 @@ use Elementor\Core\Responsive\Files\Frontend;
 //}
 
 
-define("UPLOAD_PATH",     "/home/534553.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads");
+define("UPLOAD_PATH", "/home/534553.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads");
 
 if ( ! did_action( 'elementor/loaded' ) ) {
 //    add_action( 'admin_notices', 'admin_notice_missing_main_plugin' );
@@ -685,7 +685,7 @@ function check_media_files() {
     $option_name = get_current_blog_id() . '_check_media_files';
     if ( !get_option($option_name) ) {
 //        TODO: get the path via vars
-        recurse_copy('/home/534553.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/2020/', '/home/534553.cloudwaysapps.com/fncvxcdrwb/public_html/wp-content/uploads/sites/' . get_current_blog_id() . '/2020');
+        recurse_copy(UPLOAD_PATH . '/2020/', UPLOAD_PATH . '/sites/' . get_current_blog_id() . '/2020');
         update_option($option_name, 'true');
         update_elementor_locations(); // update it once after import
         update_option( 'elementor_active_kit', 5321 );
@@ -726,7 +726,7 @@ function delete_files($target) {
 
 
 /**
- * Cleanup orphaned tables during site deletion
+ * Cleanup orphaned tables and files during site deletion
  *
  * @param $blog_id
  */
