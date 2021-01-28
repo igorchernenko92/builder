@@ -79,6 +79,17 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
             ]
         );
 
+        $this->add_responsive_control(
+            'small_agent',
+            [
+                'label' => __( 'Small agent', 'elementor-pro' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_off' => __( 'False', 'elementor-pro' ),
+                'label_on' => __( 'True', 'elementor-pro' ),
+                'default' => 'no',
+                'return_value' => 'yes',
+            ]
+        );
 
         $this->add_responsive_control(
             'posts_per_page',
@@ -250,6 +261,9 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
     }
 
     protected function render_position() {
+        if ( $this->get_instance_value( 'small_agent' ) ) {
+            return;
+        }
         $spec = get_field('agent_specialties', $this->parent->get_the_id());
         if ($spec) { ?>
           <p class="hl-agent__position"><?php echo esc_html( $spec ) ?></p>
@@ -257,6 +271,9 @@ abstract class HelloAgentSkinBase extends Elementor_Skin_Base {
     }
 
     protected function render_description() {
+        if ( $this->get_instance_value( 'small_agent' ) ) {
+            return;
+        }
 	    $content = get_field('agent_description', $this->parent->get_the_id());
 	    if ($content = trim($content)) {
 	        ?>

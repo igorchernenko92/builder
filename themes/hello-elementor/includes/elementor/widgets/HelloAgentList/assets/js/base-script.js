@@ -29,12 +29,12 @@
       return slidesPerView;
     }
   
-    $(".hl-agents-3").each(function () {
-      const laptopCount = getPreViews($(this)).laptop
-      if (laptopCount === 1) {
-        $(this).addClass("hl-agents-3_small")
-      }
-    })
+    // $(".hl-agents-3").each(function () {
+    //   const laptopCount = getPreViews($(this)).laptop
+    //   if (laptopCount === 1) {
+    //     $(this).addClass("hl-agents-3_small")
+    //   }
+    // })
   };
 
   $(window).on('elementor/frontend/init', function () {

@@ -458,13 +458,13 @@
 /* Skin 4 END */
 
 
-.sticky-agent .hl-agent__bottom {
-    display: none !important;
-}
+/*.sticky-agent .hl-agent__bottom {*/
+/*    display: none !important;*/
+/*}*/
 
-.sticky-agent .hl-agent__position {
-    display: none !important;
-}
+/*.sticky-agent .hl-agent__position {*/
+/*    display: none !important;*/
+/*}*/
 
 .sticky-agent .hl-agents-3.hl-agents-3_small .hl-agent__wrap-img {
     width: 60px !important;
@@ -483,4 +483,13 @@
 
 .sticky-agent .hl-agents-3.hl-agents-3_small .hl-agents-main {
     margin-bottom: 0 !important;
+}
+
+
+.hl-agents-3_small .hl-agents-main {
+    border-top: none !important;
+}
+
+.hl-agents-3_small .hl-agent__title {
+    border-top: none !important;
 }

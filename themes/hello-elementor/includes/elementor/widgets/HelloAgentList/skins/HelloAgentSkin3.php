@@ -38,12 +38,19 @@ class HelloAgentSkin3 extends HelloAgentSkinBase {
   }
 
     public function render_agents_top() {
+        $class = 'hl-agents-3 hl-agents-4';
+        if ( $this->get_instance_value( 'small_agent' ) ) {
+            $class .= ' hl-agents-3_small';
+        }
         ?>
-            <div class='hl-agents-3 hl-agents-4'>
+            <div class='<?php echo $class; ?>'>
         <?php
     }
 
     protected function render_bottom() {
+         if ( $this->get_instance_value( 'small_agent' ) ) {
+             return;
+         }
         ?>
           <div class="hl-agent__bottom">
             <ul class="hl-agent__socials">
@@ -91,6 +98,7 @@ class HelloAgentSkin3 extends HelloAgentSkinBase {
         $this->render_position();
         $this->render_description();
         $this->render_bottom();
+
       echo "</div>";
     }
 
