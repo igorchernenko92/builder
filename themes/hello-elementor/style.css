@@ -918,3 +918,8 @@ body.rtl #comments ol.comment-list .children:before {
   }
 
 }
+
+
+.elementor-nav-menu ul ul a, .elementor-nav-menu ul ul a:hover, .elementor-nav-menu ul ul a:focus, .elementor-nav-menu ul ul a:active {
+  border-left: 0 !important;
+}
