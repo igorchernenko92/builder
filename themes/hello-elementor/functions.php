@@ -508,7 +508,14 @@ function siteAndUserCreation($user_id, $provider) {
 
     $blog_id = wpmu_create_blog( $newdomain, '/', $randName, $user_id);
     $location = get_site_url( $blog_id, '', '' );  // send link to front
+
+
+
     switch_to_blog( $blog_id );
+
+    $user = new \WP_User( $user_id );
+    $user->set_role( 'admin' );
+
 
     if ( ! class_exists( 'WP_Importer' ) ) {
         $class_wp_importer = ABSPATH . 'wp-admin/includes/class-wp-importer.php';
@@ -723,3 +730,20 @@ function prevent_export_url_access1() {
 
 add_filter( 'auto_update_plugin', '__return_false' );
 add_filter( 'auto_update_theme', '__return_false' );
+
+// $user = wp_get_current_user();
+//var_dump($user->roles);
+
+
+//remove unnecessary admin page lings for admin user
+add_action('admin_init', 'remove_options_page', 99);
+function remove_options_page() {
+    $user = wp_get_current_user();
+
+    if (in_array('admin',  $user->roles, true)) {
+        remove_submenu_page('options-general.php', 'nextend-social-login');
+    }
+
+
+
+}
