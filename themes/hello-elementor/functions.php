@@ -493,7 +493,7 @@ function import_data($blog_id) {
     ob_end_clean();
 }
 
-//var_dump(get_current_blog_id());
+add_action('nsl_register_new_user', 'siteAndUserCreation', 10, 2);
 function siteAndUserCreation($user_id, $provider) {
     delete_user_option( $user_id, 'capabilities' );
     delete_user_option( $user_id, 'user_level' );
@@ -563,8 +563,20 @@ function siteAndUserCreation($user_id, $provider) {
     });
 
 }
-add_action('nsl_register_new_user', 'siteAndUserCreation', 10, 2);
 
+
+
+add_action('nsl_login', 'user_social_login', 10, 2);
+
+function user_social_login($user_id, $provider) {
+    $user_blogs = get_blogs_of_user($user_id);
+    $user_first_blog = array_shift($user_blogs);
+    $location = $user_first_blog->siteurl;
+
+    add_filter($provider->getId() . '_login_redirect_url', function () use ($location) {
+        return $location;
+    });
+}
 
 
 add_filter('body_class','my_class_names');
@@ -749,7 +761,7 @@ function remove_options_page() {
     $user = wp_get_current_user();
 
     if (in_array('admin',  $user->roles, true)) {
-        remove_submenu_page('options-general.php', 'nextend-social-login');
+//        remove_submenu_page('options-general.php', 'nextend-social-login');
         remove_submenu_page('elementor', 'elementor-role-manager');
         remove_menu_page('members');
     }
