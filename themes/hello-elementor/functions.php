@@ -742,6 +742,8 @@ function remove_options_page() {
 
     if (in_array('admin',  $user->roles, true)) {
         remove_submenu_page('options-general.php', 'nextend-social-login');
+        remove_submenu_page('elementor', 'elementor-role-manager');
+        remove_menu_page('members');
     }
 
 
