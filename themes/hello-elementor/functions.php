@@ -509,10 +509,8 @@ function siteAndUserCreation($user_id, $provider) {
     $blog_id = wpmu_create_blog( $newdomain, '/', $randName, $user_id);
     $location = get_site_url( $blog_id, '', '' );  // send link to front
 
-
-
     switch_to_blog( $blog_id );
-
+//    set role for more control
     $user = new \WP_User( $user_id );
     $user->set_role( 'admin' );
 
@@ -532,6 +530,13 @@ function siteAndUserCreation($user_id, $provider) {
     copy_media($blog_id, $newdomain, $user_id);
     import_data($blog_id);
 
+    wp_delete_post(8265, true);
+    wp_delete_post(3249, true);
+    wp_delete_post(8144, true);
+    wp_delete_post(2801, true);
+    wp_delete_post(819, true);
+    wp_delete_post(2110, true);
+
 
     $homepage = get_page_by_title( 'Home page 1' );
     if ( $homepage ) {
@@ -548,6 +553,9 @@ function siteAndUserCreation($user_id, $provider) {
     $site_url =  str_replace('https://', '', get_site_url());
     $arrayToSave = json_decode(str_replace('buildable.pro', $site_url, json_encode($meta_values)), true);
     update_post_meta(6121, 'elementor_font_files', $arrayToSave);
+
+//    disable elementor debugger
+    update_option( 'elementor_enable_inspector', '' );
 
 
     add_filter($provider->getId() . '_register_redirect_url', function () use ($location) {
@@ -745,7 +753,4 @@ function remove_options_page() {
         remove_submenu_page('elementor', 'elementor-role-manager');
         remove_menu_page('members');
     }
-
-
-
 }
