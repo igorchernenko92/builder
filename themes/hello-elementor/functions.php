@@ -766,3 +766,18 @@ function remove_options_page() {
         remove_menu_page('members');
     }
 }
+
+
+add_action('wp_logout','ps_redirect_after_logout');
+function ps_redirect_after_logout(){
+    wp_redirect( get_site_url() );
+    exit();
+}
+
+add_action( 'signup_header', 'rbz_prevent_multisite_signup' );
+
+function rbz_prevent_multisite_signup()
+{
+    wp_redirect( site_url() );
+    die();
+}

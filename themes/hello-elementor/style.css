@@ -912,14 +912,15 @@ body.rtl #comments ol.comment-list .children:before {
     align-items: center !important;
   }
 
-
   .elementor-widget-icon-box.post-location .elementor-icon-box-icon {
     margin-right: 6px !important;
   }
-
 }
 
-
 .elementor-nav-menu ul ul a, .elementor-nav-menu ul ul a:hover, .elementor-nav-menu ul ul a:focus, .elementor-nav-menu ul ul a:active {
+  border-left: 0 !important;
+}
+
+ul.elementor-nav-menu--dropdown a, ul.elementor-nav-menu--dropdown a:hover, ul.elementor-nav-menu--dropdown a:focus  {
   border-left: 0 !important;
 }
