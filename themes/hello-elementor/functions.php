@@ -382,24 +382,6 @@ function status_term_default_value() {
     update_field( 'status_color', '#1348c2', $term_sale );
 }
 
-function recurse_copy($src,$dst) {
-    if ($dir = opendir($src)) {
-        @mkdir($dst);
-        while (false !== ($file = readdir($dir))) {
-            if (($file != '.') && ($file != '..')) {
-                if (is_dir($src . '/' . $file)) {
-                    recurse_copy($src . '/' . $file, $dst . '/' . $file);
-                } else {
-                    copy($src . '/' . $file, $dst . '/' . $file);
-                }
-            }
-        }
-        closedir($dir);
-    }
-}
-
-//var_dump(get_current_blog_id());
-
 
 //add_action( 'init', 'copy_media' );
 function copy_media($blog_id, $blog_url, $user_id) {
@@ -415,7 +397,6 @@ function copy_media($blog_id, $blog_url, $user_id) {
     $attachments = get_posts($args);
 //    restore_current_blog();
     switch_to_blog($blog_id);
-
 
     if($attachments) {
         foreach($attachments as $attachment) {
@@ -538,7 +519,7 @@ function siteAndUserCreation($user_id, $provider) {
     wp_delete_post(2110, true);
 
 
-    $homepage = get_page_by_title( 'Home page 1' );
+    $homepage = get_page_by_title( 'Home page' );
     if ( $homepage ) {
         update_option( 'page_on_front', $homepage->ID );
         update_option( 'show_on_front', 'page' );
@@ -641,13 +622,30 @@ function bs_property_table_content( $column_name, $post_id ) {
     }
 }
 
+function recurse_copy($src,$dst) {
+    if ($dir = opendir($src)) {
+        @mkdir($dst);
+        while (false !== ($file = readdir($dir))) {
+            if (($file != '.') && ($file != '..')) {
+                if (is_dir($src . '/' . $file)) {
+                    recurse_copy($src . '/' . $file, $dst . '/' . $file);
+                } else {
+                    copy($src . '/' . $file, $dst . '/' . $file);
+                }
+            }
+        }
+        closedir($dir);
+    }
+}
+
+
 //delete_option(get_current_blog_id(). '_check_media_files') ;
 //check if media files are copied. I don't know why but it's not working from site migration function
 add_action( 'init', 'check_media_files' );
 function check_media_files() {
     $option_name = get_current_blog_id() . '_check_media_files';
     if ( !get_option($option_name) ) {
-        recurse_copy(UPLOAD_PATH . '/2020/', UPLOAD_PATH . '/sites/' . get_current_blog_id() . '/2020');
+        recurse_copy(UPLOAD_PATH . '/2020/', UPLOAD_PATH . '/sites/' . get_current_blog_id() . '/2020/');
         update_option($option_name, 'true');
         update_elementor_locations(); // update it once after import
         update_option( 'elementor_active_kit', 5321 );
@@ -676,8 +674,6 @@ function delete_files($target) {
         unlink( $target );
     }
 }
-
-
 
 /**
  * Cleanup orphaned tables and files during site deletion
@@ -761,7 +757,7 @@ function remove_options_page() {
     $user = wp_get_current_user();
 
     if (in_array('admin',  $user->roles, true)) {
-//        remove_submenu_page('options-general.php', 'nextend-social-login');
+        remove_submenu_page('options-general.php', 'nextend-social-login');
         remove_submenu_page('elementor', 'elementor-role-manager');
         remove_menu_page('members');
     }
