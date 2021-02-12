@@ -46,6 +46,9 @@ if ( ! class_exists( 'Property_Builder' ) ) {
             // Include functions
             include( BUILDER_PLUGIN_DIR . '/functions/builder-properties.php' );
 
+            // Include wordpress pluggable
+            include( BUILDER_PLUGIN_DIR . '/functions/builder-notifications.php' );
+
 
             if ( is_admin() )
                 $this->admin = new Builder_Admin();
