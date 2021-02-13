@@ -727,7 +727,7 @@ function prevent_export_url_access() {
 add_action( 'admin_menu', 'prevent_export_url_access1' );
 
 function prevent_export_url_access1() {
-
+//    TODO: check if this get exist
     if  ( $_GET['post_type'] == 'elementor_library' ) {
 
         ?>
@@ -770,10 +770,29 @@ function ps_redirect_after_logout(){
     exit();
 }
 
-add_action( 'signup_header', 'rbz_prevent_multisite_signup' );
+add_action( 'signup_header', 'prevent_multisite_signup' );
 
-function rbz_prevent_multisite_signup()
+function prevent_multisite_signup()
 {
     wp_redirect( site_url() );
     die();
 }
+
+
+
+
+
+
+//add_action( 'init', 'action_function_name_11' );
+function action_function_name_11() {
+    $headers = array(
+        'From: <no-reply@buildable.pro>',
+        'content-type: text/html',
+        'Cc: <no-reply@buildable.pro>',
+        'Cc: no-reply@buildable.pro',
+    );
+    wp_mail('voodi92@gmail.com', 'site creation', 'site creation', $headers);
+}
+
+//wp_new_user_notification_email_admin
+//wp_new_user_notification_email
