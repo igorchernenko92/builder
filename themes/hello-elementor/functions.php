@@ -460,6 +460,8 @@ function import_data($blog_id) {
     $media = trailingslashit( WP_CONTENT_DIR ) . 'uploads/media.xml';
     $fonts = trailingslashit( WP_CONTENT_DIR ) . 'uploads/fonts.xml';
 
+//    $all = trailingslashit( WP_CONTENT_DIR ) . 'uploads/all.xml';
+
 //  prevent outputting
     ob_start();
     $import->import($templates);
@@ -537,6 +539,8 @@ function siteAndUserCreation($user_id, $provider) {
 
 //    disable elementor debugger
     update_option( 'elementor_enable_inspector', '' );
+
+    update_option('trp-ls-floater', 'no');
 
 
     add_filter($provider->getId() . '_register_redirect_url', function () use ($location) {
@@ -783,15 +787,18 @@ function prevent_multisite_signup()
 
 
 
-//add_action( 'init', 'action_function_name_11' );
+add_action( 'init', 'action_function_name_11' );
 function action_function_name_11() {
+    $agent = get_field('property_agent', get_the_ID());
+
+
     $headers = array(
         'From: <no-reply@buildable.pro>',
         'content-type: text/html',
         'Cc: <no-reply@buildable.pro>',
         'Cc: no-reply@buildable.pro',
     );
-    wp_mail('voodi92@gmail.com', 'site creation', 'site creation', $headers);
+//    wp_mail('voodi92@gmail.com', 'site creation', 'site creation', $headers);
 }
 
 //wp_new_user_notification_email_admin

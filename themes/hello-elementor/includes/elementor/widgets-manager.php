@@ -162,6 +162,31 @@ class Widget_Manager {
             }
         );
 
+        add_action( 'elementor_pro/init', function() {
+            include_once( 'form-actions/action_after_submit.php' );
+
+            $sendy_action = new Action_After_Submit();
+
+
+            \ElementorPro\Plugin::instance()->modules_manager->get_modules( 'forms' )->add_form_action( $sendy_action->get_name(), $sendy_action );
+        });
+
+
+        add_action( 'elementor/dynamic_tags/register_tags', function( $dynamic_tags ) {
+            // In our Dynamic Tag we use a group named request-variables so we need
+            // To register that group as well before the tag
+            \Elementor\Plugin::$instance->dynamic_tags->register_group( 'request-variables', [
+                'title' => 'Request Variables'
+            ] );
+
+            // Include the Dynamic tag class file
+            include_once( 'dynamic-tags/agent_email.php' );
+
+            // Finally register the tag
+            $dynamic_tags->register_tag( Builder_Agent_Email::class );
+        } );
+
+
         // Add responsive columns
         add_action( 'elementor/element/column/layout/before_section_end', [ $this, 'add_responsive_column_order' ] );
 
