@@ -22,7 +22,7 @@ class HelloPropertyGallery extends Widget_Base {
     public function __construct($data = [], $args = null) {
         parent::__construct($data, $args);
         wp_register_script('hello-property-gallery-script', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloPropertyGallery/assets/js/gallery-base-script.js', '', '1', true);
-        wp_register_style('hello-property-gallery-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloPropertyGallery/assets/css/gallery-base-main.css', '', 1);
+        wp_enqueue_style('hello-property-gallery-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloPropertyGallery/assets/css/gallery-base-main.css', '', 1);
     }
 
     public function get_script_depends() {

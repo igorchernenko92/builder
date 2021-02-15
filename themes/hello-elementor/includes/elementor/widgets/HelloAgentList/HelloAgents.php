@@ -44,7 +44,7 @@ class HelloAgents extends Widget_Base {
 
         parent::__construct($data, $args);
         wp_register_script('hello-carousel-agents-script', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloAgentList/assets/js/base-script.js', '', '1', true);
-        wp_register_style('hello-carousel-agents-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloAgentList/assets/css/base-main.css', '', 1);
+        wp_enqueue_style('hello-carousel-agents-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloAgentList/assets/css/base-main.css', '', 1);
     }
 
     public function get_meta() {

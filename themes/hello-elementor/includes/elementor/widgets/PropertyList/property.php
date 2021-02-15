@@ -29,7 +29,7 @@ class Property extends Property_Base {
 
         parent::__construct($data, $args);
         wp_register_script('hello-carousel-script', get_stylesheet_directory_uri() . '/includes/elementor/widgets/PropertyList/assets/js/base-script.js', '', '1', true);
-        wp_register_style('hello-carousel-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/PropertyList/assets/css/base-main.css', '', 1);
+        wp_enqueue_style('hello-carousel-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/PropertyList/assets/css/base-main.css', '', 1);
     }
 
     public function get_script_depends() {
