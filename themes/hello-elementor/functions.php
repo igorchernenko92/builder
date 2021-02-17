@@ -539,6 +539,9 @@ function siteAndUserCreation($user_id, $provider) {
 
 //    disable elementor debugger
     update_option( 'elementor_enable_inspector', '' );
+//   enable elementor optimized DOM
+    update_option( 'elementor_optimized_dom_output',  'enabled');
+
 
     update_option('trp-ls-floater', 'no');
 
