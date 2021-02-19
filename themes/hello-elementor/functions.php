@@ -540,10 +540,10 @@ function siteAndUserCreation($user_id, $provider) {
     $arrayToSave = json_decode(str_replace('buildable.pro', $site_url, json_encode($meta_values)), true);
     update_post_meta(6121, 'elementor_font_files', $arrayToSave);
 
-//    disable elementor debugger
+//  disable elementor debugger
     update_option( 'elementor_enable_inspector', '' );
-//   enable elementor optimized DOM
-    update_option( 'elementor_optimized_dom_output',  'enabled');
+//  enable elementor optimized DOM
+    update_option( 'elementor_experiment-e_dom_optimization',  'active');
 
 
     update_option('trp-ls-floater', 'no');
