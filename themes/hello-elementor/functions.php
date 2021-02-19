@@ -365,10 +365,13 @@ require get_template_directory() . '/acfe-php/group_5f11cc6d60bd4.php';
 
 //Have the option to remove delay on drop-down menu
 //https://github.com/elementor/elementor/issues/9400
+
+//TODO: move scripts to js file
 add_action( 'wp_footer', function () { ?>
     <script>
         jQuery(document).ready(function($) {
             $('.elementor-nav-menu--main > ul').attr('data-sm-options', '{ showTimeout: 0, hideTimeout: 0 }');
+            $('.builder-sticky').parent().css('align-items', 'flex-start');
         });
     </script>
 <?php } );
