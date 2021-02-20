@@ -1080,7 +1080,6 @@ abstract class Skin_Base extends Elementor_Skin_Base {
          if ( !$this->get_instance_value( 'hello_is_thumb_carousel' ) ) return;
 
         $thumbnail = get_the_post_thumbnail_url( get_the_ID(), 'large' );
-
         $gallery = get_field('property_gallery', get_the_ID() );
     ?>
 

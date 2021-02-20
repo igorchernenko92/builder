@@ -207,7 +207,7 @@ abstract class Skin_Base extends Elementor_Skin_Base {
         $attr = array(
             'class' => "hl-property-slider__item-bg",
         );
-        $thumbnail_url = get_the_post_thumbnail_url( $post_id, 'large', $attr );
+        $thumbnail_url = get_the_post_thumbnail_url( $post_id, 'full', $attr );
 
         ?>
             <div class="hl-property-slider__item swiper-lazy" data-background="<?php echo $thumbnail_url; ?>">
