@@ -123,7 +123,7 @@ pre {
 a {
   background-color: transparent;
   text-decoration: none;
-  color: #CC3366; }
+  color: #1348C2; }
   a:hover, a:active {
     color: #333366; }
   a:not([href]):not([tabindex]) {
@@ -398,7 +398,7 @@ button,
 [type="button"] {
   display: inline-block;
   font-weight: 400;
-  color: #CC3366;
+  color: #1348C2;
   text-align: center;
   white-space: nowrap;
   -webkit-user-select: none;
@@ -406,7 +406,7 @@ button,
       -ms-user-select: none;
           user-select: none;
   background-color: transparent;
-  border: 1px solid #CC3366;
+  border: 1px solid #1348C2;
   padding: 0.5rem 1rem;
   font-size: 1rem;
   border-radius: 3px;
@@ -424,7 +424,7 @@ button,
   [type="button"]:hover,
   [type="button"]:focus {
     color: #ffffff;
-    background-color: #CC3366;
+    background-color: #1348C2;
     text-decoration: none; }
   button:not(:disabled),
   [type="submit"]:not(:disabled),
@@ -923,4 +923,8 @@ body.rtl #comments ol.comment-list .children:before {
 
 ul.elementor-nav-menu--dropdown a, ul.elementor-nav-menu--dropdown a:hover, ul.elementor-nav-menu--dropdown a:focus  {
   border-left: 0 !important;
+}
+
+.cookie_action_close_header {
+  border-radius: 5px;
 }
