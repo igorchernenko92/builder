@@ -19,7 +19,9 @@ class HelloPropertySlider extends Base_Widget {
 
 		parent::__construct( $data, $args );
 //        wp_register_script('swiper', $this->wpacuGetSwiperJsUrl(), '', '1');
-        wp_register_script('hello-property-slider-script', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloPropertySlider/assets/js/base-script.js', ['swiper'], '1', true);
+//        wp_enqueue_script('jquery');
+//        wp_enqueue_script('swiper');
+        wp_register_script('hello-property-slider-script', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloPropertySlider/assets/js/base-script.js', '', '1', true);
 
 
         wp_register_style('hello-property-slider-style', get_stylesheet_directory_uri() . '/includes/elementor/widgets/HelloPropertySlider/assets/css/base-main.css', '', 1);

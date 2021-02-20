@@ -46,11 +46,6 @@ if ( ! isset( $content_width ) ) {
 add_filter( 'big_image_size_threshold', '__return_false' );
 
 if ( ! function_exists( 'hello_elementor_setup' ) ) {
-    /**
-     * Set up theme support.
-     *
-     * @return void
-     */
     function hello_elementor_setup() {
         $hook_result = apply_filters_deprecated( 'elementor_hello_theme_load_textdomain', [ true ], '2.0', 'hello_elementor_load_textdomain' );
         if ( apply_filters( 'hello_elementor_load_textdomain', $hook_result ) ) {
@@ -97,11 +92,6 @@ if ( ! function_exists( 'hello_elementor_setup' ) ) {
 add_action( 'after_setup_theme', 'hello_elementor_setup' );
 
 if ( ! function_exists( 'hello_elementor_scripts_styles' ) ) {
-    /**
-     * Theme Scripts & Styles.
-     *
-     * @return void
-     */
     function hello_elementor_scripts_styles() {
         $enqueue_basic_style = apply_filters_deprecated( 'elementor_hello_theme_enqueue_style', [ true ], '2.0', 'hello_elementor_enqueue_style' );
         $min_suffix          = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
@@ -120,13 +110,7 @@ if ( ! function_exists( 'hello_elementor_scripts_styles' ) ) {
 add_action( 'wp_enqueue_scripts', 'hello_elementor_scripts_styles' );
 
 if ( ! function_exists( 'hello_elementor_register_elementor_locations' ) ) {
-    /**
-     * Register Elementor Locations.
-     *
-     * @param ElementorPro\Modules\ThemeBuilder\Classes\Locations_Manager $elementor_theme_manager theme manager.
-     *
-     * @return void
-     */
+
     function hello_elementor_register_elementor_locations( $elementor_theme_manager ) {
         $hook_result = apply_filters_deprecated( 'elementor_hello_theme_register_elementor_locations', [ true ], '2.0', 'hello_elementor_register_elementor_locations' );
         if ( apply_filters( 'hello_elementor_register_elementor_locations', $hook_result ) ) {
@@ -137,11 +121,6 @@ if ( ! function_exists( 'hello_elementor_register_elementor_locations' ) ) {
 add_action( 'elementor/theme/register_locations', 'hello_elementor_register_elementor_locations' );
 
 if ( ! function_exists( 'hello_elementor_content_width' ) ) {
-    /**
-     * Set default content width.
-     *
-     * @return void
-     */
     function hello_elementor_content_width() {
         $GLOBALS['content_width'] = apply_filters( 'hello_elementor_content_width', 800 );
     }
@@ -152,14 +131,16 @@ if ( is_admin() ) {
     require get_template_directory() . '/includes/admin-functions.php';
 }
 
+
+
+add_action( 'admin_enqueue_scripts', 'load_admin_styles' );
+function load_admin_styles() {
+    wp_enqueue_style( 'hello-admin-css', get_template_directory_uri() . '/assets/admin.css', false, '1.0.0' );
+}
+
+
 if ( ! function_exists( 'hello_elementor_check_hide_title' ) ) {
-    /**
-     * Check hide title.
-     *
-     * @param bool $val default value.
-     *
-     * @return bool
-     */
+
     function hello_elementor_check_hide_title( $val ) {
         if ( defined( 'ELEMENTOR_VERSION' ) ) {
             $current_doc = \Elementor\Plugin::instance()->documents->get( get_the_ID() );
