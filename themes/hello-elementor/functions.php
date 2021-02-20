@@ -807,3 +807,6 @@ function action_function_name_11() {
 
 //wp_new_user_notification_email_admin
 //wp_new_user_notification_email
+
+//form vibes review notification disable
+update_option('fv-review', 'done', false);
