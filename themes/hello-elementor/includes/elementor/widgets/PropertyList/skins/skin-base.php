@@ -1077,14 +1077,28 @@ abstract class Skin_Base extends Elementor_Skin_Base {
     }
 
     protected function render_thumb_carousel() {
-         if ( !$this->get_instance_value( 'hello_is_thumb_carousel' ) ) return; ?>
+         if ( !$this->get_instance_value( 'hello_is_thumb_carousel' ) ) return;
+
+        $thumbnail = get_the_post_thumbnail_url( get_the_ID(), 'large' );
+
+        $gallery = get_field('property_gallery', get_the_ID() );
+    ?>
+
         <div class="hl-listing-card__carousel hl-listing-card__carousel">
             <div class="swiper-container">
                 <div class="swiper-wrapper">
+                    <?php // add thumbnail to gallery list ?>
+                    <div class="swiper-slide hl-listing-card__carousel-item">
+                        <a class="hl-listing-card__carousel-item-inner hl-listing-card__picture-wrap-img" href="<?php echo $this->current_permalink; ?>">
+                            <img
+                                    src="<?php echo $thumbnail; ?>"
+                                    class="hl-listing-card__picture-img hl-img-responsive"
+                                    alt="thumbnail"
+                            >
+                        </a>
+                    </div>
 
-                    <?php
-                    $gallery = get_field('property_gallery', get_the_ID() );
-                    if ($gallery) {
+                    <?php if ($gallery) {
                         foreach ($gallery as $image) { ?>
                             <div class="swiper-slide hl-listing-card__carousel-item">
                                 <a class="hl-listing-card__carousel-item-inner hl-listing-card__picture-wrap-img" href="<?php echo $this->current_permalink; ?>">
