@@ -443,6 +443,7 @@ function import_data($blog_id) {
     $menu = trailingslashit( WP_CONTENT_DIR ) . 'uploads/menu.xml';
     $media = trailingslashit( WP_CONTENT_DIR ) . 'uploads/media.xml';
     $fonts = trailingslashit( WP_CONTENT_DIR ) . 'uploads/fonts.xml';
+    $posts = trailingslashit( WP_CONTENT_DIR ) . 'uploads/posts.xml';
 
 //    $all = trailingslashit( WP_CONTENT_DIR ) . 'uploads/all.xml';
 
@@ -455,6 +456,7 @@ function import_data($blog_id) {
     $import->import($menu);
     $import->import($media);
     $import->import($fonts);
+    $import->import($posts);
 
     //prevent outputting
     ob_end_clean();
@@ -506,6 +508,15 @@ function siteAndUserCreation($user_id, $provider) {
     wp_delete_post(803, true);
     wp_delete_post(8925, true);
     wp_delete_post(8503, true);
+    wp_delete_post(1, true);
+    wp_delete_post(2, true);
+
+//  remove translate press default floating language switcher
+    $trp_settings = get_option ( 'trp_settings' );
+    if ( isset($trp_settings['trp-ls-floater']) ) {
+        $trp_settings['trp-ls-floater'] = 'no';
+        update_option('trp_settings', $trp_settings);
+    }
 
 
     $homepage = get_page_by_title( 'Home page' );
