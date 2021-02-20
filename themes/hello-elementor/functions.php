@@ -503,6 +503,9 @@ function siteAndUserCreation($user_id, $provider) {
     wp_delete_post(2801, true);
     wp_delete_post(819, true);
     wp_delete_post(2110, true);
+    wp_delete_post(803, true);
+    wp_delete_post(8925, true);
+    wp_delete_post(8503, true);
 
 
     $homepage = get_page_by_title( 'Home page' );
@@ -791,3 +794,24 @@ function action_function_name_11() {
 
 //form vibes review notification disable
 update_option('fv-review', 'done', false);
+
+
+
+function remove_dashboard_meta() {
+    remove_meta_box( 'dashboard_incoming_links', 'dashboard', 'normal' );
+    remove_meta_box( 'dashboard_plugins', 'dashboard', 'normal' );
+    remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
+    remove_meta_box( 'dashboard_secondary', 'dashboard', 'normal' );
+    remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
+    remove_meta_box( 'dashboard_recent_drafts', 'dashboard', 'side' );
+    remove_meta_box( 'dashboard_recent_comments', 'dashboard', 'normal' );
+    remove_meta_box( 'dashboard_right_now', 'dashboard', 'normal' );
+    remove_meta_box( 'dashboard_activity', 'dashboard', 'normal');//since 3.8
+}
+add_action( 'admin_init', 'remove_dashboard_meta' );
+
+
+function disable_elementor_dashboard_overview_widget() {
+    remove_meta_box( 'e-dashboard-overview', 'dashboard', 'normal');
+}
+add_action('wp_dashboard_setup', 'disable_elementor_dashboard_overview_widget', 40);

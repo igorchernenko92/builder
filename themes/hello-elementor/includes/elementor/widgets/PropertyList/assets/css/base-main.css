@@ -360,7 +360,7 @@ ol {
     transition: opacity var(--default-transition);
     font-weight: 600;
     padding: 6px 14px;
-    border-radius: 2px;
+    border-radius: 8px;
 }
 
 .hl-listing-card__tag:hover,
