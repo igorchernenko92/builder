@@ -419,7 +419,7 @@ function update_media_gallery_for_properties() {
     $array_with_media_id = [];
 
 //    fill array with proper id's
-    for ( $i = 45; $i < 111; $i++ ) {
+    for ( $i = 36; $i < 95; $i++ ) {
         array_push($array_with_media_id, $i);
     }
 //  set array of images id to property
@@ -511,14 +511,6 @@ function siteAndUserCreation($user_id, $provider) {
     wp_delete_post(1, true);
     wp_delete_post(2, true);
 
-//  remove translate press default floating language switcher
-    $trp_settings = get_option ( 'trp_settings' );
-    if ( isset($trp_settings['trp-ls-floater']) ) {
-        $trp_settings['trp-ls-floater'] = 'no';
-        update_option('trp_settings', $trp_settings);
-    }
-
-
     $homepage = get_page_by_title( 'Home page' );
     if ( $homepage ) {
         update_option( 'page_on_front', $homepage->ID );
@@ -539,9 +531,6 @@ function siteAndUserCreation($user_id, $provider) {
     update_option( 'elementor_enable_inspector', '' );
 //  enable elementor optimized DOM
     update_option( 'elementor_experiment-e_dom_optimization',  'active');
-
-
-    update_option('trp-ls-floater', 'no');
 
 
     add_filter($provider->getId() . '_register_redirect_url', function () use ($location) {
@@ -651,6 +640,7 @@ function check_media_files() {
     $option_name = get_current_blog_id() . '_check_media_files';
     if ( !get_option($option_name) ) {
         recurse_copy(UPLOAD_PATH . '/2020/', UPLOAD_PATH . '/sites/' . get_current_blog_id() . '/2020/');
+//        recurse_copy(UPLOAD_PATH . '/2021/', UPLOAD_PATH . '/sites/' . get_current_blog_id() . '/2021/');
         update_option($option_name, 'true');
         update_elementor_locations(); // update it once after import
         update_option( 'elementor_active_kit', 5321 );
@@ -659,7 +649,15 @@ function check_media_files() {
         wp_delete_post(146, true);
         wp_delete_post(5333, true);
 
+        //  remove translate press default floating language switcher
+        $trp_settings = get_option ( 'trp_settings' );
+        if ( isset($trp_settings['trp-ls-floater']) ) {
+            $trp_settings['trp-ls-floater'] = 'no';
+            update_option('trp_settings', $trp_settings);
+        }
+
     }
+
 //    update_elementor_style_kit();
 }
 
@@ -732,8 +730,8 @@ function prevent_export_url_access() {
 add_action( 'admin_menu', 'prevent_export_url_access1' );
 
 function prevent_export_url_access1() {
-//    TODO: check if this get exist
-    if  ( $_GET['post_type'] == 'elementor_library' ) {
+
+    if ( isset($_GET['post_type']) && ( $_GET['post_type'] == 'elementor_library' ) ) {
 
         ?>
         <style>

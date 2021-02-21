@@ -82,17 +82,18 @@ abstract class Skin_Base extends Elementor_Skin_Base {
 
         if ( $featured ) { ?>
             <div class="hl-listing-card__wrap-tag hl-listing-card__wrap-tag_left">
-                <a href="<?php echo get_term_link( $featured[0] ) ?>" class="hl-listing-card__tag hl-listing-card__tag_green"><?php echo $featured[0]->name ?></a>
+                <a href="<?php echo get_term_link( $featured[0] ) ?>" class="hl-listing-card__tag hl-listing-card__tag_red"><?php echo $featured[0]->name ?></a>
             </div>
             <?php
         }
 
         if ( $status ) {
-          $class_for_position = $featured ? 'hl-listing-card__wrap-tag_right' : 'hl-listing-card__wrap-tag_left';
+//          $class_for_position = $featured ? 'hl-listing-card__wrap-tag_right' : 'hl-listing-card__wrap-tag_left';
+            echo '<div class="property-slider-tag">' . builder_get_property_status($post_id) . '</div>';
           ?>
-            <div class="hl-listing-card__wrap-tag <?php echo $class_for_position; ?>">
-                <a href="<?php echo get_term_link( $status[0] ) ?>" class="hl-listing-card__tag hl-listing-card__tag_blue"><?php echo $status[0]->name ?></a>
-            </div>
+<!--            <div class="hl-listing-card__wrap-tag --><?php //echo $class_for_position; ?><!--">-->
+<!--                <a href="--><?php //echo get_term_link( $status[0] ) ?><!--" class="hl-listing-card__tag">--><?php //echo $status[0]->name ?><!--</a>-->
+<!--            </div>-->
             <?php
         }
     }
