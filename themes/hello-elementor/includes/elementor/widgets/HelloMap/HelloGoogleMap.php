@@ -353,8 +353,8 @@ class HelloGoogleMap extends Widget_Base {
                 'label' => __( 'Icon color', 'elementor-pro' ),
                 'type' => Controls_Manager::COLOR,
                 'scheme' => [
-                    'type' => \Elementor\Scheme_Color::get_type(),
-                    'value' => \Elementor\Scheme_Color::COLOR_1,
+                    'type' => \Elementor\Core\Schemes\Color::get_type(),
+                    'value' => \Elementor\Core\Schemes\Color::COLOR_1,
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .elementor-post__title, {{WRAPPER}} .elementor-post__title a' => 'color: {{VALUE}};',
